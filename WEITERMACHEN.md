@@ -43,3 +43,8 @@ Je Paket: CHANGELOG.md + Version (app/app.js `VERSION`, package.json, package-lo
 
 ## Prompt für den neuen Chat (kopieren)
 > Entpacke die hochgeladene ZIP (netzilon-ultra-2.4-paket4.zip) in ein leeres Verzeichnis. Lies zuerst WEITERMACHEN.md, BAUPLAN.md und netzilon-ultra/CHANGELOG.md. Baue dann Paket 4 (Domänen-Simulator) nach WEITERMACHEN.md mit genau 1 Agent, lass alle Tests laufen, liefere ZIP + Netzilon-Ultra.html. Danach Paket 5 genauso, dann Gesamtprüfung. Antworte kurz.
+
+## Offene Verbesserungen (nach 2.5.0)
+- Quiz-Distraktoren im Altbestand ausgleichen: richtige Antwort = längste bei az800 66 %, az801 67 %, ihk 56 % (Ziel ≤ 35 %; `pruefung/` als Originalfragen unverändert lassen). Vorgehen wie status/P2-DISTRAKTOREN.md.
+- Legende (`## Legende`) in Altseiten AP1/AP2/AZ ergänzen.
+- HTML auf echtem iPhone testen (SQL-Labor: WASM bzw. asm.js-Fallback).
