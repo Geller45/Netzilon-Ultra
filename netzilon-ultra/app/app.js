@@ -1,5 +1,5 @@
 // Netzilon Ultra 2.3.0 – App-Kern (Navigation, Profil, Startseite, Lesen, Einstellungen)
-const VERSION = '2.3.0';
+const VERSION = '2.4.0';
 const BEREICH_INFO = [
   { key: 'AP1', name: 'AP1', sub: 'Abschlussprüfung Teil 1' },
   { key: 'AP2', name: 'AP2', sub: 'Abschlussprüfung Teil 2' },
@@ -36,7 +36,7 @@ function neuerFortschritt() {
     gelesen: {}, karten: {}, kartenTag: { datum: '', neu: 0, wdh: 0 }, quiz: {}, pruefungen: [], lab: {}, spiele: {},
     termine: [], xp: { gesamt: 0, tage: {} }, streak: { tage: 0, letzter: '', best: 0 }, tag: null, zaehler: {}, abzeichen: {},
     freitext: {}, terminal: {}, netsim: { geloest: {}, topo: null }, rechner: {}, dojo: { r: 0, f: 0 },
-    schwer: {}, zufall: { n: 0, gesehen: {} }, speicher: { geloest: {}, zustand: null, best: {} }, sql: { geloest: {}, db: null, verlauf: [], editor: '' }, tagesaufgabe: { aktuell: null, ausgegeben: 0, historie: [], serie: 0, best: 0, letzterTag: '' } };
+    schwer: {}, zufall: { n: 0, gesehen: {} }, speicher: { geloest: {}, zustand: null, best: {} }, sql: { geloest: {}, db: null, verlauf: [], editor: '' }, domaene: { geloest: {}, zustand: null, verlauf: [] }, tagesaufgabe: { aktuell: null, ausgegeben: 0, historie: [], serie: 0, best: 0, letzterTag: '' } };
 }
 function migrieren(d) {
   const n = neuerFortschritt();
@@ -55,6 +55,9 @@ function migrieren(d) {
   p.speicher = Object.assign({ geloest: {}, zustand: null, best: {} }, (p.speicher && typeof p.speicher === 'object' && !Array.isArray(p.speicher)) ? p.speicher : {});
   if (!p.speicher.geloest || typeof p.speicher.geloest !== 'object' || Array.isArray(p.speicher.geloest)) p.speicher.geloest = {};
   if (!p.speicher.best || typeof p.speicher.best !== 'object' || Array.isArray(p.speicher.best)) p.speicher.best = {};
+  p.domaene = Object.assign({ geloest: {}, zustand: null, verlauf: [] }, (p.domaene && typeof p.domaene === 'object' && !Array.isArray(p.domaene)) ? p.domaene : {});
+  if (!p.domaene.geloest || typeof p.domaene.geloest !== 'object' || Array.isArray(p.domaene.geloest)) p.domaene.geloest = {};
+  if (!Array.isArray(p.domaene.verlauf)) p.domaene.verlauf = [];
   p.kartenTag = Object.assign({ datum: '', neu: 0, wdh: 0 }, p.kartenTag || {});
   if (!THEMES[p.einstellungen.theme]) p.einstellungen.theme = p.einstellungen.theme === 'heft' ? 'weltall' : 'nacht';
   if (alt) {
@@ -129,7 +132,7 @@ function gehe(ansicht, param, ohneVerlauf) {
     console.error(err);
     $('#inhalt').innerHTML = `<h1>Hoppla</h1><p class="unter">Diese Ansicht hatte einen Fehler: ${E(err && err.message || err)}</p><button class="glas knopf primär" data-go="home">Zur Startseite</button>`;
   }
-  const tab = { home: 'home', lernhub: 'lernhub', karteikarten: 'lernhub', bereich: 'lernhub', kapitel: 'lernhub', lesen: 'lernhub', labs: 'lernhub', quiz: 'quiz', werkzeuge: 'werkzeuge', rechner: 'werkzeuge', netsim: 'werkzeuge', terminal: 'werkzeuge', befehle: 'werkzeuge', spiele: 'werkzeuge', spiel: 'werkzeuge', glossar: 'werkzeuge', cheatsheets: 'werkzeuge', spickzettel: 'werkzeuge', dojo: 'werkzeuge', suche: 'werkzeuge', zufall: 'quiz', schwierigkeit: 'quiz', fortschritt: 'lernhub', tagesaufgabe: 'lernhub', speicher: 'werkzeuge', sql: 'werkzeuge' }[ansicht] || 'mehr';
+  const tab = { home: 'home', lernhub: 'lernhub', karteikarten: 'lernhub', bereich: 'lernhub', kapitel: 'lernhub', lesen: 'lernhub', labs: 'lernhub', quiz: 'quiz', werkzeuge: 'werkzeuge', rechner: 'werkzeuge', netsim: 'werkzeuge', terminal: 'werkzeuge', befehle: 'werkzeuge', spiele: 'werkzeuge', spiel: 'werkzeuge', glossar: 'werkzeuge', cheatsheets: 'werkzeuge', spickzettel: 'werkzeuge', dojo: 'werkzeuge', suche: 'werkzeuge', zufall: 'quiz', schwierigkeit: 'quiz', fortschritt: 'lernhub', tagesaufgabe: 'lernhub', speicher: 'werkzeuge', sql: 'werkzeuge', domaene: 'werkzeuge' }[ansicht] || 'mehr';
   $$('#tableiste button').forEach(b => b.classList.toggle('an', b.dataset.go === tab));
   const inh = $('#inhalt'); inh.scrollTop = 0; try { inh.focus({ preventScroll: true }); } catch {}
 }
@@ -238,6 +241,7 @@ function home() {
     { t: 'Netzwerk-Simulator', s: 'Packet-Tracer-light: bauen & pingen', go: 'netsim', i: '⇄' },
     { t: 'Speicher-Labor', s: 'SAN, LUNs, Zoning, RAID-Rebuild', go: 'speicher', i: '🗄' },
     { t: 'SQL-Labor', s: 'Echtes SQLite offline · Firma mit 100 Mitarbeitern', go: 'sql', i: '🛢' },
+    { t: 'Meine Domäne', s: 'Active Directory, GPO, DNS, DHCP, NTFS + PowerShell', go: 'domaene', i: '🏢' },
     { t: 'Terminal-Trainer', s: 'PowerShell, CMD, Cisco IOS, Bash', go: 'terminal', i: '>_' },
     { t: 'Lernspiele', s: `${window.Spiele ? Spiele.anzahl() : 6} Spiele mit deinem Stoff`, go: 'spiele', i: '🎮' },
     { t: 'IHK-Fallen-Dojo', s: 'KiB vs. KB, Brutto/Netto …', go: 'dojo', i: '🥋' },
@@ -318,6 +322,7 @@ function hubWerkzeuge() {
     { t: 'Netzwerk-Simulator', s: 'Geräte verbinden, ping, traceroute', go: 'netsim', i: '⇄' },
     { t: 'Speicher-Labor', s: 'SAN aufbauen, LUNs mappen, RAID-Rebuild', go: 'speicher', i: '🗄' },
     { t: 'SQL-Labor', s: 'SELECT bis Transaktion – echte Datenbank, offline', go: 'sql', i: '🛢' },
+    { t: 'Meine Domäne', s: 'AD-Benutzer, Gruppen (AGDLP), GPOs, DNS, DHCP, Freigaben – GUI + PowerShell', go: 'domaene', i: '🏢' },
     { t: 'Terminal-Trainer', s: 'PowerShell · CMD · IOS · Bash', go: 'terminal', i: '>_' },
     { t: 'Befehlsreferenz', s: 'Alle Befehle filterbar', go: 'befehle', i: '⌘' },
     { t: 'Glossar', s: 'Fachbegriffe A–Z', go: 'glossar', i: 'A–Z' },

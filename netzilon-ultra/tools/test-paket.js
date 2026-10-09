@@ -346,6 +346,71 @@ let fails = 0; const ok = (c, m) => { console.log((c ? 'OK     ' : 'FEHLER ') + 
     await page.setViewportSize({ width: 1300, height: 900 });
     await go('home');
   }
+  // ---------- Domänen-Simulator (Paket 4) ----------
+  {
+    await page.evaluate(() => { S.p.domaene = { geloest: {}, zustand: null, verlauf: [] }; });
+    await go('domaene');
+    ok(/Meine Domäne/.test(await txt()) && await page.locator('#dom-wurzel .dom-baum').count() === 1, 'Domäne: Ansicht geöffnet (ADUC mit OU-Baum)');
+    ok(await page.evaluate(() => Object.keys(Domaene._test.z().users).length === 100 && Domaene._test.z().users['sven.lorenz'].ou === 'Netzilon/Hamburg/Geschäftsführung'), 'Domäne: 100 Benutzer aus FirmaDB vorhanden');
+    // Benutzer per GUI anlegen
+    await page.click('#dom-wurzel [data-a="ou"][data-v="Netzilon/Berlin/IT-Support"]');
+    await page.evaluate(() => { [...document.querySelectorAll('#dom-wurzel details.dom-det')][0].open = true; });
+    await page.fill('#dom-nvn', 'Gui'); await page.fill('#dom-nnn', 'Tester'); await page.fill('#dom-nsam', 'gui.tester'); await page.fill('#dom-nabt', 'IT-Support');
+    await page.click('[data-a="user-neu"]'); await page.waitForTimeout(150);
+    ok(await page.evaluate(() => { const u = Domaene._test.z().users['gui.tester']; return !!u && u.ou === 'Netzilon/Berlin/IT-Support' && u.an; }) && await page.locator('#dom-detail').count() === 1, 'Domäne: Benutzer per GUI angelegt');
+    // Konsole
+    await page.click('#dom-wurzel [data-a="tab"][data-v="ps"]');
+    const ps = async z => { await page.fill('#dom-psin', z); await page.press('#dom-psin', 'Enter'); await page.waitForTimeout(80); return page.locator('#dom-psaus').innerText(); };
+    await ps('New-ADUser -Name "Ps Tester" -GivenName Ps -Surname Tester -SamAccountName ps.tester -Department Vertrieb -Path "OU=Vertrieb,OU=München,OU=Netzilon,DC=netzilon,DC=example" -Enabled $true');
+    let aus = await ps('Get-ADUser -Identity ps.tester -Properties Department');
+    ok(/OU=Vertrieb,OU=München/.test(aus) && /Department\s+: Vertrieb/.test(aus), 'Domäne: New-ADUser + Get-ADUser in der Konsole');
+    aus = await ps('Get-ADUser -Identity gui.tester');
+    ok(/SamAccountName\s+: gui.tester/.test(aus), 'Domäne: GUI-Benutzer in der Konsole sichtbar (gemeinsamer Zustand)');
+    aus = await ps('Get-ADUsr x');
+    ok(/nicht als Name eines Cmdlet/.test(aus) && await page.locator('#dom-psaus .dom-ps-e').count() >= 1, 'Domäne: deutsche Fehlermeldung bei unbekanntem Befehl');
+    await page.fill('#dom-psin', 'Get-ADGroupM'); await page.press('#dom-psin', 'Tab');
+    ok(/^Get-ADGroupMember/.test(await page.inputValue('#dom-psin')), 'Domäne: Tab-Vervollständigung');
+    // effektive Rechte
+    const st = await page.evaluate(() => Domaene._test.stamm());
+    const e = await page.evaluate(s => [Domaene._test.eff(s.vt, 'Personal'), Domaene._test.eff(s.pe, 'Personal'), Domaene._test.eff(s.pe, 'Buchhaltung'), Domaene._test.eff('sven.lorenz', 'IT')], st);
+    ok(e[0].r === 1 && e[1].r === 2 && e[3].r === 0, 'Domäne: effektive Rechte (Vertrieb liest Personal über DL_Personal_R, Personal ändert, GF kein IT)');
+    ok(await page.evaluate(() => { const z = Domaene._test.z(); const azubi = Object.values(z.users).find(u => /^Auszubild/.test(u.titel) && z.groups.gg_its && z.groups.gg_its.m.includes(u.sam)); return !azubi || Domaene._test.eff(azubi.sam, 'IT').r === 0; }), 'Domäne: Verweigern gewinnt (Azubis auf IT)');
+    await page.click('#dom-wurzel [data-a="tab"][data-v="share"]');
+    await page.fill('#dom-eu', st.vt); await page.click('[data-a="eff"]'); await page.waitForTimeout(100);
+    ok(/Lesen/.test(await page.locator('#dom-eff').innerText()) && /Restriktivere/.test(await page.locator('#dom-eff').innerText()), 'Domäne: Rechte-Rechner erklärt das Ergebnis');
+    // 3 Aufgaben lösen (DNS, DHCP, Titel per Konsole)
+    const xp0 = await page.evaluate(() => S.p.xp.gesamt);
+    await page.click('#dom-wurzel [data-a="tab"][data-v="ps"]');
+    for (const id of ['dns', 'dhcp', 'titel']) for (const c of await page.evaluate(id => Domaene.AUFGABEN.find(a => a.id === id).ps(), id)) await ps(c);
+    // eine per GUI: USB-GPO verknüpfen
+    await page.click('#dom-wurzel [data-a="tab"][data-v="gpo"]');
+    await page.click('[data-a="gpo"][data-v="gpo_usb_sperre"]'); await page.selectOption('#dom-gpoziel', 'Netzilon/München/Vertrieb'); await page.click('[data-a="gpo-link"]'); await page.waitForTimeout(150);
+    const gel = await page.evaluate(() => S.p.domaene.geloest);
+    ok(['dns', 'dhcp', 'titel', 'usb'].every(k => gel[k]), 'Domäne: 4 Aufgaben gelöst (3× PowerShell, 1× GUI) ' + Object.keys(gel).join(','));
+    ok(await page.evaluate(x => S.p.xp.gesamt > x, xp0), 'Domäne: XP gestiegen');
+    ok(/4\/\d+ gelöst/.test(await page.locator('#dom-aufgaben').innerText()), 'Domäne: Fortschritt x/y');
+    ok(await page.evaluate(() => Domaene.AUFGABEN.length >= 10), 'Domäne: mind. 10 Aufgaben');
+    await page.evaluate(() => { document.getElementById('inhalt').scrollTop = 0; }); await page.click('#dom-wurzel [data-a="tab"][data-v="aduc"]'); await page.waitForTimeout(150);
+    await page.screenshot({ path: path.join(shots, 'p4-domaene.png') });
+    // Persistenz
+    await go('home'); await go('domaene');
+    ok(await page.evaluate(() => { const z = Domaene._test.z(); return !!z.users['gui.tester'] && !!z.users['ps.tester'] && z.dhcp.res.some(r => r.ip === '10.0.0.60') && !!S.p.domaene.zustand && S.p.domaene.verlauf.length >= 3; }), 'Domäne: Zustand + Verlauf übersteht gehe(home) + zurück');
+    // kaputter Zustand
+    await go('home'); await page.evaluate(() => { S.p.domaene.zustand = { v: 1, users: 'kaputt', groups: [1, 2], gpos: null, dns: [{ x: 1 }], shares: 7 }; });
+    await go('domaene');
+    ok(await page.evaluate(() => Object.keys(Domaene._test.z().users).length === 100 && !!document.getElementById('dom-wurzel')), 'Domäne: kaputter Zustand → Start ok');
+    await go('home'); await page.evaluate(() => { S.p.domaene = 'Müll'; }); await go('domaene');
+    ok(await page.evaluate(() => !!document.getElementById('dom-wurzel') && typeof S.p.domaene === 'object'), 'Domäne: kaputtes Fortschrittsfeld → Start ok');
+    // 390 px
+    await page.setViewportSize({ width: 390, height: 844 });
+    for (const t of ['aduc', 'gpo', 'share', 'ps', 'dhcp']) {
+      await page.evaluate(t => Domaene._test.tab(t), t); await page.waitForTimeout(100);
+      ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 2 && (() => { const i = document.getElementById('inhalt'); return i.scrollWidth <= i.clientWidth + 2; })()), 'Domäne: 390 px ohne Überlauf (' + t + ')');
+    }
+    await page.screenshot({ path: path.join(shots, 'p4-domaene-390.png') });
+    await page.setViewportSize({ width: 1300, height: 900 });
+    await go('home');
+  }
   ok(errs.length === 0, 'Keine Konsolenfehler ' + errs.slice(0, 3).join(' | '));
   await browser.close();
   console.log(fails ? `\n${fails} FEHLER` : '\nALLES OK'); process.exit(fails ? 1 : 0);

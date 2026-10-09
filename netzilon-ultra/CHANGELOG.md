@@ -1,3 +1,10 @@
+# 2.4.0 – Paket 4 (Domänen-Simulator „Meine Domäne“)
+- Neues Werkzeug „Meine Domäne“: simulierte AD-Umgebung netzilon.example (NETZILON) mit DC01 (Windows Server 2025, 10.0.0.10, DNS + DHCP), OUs je Standort/Abteilung und den 100 Mitarbeitern der Firmen-DB als AD-Benutzer (Abteilung, Titel, Manager, Ausgeschiedene deaktiviert)
+- GUI-Registerkarten: AD-Benutzer und -Computer (OU-Baum, Suche, Benutzer anlegen/ändern/verschieben/deaktivieren/löschen, Gruppen GG_/DL_ nach AGDLP), Gruppenrichtlinien (GPO anlegen, verknüpfen, Einstellungen, Richtlinienergebnis nach LSDOU), DNS (A/CNAME/PTR/SRV), DHCP (Bereich, DORA, Leases, Reservierungen), Freigaben/NTFS mit Rechner für effektive Rechte inkl. Erklärung, Vertrauensstellung zu partner.example
+- Simulierte PowerShell (Get-/New-/Set-ADUser, Disable-/Enable-ADAccount, Move-ADObject, Gruppen, GPO, DNS, DHCP, SMB, Get-Acl, icacls, Get-ADTrust, Get-Help …) mit deutschen Fehlermeldungen, Pipeline, Tab-Vervollständigung und Verlauf – GUI und Konsole ändern denselben Zustand
+- 11 Praxis-Aufgaben (leicht → schwer) mit automatischer Auswertung, Hinweisen und Musterlösung (GUI + PowerShell), XP, Quest, 2 Abzeichen, Legende (Domäne, DC, OU, AGDLP, LSDOU, DNS, DHCP, Freigabe vs. NTFS, Vertrauensstellung)
+- Zustand wird gespeichert, ist zurücksetzbar und gegen kaputte Stände abgesichert
+
 # 2.3.0 – Paket 3 (SQL-Labor)
 - Neues Werkzeug „SQL-Labor“: echtes SQLite offline (sql.js 1.10.3, WebAssembly eingebettet, asm.js-Fallback) – in der .exe und in der Einzel-HTML
 - Firmen-Datenbank „Netzilon GmbH“: 100 Mitarbeiter, Abteilungen, Standorte, Gehälter, Projekte, Kunden, Bestellungen, Zeiterfassung – automatisch erzeugt, zurücksetzbar, Änderungen werden gespeichert
