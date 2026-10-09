@@ -654,3 +654,11 @@ html[data-hell="1"] .term { background: #0b1220; }
 @keyframes tapuls { 50% { box-shadow: 0 0 10px var(--akzent); } }
 .ta-zeile { margin: 4px 0 8px; } .ziele-w .lesen-fuss { margin-top: 10px; gap: 6px; flex-wrap: wrap; }
 @media (max-width: 820px) { .fb-raster { grid-template-columns: 1fr; } .sw-zeile { padding: 8px; } }
+
+/* 2.2 Legende (was/wie/wann/wo/warum) */
+.leg-raster { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; }
+.leg-karte { border: 1px solid var(--glas-rand); border-radius: var(--radius-klein); padding: 10px 14px; background: var(--glas); }
+.leg-karte h3 { margin: 2px 0 8px; font-size: 1.02em; }
+.leg-karte dl { display: grid; grid-template-columns: max-content 1fr; gap: 4px 10px; margin: 0; }
+.leg-karte dt { font-weight: 700; white-space: nowrap; }
+.leg-karte dd { margin: 0; }

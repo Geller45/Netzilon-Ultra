@@ -1,7 +1,7 @@
 {
   "name": "netzilon-ultra",
   "productName": "Netzilon Ultra",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "Netzilon Ultra – die FiSi-Lernapp: Prüfungstrainer, Nachschlagewerk, Lernplan, Simulatoren",
   "author": "GPProductions",
   "main": "main.js",

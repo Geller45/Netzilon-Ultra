@@ -1,5 +1,5 @@
-// Netzilon Ultra 2.1.0 – App-Kern (Navigation, Profil, Startseite, Lesen, Einstellungen)
-const VERSION = '2.1.0';
+// Netzilon Ultra 2.2.0 – App-Kern (Navigation, Profil, Startseite, Lesen, Einstellungen)
+const VERSION = '2.2.0';
 const BEREICH_INFO = [
   { key: 'AP1', name: 'AP1', sub: 'Abschlussprüfung Teil 1' },
   { key: 'AP2', name: 'AP2', sub: 'Abschlussprüfung Teil 2' },
@@ -36,7 +36,7 @@ function neuerFortschritt() {
     gelesen: {}, karten: {}, kartenTag: { datum: '', neu: 0, wdh: 0 }, quiz: {}, pruefungen: [], lab: {}, spiele: {},
     termine: [], xp: { gesamt: 0, tage: {} }, streak: { tage: 0, letzter: '', best: 0 }, tag: null, zaehler: {}, abzeichen: {},
     freitext: {}, terminal: {}, netsim: { geloest: {}, topo: null }, rechner: {}, dojo: { r: 0, f: 0 },
-    schwer: {}, zufall: { n: 0, gesehen: {} }, tagesaufgabe: { aktuell: null, ausgegeben: 0, historie: [], serie: 0, best: 0, letzterTag: '' } };
+    schwer: {}, zufall: { n: 0, gesehen: {} }, speicher: { geloest: {}, zustand: null, best: {} }, tagesaufgabe: { aktuell: null, ausgegeben: 0, historie: [], serie: 0, best: 0, letzterTag: '' } };
 }
 function migrieren(d) {
   const n = neuerFortschritt();
@@ -52,6 +52,8 @@ function migrieren(d) {
   p.streak = Object.assign({ tage: 0, letzter: '', best: 0 }, p.streak || {});
   p.netsim = Object.assign({ geloest: {}, topo: null }, p.netsim || {});
   p.dojo = Object.assign({ r: 0, f: 0 }, p.dojo || {});
+  p.speicher = Object.assign({ geloest: {}, zustand: null, best: {} }, (p.speicher && typeof p.speicher === 'object' && !Array.isArray(p.speicher)) ? p.speicher : {});
+  if (!p.speicher.geloest || typeof p.speicher.geloest !== 'object') p.speicher.geloest = {};
   p.kartenTag = Object.assign({ datum: '', neu: 0, wdh: 0 }, p.kartenTag || {});
   if (!THEMES[p.einstellungen.theme]) p.einstellungen.theme = p.einstellungen.theme === 'heft' ? 'weltall' : 'nacht';
   if (alt) {
@@ -126,7 +128,7 @@ function gehe(ansicht, param, ohneVerlauf) {
     console.error(err);
     $('#inhalt').innerHTML = `<h1>Hoppla</h1><p class="unter">Diese Ansicht hatte einen Fehler: ${E(err && err.message || err)}</p><button class="glas knopf primär" data-go="home">Zur Startseite</button>`;
   }
-  const tab = { home: 'home', lernhub: 'lernhub', karteikarten: 'lernhub', bereich: 'lernhub', kapitel: 'lernhub', lesen: 'lernhub', labs: 'lernhub', quiz: 'quiz', werkzeuge: 'werkzeuge', rechner: 'werkzeuge', netsim: 'werkzeuge', terminal: 'werkzeuge', befehle: 'werkzeuge', spiele: 'werkzeuge', spiel: 'werkzeuge', glossar: 'werkzeuge', cheatsheets: 'werkzeuge', spickzettel: 'werkzeuge', dojo: 'werkzeuge', suche: 'werkzeuge', zufall: 'quiz', schwierigkeit: 'quiz', fortschritt: 'lernhub', tagesaufgabe: 'lernhub' }[ansicht] || 'mehr';
+  const tab = { home: 'home', lernhub: 'lernhub', karteikarten: 'lernhub', bereich: 'lernhub', kapitel: 'lernhub', lesen: 'lernhub', labs: 'lernhub', quiz: 'quiz', werkzeuge: 'werkzeuge', rechner: 'werkzeuge', netsim: 'werkzeuge', terminal: 'werkzeuge', befehle: 'werkzeuge', spiele: 'werkzeuge', spiel: 'werkzeuge', glossar: 'werkzeuge', cheatsheets: 'werkzeuge', spickzettel: 'werkzeuge', dojo: 'werkzeuge', suche: 'werkzeuge', zufall: 'quiz', schwierigkeit: 'quiz', fortschritt: 'lernhub', tagesaufgabe: 'lernhub', speicher: 'werkzeuge' }[ansicht] || 'mehr';
   $$('#tableiste button').forEach(b => b.classList.toggle('an', b.dataset.go === tab));
   const inh = $('#inhalt'); inh.scrollTop = 0; try { inh.focus({ preventScroll: true }); } catch {}
 }
@@ -233,6 +235,7 @@ function home() {
     { t: 'Schwächen', s: 'Ampel, Fehlerkatalog, Wiederholplan', go: 'analyse', i: '🚦' },
     { t: 'Rechner', s: 'Subnetting bis Netzplan – mit Rechenweg', go: 'rechner', i: '∑' },
     { t: 'Netzwerk-Simulator', s: 'Packet-Tracer-light: bauen & pingen', go: 'netsim', i: '⇄' },
+    { t: 'Speicher-Labor', s: 'SAN, LUNs, Zoning, RAID-Rebuild', go: 'speicher', i: '🗄' },
     { t: 'Terminal-Trainer', s: 'PowerShell, CMD, Cisco IOS, Bash', go: 'terminal', i: '>_' },
     { t: 'Lernspiele', s: `${window.Spiele ? Spiele.anzahl() : 6} Spiele mit deinem Stoff`, go: 'spiele', i: '🎮' },
     { t: 'IHK-Fallen-Dojo', s: 'KiB vs. KB, Brutto/Netto …', go: 'dojo', i: '🥋' },
@@ -311,6 +314,7 @@ function hubWerkzeuge() {
     { t: 'Rechner', s: 'Subnetting, VLSM, IPv6, RAID, USV, Kalkulation …', go: 'rechner', i: '∑' },
     { t: 'IHK-Fallen-Dojo', s: 'Typische Rechenfallen', go: 'dojo', i: '🥋' },
     { t: 'Netzwerk-Simulator', s: 'Geräte verbinden, ping, traceroute', go: 'netsim', i: '⇄' },
+    { t: 'Speicher-Labor', s: 'SAN aufbauen, LUNs mappen, RAID-Rebuild', go: 'speicher', i: '🗄' },
     { t: 'Terminal-Trainer', s: 'PowerShell · CMD · IOS · Bash', go: 'terminal', i: '>_' },
     { t: 'Befehlsreferenz', s: 'Alle Befehle filterbar', go: 'befehle', i: '⌘' },
     { t: 'Glossar', s: 'Fachbegriffe A–Z', go: 'glossar', i: 'A–Z' },
@@ -388,6 +392,7 @@ function lesen(id) {
     <div class="text">${Parser.md(haupt)}</div>
     ${s['Merksatz'] ? `<div class="zettel">${s['Merksatz'].split('\n').filter(x => x.trim()).map(x => `<p>${Parser.inline(x.replace(/^[-*]\s*/, ''))}</p>`).join('')}</div>` : ''}
     ${s['Prüfungsfalle'] ? `<section class="falle"><h2>Prüfungsfalle</h2><div class="text">${Parser.md(s['Prüfungsfalle'])}</div></section>` : ''}
+    ${d.legende && d.legende.length ? legendeHtml(d) : ''}
     ${d.grafiken.length ? `<details class="abschnitt grafik-abschnitt" open><summary>Grafik${d.grafiken.some(g => g.animierbar) ? ' – Animation' : ''}</summary><div class="text">${d.grafiken.map((g, i) => g.animierbar && window.Anim ? Anim.html(d, i) : `<h3>${E(g.name)}</h3>${Parser.md(g.text)}`).join('')}</div></details>` : ''}
     ${s['Lab'] ? Lernen.labHtml(d) : ''}
     ${abschnitt('Befehle', d.befehle.length ? `<div class="tablewrap"><table><thead><tr><th>Befehl</th><th>Erklärung</th></tr></thead><tbody>${d.befehle.map(x => `<tr><td><code>${E(x.befehl)}</code></td><td>${Parser.inline(x.text)}</td></tr>`).join('')}</tbody></table></div>` : Parser.md(s['Befehle']), d.typ === 'referenz')}
@@ -419,6 +424,11 @@ function lesen(id) {
   if (qEl) items.filter(it => it.art === 'mc').forEach((it, i) => { const box = document.createElement('div'); box.className = 'lesen-item'; qEl.appendChild(box); Formen.render(it, box, { modus: 'lesen', nr: i + 1 }); });
   const aEl = $('#lesen-aufgaben');
   if (aEl) nichtMc.forEach((it, i) => { const box = document.createElement('div'); box.className = 'lesen-item'; aEl.appendChild(box); Formen.render(it, box, { modus: 'lesen', nr: i + 1 }); });
+}
+// Legende (2.2): was, wie, wann, wo, warum – als ausklappbare Tabelle
+const LEG_ICON = { Was: '❓', Wie: '🛠', Wann: '⏰', Wo: '📍', Warum: '💡', Wer: '👤', Womit: '🧰', Beispiel: '📎' };
+function legendeHtml(d) {
+  return `<details class="abschnitt leg-abschnitt" open><summary>Legende – was, wie, wann, wo, warum</summary><div class="text leg-raster">${d.legende.map(l => `<div class="leg-karte">${l.titel ? `<h3>${E(l.titel)}</h3>` : ''}<dl>${l.felder.map(f => `<dt>${LEG_ICON[f.k] || '•'} ${E(f.k)}</dt><dd>${Parser.inline(f.v)}</dd>`).join('')}</dl></div>`).join('')}</div></details>`;
 }
 function nachbar(d, r) {
   const list = S.docs.filter(x => x.bereich === d.bereich), i = list.indexOf(d), n = list[i + r];

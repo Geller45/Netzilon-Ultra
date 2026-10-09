@@ -2,7 +2,7 @@
 // Läuft im Browser UND in Node (vm) – deshalb keine DOM-Abhängigkeiten.
 const Parser = (() => {
   const SECTIONS = ['Profi', 'Einfach', 'Merksatz', 'Prüfungsfalle', 'Grafik', 'Lab', 'Befehle', 'Übungen', 'Karteikarten', 'Quiz',
-    'Lücken', 'Zuordnen', 'Reihenfolge', 'Freitext', 'Szenario', 'Spickzettel'];
+    'Lücken', 'Zuordnen', 'Reihenfolge', 'Freitext', 'Szenario', 'Spickzettel', 'Legende'];
 
   function parseValue(v) {
     v = String(v).replace(/\s+#\s.*$/, '').trim();
@@ -70,7 +70,7 @@ const Parser = (() => {
 
   function parse(text, meta = {}) {
     text = String(text == null ? '' : text).replace(/^\uFEFF/, '').replace(/\r\n?/g, '\n');
-    const doc = { head: {}, sections: {}, cards: [], quiz: [], uebungen: [], befehle: [], luecken: [], zuordnen: [], reihenfolge: [], freitext: [], szenarien: [], spickzettel: [], grafiken: [], labSchritte: [], warnungen: [], ...meta };
+    const doc = { head: {}, sections: {}, legende: [], cards: [], quiz: [], uebungen: [], befehle: [], luecken: [], zuordnen: [], reihenfolge: [], freitext: [], szenarien: [], spickzettel: [], grafiken: [], labSchritte: [], warnungen: [], ...meta };
     let body = text;
     const m = text.match(/^---\n([\s\S]*?)\n---[ \t]*(\n|$)/);
     if (m) {
@@ -201,6 +201,16 @@ const Parser = (() => {
         } else if (!fragen.length) lage.push(line);
       }
       if (fragen.length) doc.szenarien.push({ titel: b.titel, lage: lage.join('\n').trim(), fragen });
+    }
+    // Legende (2.2): "- Was: …", "- Wie: …", "- Wann: …", "- Wo: …", "- Warum: …" (optional ### Begriff für mehrere Legenden)
+    for (const b of bloecke(S['Legende'], '')) {
+      const felder = [];
+      for (const line of b.text.split('\n')) {
+        const m = line.trim().match(/^[-*]\s+(Was|Wie|Wann|Wo|Warum|Wer|Womit|Beispiel)\s*[:?]\s*(.+)$/i);
+        if (m) felder.push({ k: m[1][0].toUpperCase() + m[1].slice(1).toLowerCase(), v: m[2].trim() });
+      }
+      if (felder.length) doc.legende.push({ titel: b.titel, felder });
+      else if (b.text.trim()) doc.warnungen.push('Legende ohne „- Was: …“-Zeilen' + (b.titel ? ' (' + b.titel + ')' : ''));
     }
     // Spickzettel
     doc.spickzettel = (S['Spickzettel'] || '').split('\n').map(l => l.trim()).filter(Boolean).map(l => l.replace(/^[-*]\s+/, ''));

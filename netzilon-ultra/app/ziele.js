@@ -241,7 +241,7 @@ const Ziele = (() => {
         if (window.Mot) Mot.chip();
       }
       if (t.aktuell && !t.aktuell.erledigt) {
-        const gesperrt = document.getElementById('ta-overlay') || document.getElementById('intro') || (S.ansicht && ['quiz', 'spiel', 'terminal', 'netsim'].includes(S.ansicht.ansicht));
+        const gesperrt = document.getElementById('ta-overlay') || document.getElementById('intro') || (S.ansicht && ['quiz', 'spiel', 'terminal', 'netsim', 'speicher', 'sql', 'domaene', 'wireshark'].includes(S.ansicht.ansicht));
         if (manuell || (!gesperrt && gezeigtFuer !== t.aktuell.t)) { gezeigtFuer = t.aktuell.t; oeffneTagesaufgabe(); }
       }
     } catch (e) { console.warn('Tagesaufgabe', e); }

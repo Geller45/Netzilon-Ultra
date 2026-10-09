@@ -1,6 +1,6 @@
 // Netzilon Ultra – Motivation: XP, Level, Ränge, Streak, Tagesziel, 3 tägliche Mini-Quests, Abzeichen, Konfetti
 const Mot = (() => {
-  const XP = { start: 10, gelesen: 20, karte: 2, richtig: 5, falsch: 1, lab: 3, labKomplett: 25, kartenSitzung: 10, spiel: 10, terminal: 8, netsim: 15, ping: 1, rechner: 5, dojo: 5, freitext: 3, tagesaufgabe: 30, quest: 25, subnetz: 0, puzzle: 0, luecke: 0, pruefung: 50 };
+  const XP = { start: 10, gelesen: 20, karte: 2, richtig: 5, falsch: 1, lab: 3, labKomplett: 25, kartenSitzung: 10, spiel: 10, terminal: 8, netsim: 15, ping: 1, rechner: 5, dojo: 5, freitext: 3, tagesaufgabe: 30, quest: 25, subnetz: 0, puzzle: 0, luecke: 0, pruefung: 50, speicher: 15 };
   const RAENGE = [[1, 'Azubi', '🎒'], [5, 'Junior-Admin', '🔧'], [10, 'Admin', '🖥'], [15, 'Senior-Admin', '🛡'], [20, 'Domain Admin', '👑'], [30, 'Enterprise Admin', '🌐'], [45, 'System-Architekt', '🏗'], [60, 'Cloud-Architekt', '☁'], [75, 'IT-Leiter', '🧭'], [90, 'Legende', '⭐'], [100, 'Netzilon-Meister (Durchgespielt)', '🏆']];
   const MAXLV = 100;
   // Kurve 2.1: Level 100 bei ca. 62.700 XP (erreichbar bis zum Ende der Ausbildung)
@@ -13,7 +13,8 @@ const Mot = (() => {
     { art: 'terminal', ziel: 2, txt: '2 Terminal-Aufgaben lösen' }, { art: 'spiel', ziel: 1, txt: '1 Lernspiel spielen' },
     { art: 'netsim', ziel: 1, txt: '1 Aufgabe im Netzwerk-Simulator lösen' }, { art: 'luecke', ziel: 5, txt: '5 Lücken richtig füllen' },
     { art: 'dojo', ziel: 3, txt: '3 IHK-Fallen im Dojo knacken' }, { art: 'puzzle', ziel: 2, txt: '2 Zuordnen-/Reihenfolge-Aufgaben lösen' },
-    { art: 'lab', ziel: 3, txt: '3 Lab-Schritte abhaken' }, { art: 'freitext', ziel: 1, txt: '1 Freitext- oder Szenario-Aufgabe bewerten' }
+    { art: 'lab', ziel: 3, txt: '3 Lab-Schritte abhaken' }, { art: 'freitext', ziel: 1, txt: '1 Freitext- oder Szenario-Aufgabe bewerten' },
+    { art: 'speicher', ziel: 1, txt: '1 Aufgabe im Speicher-Labor lösen' }
   ];
   const z = k => (S.p.zaehler || {})[k] || 0;
   const gelesenWo = re => Object.keys(S.p.gelesen).filter(id => re.test(id) || (S.byId[id] && re.test(S.byId[id].titel))).length;
@@ -61,6 +62,8 @@ const Mot = (() => {
     { id: 'meister', name: 'Meisterschaft 95 %', txt: 'Gesamt-Meisterschaft ≥ 95 % (gelesen, Aufgaben erfolgreich, Karten)', icon: '💎', ok: () => !!window.Ziele && Ziele.meisterschaft().pz >= 95 },
     { id: 'tag30', name: 'Monats-Aufgabe', txt: '30 Aufgaben des Tages gelöst', icon: '🎯', ok: () => z('tagesaufgabe') >= 30 },
     { id: 'tag365', name: 'Ein Jahr Aufgaben', txt: '365 Aufgaben des Tages gelöst', icon: '📆', ok: () => z('tagesaufgabe') >= 365 },
+    { id: 'san1', name: 'LUN-Lotse', txt: 'Erste Aufgabe im Speicher-Labor gelöst', icon: '🗄', ok: () => z('speicher') >= 1 },
+    { id: 'san10', name: 'SAN-Architekt', txt: '10 Aufgaben im Speicher-Labor gelöst', icon: '🧱', ok: () => z('speicher') >= 10 },
     { id: 'zufall5', name: 'Zufalls-Prüfling', txt: '5 Zufallsprüfungen geschrieben', icon: '🎲', ok: () => ((S.p.zufall && S.p.zufall.n) || 0) >= 5 }
   ];
 
