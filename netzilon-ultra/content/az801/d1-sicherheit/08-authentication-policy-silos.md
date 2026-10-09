@@ -193,3 +193,17 @@ Schalter mit Gelb (protokollieren) und Rot (blockieren); Konto meldet sich an fa
 - Protected Users gilt nur für Computer
 - Policy gilt nur für Gruppen
 - Kein Unterschied
+
+? Welche Konten können einem Authentication Policy Silo angehören?
+* Benutzer, Computer und verwaltete Dienstkonten
+- Nur Gruppen
+- Nur OUs
+- Nur Standorte
+! Konten werden zugewiesen und der Silo als Anspruch (Claim) ausgewertet.
+
+? Welche Voraussetzung müssen Clients und DCs für Silos unterstützen?
+* Kerberos-Armoring (FAST) bzw. Ansprüche und Verbundauthentifizierung
+- NTLMv1
+- SMB 1.0
+- WINS
+! Per GPO für KDC und Clients aktivieren.

@@ -164,3 +164,24 @@ Frage-Knoten „Hop vermeidbar?“ → „Remoting mit Dateien/AD?“ → RBCD �
 - RBCD unterstützt keine Admins
 - Protected Users benötigen CredSSP
 - Der DC ist kein globaler Katalog
+
+? Was beschreibt das „Second Hop“-Problem?
+* Anmeldedaten werden von einem Remote-Server nicht an einen weiteren Server weitergegeben.
+- Ein Router verwirft jedes zweite Paket.
+- Kerberos-Tickets laufen nach zwei Stunden ab.
+- DNS antwortet nur beim zweiten Versuch.
+! Standardmäßig verhindert Kerberos die Weitergabe aus Sicherheitsgründen.
+
+? Welche Delegierungsart wird für das Second-Hop-Problem empfohlen?
+* Ressourcenbasierte eingeschränkte Kerberos-Delegierung (RBCD)
+- Uneingeschränkte Delegierung
+- CredSSP auf allen Servern
+- Speichern der Kennwörter im Skript
+! RBCD wird am Zielobjekt konfiguriert und überträgt keine Kennwörter.
+
+? Mit welchem Cmdlet konfiguriert man RBCD für einen Computer?
+* Set-ADComputer -PrincipalsAllowedToDelegateToAccount
+- Enable-WSManCredSSP
+- Set-ADUser -TrustedForDelegation
+- New-PSSessionConfigurationFile
+! Gesetzt wird es am Zielserver (z. B. SRV02).

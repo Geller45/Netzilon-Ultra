@@ -186,3 +186,24 @@ Stecker dreht sich 180° und passt trotzdem; Querschnitt zeigt die symmetrischen
 - Phishing-Mails
 - SQL-Injection
 - ARP-Spoofing
+
+? Welche Datenrate hat USB 3.2 Gen 2?
+* 10 Gbit/s
+- 480 Mbit/s
+- 5 Gbit/s
+- 40 Gbit/s
+! USB 2.0 = 480 Mbit/s, USB 3.2 Gen 1 = 5 Gbit/s, Gen 2x2 = 20 Gbit/s.
+
+? Welche USB-Topologie liegt vor?
+* Sterntopologie (Baum über Hubs)
+- Ringtopologie
+- Bustopologie mit Abschlusswiderständen
+- Vermaschte Topologie
+! Hubs erweitern den Baum, ein Host-Controller steuert alles.
+
+? Welche Funktion ermöglicht das Laden von Notebooks über USB-C mit höherer Leistung?
+* USB Power Delivery (USB PD)
+- USB On-The-Go
+- DisplayPort Alt Mode
+- USB Mass Storage
+! USB PD verhandelt Spannung und Strom, z. B. bis 100 W oder mit EPR bis 240 W.

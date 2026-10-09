@@ -206,3 +206,24 @@ VM gleitet zwischen zwei Hosts, Zuschauer merken nichts.
 - SMS
 - Web-Server
 - Print-Services
+
+? Mit welchem Werkzeug werden Drucker samt Warteschlangen und Treibern migriert?
+* Druckermigration (PrintBrm.exe) bzw. Druckverwaltung → Drucker migrieren
+- Robocopy
+- DFS-R
+- Storage Migration Service
+! Export in eine .printerExport-Datei und Import am Ziel.
+
+? Wie werden die DHCP-Daten auf den neuen Server übernommen?
+* Import-DhcpServer mit der zuvor per Export-DhcpServer erzeugten Datei
+- Kopieren der Registry
+- Erneutes manuelles Anlegen aller Leases
+- Über Entra Connect
+! Danach alten Server deautorisieren bzw. Dienst stoppen.
+
+? Welche Voraussetzung gilt beim Ersetzen eines Servers mit gleichem Namen?
+* Der alte Server muss vorher außer Betrieb bzw. umbenannt sein, um Namens- und IP-Konflikte zu vermeiden
+- Beide Server laufen dauerhaft parallel mit gleichem Namen
+- Der neue Server muss eine ältere Windows-Version haben
+- Der DNS-Server muss deinstalliert werden
+! Doppelte Namen führen zu Konflikten in AD und DNS.

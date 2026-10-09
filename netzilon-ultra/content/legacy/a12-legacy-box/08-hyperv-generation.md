@@ -166,3 +166,17 @@ Ein Balken zeigt den Bootweg: Gen 1 (BIOS → IDE → MBR), Gen 2 (UEFI → SCSI
 - Höhere Geschwindigkeit
 - SR-IOV
 - Live-Migration
+
+? Welche Firmware nutzt eine Generation-1-VM?
+* BIOS
+- UEFI
+- Coreboot
+- OpenFirmware
+! Gen 2 nutzt UEFI mit Secure Boot.
+
+? Welchen Controller nutzt eine Gen-2-VM für den Startdatenträger?
+* Virtueller SCSI-Controller
+- IDE-Controller
+- Disketten-Controller
+- USB-Controller
+! Gen 1 startet vom IDE-Controller.

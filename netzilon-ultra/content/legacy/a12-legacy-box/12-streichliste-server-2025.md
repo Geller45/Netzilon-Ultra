@@ -172,3 +172,17 @@ Ein Balken; markierte Punkte zeigen, wann welche Funktion als „deprecated“ u
 - Feature sofort löschen
 - Firewall abschalten
 - Server neu starten
+
+? Was bedeutet „removed“ in Microsofts Streichliste?
+* Die Funktion ist in der neuen Version nicht mehr enthalten.
+- Die Funktion wird weiter entwickelt.
+- Die Funktion ist nur umbenannt.
+- Die Funktion ist kostenpflichtig geworden.
+! „Deprecated“ bedeutet: noch enthalten, aber nicht mehr weiterentwickelt.
+
+? Welche Remotezugriffstechnik ersetzt DirectAccess?
+* Always On VPN
+- PPTP
+- RAS über Modem
+- Telnet
+! Always On VPN nutzt IKEv2 bzw. SSTP mit Zertifikaten.

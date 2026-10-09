@@ -148,3 +148,24 @@ Stell dir vor, Computer sind wie **Autos**. Es gibt nicht „das eine richtige A
 - Indem alle Server nach oben ausblasen
 - Durch offene Fenster
 - Indem Server abwechselnd vorwärts und rückwärts eingebaut werden
+
+? Welche Aufgabe hat das Steuerwerk in einem Von-Neumann-Rechner?
+* Es holt und dekodiert Befehle und steuert den Ablauf der anderen Komponenten.
+- Es führt arithmetische Berechnungen aus.
+- Es speichert dauerhaft Daten.
+- Es wandelt Wechselspannung in Gleichspannung um.
+! Rechenwerk (ALU) rechnet, Steuerwerk steuert, Speicher hält Befehle und Daten.
+
+? Welcher Rechnertyp ist für den Einbau in einen 19-Zoll-Serverschrank vorgesehen?
+* Rack-Server
+- Tower-PC
+- Thin Client
+- All-in-One-PC
+! Rack-Server werden in Höheneinheiten (HE/U) angegeben, z. B. 1 HE = 44,45 mm.
+
+? Was beschreibt das EVA-Prinzip?
+* Eingabe, Verarbeitung, Ausgabe
+- Energie, Verbrauch, Abwärme
+- Erfassen, Verteilen, Archivieren
+- Ethernet, VLAN, Adressierung
+! Jede Datenverarbeitung folgt diesem Grundmuster.

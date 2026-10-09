@@ -1,3 +1,14 @@
+# 2.2.0 – Paket 2 (Inhalte: WiSo, Hyper-V, SAN, Speicher-Labor)
+- WiSo-Prüfungstraining: 10 neue Themenseiten (BBiG, Kündigung, Schutzgesetze, Betriebsverfassung/Tarif, Sozialversicherung/Entgelt, Rechtsformen, Markt/Wirtschaftspolitik, Verträge/Verbraucherschutz, Nachhaltigkeit/DSGVO, Organisation/Kennzahlen) mit 277 Aufgaben aller Arten
+- Hyper-V vertieft: Schwerpunkt verschachtelte Virtualisierung (Nested Virtualization) – Voraussetzungen, MAC-Spoofing/NAT, Dynamic-Memory-Einschränkungen, Prüfpunkte, Gen 1/Gen 2, vSwitch/VLAN, Nested-Cluster-Lab; 212 Aufgaben
+- 50 Hyper-V-Praxisszenarien („Kunde meldet …“): Ticket, Analyse, Lösungsweg, Lab zum Nachstellen mit GUI UND PowerShell (Maschine je Schritt), Kontrollfragen
+- SAN/Speicher vertieft: DAS/NAS/SAN, iSCSI, Fibre Channel/WWN, LUN-Masking/Zoning, MPIO, RAID, Storage Spaces, Speicherfunktionen; 206 Aufgaben
+- Neues Werkzeug „Speicher-Labor“: SAN per Klick verkabeln, LUNs anlegen/maskieren, Zoning, Pfadprüfung „Was sieht Host X?“, Ausfälle simulieren (MPIO), RAID-Rebuild animiert (XOR), 12 Aufgaben mit Auswertung, XP/Quest/Abzeichen (LUN-Lotse, SAN-Architekt)
+- Neuer Abschnitt „Legende“ (was, wie, wann, wo, warum) in jeder neuen Themenseite
+- Vollständigkeit: 20 Ergänzungsseiten (jede Aufgabenart in jedem FiSi-Bereich mind. 3×), 488 zusätzliche Quizfragen in älteren Themenseiten (jede Themenseite ≥ 8 Karten/Fragen)
+- Qualität: fachliche Korrekturen (Anomalie-Prüfung), Quiz-Distraktoren ausgeglichen (richtige Antwort nicht mehr auffällig die längste), alte Speicherstände laden weiter
+- Aufgabe des Tages und Zufallsprüfungen ziehen automatisch aus dem erweiterten Pool (über 4.000 Aufgaben)
+
 # 2.1.0 – Paket 1 (Motivation & Prüfungsmodi)
 - Schwierigkeit: jede Aufgabe (Quiz, Prüfung, Lesen, Aufgabe des Tages) hat die Markierungen leicht / mittel / schwer; Vorschlag der App gestrichelt, du überschreibst; neue Rubrik „Nach Schwierigkeit“ mit Üben-Knopf
 - Fortschritt als x/y (z. B. 33/77 erfolgreich) je Thema, Bereich, Prüfung/Ziel und gesamt; neue Ansicht „Fortschritt“ mit Meisterschaft in %

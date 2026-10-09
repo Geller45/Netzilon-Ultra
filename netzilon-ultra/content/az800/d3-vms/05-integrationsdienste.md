@@ -143,3 +143,24 @@ Zwei Pfeile zur DC-Uhr: vom Host (durchgestrichen) und vom PDC-Emulator/externer
 - Zeitsynchronisierung
 - Gastdienste
 - Datenaustausch
+
+? Über welchen Kanal kommunizieren Integrationsdienste mit dem Host?
+* VMBus
+- TCP/IP über den externen vSwitch
+- USB
+- SMB
+! Daher funktionieren sie unabhängig vom Gastnetzwerk.
+
+? Welcher Integrationsdienst tauscht Schlüssel-Wert-Paare zwischen Host und Gast aus?
+* Datenaustausch (Key-Value Pair Exchange)
+- Takt
+- Zeitsynchronisierung
+- VSS-Sicherung
+! Darüber erhält der Host z. B. die IP-Adressen der VM.
+
+? Mit welchem Cmdlet aktiviert man einen Integrationsdienst?
+* Enable-VMIntegrationService
+- Set-VMIntegration
+- Start-VMService
+- Install-WindowsFeature IntegrationServices
+! Anzeige mit Get-VMIntegrationService -VMName SRV01.

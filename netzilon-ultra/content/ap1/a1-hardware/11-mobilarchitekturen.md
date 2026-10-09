@@ -143,3 +143,24 @@ Links kurze gleich lange Befehlsblöcke laufen gleichmäßig durch eine Pipeline
 - Sie haben keinen Cache
 - Sie arbeiten nur mit 8 Bit
 - Sie besitzen keine Pipeline
+
+? Welche Befehlssatzarchitektur nutzt ARM?
+* RISC (Reduced Instruction Set Computer)
+- CISC
+- VLIW
+- EPIC
+! x86 gilt als CISC, ARM als RISC.
+
+? Was ist ein SoC?
+* System on a Chip – CPU, GPU, Speichercontroller und weitere Funktionen auf einem Chip
+- Ein Steckplatz für Erweiterungskarten
+- Ein Software-Update-Server
+- Ein Schutzschalter im Netzteil
+! SoCs sind typisch für Smartphones, Tablets und Apple-Silicon-Macs.
+
+? Wer stellt ARM-Prozessoren typischerweise her?
+* Lizenznehmer wie Qualcomm, Apple, Samsung oder MediaTek
+- Ausschließlich die Firma ARM selbst
+- Nur Intel
+- Nur AMD
+! ARM entwickelt und lizenziert die Architektur bzw. Kerne.

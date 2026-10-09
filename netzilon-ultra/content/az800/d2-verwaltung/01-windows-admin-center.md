@@ -151,3 +151,24 @@ Gateway mit „Azure registriert“-Plakette; Buttons Backup, Arc, File Sync, Mo
 - Installation eines RODC
 - Ein Forest-Trust zu Azure
 - Deaktivieren von WinRM
+
+? Über welchen Port ist das WAC-Gateway standardmäßig im Browser erreichbar (Gateway-Installation auf Windows Server)?
+* 443 (HTTPS)
+- 80
+- 3389
+- 5985
+! Bei Installation auf Windows 10/11 wird ein anderer Port (z. B. 6516) verwendet.
+
+? Welche Browser unterstützt WAC?
+* Aktuelle Versionen von Microsoft Edge und Google Chrome
+- Nur Internet Explorer
+- Nur Firefox ESR
+- Keinen, WAC ist eine Desktop-App
+! WAC ist eine browserbasierte Anwendung.
+
+? Was ermöglicht die Rollenbasierte Zugriffssteuerung (RBAC) in WAC?
+* Benutzern nur bestimmte Funktionen auf verwalteten Servern zu erlauben (per JEA-Endpunkt)
+- Die Verschlüsselung der Festplatte
+- Das Erstellen von DNS-Zonen
+- Den Domänenbeitritt
+! Rollen z. B. Administrator, Hyper-V-Administrator, Leser.

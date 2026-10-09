@@ -159,3 +159,24 @@ Pro VM ein Zähler für CPU, RAM, Disk, Netzwerk; Measure-VM erzeugt eine Rechnu
 - Messen der VM-Größe auf der Festplatte
 - Prüfen der VM-Konfigurationsversion
 - Migration einer VM
+
+? Was bewirkt die Einstellung „Virtuelle Computerreserve (Prozent)“?
+* Sie garantiert der VM einen Mindestanteil an CPU-Ressourcen.
+- Sie begrenzt die maximale CPU-Nutzung.
+- Sie legt die Anzahl der vCPUs fest.
+- Sie aktiviert Hyper-Threading.
+! Limit begrenzt nach oben, Gewichtung regelt Priorität.
+
+? Welcher Hypervisor-Scheduler-Typ schützt besonders vor seitenkanalbasierten Angriffen zwischen VMs?
+* Core-Scheduler
+- Classic-Scheduler
+- Root-Scheduler
+- Round-Robin-Scheduler
+! Er weist einer VM komplette Kerne inklusive aller SMT-Threads zu.
+
+? Mit welchem Cmdlet ändert man die Anzahl der vCPUs einer VM?
+* Set-VMProcessor -Count
+- Set-VMMemory -Count
+- Set-VM -CPU
+- Add-VMProcessor
+! Die VM muss dafür in der Regel ausgeschaltet sein.

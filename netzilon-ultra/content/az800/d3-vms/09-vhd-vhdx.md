@@ -167,3 +167,24 @@ VHDX wird größer (grauer freier Bereich), dann schiebt der Gast sein Volume in
 - Durch eine Prüfsumme pro Datei im Gast
 - Durch RAID 1 innerhalb der Datei
 - Durch automatische Prüfpunkte
+
+? Wie groß darf eine VHDX-Datei maximal sein?
+* 64 TB
+- 2 TB
+- 16 TB
+- unbegrenzt
+! VHD ist auf 2040 GB begrenzt.
+
+? Welcher Datenträgertyp belegt beim Anlegen sofort den gesamten Speicherplatz?
+* Feste Größe
+- Dynamisch erweiterbar
+- Differenzierend
+- VHD Set
+! Feste Größe bietet die beste, vorhersehbare Leistung.
+
+? Welches Cmdlet erweitert eine VHDX?
+* Resize-VHD
+- Convert-VHD
+- Optimize-VHD
+- Merge-VHD
+! Anschließend im Gast das Volume vergrößern (Resize-Partition).

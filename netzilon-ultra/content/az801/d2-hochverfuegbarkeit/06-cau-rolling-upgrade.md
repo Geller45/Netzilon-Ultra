@@ -237,3 +237,17 @@ Schalter „N → N+1“; nach Umlegen rastet er ein und lässt sich nicht zurü
 - Nur unter Linux
 - Nur bei laufender Live Migration
 - Nie
+
+? Mit welchem Cmdlet wird die Cluster-Funktionsebene nach einem Rolling Upgrade erhöht?
+* Update-ClusterFunctionalLevel
+- Update-VMVersion
+- Set-ClusterQuorum
+- Invoke-CauRun
+! Danach ist kein Rückweg zur alten Version mehr möglich.
+
+? Was startet einen CAU-Lauf manuell (Remote-Aktualisierung)?
+* Invoke-CauRun
+- Add-CauClusterRole
+- Install-WindowsUpdate
+- Start-Cluster
+! Add-CauClusterRole konfiguriert die Selbstaktualisierung.

@@ -133,3 +133,24 @@ Kauf (Schlüssel gehört dir), Leasing (Schlüssel geliehen, lange), Miete (Schl
 - Listenpreis
 - Rabatt
 - Skonto
+
+? Wie berechnet man den Bezugspreis eines Angebots?
+* Listenpreis − Rabatt − Skonto + Bezugskosten
+- Listenpreis + Rabatt + Skonto
+- Listenpreis × Umsatzsteuer
+- Listenpreis − Bezugskosten
+! Nur so sind Angebote mit unterschiedlichen Konditionen vergleichbar.
+
+? Wann ist Mieten von Hardware gegenüber Kaufen sinnvoll?
+* Bei kurzfristigem oder schwankendem Bedarf, z. B. für ein Projekt
+- Immer, weil Mieten günstiger ist
+- Nur bei Software
+- Wenn das Gerät 10 Jahre genutzt wird
+! Langfristig ist Kauf meist günstiger, Miete schont dafür Liquidität und ist flexibel.
+
+? Was wird beim Windows Server neben den Core-Lizenzen für den Zugriff von Benutzern benötigt?
+* Client Access Licenses (CALs)
+- Eine OEM-Lizenz pro Client
+- Keine weiteren Lizenzen
+- Ein Wartungsvertrag
+! User- oder Device-CALs, für Remotedesktop zusätzlich RDS-CALs.

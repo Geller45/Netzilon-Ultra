@@ -214,3 +214,24 @@ Router hisst Flagge M → Client holt Adresse bei DHCPv6; Flagge O → Client ba
 - DHCP-Failover
 - Multicastbereich
 - Zweiter DHCP-Server mit Split-Scope
+
+? Welche Funktion verteilt Adressen eines Bereichs an Clients aus mehreren logischen Subnetzen im selben Segment?
+* Superbereich (Superscope)
+- Multicastbereich
+- Ausschlussbereich
+- Reservierung
+! Superbereiche fassen mehrere Bereiche zusammen.
+
+? Welche DHCP-Funktion schützt vor dem Ausfall eines einzelnen Servers ohne Bereichsaufteilung?
+* DHCP-Failover
+- DHCP-Relay
+- Superbereich
+- Bereichsoption 015
+! Modi Lastenausgleich oder Hot Standby.
+
+? Welche Option ist für den PXE-Netzwerkstart relevant?
+* 066 (Bootserver) und 067 (Bootdateiname)
+- 003 und 006
+- 015 und 044
+- 042 und 043
+! Besser ist oft ein IP-Helper zum WDS-Server statt Optionen.

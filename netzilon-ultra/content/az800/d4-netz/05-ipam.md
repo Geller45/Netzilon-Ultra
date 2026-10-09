@@ -182,3 +182,24 @@ Zeitleiste; Adresse 192.168.10.55 gehört um 9 Uhr Laptop A (Benutzer Max), um 1
 - Install-WindowsFeature IPAM
 - New-GPO -Name IPAM
 - Add-IpamDiscoveryDomain
+
+? Welche Bereitstellungsmethode wird für IPAM-Gruppenrichtlinien empfohlen?
+* Gruppenrichtlinienbasierte Bereitstellung mit Invoke-IpamGpoProvisioning
+- Manuelle Konfiguration auf jedem Server ohne GPO
+- Bereitstellung über DHCP-Optionen
+- Installation auf jedem Client
+! Danach Server in IPAM auf „Verwaltet“ setzen.
+
+? Welche Datenbank kann IPAM statt der Windows Internal Database nutzen?
+* Microsoft SQL Server
+- Access
+- MySQL
+- Excel
+! Für größere Umgebungen empfohlen.
+
+? Welche Funktion bietet IPAM für DHCP-Server?
+* Zentrale Verwaltung von Bereichen, Reservierungen und Optionen mehrerer DHCP-Server
+- Automatische Verschlüsselung der Leases
+- Ersatz für DHCP-Relay
+- Einrichtung von VLANs
+! Zudem Überwachung der Bereichsauslastung.

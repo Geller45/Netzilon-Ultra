@@ -227,3 +227,24 @@ Binärzahl in Kästchen; Knopf „× 2“ schiebt alle Bits nach links und füll
 - Das Ergebnis ist 1111 1111
 - Das Ergebnis ist 1110 0000
 - Es passiert nichts Besonderes
+
+? Was ergibt FF₁₆ + 1₁₆?
+* 100₁₆
+- FG₁₆
+- 1FF₁₆
+- 101₁₆
+! 255 + 1 = 256 = 100₁₆.
+
+? Was ergibt A₁₆ × 2₁₆?
+* 14₁₆
+- 20₁₆
+- 12₁₆
+- 1A₁₆
+! 10 × 2 = 20 dezimal = 14₁₆.
+
+? Wie wirkt sich eine Linksverschiebung um ein Bit bei einer Binärzahl aus (ohne Überlauf)?
+* Der Wert verdoppelt sich.
+- Der Wert halbiert sich.
+- Der Wert bleibt gleich.
+- Der Wert wird negativ.
+! Shift left um n Bit = Multiplikation mit 2^n.

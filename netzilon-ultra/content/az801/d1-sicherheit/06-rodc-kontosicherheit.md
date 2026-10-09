@@ -198,3 +198,17 @@ Konto → in Denied? → ja: nie replizieren; nein → in Allowed? → ja: repli
 - Ersetzt das Konto des PDC
 - Gilt für die ganze Gesamtstruktur
 - Nur für DNS
+
+? Wo legt man fest, welche Kennwörter ein RODC zwischenspeichern darf?
+* In der Kennwortreplikationsrichtlinie (Password Replication Policy) des RODC-Computerkontos
+- In der Default Domain Policy
+- In der DNS-Zone
+- In der Firewall
+! Registerkarte „Kennwortreplikationsrichtlinie“ in ADUC.
+
+? Mit welchem Befehl lassen sich Kennwörter vorab auf einen RODC replizieren?
+* repadmin /rodcpwdrepl
+- repadmin /syncall
+- dcdiag /test:replications
+- netdom resetpwd
+! Konten müssen in der zulässigen Liste stehen.

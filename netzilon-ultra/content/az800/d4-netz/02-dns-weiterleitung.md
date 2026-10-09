@@ -182,3 +182,24 @@ On-prem-DNS → VPN-Tunnel → Inbound-Endpunkt Private Resolver → 168.63.129.
 - Auf jedem Server einzeln anlegen ist der einzige Weg
 - Als Sekundärzone anlegen
 - Per DHCP-Option 006 verteilen
+
+? Was ist ein Stammhinweis (Root Hint)?
+* Liste der Root-Server, die ohne Weiterleitung für die iterative Auflösung genutzt wird
+- Ein Alias für den lokalen DNS-Server
+- Eine Zone mit SOA-Eintrag
+- Ein DHCP-Optionswert
+! Wird verwendet, wenn keine Weiterleitung konfiguriert oder erreichbar ist.
+
+? Was unterscheidet eine Stubzone von einer bedingten Weiterleitung?
+* Die Stubzone aktualisiert die NS-Einträge der Zielzone automatisch, die bedingte Weiterleitung nutzt fest eingetragene IPs.
+- Es gibt keinen Unterschied.
+- Die bedingte Weiterleitung enthält alle Einträge der Zone.
+- Die Stubzone verschlüsselt Anfragen.
+! Stubzonen eignen sich bei sich ändernden Nameserver-Adressen.
+
+? Mit welchem Cmdlet legt man eine bedingte Weiterleitung an?
+* Add-DnsServerConditionalForwarderZone
+- Add-DnsServerForwarder
+- Add-DnsServerStubZone
+- Set-DnsClientServerAddress
+! Mit -ReplicationScope wird sie im AD repliziert.

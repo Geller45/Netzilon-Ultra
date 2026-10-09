@@ -183,3 +183,24 @@ Mehrere grüne Schilder (Gruppen) addieren sich; ein rotes „Verweigert“ übe
 - Nur Freigabeberechtigungen, NTFS auf Jeder: Vollzugriff
 - Benutzerkonten direkt berechtigen
 - Überall explizites Verweigern setzen
+
+? Welche SMB-Funktion verschlüsselt den Datenverkehr zu einer Freigabe Ende-zu-Ende?
+* SMB-Verschlüsselung (ab SMB 3.0)
+- SMB 1.0
+- NetBIOS
+- Zugriffsbasierte Aufzählung
+! Aktivierbar je Freigabe oder serverweit (Set-SmbShare -EncryptData $true).
+
+? Welches Cmdlet erstellt eine SMB-Freigabe?
+* New-SmbShare
+- New-Item -Share
+- Set-Acl -Share
+- Add-SmbMapping -Server
+! Beispiel: New-SmbShare -Name Daten -Path D:\Daten -ChangeAccess 'EXAMPLE\DL-Daten-Aendern'.
+
+? Welche Rechte gelten bei einem lokalen Zugriff am Dateiserver?
+* Nur die NTFS-Berechtigungen
+- Nur die Freigabeberechtigungen
+- Die restriktivere von beiden
+- Keine
+! Freigabeberechtigungen wirken nur beim Zugriff über das Netzwerk.

@@ -166,3 +166,24 @@ Datenbankserver streckt die Hand nach oben (ausgehend 443) zum Wolken-Postfach; 
 - Nur ein Basic-VPN-Gateway
 - Ein einzelner Server mit Hybrid Connection Manager
 - AD FS in der DMZ
+
+? Welche Azure-Ressource wird für Azure Network Adapter benötigt?
+* Ein Azure VPN Gateway (Point-to-Site)
+- Ein ExpressRoute-Circuit
+- Eine Azure Firewall
+- Ein Load Balancer
+! WAC richtet Gateway und P2S-Verbindung automatisch ein.
+
+? Was ermöglicht Azure Relay mit Hybridverbindungen?
+* Sichere Verbindungen von Azure-Diensten zu on-prem-Endpunkten über ausgehende Verbindungen
+- Replikation von AD-Daten
+- Verschlüsselung von Datenträgern
+- DNS-Auflösung in Azure
+! Der lokale Hybrid Connection Manager baut ausgehend auf.
+
+? Welches Ziel verfolgt Azure Extended Network?
+* Ein on-prem-Subnetz nach Azure erweitern, damit VMs bei der Migration ihre IP behalten
+- Eine Website weltweit verteilen
+- Benutzer synchronisieren
+- Lizenzen verwalten
+! Realisiert über VXLAN zwischen zwei Windows-Server-Appliances.

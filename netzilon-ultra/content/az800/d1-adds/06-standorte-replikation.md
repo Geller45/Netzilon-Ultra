@@ -175,3 +175,24 @@ Drei Standorte mit zwei Wegen (100 + 100 vs. 300); der Pfad mit den geringeren G
 - Der Filial-DC ist globaler Katalog
 - Die Kennwortrichtlinie ist zu streng
 - DNS nutzt UDP 53
+
+? Welcher DC ist für die Replikation zwischen Standorten zuständig?
+* Der Bridgehead-Server des Standorts
+- Der PDC-Emulator
+- Jeder Client
+- Der DHCP-Server
+! Der ISTG bestimmt die Bridgehead-Server.
+
+? Mit welchem Befehl prüft man den Replikationsstatus aller DCs übersichtlich?
+* repadmin /replsummary
+- gpupdate /force
+- ipconfig /all
+- netsh dhcp show
+! repadmin /showrepl zeigt Details je DC.
+
+? Wie werden AD-Daten innerhalb eines Standorts repliziert?
+* Benachrichtigungsgesteuert, schnell und unkomprimiert
+- Nur nach Zeitplan, komprimiert
+- Nur manuell
+- Über SMTP
+! Zwischen Standorten zeitplangesteuert und komprimiert.

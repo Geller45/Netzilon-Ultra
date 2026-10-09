@@ -220,3 +220,17 @@ Schlüssel mit Sanduhr (TTL): Sand läuft, Schlüssel löst sich in Luft auf, Gr
 - Delegierte OU-Verwaltung
 - Kerberos-Panzerung
 - Domänenreplikation
+
+? Was bewirkt das Attribut adminCount = 1?
+* Das Objekt ist bzw. war geschützt und erhält die ACL von AdminSDHolder.
+- Das Konto ist deaktiviert.
+- Das Konto ist ein Computer.
+- Das Konto darf sich nicht anmelden.
+! Nach Entfernen aus geschützten Gruppen bleibt der Wert, die Vererbung muss ggf. manuell aktiviert werden.
+
+? Welche Funktion bietet Privileged Access Management (PAM) in AD (Server 2016+)?
+* Zeitlich begrenzte Gruppenmitgliedschaften (TTL)
+- Automatische Kennwortänderung aller Benutzer
+- Verschlüsselung der NTDS.dit
+- Neue FSMO-Rollen
+! Setzt eine Bastion-Gesamtstruktur bzw. das PAM-Feature voraus.

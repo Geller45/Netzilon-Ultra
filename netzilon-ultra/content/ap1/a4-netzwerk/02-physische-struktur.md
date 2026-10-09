@@ -176,3 +176,24 @@ Lichtstrahl, der im Kern durch Totalreflexion hin- und herspringt; daneben Kupfe
 - Er leitet Frames nur an den Zielport weiter
 - Er trennt Broadcastdomänen
 - Er arbeitet auf OSI-Schicht 3
+
+? Welche Topologie hat ein typisches Ethernet-LAN mit Switches?
+* Stern (bzw. erweiterter Stern)
+- Ring
+- Bus
+- Vollvermascht
+! Jedes Endgerät hat eine eigene Leitung zum Switch.
+
+? Wie lang darf ein Twisted-Pair-Link (Kupfer) nach Ethernet-Standard maximal sein?
+* 100 m
+- 500 m
+- 10 m
+- 2 km
+! 90 m Installationskabel plus Patchkabel.
+
+? Welches Gerät arbeitet auf Schicht 2 und lernt MAC-Adressen?
+* Switch
+- Hub
+- Repeater
+- Router
+! Der Switch leitet Frames gezielt anhand seiner MAC-Tabelle weiter.

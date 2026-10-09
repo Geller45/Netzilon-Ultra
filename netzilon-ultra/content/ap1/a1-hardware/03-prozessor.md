@@ -159,3 +159,24 @@ Ein Kern mit zwei Aufgabenbändern; Wartephasen des einen Threads werden grau, d
 - Befehl holen
 - Ergebnis zurückschreiben
 - Interrupt auslösen
+
+? Wofür steht die Abkürzung ALU?
+* Arithmetic Logic Unit – Rechenwerk der CPU
+- Advanced Light Unit
+- Address Lookup Unit
+- Automatic Load Unit
+! Die ALU führt arithmetische und logische Operationen aus.
+
+? Welche Cache-Stufe ist am schnellsten, aber am kleinsten?
+* L1-Cache
+- L2-Cache
+- L3-Cache
+- Arbeitsspeicher
+! L1 sitzt direkt im Kern, L3 wird meist gemeinsam genutzt.
+
+? Was versteht man unter „Overclocking“?
+* Betrieb der CPU oberhalb des vom Hersteller spezifizierten Takts
+- Senkung der Taktfrequenz zum Stromsparen
+- Austausch des Prozessorkühlers
+- Aktivieren von Hyper-Threading
+! Mehr Leistung, aber höhere Wärme, Stromaufnahme und ggf. Instabilität bzw. Garantieverlust.

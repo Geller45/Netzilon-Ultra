@@ -179,3 +179,17 @@ Ein Schieberegler 0–5; je höher, desto mehr rote Verfahren (LM, NTLMv1) falle
 - Größere Kennwortlänge allein
 - Deaktivierung von DNS
 - Einsatz von FAT32
+
+? Welcher Algorithmus gilt in Kerberos als veraltet und sollte deaktiviert werden?
+* RC4 (und DES)
+- AES-256
+- AES-128
+- SHA-256
+! Moderne Domänen nutzen AES-Verschlüsselungstypen.
+
+? Wie kann man feststellen, welche Systeme noch NTLM nutzen?
+* Mit NTLM-Überwachungsrichtlinien (Netzwerksicherheit: NTLM einschränken – überwachen) und Ereignisprotokollen
+- Mit ipconfig
+- Mit dem Geräte-Manager
+- Gar nicht
+! Erst überwachen, dann schrittweise einschränken.

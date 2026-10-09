@@ -192,3 +192,17 @@ Vier Kästchen B/P/M/H, Pfeile zeigen die Abfragereihenfolge; Klick auf den Typ 
 - 003
 - 006
 - 015
+
+? Welcher Befehl zeigt die NetBIOS-Namenstabelle eines Remotecomputers?
+* nbtstat -A <IP-Adresse>
+- ipconfig /all
+- nslookup -nb
+- route print
+! nbtstat -n zeigt die lokale Tabelle.
+
+? Welcher Dienst ersetzt WINS in modernen Netzen?
+* DNS (ggf. mit GlobalNames-Zone)
+- DHCP
+- LDAP
+- SNMP
+! Kurze Namen werden über DNS-Suffixe aufgelöst.

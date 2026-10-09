@@ -182,3 +182,17 @@ Klick auf ein altes Protokoll (Telnet, FTP, HTTP …) blendet den Nachfolger und
 - 389
 - 3268
 - 88
+
+? Welches Protokoll ersetzt POP3/IMAP ohne Verschlüsselung?
+* POP3S (995) bzw. IMAPS (993) oder STARTTLS
+- SMTP Port 25 ohne TLS
+- Telnet
+- FTP
+! Klartext-Anmeldedaten lassen sich mitschneiden.
+
+? Warum ist FTP unsicher?
+* Benutzername, Kennwort und Daten werden im Klartext übertragen.
+- Es ist zu langsam.
+- Es funktioniert nur im LAN.
+- Es unterstützt keine Ordner.
+! Ersatz: SFTP (über SSH) oder FTPS (über TLS).

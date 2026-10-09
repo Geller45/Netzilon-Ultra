@@ -192,3 +192,17 @@ PC mit Schlüssel in der Tasche, gestrichelte Linie zum Server; Server fragt „
 - Fehlende Domänenmitgliedschaft
 - Zu wenig Festplattenspeicher
 - Fehlende BitLocker-Lizenz
+
+? Auf welcher Technik basiert Credential Guard?
+* Virtualisierungsbasierte Sicherheit (VBS) – Geheimnisse liegen im isolierten LSAIso-Prozess
+- BitLocker
+- EFS
+- NTFS-Berechtigungen
+! Voraussetzungen: UEFI, Secure Boot, Virtualisierungserweiterungen.
+
+? Was ist die EDR-Funktion von Defender for Endpoint?
+* Erkennung und Untersuchung verdächtiger Aktivitäten auf Endpunkten mit Reaktionsmöglichkeiten (z. B. Gerät isolieren)
+- Ein Backup der Endpunkte
+- Ein DHCP-Dienst für Clients
+- Die Verwaltung von Lizenzen
+! Endpoint Detection and Response.

@@ -133,3 +133,24 @@ Ein alter Bus mit blinkenden Warnlampen; per Schalter wird er „isoliert“ (Bu
 - Im Produktivnetz lassen, ohne Änderung
 - Alle Updates deaktivieren
 - Passwort auf 4 Zeichen kürzen
+
+? Was bedeutet End of Life (EoL) bzw. Ende des erweiterten Supports?
+* Es gibt keine Sicherheitsupdates mehr (außer ggf. kostenpflichtigen ESU).
+- Das Produkt funktioniert ab diesem Tag nicht mehr.
+- Es gibt nur noch neue Funktionen, aber keine Fehlerbehebungen.
+- Das Produkt wird automatisch auf die neue Version aktualisiert.
+! Das Betreiben ohne Updates erhöht das Sicherheitsrisiko erheblich.
+
+? Wie lange erhält eine Windows-Server-LTSC-Version insgesamt typischerweise Support?
+* Etwa 10 Jahre (5 Jahre Mainstream + 5 Jahre Extended)
+- 2 Jahre
+- 18 Monate
+- 25 Jahre
+! Mainstream bringt auch Funktionsänderungen, Extended nur noch Sicherheitsupdates.
+
+? Wo informiert man sich verbindlich über Supportfristen von Microsoft-Produkten?
+* Microsoft Lifecycle-Richtlinie (Lebenszyklus-Datenbank)
+- In einem Forum
+- Auf der Verpackung des Servers
+- Im Ereignisprotokoll
+! Für jedes Produkt sind Start- und Enddaten veröffentlicht.

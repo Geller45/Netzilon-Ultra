@@ -240,6 +240,28 @@ let fails = 0; const ok = (c, m) => { console.log((c ? 'OK     ' : 'FEHLER ') + 
     ok(await page.evaluate(() => { const l = document.querySelector('.leg-abschnitt'); return !!l && l.scrollWidth <= l.clientWidth + 2 && document.documentElement.scrollWidth <= innerWidth + 2; }), 'Anomalie P2: Legende bei 390 px ohne Überlauf');
     await page.setViewportSize({ width: 1300, height: 900 });
   }
+  // ---------- Paket 2: Pools & Inhalte ----------
+  {
+    await page.evaluate(() => { const o = document.getElementById('ta-overlay'); if (o) o.remove(); });
+    const p2 = await page.evaluate(() => {
+      const tp = Formen.alle(d => passtZuTag(d, 'AP1') || passtZuTag(d, 'AP2') || passtZuTag(d, 'WiSo'), ['mc', 'luecke', 'zuordnen', 'reihenfolge']).length;
+      const wiso = S.docs.filter(d => /^wiso-p2-/.test(d.id)), hv = S.docs.filter(d => /^server-hyperv-/.test(d.id)), sz = S.docs.filter(d => /^server-hvsz-/.test(d.id)), sp = S.docs.filter(d => /^server-speicher-/.test(d.id)), erg = S.docs.filter(d => /^erg-/.test(d.id));
+      const n = l => l.reduce((x, d) => x + Formen.itemsVon(d).length, 0);
+      const arten = new Set(wiso.flatMap(d => Formen.itemsVon(d).map(i => i.art)));
+      const ohneLeg = [...wiso, ...hv, ...sz, ...sp, ...erg].filter(d => d.typ === 'thema' && !d.legende.length).map(d => d.id);
+      return { tp, wiso: n(wiso), arten: arten.size, hv: n(hv), sz: sz.length, szLab: sz.filter(d => /PowerShell/.test(d.sections.Lab || '') && /GUI/.test(d.sections.Lab || '')).length, sp: n(sp), erg: erg.length, ohneLeg };
+    });
+    console.log('Paket 2', JSON.stringify(p2));
+    ok(p2.tp >= 365, `Tagesaufgaben-Pool ${p2.tp} >= 365`);
+    ok(p2.wiso >= 200 && p2.arten === 6, `WiSo: ${p2.wiso} neue Aufgaben, ${p2.arten} Aufgabenarten`);
+    ok(p2.hv >= 100, `Hyper-V vertieft: ${p2.hv} Aufgaben`);
+    ok(p2.sz === 50 && p2.szLab === 50, `50 Hyper-V-Szenarien mit GUI + PowerShell (${p2.sz}/${p2.szLab})`);
+    ok(p2.sp >= 100, `SAN/Speicher: ${p2.sp} Aufgaben`);
+    ok(p2.erg >= 10, `Ergänzungen (Vollständigkeit): ${p2.erg} Seiten`);
+    ok(p2.ohneLeg.length === 0, 'Jede neue Themenseite hat eine Legende ' + p2.ohneLeg.slice(0, 5).join(','));
+    await go('lesen', 'server-hvsz-02'); ok(await page.locator('.leg-abschnitt').count() === 1 && await page.locator('.lab input[data-schritt]').count() > 3, 'Szenario 02: Legende + abhakbares Lab');
+    await page.screenshot({ path: path.join(shots, 'p2-szenario.png') });
+  }
   ok(errs.length === 0, 'Keine Konsolenfehler ' + errs.slice(0, 3).join(' | '));
   await browser.close();
   console.log(fails ? `\n${fails} FEHLER` : '\nALLES OK'); process.exit(fails ? 1 : 0);

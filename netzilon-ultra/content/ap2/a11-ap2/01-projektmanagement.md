@@ -142,3 +142,24 @@ Backlog → Sprint Planning → Sprint mit Daily → Review → Retro → neuer 
 - 1 Stunde
 - 1 Tag
 - Einen Sprint
+
+? Wie berechnet man den Gesamtpuffer eines Vorgangs?
+* SAZ − FAZ
+- FEZ − FAZ
+- SEZ + FEZ
+- Dauer − FAZ
+! Gleichwertig: SEZ − FEZ.
+
+? Welches Dokument gliedert ein Projekt hierarchisch in Teilaufgaben und Arbeitspakete?
+* Projektstrukturplan (PSP)
+- Gantt-Diagramm
+- Lastenheft
+- Abnahmeprotokoll
+! Der PSP ist Grundlage für Termin-, Ressourcen- und Kostenplanung.
+
+? Welche drei Größen bilden das magische Dreieck des Projektmanagements?
+* Leistung/Qualität, Zeit, Kosten
+- Personal, Material, Maschinen
+- Analyse, Entwurf, Test
+- Risiko, Chance, Gewinn
+! Eine Änderung an einer Ecke wirkt auf die anderen.

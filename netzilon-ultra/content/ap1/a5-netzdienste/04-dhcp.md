@@ -237,3 +237,24 @@ Zweiter, unautorisierter „Server“ (WLAN-Router) antwortet schneller; Client 
 - Die Serveroption
 - Die Bereichsoption
 - Die zuerst angelegte Option
+
+? Welche Ports verwendet DHCP für IPv4?
+* UDP 67 (Server) und UDP 68 (Client)
+- TCP 53 und UDP 53
+- UDP 546 und 547
+- TCP 80 und 443
+! DHCPv6 nutzt UDP 546/547.
+
+? Was ist eine DHCP-Reservierung?
+* Eine feste IP-Adresse, die immer an dieselbe MAC-Adresse vergeben wird
+- Ein Adressbereich, der nicht vergeben wird
+- Eine Lease mit unbegrenzter Dauer für alle Clients
+- Ein zweiter DHCP-Server
+! Ausschlüsse dagegen werden gar nicht vergeben.
+
+? Welche DHCP-Option übermittelt die DNS-Server?
+* Option 006
+- Option 003
+- Option 015
+- Option 066
+! 003 Router, 015 Domänenname, 066 Bootserver.

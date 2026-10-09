@@ -211,3 +211,24 @@ IP und Präfix eingeben → Netzadresse, erste/letzte Host-IP, Broadcast, Anzahl
 - 192.168.100.128
 - 192.168.100.200
 - 192.168.100.208
+
+? Wie viele nutzbare Hosts hat ein /29-Netz?
+* 6
+- 8
+- 14
+- 2
+! 2^3 − 2 = 6.
+
+? Wie lautet die Netzadresse von 10.10.10.77/26?
+* 10.10.10.64
+- 10.10.10.0
+- 10.10.10.76
+- 10.10.10.128
+! Blockgröße 64: 0, 64, 128, 192.
+
+? Welche Maske gehört zu /22?
+* 255.255.252.0
+- 255.255.255.252
+- 255.255.248.0
+- 255.255.254.0
+! 22 Einsen: 8 + 8 + 6 → drittes Oktett 252.

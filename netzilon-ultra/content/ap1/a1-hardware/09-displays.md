@@ -169,3 +169,24 @@ Kapsel mit schwarzen und weißen Kügelchen; Spannung wechselt, Kügelchen wande
 - Das Bild flimmert stärker
 - Der Monitor schaltet sich ab
 - Die Farben werden invertiert
+
+? Wie berechnet man die Pixeldichte eines Displays?
+* Diagonale in Pixeln geteilt durch die Diagonale in Zoll (ppi)
+- Breite mal Höhe in Zentimetern
+- Bildwiederholrate mal Farbtiefe
+- Helligkeit geteilt durch Kontrast
+! Höhere ppi bedeuten schärfere Darstellung.
+
+? Welches Panel bietet typischerweise die kürzeste Reaktionszeit, aber eingeschränkte Blickwinkel?
+* TN-Panel
+- IPS-Panel
+- VA-Panel
+- E-Ink
+! TN ist schnell und günstig, IPS farbtreu, VA kontraststark.
+
+? Was gibt die Farbtiefe eines Displays an?
+* Anzahl Bit pro Farbkanal bzw. Pixel und damit die darstellbaren Farben
+- Die Größe des Displays
+- Die Helligkeit in Nits
+- Die Anzahl der Anschlüsse
+! 8 Bit pro Kanal ergeben ca. 16,7 Mio. Farben.

@@ -192,3 +192,24 @@ Benutzer → Webserver → SQL-Server; ohne Delegierung bleibt das Ticket am Web
 - 4624
 - 4768
 - 6527
+
+? Welcher Dienst auf dem DC stellt Kerberos-Tickets aus?
+* KDC (Key Distribution Center)
+- DHCP-Server
+- DNS-Server
+- WINS-Server
+! Der KDC besteht aus Authentication Service und Ticket Granting Service.
+
+? Welche maximale Zeitabweichung toleriert Kerberos standardmäßig?
+* 5 Minuten
+- 30 Sekunden
+- 1 Stunde
+- 24 Stunden
+! Deshalb ist Zeitsynchronisation in der Domäne wichtig.
+
+? Welche Ereignis-ID protokolliert eine fehlgeschlagene Anmeldung?
+* 4625
+- 4624
+- 4740
+- 4720
+! 4624 erfolgreich, 4740 Konto gesperrt, 4720 Konto erstellt.

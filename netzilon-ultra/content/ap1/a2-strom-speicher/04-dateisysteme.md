@@ -223,3 +223,24 @@ Dateiname „Rechnung.pdf.exe“; Schalter „Endungen anzeigen“ enthüllt das
 - Allgemein
 - Freigabe
 - Anpassen
+
+? Wie groß darf eine einzelne Datei auf FAT32 höchstens sein?
+* 4 GiB minus 1 Byte
+- 2 GiB
+- 16 TiB
+- unbegrenzt
+! Deshalb exFAT oder NTFS für große Dateien.
+
+? Welches Dateisystem unterstützt Berechtigungen, Verschlüsselung (EFS) und Kontingente unter Windows?
+* NTFS
+- FAT32
+- exFAT
+- FAT16
+! FAT-Varianten kennen keine ACLs.
+
+? Wie viele primäre Partitionen erlaubt ein MBR-Datenträger höchstens?
+* 4 (bzw. 3 primäre + 1 erweiterte)
+- 128
+- 2
+- 16
+! GPT erlaubt unter Windows 128 Partitionen.

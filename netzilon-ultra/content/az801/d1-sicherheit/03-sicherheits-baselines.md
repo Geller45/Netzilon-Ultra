@@ -193,3 +193,17 @@ Server fährt durch eine Prüfstraße (Machine Configuration), Ampel zeigt konfo
 - Änderungen im Policy Analyzer speichern
 - Baseline nicht aktualisieren
 - LGPO.exe verwenden
+
+? Welches Tool des Security Compliance Toolkit vergleicht GPOs mit Baselines?
+* Policy Analyzer
+- LGPO.exe
+- gpresult
+- secedit /export
+! LGPO.exe wendet Richtlinien auf eigenständigen Systemen an.
+
+? Wie sollte man eigene Abweichungen von einer Baseline umsetzen?
+* In einem separaten GPO mit höherer Verknüpfungspriorität statt die Baseline-GPO zu ändern
+- Direkt in der importierten Baseline-GPO
+- Durch Löschen der Baseline
+- Nur in der Registry jedes Servers
+! So bleiben Baseline-Updates einfach austauschbar.

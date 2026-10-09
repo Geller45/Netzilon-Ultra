@@ -148,3 +148,24 @@ Stufe 1: Domänen-Admin legt ein leeres Konto-Formular an; Stufe 2: Filial-Admin
 - Die zugelassene
 - Die zuletzt eingetragene
 - Die des globalen Katalogs
+
+? Welche Funktion bietet ein RODC für lokale Administratoren?
+* Administratorrollentrennung – ein Nicht-Domänen-Admin kann den RODC lokal verwalten
+- Vollständiger Schreibzugriff auf das AD
+- Übernahme aller FSMO-Rollen
+- Verwaltung der Gesamtstruktur
+! Delegierte lokale Administration ohne Domänenrechte.
+
+? Welche Gruppe enthält standardmäßig die Konten, deren Kennwörter auf RODCs zwischengespeichert werden dürfen?
+* Zulässige RODC-Kennwortreplikationsgruppe
+- Domänen-Admins
+- Organisations-Admins
+- Protected Users
+! Abgelehnte Gruppe hat Vorrang.
+
+? Welche DNS-Zone stellt ein RODC bereit?
+* Eine schreibgeschützte Kopie der AD-integrierten Zone
+- Eine primäre beschreibbare Zone
+- Keine DNS-Funktion möglich
+- Nur Stubzonen
+! Dynamische Updates werden an einen beschreibbaren DC verwiesen.

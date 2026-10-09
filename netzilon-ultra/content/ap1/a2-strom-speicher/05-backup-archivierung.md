@@ -233,3 +233,24 @@ Drei Dokumentkopien, zwei Medien-Symbole, ein Haus in der Ferne; Feuer im Hauptg
 - RTO
 - MTBF
 - SLA
+
+? Was beschreibt der RTO?
+* Die maximal tolerierbare Zeit bis zur Wiederherstellung des Betriebs
+- Den maximal tolerierbaren Datenverlust
+- Die Größe des Backups
+- Die Anzahl der Sicherungsmedien
+! RPO = Datenverlust, RTO = Wiederherstellungsdauer.
+
+? Welche Sicherungsart benötigt bei der Wiederherstellung nur die letzte Vollsicherung und die letzte Sicherung dieser Art?
+* Differenzielle Sicherung
+- Inkrementelle Sicherung
+- Kopiesicherung
+- Spiegelung
+! Die differenzielle Sicherung enthält alle Änderungen seit der letzten Vollsicherung.
+
+? Was unterscheidet Archivierung von Datensicherung?
+* Archivierung bewahrt Daten langfristig und unverändert auf (z. B. gesetzliche Fristen), Backup dient der Wiederherstellung.
+- Es gibt keinen Unterschied.
+- Archivierung ist immer kürzer als ein Backup.
+- Archivierung erfolgt nur auf USB-Sticks.
+! Beispiel: Handelsbriefe 6 Jahre, Buchungsbelege 8 bzw. 10 Jahre Aufbewahrung.

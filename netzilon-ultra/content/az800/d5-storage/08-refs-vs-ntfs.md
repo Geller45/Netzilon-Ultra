@@ -188,3 +188,17 @@ Zwei Werkzeugkästen nebeneinander: Schweizer Messer (NTFS) und Spezial-Klonschn
 - Cluster Shared Volume
 - Storage-Spaces-Direct-Volume
 - Backup-Zielvolume
+
+? Welche Funktion beschleunigt das Klonen von VHDX-Dateien auf ReFS?
+* Block Cloning
+- EFS
+- Dateikomprimierung
+- Kontingente
+! Zusammenführen von Prüfpunkten wird zu einer Metadatenoperation.
+
+? Wofür eignet sich ReFS besonders?
+* Hyper-V-Datenvolumes, Storage Spaces Direct und Backup-Ziele
+- Startvolume eines Clients
+- USB-Sticks für den Datenaustausch
+- Volumes mit EFS-Verschlüsselung
+! ReFS bietet Integritätsprüfsummen und hohe Skalierbarkeit.

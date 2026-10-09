@@ -182,3 +182,17 @@ Zwei Türen: „\\\\10.0.0.10“ (NTLM, verschlossen) und „\\\\SRV01“ (Kerbe
 - Protected Users Eigenschaften
 - Default Domain Policy
 - FGPP
+
+? Welche Authentifizierungsprotokolle sind für Mitglieder von Protected Users gesperrt?
+* NTLM, Digest und CredSSP-Delegierung mit Klartextanmeldedaten; bei Kerberos keine DES/RC4
+- Nur Kerberos
+- Nur zertifikatbasierte Anmeldung
+- Keine Einschränkungen
+! Erzwungen wird AES-Kerberos.
+
+? Für welche Konten ist Protected Users NICHT gedacht?
+* Dienst- und Computerkonten
+- Domänen-Admins
+- Organisations-Admins
+- Privilegierte Benutzer
+! Dienste würden durch die Einschränkungen ausfallen.

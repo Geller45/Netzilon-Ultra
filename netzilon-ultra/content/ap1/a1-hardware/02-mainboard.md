@@ -169,3 +169,24 @@ Vier Platinen werden maßstabsgetreu übereinandergelegt; beim Klick zeigt die A
 - Höhere CPU-Taktraten
 - Den Betrieb ohne Netzteil
 - Das Speichern der BIOS-Einstellungen ohne Batterie
+
+? Welche Partitionierung verwendet UEFI standardmäßig für das Systemlaufwerk?
+* GPT (GUID Partition Table)
+- MBR mit erweiterter Partition
+- FAT12
+- Keine Partitionierung
+! GPT erlaubt mehr als 2 TiB und 128 Partitionen unter Windows.
+
+? Wo wird die Firmware des Mainboards gespeichert?
+* In einem Flash-Speicher (EEPROM) auf dem Mainboard
+- Auf der Systemfestplatte
+- Im Arbeitsspeicher
+- In der Grafikkarte
+! Daher kann sie per Firmware-Update „geflasht“ werden.
+
+? Welche Aufgabe hat der POST beim Einschalten?
+* Er prüft grundlegende Hardware (RAM, CPU, Grafik) vor dem Laden des Betriebssystems.
+- Er installiert Treiber im Betriebssystem.
+- Er verschlüsselt die Festplatte.
+- Er vergibt eine IP-Adresse.
+! Power-On Self Test – Fehler werden über Piepcodes oder Debug-LEDs angezeigt.

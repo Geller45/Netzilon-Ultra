@@ -201,3 +201,17 @@ Ordner zwischen zwei DCs, Pfeil zeigt Quelle.
 - bcdedit /set dsrm on
 - msconfig /dsrm
 - restart-dc -dsrm
+
+? Welche Art der Wiederherstellung ist nötig, damit ein zurückgesichertes Objekt nicht von anderen DCs überschrieben wird?
+* Autoritative Wiederherstellung
+- Nicht autoritative Wiederherstellung
+- Neuinstallation des DC
+- Zurücksetzen per Prüfpunkt
+! Mit ntdsutil „authoritative restore“ wird die Versionsnummer erhöht.
+
+? Wie wird ein DC in den DSRM gestartet?
+* bcdedit /set safeboot dsrepair und Neustart bzw. F8-/Starteinstellungen
+- gpupdate /dsrm
+- shutdown /dsrm
+- ipconfig /dsrm
+! Danach bcdedit /deletevalue safeboot, um wieder normal zu starten.

@@ -198,3 +198,24 @@ Scrollende Logzeilen (DROP/ALLOW); Filter nach Port zeigt die geblockten FTP-Ver
 - Sie können keine Inhalte prüfen
 - Sie arbeiten nur auf Schicht 2
 - Sie kennen keine Regeln
+
+? Was ist eine DMZ?
+* Ein Netzsegment zwischen Internet und internem Netz für öffentlich erreichbare Server
+- Ein WLAN für Gäste ohne Verschlüsselung
+- Eine Firewallregel für ICMP
+- Ein VPN-Protokoll
+! Server in der DMZ sind vom internen LAN durch eine (zweite) Firewall getrennt.
+
+? Nach welchem Prinzip sollten Firewall-Regelwerke aufgebaut sein?
+* Alles verbieten, was nicht ausdrücklich erlaubt ist (Default Deny)
+- Alles erlauben, was nicht ausdrücklich verboten ist
+- Nur ausgehenden Verkehr filtern
+- Regeln zufällig anordnen
+! Whitelist-Prinzip.
+
+? Auf welchen Schichten arbeitet ein Paketfilter?
+* Schicht 3 und 4 (IP-Adressen, Ports, Protokolle)
+- Nur Schicht 7
+- Nur Schicht 1
+- Schicht 5 und 6
+! Application-Level-Gateways prüfen zusätzlich Inhalte auf Schicht 7.

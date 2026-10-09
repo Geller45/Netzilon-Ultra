@@ -177,3 +177,24 @@ Volume als Blöcke; Snapshot = Markierung; bei Änderung eines Blocks wird der a
 - Den Stand von 14:59 Uhr
 - Nichts
 - Den Stand von gestern 18 Uhr
+
+? Mit welchem Schlüssel werden EFS-Dateien letztlich geschützt?
+* Mit einem symmetrischen Dateischlüssel, der mit dem öffentlichen Schlüssel des Benutzers verschlüsselt ist
+- Nur mit dem Kennwort im Klartext
+- Mit dem BitLocker-Wiederherstellungsschlüssel
+- Mit der MAC-Adresse
+! Hybrides Verfahren; ein Wiederherstellungs-Agent kann vorgesehen werden.
+
+? Wie viele Schattenkopien kann ein Volume unter Windows Server maximal speichern?
+* 64
+- 8
+- 512
+- unbegrenzt
+! Ältere werden bei Platzmangel oder Erreichen der Grenze gelöscht.
+
+? Ersetzen Schattenkopien eine Datensicherung?
+* Nein, sie liegen auf demselben Volume und gehen bei dessen Ausfall verloren.
+- Ja, vollständig.
+- Ja, wenn sie täglich laufen.
+- Nur auf SSDs.
+! Sie sind eine Ergänzung für schnelle Wiederherstellung einzelner Dateien.

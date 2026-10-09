@@ -240,3 +240,17 @@ Lupe fährt über Protokoll, markiert Ereignis 1135.
 - Falsches Subnetz
 - Zu wenig RAM am DC
 - Witness gelöscht
+
+? Welches Cmdlet entleert einen Knoten vor Wartungsarbeiten?
+* Suspend-ClusterNode -Drain
+- Stop-ClusterNode -Force
+- Remove-ClusterNode
+- Move-ClusterGroup -All
+! Nach der Wartung Resume-ClusterNode -Failback Immediate.
+
+? Was bewirkt die Einstellung „Failback“ einer Clusterrolle?
+* Die Rolle wechselt zum bevorzugten Besitzer zurück, sobald er wieder verfügbar ist.
+- Die Rolle wird gelöscht.
+- Die Rolle bleibt dauerhaft offline.
+- Der Cluster wird neu gestartet.
+! Failback kann sofort oder in einem Zeitfenster erfolgen.

@@ -210,3 +210,24 @@ L3-Switch mit SVIs; ein Paket von VLAN 10 nach VLAN 20 geht hoch zur SVI, wird g
 - MAC-basiertes VLAN
 - Policy-basiertes VLAN
 - Protokollbasiertes VLAN
+
+? Wie groß ist der 802.1Q-Tag?
+* 4 Byte
+- 2 Byte
+- 8 Byte
+- 12 Bit
+! Er enthält TPID, PCP, DEI und die 12-Bit-VLAN-ID.
+
+? Was wird für die Kommunikation zwischen zwei VLANs benötigt?
+* Ein Router oder Layer-3-Switch
+- Ein Hub
+- Ein Repeater
+- Ein zweiter Access-Port im selben VLAN
+! VLANs sind getrennte Broadcastdomänen.
+
+? Welcher Vorteil entsteht durch VLANs?
+* Kleinere Broadcastdomänen und Trennung von Netzbereichen
+- Höhere Kabelreichweite
+- Kein Router mehr nötig
+- Automatische Verschlüsselung
+! Zudem flexible Zuordnung unabhängig vom Standort.

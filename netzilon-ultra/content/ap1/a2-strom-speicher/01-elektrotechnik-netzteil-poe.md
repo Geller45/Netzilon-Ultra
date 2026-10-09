@@ -188,3 +188,24 @@ Switch mit 16 Ports, Kameras werden eingesteckt; Budgetbalken füllt sich, beim 
 - 16
 - 24
 - 12
+
+? Wie lautet das ohmsche Gesetz?
+* U = R × I
+- P = U × I
+- W = P × t
+- I = U × R
+! Spannung = Widerstand × Stromstärke.
+
+? Welche Spannung liefert ein ATX-Netzteil NICHT als Standardschiene?
+* 48 V
+- 12 V
+- 5 V
+- 3,3 V
+! 48 V wird z. B. für PoE verwendet, nicht im ATX-Netzteil.
+
+? Was beschreibt der 80-PLUS-Standard?
+* Mindestwirkungsgrade von Netzteilen bei verschiedenen Lasten
+- Die maximale Leistung eines Netzteils
+- Die Lautstärke des Lüfters
+- Die Anzahl der Anschlüsse
+! Stufen von Bronze über Gold bis Titanium.

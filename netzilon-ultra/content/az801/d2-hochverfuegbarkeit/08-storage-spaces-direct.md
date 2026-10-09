@@ -227,3 +227,17 @@ Schneller Tresen vorne, große Regale dahinter.
 - Quorum löschen
 - Cache-Laufwerke entfernen
 - CNO neu anlegen
+
+? Wie viele Knoten unterstützt ein S2D-Cluster höchstens?
+* 16
+- 4
+- 64
+- 2
+! Mindestens 2 Knoten (mit Witness).
+
+? Welche Netzwerkanforderung gilt für S2D empfohlen?
+* Mindestens 10 Gbit/s, bevorzugt mit RDMA (iWARP oder RoCE)
+- 100 Mbit/s genügen
+- WLAN zwischen den Knoten
+- Nur USB-Verbindungen
+! Der Ost-West-Speicherverkehr läuft über SMB 3 mit SMB Direct.

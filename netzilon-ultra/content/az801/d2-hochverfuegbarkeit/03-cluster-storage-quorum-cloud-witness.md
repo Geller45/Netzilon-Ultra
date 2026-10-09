@@ -231,3 +231,10 @@ Wolke mit kleinem Dokument, Pfeil über Port 443 von beiden Standorten.
 - Auf einem Dateiserver
 - Auf einem NAS
 - Auf einem separaten Server
+
+? Was speichert ein Cloud Witness in Azure?
+* Eine kleine Blob-Datei im Speicherkonto als Stimme für das Quorum
+- Alle VM-Daten
+- Die Clusterlogs
+- Die Active-Directory-Datenbank
+! Konfiguration mit Set-ClusterQuorum -CloudWitness.

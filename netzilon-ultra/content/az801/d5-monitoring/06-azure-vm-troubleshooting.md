@@ -178,3 +178,17 @@ Defekter Datenträger wird an Werkstatt-VM angehängt, repariert, zurückgesteck
 - Backup
 - Replikation
 - Kennwortsynchronisation
+
+? Welche Funktion von Network Watcher prüft, ob eine NSG-Regel Datenverkehr blockiert?
+* Überprüfung des IP-Flusses (IP Flow Verify)
+- Bastion
+- Startdiagnose
+- Serielle Konsole
+! Sie nennt die verantwortliche Regel.
+
+? Welche Funktion zeigt einen Screenshot des Bootbildschirms einer Azure-VM?
+* Startdiagnose (Boot Diagnostics)
+- Azure Advisor
+- Kostenanalyse
+- Activity Log
+! Hilfreich bei Bluescreens oder hängenden Updates.

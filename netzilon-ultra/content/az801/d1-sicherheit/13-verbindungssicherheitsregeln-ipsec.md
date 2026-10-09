@@ -237,3 +237,17 @@ Postpaket mit Siegel (AH) versus Postpaket im verschlossenen Koffer (ESP).
 - Firewall Block Regel
 - NSG
 - WDAC
+
+? Was ist der Unterschied zwischen „Anfordern“ und „Erfordern“ bei der Authentifizierung?
+* Anfordern versucht IPsec, erlaubt aber auch ungeschützte Verbindungen; Erfordern lässt nur authentifizierte zu.
+- Beide sind identisch.
+- Erfordern ist nur für ausgehende Verbindungen.
+- Anfordern blockiert alles.
+! Einführung meist zuerst mit „Anfordern“.
+
+? Welche Ports bzw. Protokolle müssen für IPsec durch Firewalls erlaubt sein?
+* UDP 500, UDP 4500 (NAT-T) und IP-Protokoll 50 (ESP)
+- TCP 80 und 443
+- TCP 3389
+- UDP 53
+! AH nutzt IP-Protokoll 51 und funktioniert nicht über NAT.

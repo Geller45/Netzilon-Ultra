@@ -189,3 +189,17 @@ Tafel mit 53, 88, 389, 445, 135 und 3268.
 - DFS-R
 - BITS
 - WSUS
+
+? Welches Werkzeug testet einen DC umfassend auf Fehler (u. a. Replikation, DNS, Dienste)?
+* dcdiag
+- gpresult
+- netsh
+- msinfo32
+! dcdiag /test:replications prüft gezielt die Replikation.
+
+? Wie wird die Tombstone Lifetime bei neueren Gesamtstrukturen standardmäßig eingestellt?
+* 180 Tage
+- 60 Tage
+- 365 Tage
+- 14 Tage
+! DCs, die länger offline waren, dürfen nicht wieder replizieren (Lingering Objects).

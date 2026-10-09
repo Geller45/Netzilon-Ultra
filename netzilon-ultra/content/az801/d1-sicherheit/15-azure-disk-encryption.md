@@ -220,3 +220,17 @@ Kalender mit 15.09.2028; ADE-Schild wechselt zu „Encryption at Host“.
 - Zwei Regionen
 - Standard-SKU
 - Tags
+
+? Welche Verschlüsselung ist für alle verwalteten Azure-Datenträger standardmäßig aktiv?
+* Serverseitige Verschlüsselung (SSE) mit plattformverwalteten Schlüsseln
+- Azure Disk Encryption
+- EFS
+- Keine
+! ADE verschlüsselt zusätzlich im Gast.
+
+? Welche Technik nutzt ADE in Linux-VMs?
+* DM-Crypt
+- BitLocker
+- EFS
+- VeraCrypt
+! In Windows-VMs wird BitLocker verwendet.

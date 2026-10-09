@@ -168,3 +168,24 @@ Ein GPO-Paket, aus dem viele Einstellungskarten fliegen; jede Karte hat ein Schl
 - Computerkonfiguration → Richtlinien → Sicherheitseinstellungen
 - Computerkonfiguration → Einstellungen → Netzwerkfreigaben
 - Benutzerkonfiguration → Richtlinien → Administrative Vorlagen
+
+? Welche Aktionen bieten Gruppenrichtlinieneinstellungen (Preferences)?
+* Erstellen, Ersetzen, Aktualisieren, Löschen
+- Nur Aktivieren und Deaktivieren
+- Lesen, Schreiben, Ausführen
+- Zulassen, Verweigern
+! Aktualisieren ändert nur konfigurierte Werte.
+
+? Was unterscheidet Preferences grundsätzlich von Richtlinien (Policies)?
+* Preferences sind Vorgaben, die der Benutzer ändern kann; Richtlinien werden erzwungen.
+- Preferences gelten nur für Server.
+- Richtlinien funktionieren nur lokal.
+- Es gibt keinen Unterschied.
+! Policies sind in der Oberfläche ausgegraut.
+
+? Welche Option sorgt dafür, dass ein Element nur einmal angewendet wird?
+* „Einmalig anwenden und nicht erneut übernehmen“
+- „Im Benutzersicherheitskontext ausführen“
+- „Element entfernen, wenn es nicht mehr angewendet wird“
+- „Zielgruppenadressierung“
+! Nützlich für Vorbelegungen, die Benutzer anschließend ändern dürfen.

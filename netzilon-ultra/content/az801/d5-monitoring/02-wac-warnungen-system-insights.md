@@ -126,6 +126,7 @@ Live-Anzeigen ohne Fahrtenbuch.
 - F: Welches Cmdlet startet eine Prognose? | A: Invoke-InsightsCapability.
 - F: Wie löst man eine Aktion bei Warnung aus? | A: Set-InsightsCapabilityAction.
 - F: Was zeigt WAC im Vergleich zu Azure Monitor? | A: Live-Werte, keine langfristige Speicherung.
+- F: Mit welchem Cmdlet zeigt man die Ergebnisse einer System-Insights-Prognose an? | A: Get-InsightsCapabilityResult -Name '<Funktionsname>' (Liste der Funktionen mit Get-InsightsCapability).
 
 ## Quiz
 ? Welche Lösung prognostiziert lokal, wann ein Volume voll ist?
@@ -163,3 +164,17 @@ Live-Anzeigen ohne Fahrtenbuch.
 - Windows Server 2012
 - Windows Server 2016
 - Windows 8
+
+? Welche Standardfunktionen der Prognose bietet System Insights?
+* CPU-Kapazität, Netzwerkkapazität, Gesamtspeicherverbrauch und Volumeverbrauch
+- Kennwortablauf und Kontosperrungen
+- DHCP-Leases und DNS-Abfragen
+- Druckaufträge und Toner
+! Die Vorhersagen beruhen auf lokalem maschinellem Lernen.
+
+? Mit welchem Cmdlet lässt man sich die Ergebnisse einer System-Insights-Funktion anzeigen?
+* Get-InsightsCapabilityResult
+- Get-Counter -Insights
+- Get-WinEvent -Insights
+- Show-Prediction
+! Invoke-InsightsCapability startet eine Prognose sofort.

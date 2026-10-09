@@ -180,3 +180,24 @@ Regler für DDR-Generation, MT/s und Kanäle; Ergebnis in GB/s und Rechenweg wer
 - hiberfil.sys
 - boot.ini
 - ntuser.dat
+
+? Was bedeutet ECC bei Arbeitsspeicher?
+* Error Correcting Code – erkennt und korrigiert Einzelbitfehler
+- Extra Cache Capacity
+- Energy Control Chip
+- External Clock Control
+! ECC-RAM ist in Servern Standard.
+
+? Was passiert mit dem Inhalt des RAM beim Ausschalten?
+* Er geht verloren, weil RAM flüchtig ist.
+- Er wird automatisch auf die SSD kopiert.
+- Er bleibt dauerhaft erhalten.
+- Er wird in die Cloud synchronisiert.
+! Ausnahme: Ruhezustand – dann schreibt Windows den Inhalt in hiberfil.sys.
+
+? Welche Bauform wird typischerweise in Notebooks verwendet?
+* SO-DIMM
+- DIMM in voller Länge
+- SIMM
+- RIMM
+! Small Outline DIMM – kleinere Module für mobile Geräte.

@@ -194,3 +194,17 @@ Zwei Zeiger: Objektsync 30 Minuten, Kennwort 2 Minuten.
 - gpresult
 - ipconfig
 - nltest
+
+? Mit welchem Werkzeug analysiert man Synchronisationsfehler von Entra Connect?
+* Synchronization Service Manager und Entra Connect Health
+- Ereignisanzeige des Clients
+- DHCP-Konsole
+- DNS-Manager
+! Dort sieht man Fehler je Connector und Objekt.
+
+? Welche Ursache ist typisch, wenn Benutzer mit Kennworthashsynchronisierung ihr neues Kennwort in der Cloud noch nicht nutzen können?
+* Die Synchronisation des Kennworthashs ist noch nicht erfolgt bzw. gestört (Intervall ca. 2 Minuten)
+- Der DHCP-Server ist ausgefallen
+- Die Gruppenrichtlinie ist zu alt
+- Das Benutzerkonto ist zu groß
+! Kennworthashes werden unabhängig vom 30-Minuten-Zyklus etwa alle 2 Minuten synchronisiert.

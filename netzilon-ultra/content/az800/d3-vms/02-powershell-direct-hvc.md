@@ -174,3 +174,24 @@ Tabelle als Straßenkarte: Netzwerkstraßen (RDP, WinRM) vs. Geheimgänge im Hau
 - robocopy \\VM\C$
 - Copy-VMFile ohne Gastdienste
 - xcopy /vm
+
+? Welche Anmeldedaten verlangt PowerShell Direct?
+* Gültige Anmeldedaten des Gastbetriebssystems
+- Die Anmeldedaten des Hyper-V-Hosts genügen
+- Keine Anmeldedaten
+- Ein Zertifikat aus der Azure-PKI
+! Der Zugriff erfolgt über den VMBus, nicht über das Netzwerk.
+
+? Mit welchem Parameter öffnet man eine Sitzung per Name einer VM?
+* -VMName (oder -VMId)
+- -ComputerName
+- -HostName
+- -IPAddress
+! Beispiel: Enter-PSSession -VMName SRV01 -Credential (Get-Credential).
+
+? Wo muss ein PowerShell-Direct-Befehl ausgeführt werden?
+* Auf dem Hyper-V-Host, auf dem die VM läuft
+- Auf einem beliebigen Domänenclient
+- In Azure Cloud Shell
+- Auf dem Domänencontroller
+! Remote-Hosts benötigen erst eine Sitzung auf dem Host.

@@ -227,3 +227,24 @@ Admin steht vor verschlossenem Ordner, drückt „Besitz übernehmen“, bekommt
 - Er startet den Server neu
 - Er kopiert den Ordner auf den Desktop
 - Er ändert die Freigabeberechtigungen
+
+? Welche NTFS-Standardberechtigung erlaubt Lesen, Schreiben und Löschen, aber nicht das Ändern von Berechtigungen?
+* Ändern
+- Vollzugriff
+- Lesen, Ausführen
+- Schreiben
+! Vollzugriff erlaubt zusätzlich Berechtigungen ändern und Besitz übernehmen.
+
+? Ein Ordner wird innerhalb desselben NTFS-Volumes verschoben. Welche Berechtigungen hat er?
+* Er behält seine expliziten Berechtigungen.
+- Er übernimmt nur die Rechte des Zielordners.
+- Er verliert alle Rechte.
+- Er erhält Vollzugriff für Jeder.
+! Beim Kopieren oder Verschieben auf ein anderes Volume werden die Rechte des Ziels geerbt.
+
+? Welche Berechtigung gilt, wenn Freigabe- und NTFS-Rechte zusammenwirken?
+* Die restriktivere von beiden
+- Die großzügigere von beiden
+- Immer die Freigabeberechtigung
+- Immer die NTFS-Berechtigung
+! Beim Zugriff über das Netzwerk werden beide geprüft.

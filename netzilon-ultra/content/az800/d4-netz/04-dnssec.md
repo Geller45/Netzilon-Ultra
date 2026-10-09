@@ -186,3 +186,24 @@ GPO-Briefkasten verteilt Regel „example.com nur geprüft“ an Clients; Client
 - Zone neu erstellen
 - Vertrauensanker löschen
 - NRPT-Regel entfernen
+
+? Welcher Eintrag weist das Nichtvorhandensein eines Namens signiert nach?
+* NSEC bzw. NSEC3
+- RRSIG
+- DS
+- PTR
+! NSEC3 verhindert zusätzlich das einfache Durchlaufen der Zone (Zone Walking).
+
+? Welcher Eintrag in der Elternzone stellt die Vertrauenskette zur Kindzone her?
+* DS (Delegation Signer)
+- DNSKEY
+- SOA
+- NS
+! Er enthält einen Hash des KSK der Kindzone.
+
+? Welche Rolle verwaltet in Windows Server die DNSSEC-Schlüssel einer Zone?
+* Der Key Master
+- Der PDC-Emulator
+- Der RID-Master
+- Der Infrastrukturmaster
+! Der Key Master kann auf einen anderen autoritativen DNS-Server übertragen werden.

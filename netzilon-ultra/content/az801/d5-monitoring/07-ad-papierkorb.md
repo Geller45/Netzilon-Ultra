@@ -161,3 +161,17 @@ Baum: OU (Vertrieb) wird vor Benutzern zurückgeholt.
 - Voll wiederherstellbar
 - Aktiv
 - Replikiert
+
+? Mit welchem Cmdlet wird der AD-Papierkorb aktiviert?
+* Enable-ADOptionalFeature 'Recycle Bin Feature'
+- Enable-ADRecycleBin
+- Set-ADForestMode -RecycleBin
+- Restore-ADObject -Enable
+! Alternativ im Active Directory-Verwaltungscenter.
+
+? Wie lange bleibt ein gelöschtes Objekt standardmäßig wiederherstellbar (Lebensdauer gelöschter Objekte)?
+* 180 Tage (msDS-DeletedObjectLifetime, Standard = Tombstone Lifetime)
+- 7 Tage
+- 30 Tage
+- Unbegrenzt
+! Danach wird es zum recycelten Objekt und kann nicht mehr vollständig wiederhergestellt werden.

@@ -174,3 +174,17 @@ Ein Balken; oben MBR (ein Sektor, 4 Slots), unten GPT (Header, 128 Slots, Backup
 - Ein Verschlüsselungsmodul
 - Ein Dateisystem
 - Ein Netzwerkboot-Protokoll
+
+? Wie viele Partitionen unterstützt GPT unter Windows standardmäßig?
+* 128
+- 4
+- 16
+- 1024
+! MBR erlaubt 4 primäre Partitionen.
+
+? Welche UEFI-Funktion verhindert das Laden nicht signierter Bootloader?
+* Secure Boot
+- CSM
+- Fast Boot
+- Wake on LAN
+! CSM (Legacy-Modus) muss für Secure Boot deaktiviert sein.

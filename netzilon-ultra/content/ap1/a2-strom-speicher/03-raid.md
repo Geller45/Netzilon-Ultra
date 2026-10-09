@@ -171,3 +171,24 @@ Array mit Hot-Spare; Platte fällt aus, Hot-Spare leuchtet auf, Fortschrittsbalk
 - 0110
 - 1100
 - 0011
+
+? Wie viel Nutzkapazität haben 6 Platten à 4 TB im RAID 6?
+* 16 TB
+- 20 TB
+- 24 TB
+- 12 TB
+! RAID 6: (n − 2) × Kapazität = 4 × 4 TB.
+
+? Welches RAID-Level spiegelt Daten auf zwei Platten?
+* RAID 1
+- RAID 0
+- RAID 5
+- RAID 6
+! Nutzkapazität 50 %, eine Platte darf ausfallen.
+
+? Warum ersetzt RAID keine Datensicherung?
+* Löschungen, Schadsoftware und logische Fehler werden sofort auf alle Platten übertragen.
+- RAID ist langsamer als ein Backup.
+- RAID funktioniert nur mit SSDs.
+- RAID verschlüsselt die Daten nicht.
+! RAID schützt nur vor Plattenausfall (Verfügbarkeit), nicht vor Datenverlust.

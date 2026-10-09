@@ -129,3 +129,24 @@ Plan, Do, Check, Act.
 - Vermeiden
 - Akzeptieren
 - Reduzieren
+
+? Welche Schutzbedarfskategorien kennt der IT-Grundschutz?
+* Normal, hoch, sehr hoch
+- Niedrig, mittel, hoch, kritisch
+- Grün, gelb, rot
+- Öffentlich, intern, geheim
+! Die Einstufung erfolgt für Vertraulichkeit, Integrität und Verfügbarkeit.
+
+? Was ist der erste Schritt der IT-Grundschutz-Methodik (Standard-Absicherung)?
+* Strukturanalyse
+- Risikoanalyse
+- IT-Grundschutz-Check
+- Zertifizierung
+! Danach folgen Schutzbedarfsfeststellung und Modellierung.
+
+? Welches Schutzziel wird durch eine USV vorrangig unterstützt?
+* Verfügbarkeit
+- Vertraulichkeit
+- Integrität
+- Authentizität
+! Sie hält Systeme bei Stromausfall am Laufen.

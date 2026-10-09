@@ -187,3 +187,24 @@ Kreise: kleinster Kreis Domäne (DNS-Server), größerer Kreis Forest, separater
 - AD-integrierte Zone auf dem Mitgliedsserver
 - Stubzone mit dynamischen Updates
 - Bedingte Weiterleitung
+
+? Welcher Eintragstyp wird für das Auffinden von DCs benötigt?
+* SRV
+- MX
+- CNAME
+- TXT
+! Netlogon registriert die SRV-Einträge automatisch.
+
+? Wo wird die Alterung und Bereinigung zusätzlich zur Zone aktiviert?
+* Auf mindestens einem DNS-Server (Serverbereinigung)
+- Auf jedem Client
+- Im DHCP-Server
+- In der Gruppenrichtlinie der Clients
+! Erst dann werden veraltete Einträge tatsächlich gelöscht.
+
+? Welche Einstellung für dynamische Updates sollte bei AD-integrierten Zonen gewählt werden?
+* Nur sichere dynamische Updates
+- Nicht sichere und sichere Updates
+- Keine dynamischen Updates
+- Nur Updates per DHCP-Option 081
+! Nur authentifizierte Domänenmitglieder dürfen Einträge registrieren.

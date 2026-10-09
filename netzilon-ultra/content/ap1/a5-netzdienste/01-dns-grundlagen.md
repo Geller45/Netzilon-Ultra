@@ -197,3 +197,24 @@ Drei Webserver, Anfragen von Clients werden reihum verteilt; die Antwortliste ro
 - Der mit Priorität 20
 - Beide abwechselnd
 - Keiner, MX hat keine Priorität
+
+? Welcher Port wird für DNS-Abfragen standardmäßig verwendet?
+* 53 (UDP, bei großen Antworten/Zonentransfer TCP)
+- 67
+- 80
+- 389
+! DNS over HTTPS nutzt dagegen 443.
+
+? Welcher Eintrag verweist als Alias auf einen anderen Namen?
+* CNAME
+- A
+- PTR
+- SOA
+! Beispiel: www → webserver01.example.com.
+
+? Was bestimmt die TTL eines DNS-Eintrags?
+* Wie lange der Eintrag in Caches gespeichert werden darf
+- Wie viele Hops die Anfrage zurücklegt
+- Die Priorität des Mailservers
+- Die Größe der Zone
+! Vor einem IP-Umzug TTL verkürzen.

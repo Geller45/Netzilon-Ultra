@@ -258,3 +258,24 @@ Vier Karten (Primär, Sekundär, Stub, AD-integriert) drehen sich beim Hover um 
 - 172.16.5.in-addr.arpa
 - 0.5.16.172.ip6.arpa
 - 172.16.5.0.arpa
+
+? Welcher Eintrag enthält die Seriennummer einer Zone?
+* SOA
+- NS
+- MX
+- CNAME
+! Sekundäre Server erkennen an der Seriennummer, ob ein Zonentransfer nötig ist.
+
+? Was ist eine bedingte Weiterleitung?
+* Anfragen für eine bestimmte Domäne werden an einen festgelegten DNS-Server geschickt.
+- Alle Anfragen gehen an den Provider.
+- Anfragen werden nur bei Fehlern weitergeleitet.
+- DNS-Antworten werden verschlüsselt.
+! Typisch für Partnerdomänen oder Vertrauensstellungen.
+
+? Wie heißt die vollständige Kopie einer Zone, die nur gelesen werden kann?
+* Sekundäre Zone
+- Stubzone
+- Primäre Zone
+- Reverse-Zone
+! Sie wird per Zonentransfer (AXFR/IXFR) vom Master aktualisiert.

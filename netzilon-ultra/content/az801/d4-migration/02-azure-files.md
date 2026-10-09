@@ -178,3 +178,17 @@ Freigabeschloss (RBAC) und Türschloss (NTFS) hintereinander.
 - ZRS
 - Keine davon
 
+? Welchen Port nutzt der Zugriff auf Azure Files per SMB?
+* TCP 445
+- TCP 443
+- UDP 53
+- TCP 3389
+! Viele Internetanbieter blockieren Port 445; Abhilfe VPN, ExpressRoute oder Azure File Sync.
+
+? Welche Identitätsquellen unterstützt Azure Files für die SMB-Authentifizierung?
+* AD DS, Entra Domain Services und Entra Kerberos (für hybride Identitäten)
+- Nur lokale Konten des Speicherkontos
+- Nur Gastzugang
+- Keine Authentifizierung möglich
+! Freigabeberechtigungen per Azure RBAC, NTFS-Rechte wie gewohnt.
+

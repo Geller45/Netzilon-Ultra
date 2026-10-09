@@ -132,3 +132,24 @@ IDS klingelt, IPS hält den Einbrecher fest.
 - DDoS
 - XSS
 - ARP-Spoofing
+
+? Was ist Ransomware?
+* Schadsoftware, die Daten verschlüsselt und Lösegeld fordert
+- Ein Programm zur Datensicherung
+- Werbung im Browser
+- Ein Netzwerkscanner
+! Schutz: Offline-/unveränderliche Backups, Patches, Schulung, EDR.
+
+? Was ist ein DDoS-Angriff?
+* Überlastung eines Dienstes durch Anfragen vieler verteilter Systeme
+- Ausspähen von Kennwörtern per E-Mail
+- Einschleusen von SQL-Befehlen
+- Mitlesen im WLAN
+! Häufig über Botnetze; Schutz durch Provider-/CDN-Filter.
+
+? Welche Maßnahme schützt am wirksamsten gegen Phishing-bedingte Kontoübernahmen?
+* Mehr-Faktor-Authentifizierung (MFA) plus Schulung
+- Längere Bildschirmsperre
+- Größere Festplatten
+- Ein zweiter DNS-Server
+! Auch bei erbeutetem Kennwort fehlt dem Angreifer der zweite Faktor.

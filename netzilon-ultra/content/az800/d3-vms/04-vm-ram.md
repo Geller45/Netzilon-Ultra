@@ -163,3 +163,24 @@ Zwei CPU-Sockel mit je eigener Speicherbank; VM greift lokal (grün, schnell) od
 - Er muss höher als der maximale RAM sein
 - Er muss gleich dem Start-RAM sein
 - Er gilt nur beim Booten
+
+? Was legt der Wert „Arbeitsspeicherpuffer“ bei Dynamic Memory fest?
+* Den prozentualen Zusatzspeicher, den der Host über den Bedarf hinaus bereithält
+- Die maximale Größe der Auslagerungsdatei
+- Den Speicher des Hosts
+- Die Anzahl der vCPUs
+! Standard 20 %.
+
+? Was bestimmt die Arbeitsspeichergewichtung?
+* Welche VMs bei Speicherknappheit bevorzugt Speicher erhalten
+- Die Geschwindigkeit des RAM
+- Die Größe der VHDX
+- Die Netzwerkbandbreite
+! Höhere Gewichtung = höhere Priorität.
+
+? Welches Cmdlet konfiguriert Dynamic Memory einer VM?
+* Set-VMMemory
+- Set-VMProcessor
+- Set-VMHost
+- Set-VMNetworkAdapter
+! Beispiel: Set-VMMemory -VMName SRV01 -DynamicMemoryEnabled $true -MinimumBytes 1GB -MaximumBytes 8GB.

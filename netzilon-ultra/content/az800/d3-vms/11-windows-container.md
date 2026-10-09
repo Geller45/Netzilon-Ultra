@@ -201,3 +201,24 @@ Paket kommt an Host-Port 8080, Pfeil durch NAT-Tür zu Container-Port 80, IIS-Se
 - Container der Domäne beitreten
 - Domänen-Admin-Kennwort ins Image einbauen
 - Hyper-V-Isolierung aktivieren
+
+? Welche Isolierungsart teilt sich den Kernel mit dem Host?
+* Prozessisolierung
+- Hyper-V-Isolierung
+- Vollvirtualisierung
+- Sandbox-Isolierung
+! Hyper-V-Isolierung startet für jeden Container eine schlanke VM mit eigenem Kernel.
+
+? Welches Werkzeug wird typischerweise zum Starten von Windows-Containern verwendet?
+* Docker bzw. eine Container-Runtime wie containerd
+- Hyper-V-Manager
+- Datenträgerverwaltung
+- DHCP-Konsole
+! Images stammen z. B. aus der Microsoft Container Registry (mcr.microsoft.com).
+
+? Was beschreibt ein Dockerfile?
+* Die schrittweise Bauanleitung eines Container-Images
+- Die Netzwerkkonfiguration des Hosts
+- Die Lizenz eines Containers
+- Ein Backup eines Containers
+! docker build erzeugt daraus ein Image.

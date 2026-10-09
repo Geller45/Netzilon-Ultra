@@ -150,3 +150,24 @@ Hyper-V-Einstellungen mit Server-Schalter und Benutzer-Schalter; nur wenn beide 
 - Beim Kopieren von Dateien
 - Bei Mehrfachmonitoren
 - Beim Drucken aus der VM
+
+? Welche Gastbetriebssysteme unterstützen den erweiterten Sitzungsmodus nativ?
+* Aktuelle Windows-Gäste (Windows 10/11, Windows Server 2012 R2 und neuer)
+- Alle Linux-Distributionen ohne Konfiguration
+- MS-DOS
+- Nur Windows XP
+! Für Linux sind zusätzliche Pakete (xrdp mit vsock) nötig.
+
+? Welche Funktionen stellt der erweiterte Sitzungsmodus zusätzlich bereit?
+* Zwischenablage, lokale Laufwerke, Drucker, USB-Geräte und variable Auflösung
+- Live-Migration ohne Speicher
+- Automatische Sicherung der VM
+- DHCP für die VM
+! Grundlage ist das RDP-Protokoll über VMBus.
+
+? Benötigt der erweiterte Sitzungsmodus eine Netzwerkverbindung zur VM?
+* Nein, er arbeitet über den VMBus.
+- Ja, zwingend über TCP 3389.
+- Ja, über einen externen vSwitch.
+- Nur bei Linux-VMs.
+! Deshalb funktioniert er auch bei VMs ohne Netzwerkkarte.

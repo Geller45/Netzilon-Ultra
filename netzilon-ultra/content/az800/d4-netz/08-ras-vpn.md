@@ -192,3 +192,24 @@ Laptop wird aufgeklappt: zuerst Gerätetunnel (Zahnrad-Symbol) vor dem Anmeldebi
 - Gruppenrichtlinie „VPN-Profil“
 - DHCP-Option 252
 - NRPT-Regel
+
+? Welches VPN-Protokoll nutzt TLS über TCP 443?
+* SSTP
+- PPTP
+- L2TP/IPsec
+- IKEv2
+! Daher kommt es durch die meisten Firewalls und Proxys.
+
+? Welches Protokoll gilt als veraltet und unsicher?
+* PPTP
+- IKEv2
+- SSTP
+- WireGuard-basierte Tunnel
+! PPTP mit MS-CHAPv2 ist angreifbar.
+
+? Was ist ein Device Tunnel bei Always On VPN?
+* Eine VPN-Verbindung, die vor der Benutzeranmeldung aufgebaut wird
+- Ein Tunnel nur für Drucker
+- Ein Site-to-Site-VPN
+- Ein Tunnel für Linux-Server
+! Er benötigt IKEv2 und Maschinenzertifikate.

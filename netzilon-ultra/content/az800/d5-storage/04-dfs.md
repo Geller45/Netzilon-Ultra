@@ -192,3 +192,24 @@ Zwei Hände ändern gleichzeitig dieselbe Datei; die spätere gewinnt, die ander
 - Datei wird gesperrt
 - Beide Versionen werden zusammengeführt
 - Replikation stoppt dauerhaft
+
+? Welcher Namespace-Typ wird im AD gespeichert und ist über den Domänennamen erreichbar?
+* Domänenbasierter Namespace
+- Eigenständiger Namespace
+- Lokaler Namespace
+- DNS-Namespace
+! Beispiel: \\example.com\Daten.
+
+? Was ist die primäre Replikationsart von DFS-R?
+* Remote Differential Compression – nur geänderte Blöcke werden übertragen
+- Vollständige Dateikopie bei jeder Änderung
+- Blockweise Spiegelung wie RAID 1
+- Replikation per FTP
+! Das spart Bandbreite zwischen Standorten.
+
+? Welcher Ordner hält bei DFS-R Dateien vor der Übertragung bereit?
+* Der Stagingordner
+- Der Papierkorb
+- Der SYSVOL-Ordner
+- Der Temp-Ordner des Benutzers
+! Zu kleine Staging-Kontingente bremsen die Replikation großer Dateien.

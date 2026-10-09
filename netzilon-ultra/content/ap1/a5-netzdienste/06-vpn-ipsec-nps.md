@@ -227,3 +227,24 @@ PC steckt ins Netz; Switchport rot; EAP-Dialog mit dem RADIUS-Server; nach Erfol
 - IPsec ist nicht auf Schicht 3
 - Der DHCP-Server ist autorisiert
 - Das VPN nutzt IKEv2
+
+? Welches IPsec-Protokoll bietet nur Integrität und Authentizität, aber keine Verschlüsselung?
+* AH (Authentication Header)
+- ESP
+- IKE
+- L2TP
+! ESP verschlüsselt zusätzlich.
+
+? Welches Protokoll handelt bei IPsec die Schlüssel aus?
+* IKE (Internet Key Exchange)
+- RADIUS
+- TLS
+- SNMP
+! IKEv2 arbeitet über UDP 500 bzw. 4500 (NAT-Traversal).
+
+? Welche Komponente prüft bei 802.1X die Anmeldedaten?
+* Der Authentifizierungsserver (RADIUS, z. B. NPS)
+- Der Switch bzw. Access Point
+- Der DHCP-Server
+- Der Client selbst
+! Switch/AP sind nur Authenticator (RADIUS-Client).

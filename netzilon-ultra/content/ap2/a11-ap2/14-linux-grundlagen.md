@@ -134,3 +134,24 @@ Fünf Felder als Rädchen einer Uhr.
 - Startet den Dienst sofort und nur einmal
 - Löscht den Dienst
 - Zeigt Logs
+
+? Welche Datei enthält die Kennwort-Hashes unter Linux?
+* /etc/shadow
+- /etc/passwd
+- /etc/hosts
+- /etc/fstab
+! /etc/passwd ist für alle lesbar und enthält nur ein „x“.
+
+? Welcher Befehl ändert den Besitzer einer Datei?
+* chown
+- chmod
+- chgrp nur für Benutzer
+- passwd
+! chmod ändert Rechte, chgrp die Gruppe.
+
+? Welcher Befehl zeigt die IP-Konfiguration unter modernen Linux-Systemen?
+* ip addr (ip a)
+- ipconfig
+- ifconfig.exe /all
+- netsh interface
+! ifconfig gilt als veraltet (net-tools).

@@ -153,3 +153,24 @@ Firmen-PC mit Kerberos-Ticket für AZUREADSSOACC; Browser öffnet myapps und ist
 - Kennwörter werden im Klartext synchronisiert
 - AD FS wird automatisch installiert
 - Benutzer brauchen kein Kennwort mehr für Windows
+
+? Welches Verfahren synchronisiert einen Hash des Kennworthashs in die Cloud?
+* Kennworthashsynchronisierung (PHS)
+- Passthrough-Authentifizierung (PTA)
+- Verbund mit AD FS
+- Seamless SSO
+! Die Anmeldung erfolgt dann vollständig in Entra ID.
+
+? Wie erhöht man die Verfügbarkeit von PTA?
+* Mehrere PTA-Agents auf verschiedenen Servern installieren
+- Den Agent auf einem DC deaktivieren
+- Nur einen Agent betreiben
+- PHS deaktivieren
+! Empfohlen: mindestens drei Agents; PHS als Fallback möglich.
+
+? Welche zusätzliche Sicherheitsfunktion ermöglicht PHS?
+* Erkennung kompromittierter Anmeldedaten (Leaked Credentials) in Entra ID Protection
+- Smartcard-Anmeldung on-prem
+- Offline-Anmeldung an DCs
+- Verschlüsselung von SMB
+! Microsoft vergleicht Hashes mit bekannten Datenlecks.

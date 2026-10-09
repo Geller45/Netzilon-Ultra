@@ -152,3 +152,24 @@ Die drei Prüfungsabbildungen werden gemischt; per Drag & Drop VFD/VI/VFI zuordn
 - 3 Stunden 75 Minuten
 - 3 Stunden 7 Minuten
 - 4 Stunden 15 Minuten
+
+? Wofür steht die Abkürzung VFI bei USV-Anlagen?
+* Voltage and Frequency Independent
+- Very Fast Interrupt
+- Voltage Filter Integrated
+- Variable Frequency Inverter
+! VFI = Online-USV, Ausgang unabhängig von Netzspannung und -frequenz.
+
+? Warum sollte eine USV mit dem Server per USB oder Netzwerk kommunizieren?
+* Damit der Server bei niedrigem Akkustand automatisch herunterfährt
+- Damit die USV Updates aus dem Internet lädt
+- Damit der Server schneller startet
+- Damit die Akkus schneller laden
+! Kontrollierter Shutdown verhindert Datenverlust.
+
+? Eine USV wird mit 1500 VA und 900 W angegeben. Was ist für die Auswahl entscheidend?
+* Beide Werte dürfen von der Last nicht überschritten werden.
+- Nur der VA-Wert zählt.
+- Nur die Akkukapazität zählt.
+- Die Werte sind Werbung ohne Bedeutung.
+! Wirkleistung (W) und Scheinleistung (VA) müssen ausreichen.

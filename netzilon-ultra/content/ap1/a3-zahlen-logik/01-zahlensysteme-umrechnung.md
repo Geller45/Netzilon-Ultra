@@ -224,3 +224,24 @@ Eine lange Binärzahl zerfällt von rechts in 4er-Gruppen, jede Gruppe verwandel
 - 0101 1010
 - 1010 1111
 - 1100 0101
+
+? Wie lautet die Dezimalzahl 100 im Binärsystem?
+* 0110 0100
+- 0110 0010
+- 0101 0100
+- 1100 0100
+! 64 + 32 + 4 = 100.
+
+? Wie viele verschiedene Werte lassen sich mit 8 Bit darstellen?
+* 256
+- 255
+- 128
+- 512
+! 2^8 = 256 (0 bis 255).
+
+? Welche Hexadezimalzahl entspricht 1111 1010₂?
+* FA₁₆
+- AF₁₆
+- F5₁₆
+- EA₁₆
+! 1111 = F, 1010 = A.

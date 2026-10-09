@@ -139,3 +139,24 @@ RAID 0 abwechselnd verteilt, RAID 1 gespiegelt, RAID 5 mit wanderndem P.
 - 8,76 Stunden
 - 3,65 Tage
 - 5 Minuten
+
+? Zwei Komponenten mit je 99 % Verfügbarkeit sind in Reihe geschaltet. Wie hoch ist die Gesamtverfügbarkeit?
+* 98,01 %
+- 99,99 %
+- 99 %
+- 198 %
+! Reihe: Produkt der Verfügbarkeiten (0,99 × 0,99).
+
+? Was bedeutet „Single Point of Failure“?
+* Eine Komponente, deren Ausfall das Gesamtsystem lahmlegt
+- Eine besonders zuverlässige Komponente
+- Der erste Fehler in einem Log
+- Ein redundanter Server
+! Hochverfügbarkeit beseitigt SPOFs durch Redundanz.
+
+? Was beschreibt die MTBF?
+* Mittlere Betriebszeit zwischen zwei Ausfällen
+- Mittlere Reparaturzeit
+- Maximale Datenrate
+- Mindestlaufzeit der USV
+! Verfügbarkeit ≈ MTBF ÷ (MTBF + MTTR).

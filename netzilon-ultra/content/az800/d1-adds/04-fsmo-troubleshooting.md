@@ -162,3 +162,24 @@ Schalter pro Rolle „offline“; Anzeige, welche Funktionen ausfallen (z. B. Uh
 - PDC-Emulator
 - RID-Master
 - Infrastrukturmaster
+
+? Welche FSMO-Rolle vergibt Pools relativer IDs an DCs?
+* RID-Master
+- PDC-Emulator
+- Infrastrukturmaster
+- Schemamaster
+! Ohne RID-Master können DCs nach Aufbrauchen ihres Pools keine neuen Objekte anlegen.
+
+? Mit welchem Befehl zeigt man alle FSMO-Rolleninhaber an?
+* netdom query fsmo
+- dcdiag /fsmo
+- gpresult /fsmo
+- ipconfig /fsmo
+! Alternativ Get-ADDomain und Get-ADForest.
+
+? Was darf ein DC nach einer erzwungenen Übernahme der RID-Master-Rolle nicht tun?
+* Wieder online gehen, ohne zuvor bereinigt bzw. neu installiert zu werden
+- Weiterhin DNS anbieten
+- Neue Updates installieren
+- Gruppenrichtlinien anwenden
+! Sonst drohen doppelte RIDs; Metadaten bereinigen und den alten DC nicht zurückbringen.

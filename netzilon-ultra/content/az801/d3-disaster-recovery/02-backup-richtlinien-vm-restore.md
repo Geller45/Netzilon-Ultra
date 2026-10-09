@@ -184,3 +184,17 @@ Kaputtes Haus: neu bauen, Möbel liefern, tauschen, einzelne Tasse holen.
 - Snapshot-Ebene
 - Lokale Disk
 - Standard-Snapshot
+
+? Welche Optionen bietet die Wiederherstellung einer Azure-VM aus Azure Backup?
+* Neue VM erstellen, Datenträger wiederherstellen oder vorhandene Datenträger ersetzen
+- Nur einzelne Registry-Schlüssel
+- Nur Export als ISO
+- Keine – Azure Backup sichert nur Dateien
+! Einzelne Dateien zusätzlich über die Dateiwiederherstellung (iSCSI-Bereitstellung).
+
+? Wie oft können Azure-VMs mit der Standardrichtlinie gesichert werden?
+* Einmal täglich (erweiterte Richtlinie: mehrmals täglich, z. B. alle 4 Stunden)
+- Jede Minute
+- Nur wöchentlich
+- Nur manuell
+! Die erweiterte Richtlinie ist z. B. für Trusted-Launch-VMs erforderlich.

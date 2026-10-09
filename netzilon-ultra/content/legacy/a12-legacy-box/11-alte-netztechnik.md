@@ -199,3 +199,17 @@ Drei Klassenzimmer: Koax-Tisch mit Kollisionsblitzen, Hub-Lautsprecher mit Mitsc
 - 55 m
 - 185 m
 - 500 m
+
+? Welche Topologie nutzt klassisches Koax-Ethernet (10BASE2)?
+* Bus
+- Stern
+- Ring
+- Masche
+! Abschlusswiderstände an beiden Enden waren nötig.
+
+? Was ist der Nachfolger von IPX/SPX in heutigen Netzen?
+* TCP/IP
+- NetBEUI
+- AppleTalk
+- Token Ring
+! Novell NetWare nutzte früher IPX/SPX.

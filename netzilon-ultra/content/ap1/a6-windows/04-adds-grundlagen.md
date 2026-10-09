@@ -225,3 +225,24 @@ Fünf Kronen verteilt auf DCs; Klick zeigt die Aufgabe; Szenario „DC fällt au
 - Es existiert einmal je OU
 - Es wird nur auf RODCs gespeichert
 - Jeder Benutzer kann es ändern
+
+? Welche Datenbankdatei speichert die AD-Daten auf einem Domänencontroller?
+* NTDS.dit
+- SAM
+- hosts
+- boot.ini
+! Standardpfad C:\Windows\NTDS.
+
+? Welcher Dienst ist für das Auffinden von Domänencontrollern zwingend erforderlich?
+* DNS (SRV-Einträge)
+- DHCP
+- WINS
+- IIS
+! Clients finden DCs über _ldap._tcp.dc._msdcs.
+
+? Was ist eine Organisationseinheit (OU)?
+* Ein Container zur Strukturierung, Delegierung und GPO-Verknüpfung
+- Eine eigene Domäne
+- Eine Sicherheitsgruppe
+- Ein Standort mit eigenem Subnetz
+! OUs sind keine Sicherheitsprinzipale.

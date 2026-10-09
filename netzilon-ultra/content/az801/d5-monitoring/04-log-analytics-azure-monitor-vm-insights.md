@@ -175,3 +175,17 @@ Server als Punkte, Linien zeigen Gespräche.
 - 1 Tag
 - 7 Tage
 - 10 Jahre
+
+? Welche Tabelle enthält in Log Analytics typischerweise Windows-Ereignisse aus dem Sicherheitsprotokoll (mit Defender/Sentinel)?
+* SecurityEvent
+- Heartbeat
+- Perf
+- Syslog
+! Heartbeat zeigt die Erreichbarkeit der Agenten, Perf Leistungsdaten.
+
+? Womit werden in Azure Monitor automatisch Benachrichtigungen oder Aktionen ausgelöst?
+* Warnungsregeln mit Aktionsgruppen
+- Datensammlungsregeln
+- Arbeitsmappen
+- Ressourcengruppen
+! Aktionsgruppen senden E-Mail/SMS oder starten Runbooks, Logic Apps, Webhooks.

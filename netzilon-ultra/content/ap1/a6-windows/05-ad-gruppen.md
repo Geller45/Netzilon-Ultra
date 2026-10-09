@@ -209,3 +209,24 @@ Links ein Spinnennetz aus 20 Benutzern und 10 Ordnern (200 Linien), rechts dasse
 - Jeder
 - Domänen-Admins
 - Interaktiv
+
+? Wofür steht das „DL“ in AGDLP?
+* Domänenlokale Gruppe
+- Download-Link
+- Delegierte Leserechte
+- Domain Login
+! Accounts → Global → Domänenlokal → Permissions.
+
+? Wo werden globale Gruppen typischerweise eingesetzt?
+* Zum Bündeln von Benutzern nach Rolle bzw. Abteilung
+- Direkt für NTFS-Berechtigungen auf Ressourcen
+- Nur für E-Mail-Verteiler
+- Für lokale Computerkonten
+! Rechte erhält nach AGDLP die domänenlokale Gruppe.
+
+? Welche Gruppenart hat keine SID und eignet sich nur für E-Mails?
+* Verteilergruppe
+- Sicherheitsgruppe
+- Universelle Sicherheitsgruppe
+- Domänenlokale Sicherheitsgruppe
+! Verteilergruppen lassen sich in Exchange als Verteiler nutzen.

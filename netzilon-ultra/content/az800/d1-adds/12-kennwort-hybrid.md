@@ -162,3 +162,24 @@ Angreifer aus dem Internet prallt an der Cloud-Sperre ab (Schwelle 5), das AD-Ko
 - Synchronisation von Benutzern in die Cloud
 - Verschlüsselung von Festplatten
 - Verwaltung von Druckern
+
+? Was verhindert Entra Password Protection on-premises?
+* Die Verwendung schwacher oder gesperrter Kennwörter bei Kennwortänderungen an DCs
+- Die Anmeldung von Gästen
+- Die Replikation zwischen DCs
+- Das Zurücksetzen von Kennwörtern
+! Basis ist die globale und die benutzerdefinierte Sperrliste.
+
+? Welche Funktion ermöglicht Benutzern, ihr Kennwort selbst zurückzusetzen und on-prem zurückzuschreiben?
+* SSPR mit Kennwortrückschreiben (Password Writeback)
+- FGPP
+- LAPS
+- gMSA
+! Das Rückschreiben erfolgt über Entra Connect bzw. Cloud Sync.
+
+? Wo werden lokale Administratorkennwörter mit Windows LAPS gespeichert?
+* Im Active Directory oder in Entra ID
+- Auf einem USB-Stick
+- In einer Textdatei im Profil
+- In der hosts-Datei
+! Jeder Computer erhält ein eigenes, regelmäßig gewechseltes Kennwort.

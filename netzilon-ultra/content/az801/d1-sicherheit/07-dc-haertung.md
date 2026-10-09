@@ -199,3 +199,17 @@ Admin sitzt an der PAW, Verbindung führt nur durch eine Schleuse zum DC; E-Mail
 - AppLocker
 - BitLocker
 - Windows Defender Firewall
+
+? Welches Modell trennt Verwaltungsebenen in Tier 0, Tier 1 und Tier 2?
+* Das Tiering-Modell bzw. Enterprise Access Model
+- Das OSI-Modell
+- Das V-Modell
+- Das Wasserfallmodell
+! Tier-0-Konten dürfen sich nie an Tier-1/2-Systemen anmelden.
+
+? Warum sollten DCs keine Internetzugriffe (z. B. Browsen) erlauben?
+* Um Angriffe über Webinhalte und Schadsoftware auf das wichtigste System zu verhindern
+- Weil DCs keine Netzwerkkarte brauchen
+- Weil sonst die Replikation stoppt
+- Weil DNS dann nicht funktioniert
+! DCs sind Tier-0-Systeme mit minimaler Angriffsfläche.

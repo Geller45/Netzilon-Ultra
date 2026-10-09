@@ -184,3 +184,24 @@ Zwei Tabellen, Linie von FK zu PK.
 - Eine Umgebungsvariable
 - Der Rückgabecode
 - Ein Kommentar
+
+? Welche Join-Art liefert alle Zeilen der linken Tabelle, auch ohne Partner?
+* LEFT JOIN
+- INNER JOIN
+- CROSS JOIN
+- SELF JOIN ohne Bedingung
+! Fehlende Werte der rechten Tabelle sind NULL.
+
+? Wie wird in Bash einer Variablen ein Wert zugewiesen?
+* name="Wert" ohne Leerzeichen um das Gleichheitszeichen
+- $name = "Wert"
+- set name == Wert
+- name := Wert
+! Zugriff anschließend mit $name.
+
+? Welches Diagramm stellt Algorithmen mit Blöcken nach Nassi-Shneiderman dar?
+* Struktogramm
+- Programmablaufplan
+- ER-Diagramm
+- Gantt-Diagramm
+! Der PAP nutzt dagegen Symbole und Pfeile nach DIN 66001.

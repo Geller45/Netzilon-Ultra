@@ -152,3 +152,24 @@ Blockbild mit Steuerwerk, Rechenwerk, Speicher, E/A und Bus; Befehle (blau) und 
 - 1 GB/s
 - 266 MB/s
 - 16 GB/s
+
+? Was bezeichnet man als „Von-Neumann-Flaschenhals“?
+* Befehle und Daten teilen sich einen Bus, die CPU wartet auf den Speicher.
+- Die CPU hat zu wenige Kerne.
+- Die Festplatte ist zu klein.
+- Das Netzteil liefert zu wenig Strom.
+! Caches und getrennte Befehls-/Daten-Caches (Harvard-Ansatz) mildern das ab.
+
+? Welche Architektur trennt Befehls- und Datenspeicher?
+* Harvard-Architektur
+- Von-Neumann-Architektur
+- Client-Server-Architektur
+- Drei-Schichten-Architektur
+! Typisch bei Mikrocontrollern und DSPs.
+
+? Welche Aufgabe übernimmt heute der Platform Controller Hub (PCH)?
+* Anbindung von SATA, USB, Netzwerk, Audio und zusätzlichen PCIe-Lanes
+- Berechnung der Grafik
+- Speicherung des Betriebssystems
+- Kühlung der CPU
+! Speichercontroller und meist auch Grafik sitzen heute direkt in der CPU.

@@ -158,3 +158,24 @@ Gast aus Partner-Forest darf nur an einem Computer mit grünem „Authentifizier
 - Um Linux-Realms anzubinden
 - Um zwei Forests zu verbinden
 - Um SID-History zu filtern
+
+? Welcher Trust wird zwischen zwei Gesamtstrukturen eingerichtet, damit alle Domänen einander vertrauen können?
+* Gesamtstrukturvertrauensstellung (Forest Trust)
+- Externe Vertrauensstellung
+- Bereichsvertrauensstellung
+- Verknüpfungsvertrauensstellung
+! Forest Trusts sind zwischen den Gesamtstrukturen transitiv.
+
+? Welcher Trust verbindet eine AD-Domäne mit einem Kerberos-Realm ohne Windows?
+* Bereichsvertrauensstellung (Realm Trust)
+- Externe Vertrauensstellung
+- Strukturstamm-Vertrauensstellung
+- Übergeordnet-untergeordnet
+! Z. B. zu MIT-Kerberos unter Linux/Unix.
+
+? Was bewirkt die SID-Filterung bei externen Trusts?
+* Sie verwirft fremde SIDs aus der SID-History, um Rechteausweitung zu verhindern.
+- Sie verschlüsselt den Datenverkehr.
+- Sie synchronisiert Kennwörter.
+- Sie blockiert DNS-Abfragen.
+! Bei Migrationen mit SID-History muss sie ggf. gezielt gelockert werden.

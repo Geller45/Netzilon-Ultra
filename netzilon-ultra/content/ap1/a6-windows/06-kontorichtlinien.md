@@ -175,3 +175,24 @@ Ein Benutzer in zwei Gruppen mit zwei PSOs (Rangfolge 10 und 20); das PSO mit 10
 - Maximales Kennwortalter
 - Umkehrbare Verschlüsselung
 - Kontosperrungsschwelle
+
+? Welche Einstellung legt fest, nach wie vielen Fehlversuchen ein Konto gesperrt wird?
+* Kontosperrungsschwelle
+- Kontosperrdauer
+- Zurücksetzungsdauer des Kontosperrungszählers
+- Minimales Kennwortalter
+! Dauer und Zurücksetzungszeitraum ergänzen die Schwelle.
+
+? Was bewirkt die Einstellung „Kennwort muss Komplexitätsvoraussetzungen entsprechen“?
+* Kennwörter müssen Zeichen aus mindestens drei von vier Zeichenkategorien enthalten und dürfen den Kontonamen nicht enthalten.
+- Kennwörter müssen mindestens 20 Zeichen lang sein.
+- Kennwörter müssen täglich geändert werden.
+- Kennwörter werden verschlüsselt gespeichert.
+! Kategorien: Großbuchstaben, Kleinbuchstaben, Ziffern, Sonderzeichen.
+
+? Mit welchem Werkzeug legt man eine Fine-Grained Password Policy (PSO) grafisch an?
+* Active Directory-Verwaltungscenter
+- Gruppenrichtlinienverwaltung
+- Server-Manager → Rollen
+- Registrierungs-Editor
+! Alternativ per New-ADFineGrainedPasswordPolicy.

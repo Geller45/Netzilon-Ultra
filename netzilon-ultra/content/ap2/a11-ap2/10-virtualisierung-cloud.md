@@ -127,3 +127,24 @@ Haus mit Wohnungen (VMs) neben WG mit Küche (Container).
 - Wartung der Rechenzentrums-Hardware
 - Stromversorgung
 - Kühlung
+
+? Welcher Hypervisor gehört zu Typ 1 (Bare Metal)?
+* Microsoft Hyper-V bzw. VMware ESXi
+- VirtualBox auf Windows 11
+- VMware Workstation
+- Parallels Desktop
+! Typ 1 läuft direkt auf der Hardware.
+
+? Was ist ein Vorteil der Servervirtualisierung?
+* Bessere Auslastung der Hardware und schnellere Bereitstellung
+- Kein Single Point of Failure mehr
+- Wegfall aller Lizenzkosten
+- Höhere Leistung als jedes physische System
+! Mehrere VMs teilen sich einen Host; Snapshots, Migration und Vorlagen erleichtern den Betrieb.
+
+? Welches Cloud-Modell bezeichnet Microsoft 365?
+* SaaS
+- IaaS
+- PaaS
+- Private Cloud
+! Der Anbieter stellt die komplette Anwendung bereit.

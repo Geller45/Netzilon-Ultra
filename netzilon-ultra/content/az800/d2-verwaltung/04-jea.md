@@ -174,3 +174,24 @@ Praktikant vor einem Automaten mit drei Knöpfen; hinter dem Automaten ein Robot
 - Default
 - Empty
 - FullLanguage
+
+? Welche Datei registriert einen JEA-Endpunkt und legt Sitzungstyp sowie RunAs-Konto fest?
+* Sitzungskonfigurationsdatei (.pssc)
+- Rollenfunktionsdatei (.psrc)
+- Modulmanifest (.psd1)
+- Profilskript (profile.ps1)
+! Rollenfunktionen (.psrc) definieren die erlaubten Cmdlets.
+
+? Mit welchem Cmdlet wird ein JEA-Endpunkt registriert?
+* Register-PSSessionConfiguration
+- Enable-PSRemoting -JEA
+- New-PSSession -JEA
+- Set-ExecutionPolicy JEA
+! Danach mit Enter-PSSession -ConfigurationName verbinden.
+
+? Was ist ein virtuelles Konto bei JEA?
+* Ein temporäres lokales Administratorkonto nur für die Dauer der Sitzung
+- Ein Domänen-Admin-Konto
+- Ein Gastkonto mit Kennwort
+- Ein Microsoft-Konto
+! Für Netzwerkzugriffe eignet sich stattdessen ein gMSA.

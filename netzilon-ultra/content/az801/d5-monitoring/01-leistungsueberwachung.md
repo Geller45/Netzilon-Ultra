@@ -178,3 +178,24 @@ Uhr startet Aufzeichnung nachts, morgens Bericht als Seite.
 - Eine MSI-Datei
 - Eine VHDX-Datei
 - Eine XLSX-Datei
+
+? Welcher Leistungsindikator zeigt eine dauerhafte CPU-Überlastung an?
+* Prozessor(_Total)\Prozessorzeit (%) dauerhaft über ca. 80–90 %
+- Arbeitsspeicher\Verfügbare MB über 1.000
+- Netzwerkschnittstelle\Gesendete Bytes = 0
+- Physikalischer Datenträger\Leerlaufzeit 100 %
+! Zusätzlich die Prozessorwarteschlangenlänge prüfen.
+
+? Mit welchem Cmdlet liest man Leistungsindikatoren in PowerShell aus?
+* Get-Counter
+- Get-Process -Counter
+- Get-WinEvent -Performance
+- Measure-Object
+! Beispiel: Get-Counter '\Prozessor(_Total)\Prozessorzeit (%)' -SampleInterval 5 -MaxSamples 12.
+
+? Welches Werkzeug zeigt Live-Daten zu CPU, Datenträger, Netzwerk und Arbeitsspeicher je Prozess detailliert?
+* Ressourcenmonitor (resmon)
+- Ereignisanzeige
+- Datenträgerverwaltung
+- Dienste-Konsole
+! Der Task-Manager zeigt eine vereinfachte Übersicht.

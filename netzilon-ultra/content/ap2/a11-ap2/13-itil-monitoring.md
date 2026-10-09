@@ -144,3 +144,24 @@ Server mit Thermometer und Schwellen gelb/rot.
 - 2
 - 1
 - 7
+
+? Was ist ein Problem nach ITIL?
+* Die Ursache eines oder mehrerer Incidents
+- Jede Benutzeranfrage
+- Eine geplante Änderung
+- Ein Hardwarekauf
+! Problem Management sucht die Ursache, Incident Management stellt den Service wieder her.
+
+? Welche Kennzahl beschreibt die Lösung beim ersten Kontakt?
+* First Call Resolution (Erstlösungsquote)
+- MTBF
+- RPO
+- TTL
+! Wichtiger KPI des Service Desks.
+
+? Wohin werden Anfragen im Rahmen der funktionalen Eskalation weitergegeben?
+* An eine Stelle mit mehr Fachwissen (2nd/3rd Level)
+- An die Geschäftsführung
+- An den Kunden
+- An den Betriebsrat
+! Die hierarchische Eskalation geht an höhere Führungsebenen.

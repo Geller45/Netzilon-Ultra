@@ -161,3 +161,24 @@ Secure-Score-Tachometer; Empfehlungskarten; Umschalter „Defender for Servers�
 - Er ist der empfohlene neue Agent
 - Er wird für Arc zwingend benötigt
 - Er ersetzt den AMA
+
+? Welcher Agent ersetzt den Log Analytics Agent (MMA)?
+* Azure Monitor Agent (AMA)
+- Connected Machine Agent
+- Hybrid Runbook Worker
+- WSUS-Client
+! Datenerfassung über Datensammlungsregeln (DCR).
+
+? Welche Abfragesprache nutzt Log Analytics?
+* KQL (Kusto Query Language)
+- SQL
+- LDAP
+- WQL
+! Beispiel: Event | where EventID == 4625.
+
+? Was bietet Microsoft Defender for Cloud?
+* Sicherheitsbewertung (Secure Score), Empfehlungen und Bedrohungsschutz für Azure-, Hybrid- und Multi-Cloud-Ressourcen
+- Nur Virenschutz für Clients
+- Ein Backup der VMs
+- Einen DHCP-Dienst
+! Erweiterte Pläne wie „Defender for Servers“ sind kostenpflichtig.

@@ -216,3 +216,17 @@ Schalter Request (gelb), Require (rot); Fortschrittsbalken „Pilot → Produkti
 - Kerberos V5 Computer
 - NTLMv1
 - Smartcard
+
+? Mit welcher Technik wird Domänenisolierung umgesetzt?
+* IPsec-Verbindungssicherheitsregeln mit Kerberos-Authentifizierung per GPO
+- VLANs auf den Switches
+- DNS-Richtlinien
+- NTFS-Berechtigungen
+! Nicht authentifizierte Geräte werden abgewiesen.
+
+? Was ist eine Ausnahme (Exemption) bei der Isolierung?
+* Systeme, die ohne IPsec-Authentifizierung erreichbar bleiben, z. B. DCs, DHCP, DNS
+- Benutzer ohne Kennwort
+- Alle Clients
+- Alle Webserver
+! Infrastruktur muss für noch nicht authentifizierte Geräte erreichbar sein.

@@ -171,3 +171,24 @@ Büro → VPN-Tunnel → Inbound-Schalter → Antwort zurück; Azure-VM → Outb
 - Zone neu erstellen
 - NSG löschen
 - Autoregistrierung aktivieren
+
+? Welche IP-Adresse beantwortet in Azure DNS-Abfragen für VMs mit Azure-bereitgestelltem DNS?
+* 168.63.129.16
+- 8.8.8.8
+- 10.0.0.1
+- 127.0.0.53
+! Die virtuelle öffentliche Azure-IP für DNS, DHCP und Health Probes.
+
+? Was bewirkt die Autoregistrierung einer Private DNS Zone?
+* VMs im verknüpften VNet erhalten automatisch A-Einträge in der Zone.
+- Die Zone wird öffentlich im Internet sichtbar.
+- Clients erhalten automatisch eine öffentliche IP.
+- DNSSEC wird aktiviert.
+! Pro VNet ist nur eine Zone mit Autoregistrierung möglich.
+
+? Welche Komponente des Azure DNS Private Resolver nimmt Anfragen von on-prem entgegen?
+* Eingehender Endpunkt (Inbound Endpoint)
+- Ausgehender Endpunkt
+- DNS-Weiterleitungsregelsatz
+- Netzwerksicherheitsgruppe
+! Ausgehende Endpunkte mit Regelsätzen leiten Azure-Anfragen an on-prem-DNS weiter.

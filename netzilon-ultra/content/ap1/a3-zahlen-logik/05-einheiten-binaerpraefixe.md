@@ -157,3 +157,24 @@ Treppenstufen kB → MB → GB → TB neben KiB → MiB → GiB → TiB; die Lü
 - 3.840.000 Byte
 - 60.000 Byte
 - 1.440.000 Byte
+
+? Wie viele Byte sind 1 MiB?
+* 1.048.576 Byte
+- 1.000.000 Byte
+- 1.024.000 Byte
+- 8.388.608 Byte
+! 1 MiB = 1024 × 1024 Byte.
+
+? Ein Download mit 50 Mbit/s – wie viele Megabyte (dezimal) pro Sekunde sind das theoretisch?
+* 6,25 MB/s
+- 50 MB/s
+- 400 MB/s
+- 5 MB/s
+! 50 ÷ 8 = 6,25.
+
+? Wofür steht das Präfix „Tebi“?
+* 2^40
+- 10^12
+- 2^30
+- 10^15
+! TiB = 1.099.511.627.776 Byte, TB = 10^12 Byte.

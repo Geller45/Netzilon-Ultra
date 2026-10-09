@@ -207,3 +207,24 @@ VPN-Anmeldung → NPS prüft Kennwort → Handy vibriert „Genehmigen?“ → D
 - TCP 1723 und GRE
 - UDP 500 und 4500
 - TCP 647
+
+? Welche Bestandteile hat eine Netzwerkrichtlinie in NPS?
+* Bedingungen, Einschränkungen und Einstellungen
+- Nur Benutzername und Kennwort
+- Subnetzmaske und Gateway
+- Zertifikat und Firmenlogo
+! Die erste passende Richtlinie in der Reihenfolge wird angewendet.
+
+? Welche EAP-Methode verwendet Zertifikate auf Client- und Serverseite?
+* EAP-TLS
+- PEAP-MS-CHAPv2
+- PAP
+- CHAP
+! PEAP verwendet nur ein Serverzertifikat und Kennwörter für die Clients.
+
+? Was ist ein RADIUS-Client aus Sicht von NPS?
+* Der Netzwerkzugriffsserver, z. B. VPN-Server, WLAN-AP oder Switch
+- Der Laptop des Benutzers
+- Der Domänencontroller
+- Der DHCP-Server
+! Er wird in NPS mit IP und gemeinsamem geheimen Schlüssel eingetragen.

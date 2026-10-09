@@ -167,3 +167,24 @@ Kollege will Kopie aus dem Filialschrank; Zentrale prüft per Telefon die Berech
 - Über DNS-SRV-Einträge von Netlogon
 - Über DHCP-Option 006
 - Über NRPT
+
+? Welches Ziel verfolgt BranchCache?
+* WAN-Bandbreite sparen, indem Inhalte in der Filiale zwischengespeichert werden
+- Daten vom Hauptsitz in die Filiale replizieren
+- Dateien verschlüsseln
+- Benutzer gegen AD authentifizieren
+! Clients rufen bereits geladene Inhalte lokal ab.
+
+? Welche Inhaltsserver unterstützen BranchCache?
+* SMB-Dateiserver, HTTP/HTTPS-Webserver (IIS) und BITS-basierte Server
+- Nur FTP-Server
+- Nur DNS-Server
+- Nur Druckserver
+! Auf Dateiservern muss das Feature „BranchCache für Netzwerkdateien“ installiert sein.
+
+? Welche Windows-Editionen können BranchCache-Clients sein?
+* Enterprise- und Education-Editionen (bzw. Pro mit BITS-Einschränkung)
+- Alle Home-Editionen
+- Nur Windows Server Core
+- Nur Linux-Clients
+! In der Praxis werden Enterprise/Education eingesetzt.

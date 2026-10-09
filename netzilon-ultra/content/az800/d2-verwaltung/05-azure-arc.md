@@ -161,3 +161,24 @@ Lupe wandert durch das Windows-Innere des Servers, prüft Zeitzone/Dienste; grü
 - Er wird nach Azure migriert
 - Er wird zum Domänencontroller
 - Er verliert seine Domänenmitgliedschaft
+
+? Welcher Agent wird für Azure Arc-fähige Server installiert?
+* Connected Machine Agent (azcmagent)
+- Log Analytics Agent (MMA)
+- Hybrid Runbook Worker
+- Entra Connect
+! Danach erscheint der Server als Ressource in Azure.
+
+? Welche Vorteile bietet Azure Arc für on-prem-Server?
+* Zentrale Verwaltung mit Azure Policy, Update Manager, Defender for Cloud und Monitoring
+- Automatische Migration aller VMs nach Azure
+- Kostenlose Windows-Lizenzen
+- Ersatz für Active Directory
+! Die Server bleiben physisch, wo sie sind.
+
+? Über welches Protokoll kommuniziert der Arc-Agent mit Azure?
+* Ausgehend über HTTPS (TCP 443)
+- Eingehend über RDP
+- Über SMB 445
+- Über SNMP
+! Kein eingehender Port nötig; Proxy oder Private Link möglich.

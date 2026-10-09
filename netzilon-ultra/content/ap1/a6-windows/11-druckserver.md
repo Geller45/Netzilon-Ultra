@@ -183,3 +183,24 @@ Benutzer aus OU Vertrieb meldet sich an, Drucker-Symbol fliegt auf seinen Deskto
 - Durch manuelle Installation an jedem Client
 - Über den DNS-Server
 - Über die Kontosperrungsrichtlinie
+
+? Welcher Dienst verwaltet unter Windows die Druckwarteschlangen?
+* Druckwarteschlange (Spooler)
+- Windows Update
+- Server (LanmanServer)
+- Netlogon
+! Bei hängenden Aufträgen Spooler neu starten.
+
+? Welche Konsole dient zur zentralen Verwaltung von Druckservern?
+* Druckverwaltung (printmanagement.msc)
+- Geräte-Manager
+- Datenträgerverwaltung
+- Ereignisanzeige
+! Dort werden Drucker, Treiber und Anschlüsse verwaltet und per GPO bereitgestellt.
+
+? Welche Berechtigung braucht ein Benutzer standardmäßig, um zu drucken?
+* Drucken
+- Drucker verwalten
+- Dokumente verwalten
+- Vollzugriff auf den Spoolordner
+! „Dokumente verwalten“ erlaubt das Steuern fremder Aufträge.

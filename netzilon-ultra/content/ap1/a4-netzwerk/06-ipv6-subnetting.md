@@ -155,3 +155,24 @@ Eingabe Präfix und Anzahl Netze → alle fünf Schritte mit Ergebnis und Liste 
 - fd00:1::ffff
 - fd00:1:ffff:ffff::
 - ff02::1 ist die Broadcastadresse dieses Netzes
+
+? Wie viele /64-Subnetze enthält ein /48?
+* 65.536
+- 256
+- 16
+- 4.096
+! 2^(64−48) = 2^16.
+
+? Welches Präfix ist die Standardgröße für ein IPv6-LAN?
+* /64
+- /48
+- /56
+- /128
+! SLAAC setzt ein /64 voraus.
+
+? Wie viele /52-Netze lassen sich aus einem /48 bilden?
+* 16
+- 4
+- 8
+- 256
+! 2^(52−48) = 16 – entspricht einer Hex-Stelle.

@@ -211,3 +211,17 @@ Schreibvorgang läuft an, Bestätigung kommt erst nach beiden Standorten zurück
 - Stretch-Cluster braucht keine Standorte
 - Hyper-V Replica ist synchron
 - Beide sind identisch
+
+? Welche Technik repliziert bei einem Stretch-Cluster die Volumes zwischen den Standorten?
+* Storage Replica
+- DFS-R
+- Robocopy
+- Hyper-V Replica
+! Synchron bei geringer Latenz, asynchron bei größeren Entfernungen.
+
+? Was bewirkt die Standortaffinität im Cluster?
+* Rollen bevorzugen bei Failover Knoten am selben Standort.
+- Alle Rollen laufen immer am zweiten Standort.
+- Knoten verschiedener Standorte dürfen nicht kommunizieren.
+- Der Witness wird deaktiviert.
+! Konfiguriert über Fault Domains (New-ClusterFaultDomain).

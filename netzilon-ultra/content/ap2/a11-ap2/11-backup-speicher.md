@@ -129,3 +129,24 @@ Drei Ordner, zwei Medientypen, einer im Auto zu einem anderen Ort.
 - 100 Sekunden
 - 8 Sekunden
 - 8.000 Sekunden
+
+? Welche Zugriffsart bietet ein NAS?
+* Dateibasiert (SMB, NFS)
+- Blockbasiert per Fibre Channel
+- Nur über USB
+- Nur über SATA
+! SAN und iSCSI liefern Blockspeicher.
+
+? Was besagt die 3-2-1-Backup-Regel?
+* 3 Kopien, 2 verschiedene Medien, 1 Kopie außer Haus
+- 3 Backups pro Tag, 2 pro Nacht, 1 am Wochenende
+- 3 Server, 2 Switches, 1 Firewall
+- 3 Jahre Aufbewahrung, 2 Prüfungen, 1 Restore
+! Erweiterung 3-2-1-1-0: eine Kopie offline/unveränderlich, 0 Fehler bei Restore-Tests.
+
+? Welches Protokoll wird von iSCSI zur Übertragung genutzt?
+* TCP/IP über Ethernet (Port 3260)
+- Fibre Channel ohne IP
+- UDP 514
+- HTTP
+! Initiator (Server) greift auf Target (Speicher) zu.

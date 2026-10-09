@@ -227,3 +227,17 @@ Ein gemeinsamer Ordnername verzweigt zu den Membern.
 - New-SofsServer
 - Set-ClusterSofs
 - Install-Sofs
+
+? Welches Speicherformat nutzt SOFS als Grundlage?
+* Cluster Shared Volumes (CSV)
+- FAT32
+- Lokale Datenträger ohne Cluster
+- Bandlaufwerke
+! Alle Knoten stellen die Freigabe gleichzeitig bereit (Active-Active).
+
+? Für welche Workloads ist SOFS NICHT empfohlen?
+* Allgemeine Benutzerdateiablagen mit vielen kleinen Dateien und Metadatenoperationen
+- Hyper-V-VHDX-Dateien
+- SQL-Server-Datenbankdateien
+- Anwendungsdaten mit großen Dateien
+! Für Benutzerdaten nutzt man den Dateiserver für allgemeine Zwecke.

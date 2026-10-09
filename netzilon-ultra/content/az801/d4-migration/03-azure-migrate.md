@@ -166,3 +166,24 @@ Zwei Pfade: einmaliger Umzug mit Ende, Dauerlinie für Notfall.
 - Data Box
 - WAC
 - DPM
+
+? Welche Information liefert eine Azure-Migrate-Bewertung?
+* Empfohlene VM-Größen, Bereitschaft und geschätzte monatliche Kosten
+- Die Kennwörter der Server
+- Die Lizenzschlüssel
+- Die Geschäftszahlen des Unternehmens
+! Grundlage sind erfasste Leistungsdaten oder Konfigurationen.
+
+? Was ist bei einer Migration mit Azure Migrate zuletzt nötig?
+* Abschließen der Migration (Replikation beenden) und Quellsysteme außer Betrieb nehmen
+- Erneutes Discovery aller Server
+- Erstellen eines neuen Tenants
+- Deinstallation von Windows auf der Azure-VM
+! Vorher Tests durchführen und DNS/IP-Abhängigkeiten anpassen.
+
+? Welches Werkzeug in Azure Migrate erkennt Abhängigkeiten zwischen Servern?
+* Abhängigkeitsanalyse (agentlos oder agentbasiert)
+- Azure Policy
+- Azure Bastion
+- Network Watcher
+! Hilft, zusammengehörige Server gemeinsam zu migrieren.

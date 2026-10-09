@@ -197,3 +197,24 @@ SR01 schreibt Block; synchron: Bestätigung erst nachdem SR02 „angekommen“ m
 - Speicherebenen erfordern Parität
 - SSDs sind in Pools nicht erlaubt
 - Tiering benötigt dynamische Datenträger
+
+? Welches Cmdlet erstellt einen Speicherpool?
+* New-StoragePool
+- New-VirtualDisk
+- New-Volume -Pool
+- Add-PhysicalDisk -NewPool
+! Danach New-VirtualDisk und Volume anlegen.
+
+? Wie viele physische Datenträger benötigt eine Drei-Wege-Spiegelung in eigenständigen Speicherplätzen mindestens?
+* 5
+- 2
+- 3
+- 10
+! Eine Zwei-Wege-Spiegelung benötigt mindestens 2, eine Drei-Wege-Spiegelung mindestens 5 Datenträger.
+
+? Welcher Replikationsmodus von Storage Replica garantiert keinen Datenverlust?
+* Synchron
+- Asynchron
+- Zeitgesteuert
+- Inkrementell
+! Erfordert geringe Latenz (≤ 5 ms Roundtrip empfohlen).

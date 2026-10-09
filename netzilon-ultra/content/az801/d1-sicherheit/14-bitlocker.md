@@ -257,3 +257,17 @@ Update-Balken; Pause-Symbol auf BitLocker; Resume-Symbol danach.
 - Laufwerk wird entschlüsselt
 - TPM wird gelöscht
 - Wiederherstellungskennwort wird gelöscht
+
+? Welcher Schutz (Protector) nutzt nur das TPM ohne Benutzereingabe?
+* TPM-only
+- TPM + PIN
+- Kennwort
+- Wiederherstellungsschlüssel auf USB
+! TPM + PIN schützt zusätzlich vor Angriffen bei gestohlenem Gerät.
+
+? Welches Cmdlet aktiviert BitLocker auf einem Volume?
+* Enable-BitLocker
+- Start-BitLocker
+- Set-BitLockerVolume
+- New-BitLockerKey
+! Beispiel mit -TpmProtector und anschließend Add-BitLockerKeyProtector -RecoveryPasswordProtector.

@@ -164,3 +164,24 @@ OU als Flur mit Türen; Helpdesk-Figur hat einen Schlüssel nur für „Kennwort
 - Verschlüsselung von Gruppen
 - Beschleunigung der DNS-Auflösung
 - Replikation von SYSVOL
+
+? Wo sollte eine universelle Gruppe sinnvoll eingesetzt werden?
+* Zum domänenübergreifenden Zusammenfassen globaler Gruppen in einer Gesamtstruktur
+- Für lokale Ressourcen eines einzelnen Servers
+- Für Benutzer einer fremden Gesamtstruktur
+- Als Ersatz für OUs
+! Mitgliedschaften werden im globalen Katalog repliziert.
+
+? Mit welchem Assistenten werden Verwaltungsrechte auf eine OU übertragen?
+* Assistent zum Zuweisen der Objektverwaltung (Delegation of Control Wizard)
+- Gruppenrichtlinienverwaltung
+- Server-Manager → Rollen
+- DNS-Manager
+! Die Rechte werden als ACEs am OU-Objekt gesetzt.
+
+? Welche Gruppen dürfen Benutzer aus einer anderen Gesamtstruktur (über einen Trust) als Mitglieder aufnehmen?
+* Domänenlokale Gruppen
+- Globale Gruppen
+- Universelle Gruppen
+- Verteilergruppen nur
+! Global und universell nehmen nur Mitglieder aus der eigenen Gesamtstruktur auf.

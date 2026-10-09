@@ -200,3 +200,24 @@ Interner Webserver, daneben Connector-Kiste, die einen Pfeil nur nach außen sch
 - S2S-VPN mit VpnGw1
 - P2S mit OpenVPN
 - Virtual WAN Basic
+
+? Welche Verbindung verbindet ein Firmennetz über einen IPsec-Tunnel mit einem Azure-VNet?
+* Site-to-Site-VPN
+- Point-to-Site-VPN
+- Azure Bastion
+- Private Link
+! P2S verbindet einzelne Clients.
+
+? Welche Komponente muss für den Entra-Anwendungsproxy on-prem installiert werden?
+* Ein privater Netzwerkconnector (Application Proxy Connector)
+- Ein AD FS-Server
+- Ein Webanwendungsproxy
+- Ein VPN-Gateway
+! Der Connector baut nur ausgehende Verbindungen auf.
+
+? Welches Subnetz benötigt ein Azure VPN Gateway?
+* Ein eigenes Subnetz mit dem Namen GatewaySubnet
+- Das Standardsubnetz der VMs
+- Kein Subnetz
+- Ein öffentliches Subnetz mit Namen DMZ
+! Empfohlen ist mindestens /27.

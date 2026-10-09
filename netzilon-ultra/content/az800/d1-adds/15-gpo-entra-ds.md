@@ -154,3 +154,31 @@ Admin-Figur an einer VM im VNet, Pfeile mit GPMC/ADUC zur verwalteten Domäne; k
 - Mit der Default Domain Policy
 - Mit dcgpofix
 - Gar nicht möglich
+
+? Welche Gruppe darf in Entra Domain Services GPOs verwalten?
+* AAD DC Administrators
+- Domänen-Admins
+- Schema-Admins
+- Organisations-Admins
+! Mitglieder verwalten die benutzerdefinierten OUs und GPOs.
+
+? Können die integrierten GPOs der Container „AADDC Computers“ und „AADDC Users“ angepasst werden?
+* Ja, sie lassen sich mit der Gruppenrichtlinienverwaltung bearbeiten.
+- Nein, sie sind vollständig gesperrt.
+- Nur per Azure CLI.
+- Nur durch den Microsoft-Support.
+! Zusätzlich können eigene OUs mit eigenen GPOs angelegt werden.
+
+? Von welchem Rechner aus verwaltet man GPOs in Entra DS?
+* Von einer der verwalteten Domäne beigetretenen VM mit installierten RSAT-Tools
+- Direkt auf den DCs per RDP
+- Nur im Azure-Portal
+- Von jedem Internet-PC ohne Domänenbeitritt
+! Auf die verwalteten DCs selbst hat der Kunde keinen RDP-Zugriff.
+
+? Wo legt man benutzerdefinierte OUs in Entra DS an?
+* Mit „Active Directory-Benutzer und -Computer“ auf einer Verwaltungs-VM
+- Im Entra-Portal unter Gruppen
+- In Azure Policy
+- In der Registry der DCs
+! Benutzer aus Entra ID werden in AADDC Users synchronisiert, nicht in eigene OUs.

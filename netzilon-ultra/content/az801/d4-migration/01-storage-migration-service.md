@@ -160,3 +160,24 @@ Namensschilder wechseln die Türen; alter Schrank bekommt „OLD-Random“.
 - DFS-Replikation
 - Storage Replica
 - BranchCache
+
+? Welche drei Phasen umfasst eine Migration mit dem Storage Migration Service?
+* Inventarisieren, Übertragen, Übernehmen (Cutover)
+- Installieren, Lizenzieren, Aktivieren
+- Sichern, Löschen, Wiederherstellen
+- Planen, Kaufen, Abschreiben
+! Beim Cutover übernimmt der Ziel-Server Name und IP-Adressen der Quelle.
+
+? Welche Quellsysteme kann der Storage Migration Service migrieren?
+* Windows Server ab 2003 sowie Linux-Samba-Server und bestimmte NAS-Systeme
+- Nur Windows Server 2022
+- Nur Linux ohne Samba
+- Nur Azure-VMs
+! Ziel kann ein Windows Server oder eine Azure-VM sein.
+
+? Welcher Proxy-Dienst beschleunigt die Übertragung, wenn er auf dem Zielserver installiert ist?
+* Storage Migration Service-Proxy
+- BranchCache
+- DFS-Replikation
+- iSCSI-Initiator
+! Ohne Proxy läuft die Kopie über den Orchestrator.

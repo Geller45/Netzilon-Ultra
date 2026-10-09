@@ -155,3 +155,24 @@ Virtueller DC wird mit einer XML-Datei „geimpft“, exportiert, importiert –
 - Nur der erste DC ist DNS-Server
 - Clients nutzen den Provider-DNS
 - DNS wird nur auf dem RODC installiert
+
+? Welches Windows-Feature muss vor der Heraufstufung zum Domänencontroller installiert werden?
+* Active Directory-Domänendienste (AD-Domain-Services)
+- DHCP-Server
+- Hyper-V
+- Webserver (IIS)
+! Install-WindowsFeature AD-Domain-Services -IncludeManagementTools, danach Install-ADDSForest bzw. Install-ADDSDomainController.
+
+? Welches Cmdlet erstellt eine neue Gesamtstruktur?
+* Install-ADDSForest
+- Install-ADDSDomainController
+- New-ADDomain
+- Add-Computer
+! Install-ADDSDomain erstellt eine neue Domäne in einer vorhandenen Gesamtstruktur.
+
+? Welches Kennwort wird bei der Heraufstufung zusätzlich festgelegt?
+* Das Kennwort für den Verzeichnisdienst-Wiederherstellungsmodus (DSRM)
+- Das Kennwort des Gastkontos
+- Das BitLocker-PIN
+- Das Kennwort des krbtgt-Kontos
+! Es wird für die Anmeldung im DSRM (z. B. autoritative Wiederherstellung) benötigt.

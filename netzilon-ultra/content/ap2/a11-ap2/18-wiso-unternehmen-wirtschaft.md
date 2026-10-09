@@ -126,3 +126,24 @@ Welle mit Aufschwung, Boom, Abschwung, Tal.
 - Maximaler Gewinn aller Firmen
 - Steigende Steuern
 - Hohe Inflation
+
+? Wer haftet bei einer GmbH für Verbindlichkeiten der Gesellschaft?
+* Die Gesellschaft mit ihrem Gesellschaftsvermögen
+- Die Gesellschafter unbeschränkt mit dem Privatvermögen
+- Der Geschäftsführer immer privat
+- Der Staat
+! Die Gesellschafter riskieren grundsätzlich nur ihre Einlage.
+
+? Welche Organisationsform hat jede Stelle genau einen Vorgesetzten?
+* Einliniensystem
+- Mehrliniensystem
+- Matrixorganisation
+- Stabliniensystem mit zwei Weisungsbefugten
+! Einfache Weisungswege, aber lange Dienstwege.
+
+? Welche Ziele gehören zum magischen Viereck der Wirtschaftspolitik?
+* Preisniveaustabilität, hoher Beschäftigungsstand, außenwirtschaftliches Gleichgewicht, stetiges Wachstum
+- Gewinn, Umsatz, Liquidität, Rentabilität
+- Leistung, Zeit, Kosten, Qualität
+- Bildung, Gesundheit, Umwelt, Sicherheit
+! Festgelegt im Stabilitätsgesetz (1967).

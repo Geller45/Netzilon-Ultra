@@ -176,3 +176,24 @@ Links: zwei NICs → Team-Adapter → vSwitch (durchgestrichen für Hyper-V 2022
 - VLAN im DHCP-Bereich angeben
 - VM auf einen privaten Switch legen
 - Portspiegelung aktivieren
+
+? Welcher vSwitch-Typ verbindet VMs mit dem physischen Netzwerk?
+* Extern
+- Intern
+- Privat
+- NAT ohne Uplink
+! Intern erlaubt nur VMs und Host, privat nur VMs untereinander.
+
+? Mit welchem Cmdlet weist man einer VM-Netzwerkkarte VLAN 20 im Access-Modus zu?
+* Set-VMNetworkAdapterVlan -Access -VlanId 20
+- Set-VMSwitch -VLAN 20
+- New-NetLbfoTeam -VLAN 20
+- Set-NetIPAddress -VLAN 20
+! Der Host-Uplink muss als Trunk konfiguriert sein.
+
+? Mit welchem Cmdlet erstellt man einen vSwitch mit Switch Embedded Teaming?
+* New-VMSwitch -NetAdapterName NIC1,NIC2 -EnableEmbeddedTeaming $true
+- New-NetLbfoTeam
+- Add-VMNetworkAdapter -Team
+- Set-VMSwitch -Teaming LACP
+! SET unterstützt nur Switch-Independent-Modus.

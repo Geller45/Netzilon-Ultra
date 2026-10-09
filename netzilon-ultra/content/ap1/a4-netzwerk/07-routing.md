@@ -214,3 +214,24 @@ Netzgraph: RIP wählt den Weg mit den wenigsten Hops (über langsame Leitung), O
 - Netz A nutzt IPv4
 - Der Router hat zu viele Netzwerkkarten
 - Die Subnetzmaske ist /24
+
+? Welche administrative Distanz hat eine statische Route standardmäßig (Cisco)?
+* 1
+- 0
+- 110
+- 120
+! Direkt verbunden 0, OSPF 110, RIP 120.
+
+? Was zeigt der Windows-Befehl route print?
+* Die Routingtabelle des Hosts
+- Die ARP-Tabelle
+- Die DNS-Cache-Einträge
+- Die offenen TCP-Ports
+! Alternativ: Get-NetRoute in PowerShell.
+
+? Welches Routingprotokoll ist ein Link-State-Protokoll?
+* OSPF
+- RIP
+- RIPv2
+- Statisches Routing
+! OSPF berechnet mit dem Dijkstra-Algorithmus kürzeste Wege anhand von Kosten.

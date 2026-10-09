@@ -179,3 +179,24 @@ Server neben einem Foto des Sollzustands; jemand schaltet den Webserver-Dienst a
 - Die Reihenfolge von Mausklicks
 - Nur die Firewall eines Routers
 - Die Kosten einer VM
+
+? Was ist ein Runbook in Azure Automation?
+* Ein Skript (PowerShell oder Python), das automatisiert in Azure oder auf Hybrid Workern ausgeführt wird
+- Ein Handbuch im PDF-Format
+- Eine Firewallregel
+- Ein Speicherkonto
+! Auslösung per Zeitplan, Webhook oder Warnung.
+
+? Welcher Dienst ersetzt zunehmend Azure Automation State Configuration (DSC)?
+* Azure Machine Configuration (Azure Policy)
+- Azure Backup
+- Azure DNS
+- Azure Files
+! Machine Configuration nutzt DSC-Ressourcen über Azure Policy.
+
+? Welche Komponente auf dem Zielsystem setzt DSC-Konfigurationen um?
+* Local Configuration Manager (LCM)
+- Task-Planer
+- Windows Update
+- Group Policy Client
+! Modi: ApplyOnly, ApplyAndMonitor, ApplyAndAutoCorrect.

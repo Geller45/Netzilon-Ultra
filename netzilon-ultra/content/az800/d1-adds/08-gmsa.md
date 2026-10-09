@@ -170,3 +170,24 @@ Links ein Post-it mit Passwort am Monitor (svc-Konto), rechts ein Tresor, der nu
 - Die Abschaffung von gMSA
 - Dienstkonten ohne Domäne
 - Interaktive Anmeldung mit gMSA
+
+? Wie oft wechselt das Kennwort eines gMSA standardmäßig?
+* Alle 30 Tage automatisch
+- Nie
+- Täglich
+- Nur manuell
+! Das Kennwort ist 240 Byte lang und wird vom KDS berechnet.
+
+? Welches Cmdlet installiert ein gMSA auf dem Zielserver?
+* Install-ADServiceAccount
+- New-ADUser
+- Add-LocalGroupMember
+- Set-Service -Credential
+! Zuvor New-ADServiceAccount mit -PrincipalsAllowedToRetrieveManagedPassword.
+
+? Woran erkennt man ein gMSA im Dienst-Anmeldefeld?
+* Am angehängten $ (z. B. EXAMPLE\gmsa-web$) und leerem Kennwortfeld
+- An einem Präfix svc_
+- An der Endung .local
+- An einem Kennwort aus 8 Zeichen
+! Das Kennwort verwaltet das System.

@@ -191,3 +191,24 @@ ISCSI01 mit LUN-Paket; Kabel TCP 3260 zu SRV01; dort erscheint die Platte in der
 - NTFS-Berechtigungen auf der VHDX
 - Freigabeberechtigungen
 - MPIO-Richtlinie
+
+? Welcher Partitionsstil ist für Datenträger größer als 2 TiB erforderlich?
+* GPT
+- MBR
+- FAT32
+- Dynamisch auf MBR
+! MBR adressiert maximal 2 TiB.
+
+? Welches Cmdlet initialisiert einen neuen Datenträger mit GPT?
+* Initialize-Disk -PartitionStyle GPT
+- New-Partition -GPT
+- Format-Volume -GPT
+- Set-Disk -Online
+! Danach New-Partition und Format-Volume.
+
+? Welche Rolle stellt in Windows Server iSCSI-Datenträger für andere Server bereit?
+* iSCSI-Zielserver
+- iSCSI-Initiator
+- DFS-Namespace
+- Speicherreplikat
+! Der Initiator ist die Clientseite.

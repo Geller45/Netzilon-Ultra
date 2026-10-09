@@ -177,3 +177,24 @@ Schlitten fährt unter einer Vorlage; Lichtstrahl, Spiegel, Sensor; Bild baut si
 - Tinte trocknet ein
 - Keine Farbdrucke möglich
 - Keine Netzwerkanbindung möglich
+
+? Welche Kennzahl beschreibt die Auflösung eines Druckers?
+* dpi (dots per inch)
+- ppm nur bei Scannern
+- Hz
+- lm
+! ppm (pages per minute) beschreibt dagegen die Druckgeschwindigkeit.
+
+? Was sind Total Cost of Printing (Seitenkosten) im Wesentlichen?
+* Verbrauchsmaterial, Wartung und Strom je gedruckter Seite
+- Nur der Kaufpreis des Druckers
+- Nur die Kosten für Papier
+- Die Lizenzkosten des Treibers
+! Tintenstrahldrucker sind oft günstig in der Anschaffung, aber teuer pro Seite.
+
+? Was erkennt OCR beim Scannen?
+* Text in Bildern, der in bearbeitbaren Text umgewandelt wird
+- Farbfehler im Bild
+- Viren im Dokument
+- Die Papierstärke
+! Optical Character Recognition.

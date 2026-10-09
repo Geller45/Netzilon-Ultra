@@ -238,3 +238,17 @@ Load Balancer fragt beide Knoten per Probe-Port; nur aktiver antwortet, Verkehr 
 - Um DNS zu beschleunigen
 - Um AD-Replikation zu ersetzen
 - Um Kerberos zu verbessern
+
+? Wie oft senden Clusterknoten standardmäßig Heartbeats im selben Subnetz?
+* Jede Sekunde (SameSubnetDelay 1000 ms)
+- Jede Minute
+- Alle 10 Sekunden
+- Nur bei Fehlern
+! Mit SameSubnetThreshold bestimmt man, wie viele Heartbeats ausfallen dürfen.
+
+? Was ist eine Floating IP in einem Cluster?
+* Eine IP-Adresse, die mit der Rolle zum aktiven Knoten wandert
+- Eine fest an einen Knoten gebundene Adresse
+- Eine APIPA-Adresse
+- Eine öffentliche IPv6-Adresse
+! Clients sprechen immer die Rollen-IP an.

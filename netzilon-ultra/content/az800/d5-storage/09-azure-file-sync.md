@@ -211,3 +211,10 @@ Drei Häuser (Hamburg, München, Berlin) verbunden mit derselben Wolke; jede Än
 - Cloud-Tiering ist nicht aktiv
 - Der Cloud-Endpunkt ist voll
 - Dedup wurde deaktiviert
+
+? Welche Rolle spielt der Servermitglied-Endpunkt in Azure File Sync?
+* Er bezeichnet den lokalen Pfad auf einem registrierten Server, der mit der Azure-Dateifreigabe synchronisiert wird.
+- Er ist das Speicherkonto in Azure.
+- Er ist ein Backup-Tresor.
+- Er ist ein DNS-Eintrag.
+! Eine Synchronisierungsgruppe hat einen Cloudendpunkt und einen oder mehrere Serverendpunkte.

@@ -178,3 +178,24 @@ Eine positive Binärzahl erscheint, alle Bits drehen sich mit Flip-Animation um,
 - 1010 0110
 - 0101 1011
 - 1111 1111
+
+? Wie bildet man das Zweierkomplement einer Binärzahl?
+* Alle Bits invertieren und 1 addieren
+- Alle Bits invertieren
+- 1 subtrahieren
+- Die Bits in umgekehrter Reihenfolge schreiben
+! Einerkomplement + 1 = Zweierkomplement.
+
+? Welcher Wertebereich gilt für 8-Bit-Zweierkomplement?
+* −128 bis +127
+- −127 bis +127
+- 0 bis 255
+- −256 bis +255
+! Es gibt nur eine Null, daher eine negative Zahl mehr.
+
+? Woran erkennt man im Zweierkomplement eine negative Zahl?
+* Am höchstwertigen Bit (MSB) = 1
+- Am niedrigsten Bit = 1
+- An einer ungeraden Anzahl Einsen
+- Am Vorzeichen-Byte vor der Zahl
+! Das MSB fungiert als Vorzeichen.

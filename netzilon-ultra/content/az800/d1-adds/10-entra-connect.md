@@ -160,3 +160,24 @@ Ampel-Kacheln für Sync, AD DS, AD FS mit Warnmeldungen.
 - Nur im Entra-Portal
 - In Exchange Online
 - In der Entra-Connect-Datenbank
+
+? Was ist die empfohlene leichtgewichtige Alternative zu Entra Connect Sync, bei der Agenten installiert und in der Cloud konfiguriert werden?
+* Microsoft Entra Cloud Sync
+- AD FS
+- DFS-R
+- Azure File Sync
+! Cloud Sync eignet sich auch für mehrere getrennte Gesamtstrukturen.
+
+? Welche Funktion bietet Entra Connect Health?
+* Überwachung der Synchronisation und Identitätsinfrastruktur mit Warnungen
+- Verschlüsselung der AD-Datenbank
+- Bereitstellung von DHCP
+- Installation von Updates
+! Agenten senden Daten an das Entra-Portal.
+
+? Wie lautet der Standard-Synchronisationsintervall von Entra Connect Sync?
+* 30 Minuten
+- 5 Minuten
+- 24 Stunden
+- 1 Woche
+! Delta-Zyklen manuell mit Start-ADSyncSyncCycle -PolicyType Delta.

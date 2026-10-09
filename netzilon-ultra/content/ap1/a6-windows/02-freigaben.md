@@ -197,3 +197,24 @@ Benutzer, Gruppen, Freigabe- und NTFS-Rechte auswählen → effektive Berechtigu
 - Der Name ist falsch geschrieben
 - Die Freigabe wurde gelöscht
 - NTFS speichert nur Namen
+
+? Wie lautet der Pfad einer Freigabe „Daten“ auf dem Server FS01?
+* \\FS01\Daten
+- //FS01:Daten
+- C:\FS01\Daten
+- FS01@Daten
+! UNC-Pfad: \\Server\Freigabe.
+
+? Welche Freigabeberechtigungen gibt es unter Windows?
+* Lesen, Ändern, Vollzugriff
+- Lesen, Schreiben, Ausführen
+- Ändern, Löschen, Besitz übernehmen
+- Nur Zulassen und Verweigern
+! NTFS bietet deutlich feinere Rechte.
+
+? Welcher Port wird für SMB-Dateifreigaben verwendet?
+* TCP 445
+- TCP 139 ausschließlich
+- UDP 53
+- TCP 3389
+! 139 war NetBIOS-Session (Legacy).

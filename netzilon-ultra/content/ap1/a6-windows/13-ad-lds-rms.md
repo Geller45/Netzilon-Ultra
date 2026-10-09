@@ -187,3 +187,24 @@ Ein geschütztes Dokument reist vom Firmen-PC per Mail zu einem fremden PC; bei 
 - DHCP-Konsole
 - Druckverwaltung
 - Datenträgerverwaltung
+
+? Was ist AD LDS?
+* Ein schlanker LDAP-Verzeichnisdienst ohne Domänenfunktionen
+- Ein Domänencontroller für Zweigstellen
+- Ein Dienst für Lizenzen
+- Ein DNS-Server
+! Lightweight Directory Services – mehrere Instanzen auf einem Server möglich.
+
+? Welche Funktion bietet AD RMS?
+* Dokumentbezogene Nutzungsrechte wie „nicht drucken“ oder „nicht weiterleiten“
+- Verschlüsselung ganzer Laufwerke
+- Verteilung von Updates
+- Replikation von Ordnern
+! Heute meist durch Microsoft Purview Information Protection (Azure RMS) ersetzt.
+
+? Welcher Port ist der Standardport für LDAP?
+* 389 (LDAPS 636)
+- 443
+- 88
+- 53
+! Port 88 nutzt Kerberos.

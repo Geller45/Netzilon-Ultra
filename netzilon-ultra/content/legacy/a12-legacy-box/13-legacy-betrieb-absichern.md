@@ -202,3 +202,17 @@ Ein Netzplan mit Altsystem; per Klick entstehen VLAN-Zaun, Firewall-Tor, Jump-Ho
 - Kosten + Nutzen
 - Verfügbarkeit − Ausfall
 - MTBF ÷ MTTR
+
+? Was ist eine kompensierende Maßnahme für ein nicht patchbares Altsystem?
+* Netzwerksegmentierung mit restriktiver Firewall und Überwachung
+- Abschalten des Virenschutzes
+- Öffentliche IP-Adresse vergeben
+- Lokale Adminrechte für alle Benutzer
+! Ergänzend Zugriffe auf das Nötigste beschränken.
+
+? Was bedeutet die Migrationsstrategie „Replace“?
+* Das Altsystem wird durch ein neues Produkt (z. B. SaaS) ersetzt.
+- Das System wird unverändert in eine VM verschoben.
+- Das System wird nur gepatcht.
+- Das System wird weiterbetrieben wie bisher.
+! Weitere Strategien: Rehost, Replatform, Refactor, Retire.

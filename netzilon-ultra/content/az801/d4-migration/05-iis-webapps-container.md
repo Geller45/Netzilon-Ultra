@@ -164,3 +164,24 @@ Container mit gemeinsamer Wand (Prozess) und mit eigener Wand (Hyper-V).
 - Recovery Services Vault
 - Storage Sync Service
 - Log Analytics
+
+? Was ist ein App Service-Plan?
+* Die Compute-Ressourcen (Größe, Anzahl Instanzen, Region), auf denen Web Apps laufen
+- Ein Projektplan für Webseiten
+- Eine Lizenz für IIS
+- Ein Backup-Zeitplan
+! Mehrere Web Apps können sich einen Plan teilen.
+
+? Welche Funktion von App Service erlaubt das Testen einer neuen Version vor dem Livegang?
+* Bereitstellungsslots (Deployment Slots) mit Slot-Tausch
+- Kudu-Konsole
+- Application Insights
+- Azure Front Door
+! Nach dem Tausch kann bei Problemen zurückgetauscht werden.
+
+? Welcher Dienst eignet sich, um Windows-Container ohne eigene VM-Verwaltung in Azure auszuführen?
+* Azure Container Instances bzw. Azure Kubernetes Service mit Windows-Knotenpools
+- Azure DNS
+- Azure Files
+- Azure Bastion
+! ACI für einfache Einzelcontainer, AKS für Orchestrierung.

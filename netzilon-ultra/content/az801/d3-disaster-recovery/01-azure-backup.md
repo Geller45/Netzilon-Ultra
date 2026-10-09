@@ -196,3 +196,17 @@ Ein Tresor wird einmal, dreimal in einem Rechenzentrum oder in zwei Ländern kop
 - Jederzeit
 - Nur per Support
 - Nie
+
+? In welcher Azure-Ressource werden Azure-Backup-Sicherungen gespeichert?
+* Recovery Services-Tresor (bzw. Sicherungstresor)
+- Speicherkonto ohne Tresor
+- Key Vault
+- Log Analytics Workspace
+! Der Tresor verwaltet Richtlinien, Wiederherstellungspunkte und Redundanz.
+
+? Was schützt Sicherungen vor dem sofortigen Löschen durch einen Angreifer?
+* Vorläufiges Löschen (Soft Delete), das gelöschte Sicherungsdaten noch 14 Tage aufbewahrt
+- Ein längeres Kennwort für den Tresor
+- Die Redundanz LRS
+- Das Deaktivieren von MFA
+! Zusätzlich Unveränderlichkeit (Immutable Vault) und Multi-User Authorization.

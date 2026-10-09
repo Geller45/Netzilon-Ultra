@@ -159,3 +159,31 @@ Drei Säulen (IaaS-DC, Entra DS, Entra ID) mit Symbolen für Kontrolle, Protokol
 - Nur eine öffentliche IP pro DC
 - Azure DNS Private Zones allein
 - Point-to-Site-VPN eines Admins
+
+? Welches Azure-Merkmal schützt DCs vor gleichzeitigem Ausfall in einer Region?
+* Verfügbarkeitszonen bzw. Verfügbarkeitsgruppen
+- Ressourcengruppen
+- Tags
+- Azure Policy
+! Mindestens zwei DCs auf verschiedene Zonen verteilen.
+
+? Warum sollten AD-Datenbank, Protokolle und SYSVOL auf einem Azure-Datenträger ohne Host-Schreibcache liegen?
+* Damit Schreibvorgänge sofort dauerhaft gespeichert werden und die AD-Datenbank konsistent bleibt
+- Weil sonst keine IP-Adresse vergeben wird
+- Weil Azure sonst den DC löscht
+- Weil die Lizenz es verlangt
+! Host-Caching „None“ für den Datenträger mit NTDS und SYSVOL.
+
+? Wie sollten Azure-DCs ihre IP-Adressen erhalten?
+* Statisch in der Azure-Netzwerkschnittstelle (nicht im Gast-Betriebssystem eingetragen)
+- Per APIPA
+- Dynamisch ohne Reservierung
+- Über einen öffentlichen DNS-Dienst
+! Im Gast bleibt DHCP aktiv; Azure liefert immer dieselbe Adresse.
+
+? Wie gelangen on-prem-Benutzer in einem hybriden Szenario zu einem Azure-DC derselben Domäne?
+* Über AD-Replikation per Site-to-Site-VPN oder ExpressRoute
+- Durch Kopieren der NTDS.dit
+- Durch Export in eine CSV-Datei
+- Durch Entra Connect allein
+! Der Azure-DC ist ein regulärer zusätzlicher DC, idealerweise in eigenem AD-Standort.

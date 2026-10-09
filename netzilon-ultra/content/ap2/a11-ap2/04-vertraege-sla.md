@@ -121,3 +121,31 @@ Stufe 1 Nacherfüllung, Stufe 2 Rücktritt/Minderung/Schadensersatz.
 - Werklieferungsvertrag
 - Leasingvertrag
 - Arbeitsvertrag
+
+? Was ist beim Dienstvertrag geschuldet?
+* Die Tätigkeit, nicht ein bestimmter Erfolg
+- Ein abnahmefähiges Werk
+- Die Übereignung einer Sache
+- Die Gebrauchsüberlassung gegen Miete
+! Beispiel: IT-Beratung oder Support nach Stunden.
+
+? Wie lange verjähren Mängelansprüche beim Kauf beweglicher Sachen in der Regel?
+* 2 Jahre
+- 6 Monate
+- 1 Jahr
+- 5 Jahre
+! § 438 BGB; bei Bauwerken 5 Jahre.
+
+? Was ist der Unterschied zwischen Gewährleistung und Garantie?
+* Gewährleistung ist gesetzlich, Garantie eine freiwillige Zusatzleistung.
+- Garantie ist gesetzlich, Gewährleistung freiwillig.
+- Beide sind identisch.
+- Gewährleistung gilt nur für Software.
+! Die Garantie kann vom Hersteller oder Händler gegeben werden.
+
+? Was ist der Unterschied zwischen Reaktions- und Lösungszeit im SLA?
+* Reaktion = erste qualifizierte Rückmeldung, Lösung = Service wiederhergestellt
+- Beide bezeichnen dasselbe.
+- Reaktionszeit ist immer länger als Lösungszeit.
+- Lösungszeit betrifft nur Hardware.
+! Beide werden meist je Priorität festgelegt.

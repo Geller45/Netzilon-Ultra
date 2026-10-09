@@ -192,3 +192,17 @@ Drei Stufen: DC, SQL, Web nacheinander.
 - Backup ist schneller als ASR im Failover
 - Beide sind identisch
 
+? Wofür steht RTO?
+* Recovery Time Objective – maximal tolerierbare Ausfallzeit bis zur Wiederherstellung
+- Recovery Transfer Option
+- Remote Tunnel Object
+- Replication Time Offset
+! RPO beschreibt dagegen den maximal tolerierbaren Datenverlust.
+
+? Welche Azure-Ressource verwaltet die Replikation mit Azure Site Recovery?
+* Recovery Services-Tresor
+- Application Gateway
+- Azure Policy
+- Azure DNS
+! Dort werden Replikationsrichtlinien und Wiederherstellungspläne verwaltet.
+

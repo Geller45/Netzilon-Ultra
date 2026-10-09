@@ -181,3 +181,24 @@ Partner fällt aus; Sanduhr „1 Stunde“ läuft; währenddessen nur kurze Leas
 - DHCP-Failover mit Lastenausgleich
 - DHCP-Failover mit Hot Standby
 - Superscope mit IPv6
+
+? Welcher Failover-Modus verteilt Anfragen standardmäßig 50:50 auf zwei Server?
+* Lastenausgleich (Load Balance)
+- Hot Standby
+- Split-Scope
+- Superbereich
+! Das Verhältnis ist anpassbar.
+
+? Wofür steht MCLT?
+* Maximum Client Lead Time – Zeitraum, um den ein Partner Leases über die bekannte Zeit hinaus verlängern darf
+- Minimum Client Lease Time
+- Multicast Lease Table
+- Managed Client License Type
+! Nach Ablauf im Zustand „Partner ausgefallen“ übernimmt der Partner den ganzen Pool.
+
+? Wie viele Partner kann ein DHCP-Bereich im Failover haben?
+* Genau einen
+- Bis zu zehn
+- Beliebig viele
+- Zwei bei IPv6
+! Ein Server kann aber mit verschiedenen Partnern für verschiedene Bereiche Failover-Beziehungen haben.

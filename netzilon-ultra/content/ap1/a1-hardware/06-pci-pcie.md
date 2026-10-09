@@ -165,3 +165,24 @@ Grafikkarte mit Leistungsbalken; Stecker (Slot, 6-Pin, 8-Pin, 16-Pin) werden per
 - Die CPU steuert jede Übertragung einzeln
 - Mehrere Busse werden zusammengeschaltet
 - Der Bus wird übertaktet
+
+? Wie werden PCIe-Verbindungen aufgebaut?
+* Als serielle Punkt-zu-Punkt-Verbindungen aus einer oder mehreren Lanes
+- Als gemeinsamer paralleler Bus für alle Karten
+- Über ein Koaxialkabel
+- Über den USB-Controller
+! Jede Karte hat ihre eigene Verbindung, Bandbreite skaliert mit der Lane-Zahl.
+
+? Wie verändert sich die Datenrate pro Lane typischerweise von einer PCIe-Generation zur nächsten?
+* Sie verdoppelt sich etwa.
+- Sie halbiert sich.
+- Sie bleibt gleich.
+- Sie verzehnfacht sich.
+! PCIe 3.0 ≈ 1 GB/s, 4.0 ≈ 2 GB/s, 5.0 ≈ 4 GB/s pro Lane und Richtung.
+
+? Welche Speicher werden häufig direkt über PCIe angebunden?
+* NVMe-SSDs
+- Bandlaufwerke über SCSI
+- CD-ROM-Laufwerke
+- Disketten
+! NVMe nutzt PCIe-Lanes (z. B. im M.2-Slot) für geringe Latenz.

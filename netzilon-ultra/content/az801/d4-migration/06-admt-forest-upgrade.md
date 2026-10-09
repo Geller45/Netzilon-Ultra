@@ -186,3 +186,24 @@ Bürger laufen über Brücke (Vertrauensstellung) mit altem Ausweis in der Tasch
 - Sofort nach dem ersten neuen DC
 - Vor dem Hinzufügen neuer DCs
 - Nie
+
+? Welche Option erhält bei einer Benutzer-Migration mit ADMT den Zugriff auf alte Ressourcen?
+* SID-Verlauf (SID History) migrieren
+- Kennwort zurücksetzen
+- Konto deaktivieren
+- UPN ändern
+! Dafür muss die SID-Filterung am Trust ggf. angepasst werden.
+
+? Was ist vor einer Migration mit ADMT zwischen zwei Gesamtstrukturen nötig?
+* Eine Vertrauensstellung sowie DNS-Namensauflösung zwischen den Gesamtstrukturen
+- Ein gemeinsamer DHCP-Server
+- Identische Domänennamen
+- Deaktivierung aller Firewalls
+! Zusätzlich ggf. der Password Export Server für die Kennwortmigration.
+
+? Welches Werkzeug bereitet Schema und Domäne vor, wenn ein neuer DC einer höheren Version in einer bestehenden Domäne installiert wird?
+* Adprep (wird beim Heraufstufen automatisch ausgeführt)
+- dcpromo /forceremoval
+- ntdsutil semantic database analysis
+- repadmin /syncall
+! Voraussetzung sind passende Rechte (Schema-/Organisations-Admins).

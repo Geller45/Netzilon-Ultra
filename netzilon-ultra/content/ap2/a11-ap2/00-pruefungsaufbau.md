@@ -110,3 +110,31 @@ Antrag → Genehmigung → 40 h Projekt → Doku → Präsentation → Fachgespr
 - GA1
 - GA2
 - WiSo
+
+? Aus welchen Teilen besteht die AP2 der Fachinformatiker Systemintegration (Verordnung 2020)?
+* Betriebliche Projektarbeit mit Präsentation/Fachgespräch, zwei schriftliche Bereiche (Konzeption und Administration von IT-Systemen, Analyse und Entwicklung von Netzwerken) und WiSo
+- Nur eine schriftliche Prüfung
+- Nur ein Fachgespräch
+- Programmieraufgabe und Multiple-Choice-Test
+! Die AP1 („Einrichten eines IT-gestützten Arbeitsplatzes“) geht zusätzlich in die Gesamtnote ein.
+
+? Wie lange dauert die Präsentation einschließlich Fachgespräch höchstens?
+* 30 Minuten (Präsentation ca. 15 Minuten, Rest Fachgespräch)
+- 90 Minuten
+- 10 Minuten
+- 60 Minuten Präsentation plus 60 Minuten Gespräch
+! Die genaue Aufteilung regelt der Prüfungsausschuss im Rahmen der Verordnung.
+
+? Was muss vor Beginn der betrieblichen Projektarbeit beim Prüfungsausschuss eingereicht werden?
+* Der Projektantrag zur Genehmigung
+- Die fertige Projektdokumentation
+- Das Ausbildungszeugnis
+- Eine Rechnung über die Projektkosten
+! Ohne genehmigten Antrag darf das Projekt nicht durchgeführt werden.
+
+? Wie lange dauert der schriftliche Prüfungsbereich Wirtschafts- und Sozialkunde?
+* 60 Minuten
+- 90 Minuten
+- 120 Minuten
+- 30 Minuten
+! Die beiden fachlichen schriftlichen Bereiche dauern je 90 Minuten.

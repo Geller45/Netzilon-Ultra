@@ -212,3 +212,24 @@ Registry-Schlüssel füllt sich; GPO wird entfernt: Policy-Schlüssel verschwind
 - Sie funktioniert nur auf Servern
 - Sie benötigt DHCP
 - Sie gilt nur für Computer
+
+? Wie oft aktualisieren Domänen-Clients ihre Gruppenrichtlinien standardmäßig?
+* Alle 90 Minuten mit zufälligem Versatz von bis zu 30 Minuten
+- Alle 5 Minuten
+- Nur beim Neustart
+- Einmal täglich um Mitternacht
+! Domänencontroller aktualisieren alle 5 Minuten.
+
+? Welche Konsole dient zur Verwaltung von GPOs in der Domäne?
+* Gruppenrichtlinienverwaltung (gpmc.msc)
+- Lokale Sicherheitsrichtlinie (secpol.msc)
+- Computerverwaltung (compmgmt.msc)
+- Dienste (services.msc)
+! Bearbeitet wird mit dem Gruppenrichtlinienverwaltungs-Editor.
+
+? Welcher Befehl erzwingt eine sofortige Aktualisierung der Gruppenrichtlinien?
+* gpupdate /force
+- gpresult /r
+- dcdiag
+- secedit /analyze
+! gpresult zeigt nur das Ergebnis an.

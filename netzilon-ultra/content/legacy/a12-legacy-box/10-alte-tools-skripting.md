@@ -191,3 +191,17 @@ Ein Wachdienst (AMSI) steht vor einer Tür. Der Angreifer nimmt eine Seitentür 
 - WSUS
 - DFS-R
 - Robocopy
+
+? Welches Cmdlet ersetzt wmic für WMI-Abfragen?
+* Get-CimInstance
+- Get-WmiObject in PowerShell 7
+- Invoke-WMIC
+- Get-Service -WMI
+! Get-WmiObject ist in PowerShell 7 nicht mehr verfügbar.
+
+? Welche Skriptsprache kündigt Microsoft ab?
+* VBScript
+- PowerShell 7
+- Python
+- Bash
+! VBScript wird als Feature on Demand ausgeliefert und schrittweise entfernt.

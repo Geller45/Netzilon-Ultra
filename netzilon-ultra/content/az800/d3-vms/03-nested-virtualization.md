@@ -156,3 +156,24 @@ Links: innere VM mit eigener MAC geht dank Spoofing direkt ins LAN. Rechts: inne
 - Beim Kopieren einer Datei
 - Beim Anmelden per RDP
 - Nie
+
+? Welche Konfigurationsversion benötigt eine VM mindestens für Nested Virtualization?
+* 8.0
+- 5.0
+- 2.0
+- 12.0
+! Prüfen mit Get-VM | Select-Object Name, Version.
+
+? Welches Einsatzszenario ist typisch für Nested Virtualization?
+* Testlabore und Schulungen mit Hyper-V-Clustern in VMs
+- Produktive Datenbankserver mit maximaler Leistung
+- Ersatz für Container-Orchestrierung
+- Beschleunigung von Grafikkarten
+! Auch Windows-Sandbox oder Hyper-V-Container in einer VM benötigen es.
+
+? Warum sollte die äußere VM statischen Arbeitsspeicher nutzen?
+* Dynamic Memory wird für VMs mit aktivierten Virtualisierungserweiterungen nicht unterstützt bzw. führt zu Problemen.
+- Weil statischer Speicher schneller installiert wird
+- Weil sonst keine IP-Adresse vergeben wird
+- Weil Lizenzen das verlangen
+! Laufzeitänderungen des RAM sind bei Nested-Hosts eingeschränkt.

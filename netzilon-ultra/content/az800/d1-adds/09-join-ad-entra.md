@@ -153,3 +153,24 @@ DC druckt eine Mitgliedskarte (djoin-Datei), Brief-Animation zum Server ohne Net
 - Die Default Domain Policy löschen
 - DNS deaktivieren
 - Alle Benutzer in Protected Users aufnehmen
+
+? Welches Cmdlet nimmt einen Server in eine AD-Domäne auf?
+* Add-Computer
+- Join-Domain
+- New-ADComputer -Join
+- Install-ADDSDomain
+! Beispiel: Add-Computer -DomainName example.com -Restart.
+
+? Welcher Join-Typ verbindet ein Gerät gleichzeitig mit lokalem AD und Entra ID?
+* Hybrid Entra Join
+- Entra Registered
+- Arbeitsgruppe
+- Offline-Join ohne AD
+! Gerät ist AD-Mitglied und zusätzlich in Entra ID registriert.
+
+? Was ist bei Entra Domain Services hinsichtlich Domänen-Admin-Rechten zu beachten?
+* Kunden erhalten keine Domänen-Admin- oder Organisations-Admin-Rechte, sondern die Gruppe AAD DC Administrators.
+- Kunden sind automatisch Schema-Admins.
+- Es gibt gar keine Verwaltungsgruppe.
+- Domänen-Admins werden aus dem lokalen AD übernommen.
+! Microsoft betreibt die DCs als verwalteten Dienst.

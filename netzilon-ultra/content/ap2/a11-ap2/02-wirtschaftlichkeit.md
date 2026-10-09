@@ -158,3 +158,24 @@ Zwei Waagschalen mit gewichteten Punkten.
 - Kaufpreis
 - Listenpreis
 - Rabatt
+
+? Was ist der Unterschied zwischen fixen und variablen Kosten?
+* Fixe Kosten sind unabhängig von der Menge, variable steigen mit der Menge.
+- Fixe Kosten ändern sich täglich.
+- Variable Kosten fallen nur einmal an.
+- Es gibt keinen Unterschied.
+! Beispiel fix: Miete; variabel: Material je Stück.
+
+? Bezugspreis 800 €, Handlungskosten 25 %, Gewinn 10 %. Wie hoch ist der Barverkaufspreis?
+* 1.100 €
+- 1.080 €
+- 1.000 €
+- 1.120 €
+! 800 + 200 = 1.000 Selbstkosten; + 10 % = 1.100 €.
+
+? Was berechnet die lineare Abschreibung?
+* Gleichmäßige Verteilung der Anschaffungskosten auf die Nutzungsdauer
+- Den Restwert nach einem Jahr Nutzung im Gebrauchtmarkt
+- Die Zinsen eines Kredits
+- Die Mehrwertsteuer
+! Beispiel: 3.000 € über 3 Jahre = 1.000 € pro Jahr.

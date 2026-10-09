@@ -204,3 +204,24 @@ Admin im Browser → Pförtner Bastion → VM ohne Haustür; daneben JIT-Tür mi
 - Der temporäre Datenträger kostet extra
 - Bastion berechnet die VM weiter
 - Die NSG verursacht Compute-Kosten
+
+? Welches Format muss eine VHD für den Upload als Azure-Datenträger haben?
+* VHD mit fester Größe
+- Dynamische VHDX
+- VMDK
+- ISO
+! Konvertierung mit Convert-VHD -VHDType Fixed.
+
+? Welcher Zustand einer Azure-VM verursacht keine Compute-Kosten mehr?
+* Beendet (Zuordnung aufgehoben / Deallocated)
+- Im Gast heruntergefahren
+- Angehalten im Betriebssystem
+- Neustart
+! Speicherkosten fallen weiterhin an.
+
+? Was ist die Funktion einer Netzwerksicherheitsgruppe (NSG)?
+* Filterung von ein- und ausgehendem Datenverkehr per Regeln für Subnetze oder NICs
+- Verschlüsselung der Datenträger
+- Vergabe öffentlicher DNS-Namen
+- Sicherung der VM
+! Regeln mit Priorität, Quelle, Ziel, Port und Aktion.

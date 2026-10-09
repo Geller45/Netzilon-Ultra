@@ -171,3 +171,24 @@ Tortendiagramm, das sich animiert füllt: Texturen, Geometrie, Framebuffer, Z-Bu
 - Mit der SSD
 - Mit dem L1-Cache
 - Mit dem BIOS-Flash
+
+? Wofür steht VRAM?
+* Video-RAM – eigener Speicher der Grafikkarte
+- Virtual RAM des Betriebssystems
+- Variable Random Access Memory
+- Verified RAM
+! Dedizierte GPUs nutzen schnellen GDDR- oder HBM-Speicher.
+
+? Welche Angabe beschreibt die Bildwiederholrate eines Monitors?
+* Hertz (Hz)
+- Pixel pro Zoll (ppi)
+- Candela pro Quadratmeter
+- Bit pro Sekunde
+! 60 Hz = 60 Bilder pro Sekunde; Spielemonitore 144 Hz und mehr.
+
+? Welcher Vorteil spricht für eine dedizierte Grafikkarte in einem CAD-Arbeitsplatz?
+* Eigene GPU und eigener Grafikspeicher für hohe 3D-Leistung
+- Geringerer Stromverbrauch als eine integrierte Grafik
+- Kein Treiber erforderlich
+- Geringerer Platzbedarf
+! Integrierte Grafik reicht für Office, CAD/3D braucht dedizierte Leistung.

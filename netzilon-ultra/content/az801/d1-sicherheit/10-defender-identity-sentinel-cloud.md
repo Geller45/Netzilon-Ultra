@@ -218,3 +218,17 @@ On-Prem-Server → Arc-Agent → Wolke; grüner Haken „Secure Score“.
 - Deaktivierte Firewall
 - SMBv1 aktiviert
 - Zweite Netzwerkkarte
+
+? Wo wird der Sensor von Defender for Identity installiert?
+* Auf Domänencontrollern (sowie AD FS-, AD CS- und Entra-Connect-Servern)
+- Auf jedem Client
+- Nur in Azure
+- Auf Druckservern
+! Der Sensor analysiert Netzwerkverkehr und Ereignisse.
+
+? Was ist Microsoft Sentinel?
+* Eine cloudbasierte SIEM- und SOAR-Lösung
+- Ein Virenscanner
+- Ein Backup-Dienst
+- Ein VPN-Gateway
+! Datenbasis ist ein Log Analytics Workspace.

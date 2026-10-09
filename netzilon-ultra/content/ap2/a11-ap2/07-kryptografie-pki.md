@@ -131,3 +131,24 @@ Drei gestapelte Zertifikate, Root ganz oben mit Krone.
 - .cer
 - .csr
 - .crl
+
+? Mit welchem Schlüssel verschlüsselt man eine Nachricht asymmetrisch an einen Empfänger?
+* Mit dem öffentlichen Schlüssel des Empfängers
+- Mit dem eigenen privaten Schlüssel
+- Mit dem privaten Schlüssel des Empfängers
+- Mit einem Hashwert
+! Nur der private Schlüssel des Empfängers kann entschlüsseln.
+
+? Was prüft ein Client bei einem TLS-Serverzertifikat?
+* Gültigkeit, Vertrauenskette zur Stammzertifizierungsstelle, Name und Sperrstatus
+- Nur die Dateigröße
+- Nur das Ablaufdatum
+- Die MAC-Adresse des Servers
+! Sperrstatus per CRL oder OCSP.
+
+? Welches Verfahren kombiniert asymmetrischen Schlüsselaustausch mit symmetrischer Datenverschlüsselung?
+* Hybride Verschlüsselung (z. B. TLS)
+- Reine RSA-Verschlüsselung jeder Nachricht
+- Hashing mit SHA-256
+- Base64-Kodierung
+! Symmetrisch ist schnell, asymmetrisch löst das Schlüsselaustauschproblem.

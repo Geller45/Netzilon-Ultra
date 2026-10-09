@@ -173,3 +173,17 @@ Vier Schlösser von Pappe über Vorhängeschloss und Sicherheitsschloss bis zum 
 - TLS 1.2
 - TLS 1.3
 - Alle
+
+? Welches WLAN-Verschlüsselungsverfahren gilt bei WPA als veraltet?
+* TKIP
+- AES-CCMP
+- GCMP-256
+- SAE
+! WPA2/WPA3 nutzen AES-basierte Verfahren.
+
+? Welche TLS-Versionen sollten heute eingesetzt werden?
+* TLS 1.2 und TLS 1.3
+- SSL 3.0 und TLS 1.0
+- Nur SSL 2.0
+- TLS 1.1
+! SSL 2/3, TLS 1.0 und 1.1 gelten als unsicher.

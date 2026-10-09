@@ -173,3 +173,24 @@ Besucher mit AD-FS-Ausweis; Empfang holt beim Kerberos-Schalter (DC) einen Windo
 - MS-OFBA
 - Pass-Through ist unmöglich
 - OAuth2 für Store-Apps
+
+? Wo wird der Webanwendungsproxy typischerweise platziert?
+* In der DMZ zwischen Internet und internem Netz
+- Auf dem Domänencontroller
+- Im internen Clientnetz
+- Auf jedem Client
+! WAP-Server sind in der Regel keine Domänenmitglieder (außer für KCD).
+
+? Welche Vorauthentifizierung leitet Anfragen ungeprüft an die interne Anwendung weiter?
+* Passthrough
+- AD FS
+- OAuth2 mit MFA
+- Clientzertifikat
+! Die Anwendung muss die Authentifizierung dann selbst übernehmen.
+
+? Was ist für die Veröffentlichung einer Anwendung mit Windows-Authentifizierung über WAP und AD FS nötig?
+* Kerberos-eingeschränkte Delegierung (KCD) und Domänenmitgliedschaft des WAP-Servers
+- Ein zweiter DHCP-Server
+- Eine öffentliche Stubzone
+- Deaktivieren von HTTPS
+! Der WAP holt Kerberos-Tickets im Namen des Benutzers.

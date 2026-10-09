@@ -196,3 +196,17 @@ Tafel mit 4624, 4625, 4740, 1102 und Symbolen.
 - Get-EventLog
 - Show-Log
 - Read-Events
+
+? Welche Ereignis-ID zeigt eine Kontosperrung im Sicherheitsprotokoll?
+* 4740
+- 4624
+- 4625
+- 1102
+! 1102 bedeutet, dass das Sicherheitsprotokoll gelöscht wurde.
+
+? Welcher Dienst muss auf dem Sammlercomputer für die Ereignisweiterleitung laufen?
+* Windows-Ereignissammlung (Wecsvc)
+- Druckwarteschlange
+- DHCP-Client
+- Windows Search
+! Einrichtung mit wecutil qc.

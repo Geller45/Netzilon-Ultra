@@ -167,3 +167,24 @@ GPU als Pizza, in 4 Stücke geschnitten, jedes Stück fliegt zu einer VDI-VM; Um
 - DDA für jede VM
 - RemoteFX vGPU
 - Smart Paging
+
+? Welches Cmdlet trennt ein PCIe-Gerät vom Host, damit es an eine VM übergeben werden kann?
+* Dismount-VMHostAssignableDevice
+- Remove-VMHardDiskDrive
+- Disable-NetAdapter
+- Stop-VM
+! Vorher Gerät im Geräte-Manager bzw. per Disable-PnpDevice deaktivieren.
+
+? Welche Generation muss eine VM für DDA haben?
+* Generation 2
+- Generation 1
+- Beide gleichermaßen
+- Generation 3
+! DDA setzt UEFI-basierte Gen-2-VMs voraus.
+
+? Welche Einstellung muss für DDA bei Ausschalten des Hosts in der VM gesetzt sein?
+* AutomaticStopAction auf TurnOff
+- AutomaticStopAction auf Save
+- Dynamic Memory aktiviert
+- Prüfpunkte aktiviert
+! Gespeicherter Zustand wird mit durchgereichten Geräten nicht unterstützt.

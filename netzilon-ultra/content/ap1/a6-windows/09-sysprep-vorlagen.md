@@ -199,3 +199,24 @@ Client wechselt vom Profil „Öffentlich (aus)“ zu „Domäne (an)“ – Sch
 - in-addr.arpa
 - localhost
 - root-servers.net
+
+? Welche Option von sysprep entfernt rechnerspezifische Daten wie die SID?
+* /generalize
+- /oobe
+- /audit
+- /quiet
+! /oobe startet beim nächsten Boot die Ersteinrichtung.
+
+? Welche Datei steuert eine unbeaufsichtigte Windows-Installation bzw. Sysprep?
+* unattend.xml (Antwortdatei)
+- autoexec.bat
+- config.sys
+- boot.ini
+! Erstellt mit dem Windows System Image Manager.
+
+? Wo befindet sich sysprep.exe?
+* C:\Windows\System32\Sysprep
+- C:\Program Files\Sysprep
+- C:\Sysprep auf dem Installationsmedium
+- In der Registry
+! Ausführung als Administrator.

@@ -172,3 +172,24 @@ IP-Adresse in Bits, darüber schiebt sich die Subnetzmaske als Schablone; Bits u
 - NICHT(A UND B) = (NICHT A) UND (NICHT B)
 - NICHT(A ODER B) = A UND B
 - A XOR B = A UND B
+
+? Welche Verknüpfung liefert nur dann 1, wenn beide Eingänge 0 sind?
+* NOR
+- NAND
+- XOR
+- UND
+! NOR = NICHT ODER.
+
+? Wie viele Zeilen hat eine Wahrheitstabelle mit 3 Eingängen?
+* 8
+- 6
+- 3
+- 9
+! 2^3 Kombinationen.
+
+? Was ergibt 1010 ODER 0101?
+* 1111
+- 0000
+- 1010
+- 0101
+! Jedes Bit ist in mindestens einem Operanden 1.

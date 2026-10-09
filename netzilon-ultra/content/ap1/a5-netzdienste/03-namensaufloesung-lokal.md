@@ -163,3 +163,24 @@ Drei Karten mDNS/LLMNR/NetBIOS mit Ports, Adressen, IPv6-Fähigkeit und Zukunfts
 - .lan
 - .arpa
 - .home
+
+? In welcher Datei können unter Windows Namen statisch IP-Adressen zugeordnet werden?
+* C:\Windows\System32\drivers\etc\hosts
+- C:\Windows\win.ini
+- C:\boot.ini
+- C:\Windows\System32\config\SAM
+! Unter Linux: /etc/hosts.
+
+? Welches Angriffswerkzeug nutzt LLMNR/NBT-NS-Antworten aus, um Hashes abzugreifen?
+* Responder (Spoofing/Poisoning)
+- nslookup
+- tracert
+- ipconfig
+! Daher LLMNR und NetBIOS über TCP/IP per GPO deaktivieren.
+
+? Welcher Befehl leert den DNS-Cache unter Windows?
+* ipconfig /flushdns
+- ipconfig /renew
+- nbtstat -R
+- arp -d
+! nbtstat -R leert dagegen den NetBIOS-Namencache.

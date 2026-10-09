@@ -194,3 +194,17 @@ Drei VMs vor einer Speicher-Ampel; die gierige VM bekommt ein **Max-IOPS-Schild*
 - iWARP-Lizenz
 - SMB-Multichannel-Feature
 - Deduplizierungsrolle
+
+? Welcher Nutzungstyp der Datendeduplizierung ist für allgemeine Dateiserver gedacht?
+* Allzweck-Dateiserver
+- Virtual Desktop Infrastructure (VDI)
+- Backup
+- Datenbank
+! VDI für laufende VHDX in VDI-Szenarien, Backup für Sicherungsziele.
+
+? Auf welchem Volume kann Deduplizierung NICHT aktiviert werden?
+* Auf dem Systemvolume bzw. Startvolume
+- Auf einem NTFS-Datenvolume
+- Auf einem ReFS-Datenvolume (ab Server 2019)
+- Auf einem CSV-Volume für VDI
+! Dedup ist für Datenvolumes vorgesehen.

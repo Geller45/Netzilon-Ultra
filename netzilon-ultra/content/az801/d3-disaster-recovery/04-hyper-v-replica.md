@@ -190,3 +190,17 @@ Kette Haus A → Haus B → Haus C, jeweils mit Boten.
 - Die Primär-VM wird gelöscht
 - Der Cluster wird umgestellt
 - Die Replikation stoppt endgültig
+
+? Welche Rolle wird benötigt, wenn ein Failover-Cluster als Replikatserver dient?
+* Hyper-V-Replikatbroker
+- DHCP-Server
+- Speicherreplikat
+- Netzwerkrichtlinienserver
+! Der Broker stellt einen Clientzugriffspunkt für den Cluster bereit.
+
+? Was ermöglicht die erweiterte Replikation (Extended Replication)?
+* Eine weitere Replikation vom Replikatserver zu einem dritten Server
+- Replikation zu beliebig vielen Zielen gleichzeitig
+- Replikation physischer Server
+- Replikation nur der Arbeitsspeicherinhalte
+! Kette: Primär → Replikat → erweitertes Replikat.

@@ -187,3 +187,24 @@ DC schickt ein GPO an eine OU; beim Neustart der Clients fährt ein Lieferwagen 
 - Weil erzwungene Regeln nicht funktionieren
 - Weil sonst die Standardregeln gelöscht werden
 - Um Lizenzkosten zu sparen
+
+? Welche Regeltypen bietet AppLocker?
+* Herausgeber, Pfad und Dateihash
+- Nur Dateiname
+- Nur IP-Adresse
+- Benutzerkennwort
+! Herausgeberregeln basieren auf der digitalen Signatur.
+
+? Welcher Dienst muss für AppLocker auf den Clients laufen?
+* Anwendungsidentität (AppIDSvc)
+- Druckwarteschlange
+- DHCP-Client
+- Windows Search
+! Ohne laufenden Dienst werden die Regeln nicht durchgesetzt.
+
+? Was ist der Unterschied zwischen „Zuweisen“ und „Veröffentlichen“ bei der Softwareverteilung per GPO?
+* Zuweisen installiert automatisch, Veröffentlichen bietet die Software nur zur Installation an (nur Benutzer).
+- Es gibt keinen Unterschied.
+- Veröffentlichen installiert sofort, Zuweisen nie.
+- Zuweisen gilt nur für EXE-Dateien.
+! Veröffentlichen ist nur in der Benutzerkonfiguration möglich.

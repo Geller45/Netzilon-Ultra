@@ -182,3 +182,17 @@ Oben eine Straße mit allen Autos auf einer Spur (PCI), unten eine Autobahn mit 
 - ISO 9001
 - DIN 5008
 - IEEE 802.3
+
+? Welche Schnittstelle ersetzte die parallele Druckerschnittstelle (LPT)?
+* USB bzw. Netzwerk (Ethernet/WLAN)
+- PS/2
+- VGA
+- FireWire 400
+! Moderne Drucker werden meist per Netzwerk angebunden.
+
+? Welches Medium gilt als veraltet für die Datensicherung in Unternehmen?
+* Diskette bzw. DVD für große Datenmengen
+- LTO-Band
+- Festplatten-Backup-Speicher
+- Objektspeicher in der Cloud
+! LTO ist weiterhin aktuell für Langzeit- und Offline-Sicherungen.

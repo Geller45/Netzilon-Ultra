@@ -223,3 +223,17 @@ Validierungs-Häkchen erscheinen, danach entsteht der Cluster-Kreis um beide Kno
 - Jeder Knoten in eigener Gesamtstruktur
 - Nur Windows 10
 - Kein Speicher nötig
+
+? Welches Feature muss vor dem Erstellen eines Clusters auf allen Knoten installiert werden?
+* Failoverclustering
+- Hyper-V
+- DFS-Namespace
+- Windows Server-Sicherung
+! Install-WindowsFeature Failover-Clustering -IncludeManagementTools.
+
+? Mit welchem Cmdlet wird ein Cluster erstellt?
+* New-Cluster
+- Test-Cluster
+- Add-ClusterNode
+- New-ClusterGroup
+! Beispiel: New-Cluster -Name CL01 -Node HV01,HV02 -StaticAddress 10.0.0.50.

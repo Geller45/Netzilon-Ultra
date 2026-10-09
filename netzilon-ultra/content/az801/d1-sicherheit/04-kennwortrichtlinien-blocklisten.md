@@ -188,3 +188,17 @@ Schalter mit Audit (gelb, protokolliert) und Enforce (rot, lehnt ab).
 - Rangfolge 20
 - Kombination beider
 - Default Domain Policy
+
+? Welche Domänenfunktionsebene ist für Fine-Grained Password Policies mindestens nötig?
+* Windows Server 2008
+- Windows 2000
+- Windows Server 2016
+- Windows Server 2025
+! PSOs werden im Container Password Settings Container gespeichert.
+
+? Auf welche Objekte kann ein PSO direkt angewendet werden?
+* Benutzer und globale Sicherheitsgruppen
+- OUs
+- Computerkonten
+- Standorte
+! Für eine OU nutzt man eine Schattengruppe (Shadow Group).

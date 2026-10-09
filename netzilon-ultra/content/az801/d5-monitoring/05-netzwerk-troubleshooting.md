@@ -189,3 +189,17 @@ Haus mit Türen 53, 88, 389, 445, 3389; manche verschlossen.
 - Clear-Dns
 - Reset-Dns
 - Flush-Cache
+
+? Welcher Befehl zeigt den Weg eines Pakets mit Laufzeiten je Hop?
+* tracert bzw. Test-NetConnection -TraceRoute
+- ipconfig /all
+- nslookup
+- arp -a
+! pathping kombiniert tracert mit Paketverluststatistik.
+
+? Welcher Befehl zeigt offene Verbindungen mit Prozess-ID?
+* netstat -ano bzw. Get-NetTCPConnection
+- ipconfig /displaydns
+- route print
+- nbtstat -n
+! Die PID lässt sich im Task-Manager einem Prozess zuordnen.

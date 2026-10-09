@@ -163,3 +163,24 @@ Drei Schlüssel (Erstellen, Bearbeiten, Verknüpfen) werden an unterschiedliche 
 - gpupdate /force
 - gpresult /z
 - repadmin /syncall
+
+? Mit welchem Cmdlet wird ein GPO gesichert?
+* Backup-GPO
+- Export-GPO
+- Copy-GPO -Backup
+- Save-GPO
+! Wiederherstellung mit Restore-GPO, Import in andere Domäne mit Import-GPO.
+
+? Was beinhaltet die Sicherung eines GPOs NICHT?
+* Die Verknüpfungen (Links) mit OUs
+- Die Einstellungen
+- Die Sicherheitsfilterung
+- Die WMI-Filter-Verknüpfung
+! Verknüpfungen müssen nach einer Wiederherstellung ggf. neu gesetzt werden.
+
+? Wozu dient eine Migrationstabelle beim Import eines GPOs?
+* Sie ordnet Sicherheitsprinzipale und UNC-Pfade der Quelldomäne denen der Zieldomäne zu.
+- Sie übersetzt Einstellungen in andere Sprachen.
+- Sie migriert Benutzerkonten.
+- Sie ändert die Domänenfunktionsebene.
+! Erstellt mit dem Migrationstabellen-Editor.

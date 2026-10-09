@@ -213,3 +213,24 @@ Ein Haus mit IP-Adresse; Fenster mit Portnummern; Klick auf ein Fenster zeigt de
 - Segment
 - Paket
 - Bit
+
+? Auf welcher OSI-Schicht arbeitet ein Router?
+* Schicht 3 – Vermittlung
+- Schicht 2 – Sicherung
+- Schicht 4 – Transport
+- Schicht 7 – Anwendung
+! Router entscheiden anhand der IP-Adresse.
+
+? Welchen Port nutzt HTTPS standardmäßig?
+* 443
+- 80
+- 22
+- 25
+! HTTP 80, SSH 22, SMTP 25.
+
+? Welche Aufgabe hat die Transportschicht?
+* Ende-zu-Ende-Kommunikation zwischen Anwendungen über Ports, ggf. gesichert (TCP)
+- Wegewahl zwischen Netzen
+- Physische Übertragung der Bits
+- Darstellung und Verschlüsselung der Daten
+! TCP und UDP gehören zur Schicht 4.

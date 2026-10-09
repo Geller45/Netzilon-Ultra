@@ -116,3 +116,31 @@ Kopf mit vier Ohren: Sache, Selbst, Beziehung, Appell.
 - Deckblatt
 - Projektantrag
 - Glossar
+
+? Welche Bestandteile gehören typischerweise zur Projektdokumentation?
+* Ausgangssituation, Ziel, Planung, Durchführung, Soll-Ist-Vergleich, Fazit und Anhang
+- Nur der Projektantrag
+- Nur Screenshots
+- Nur die Rechnung
+! Wichtig ist das Begründen von Entscheidungen.
+
+? Was ist bei einer Präsentation im Fachgespräch zu beachten?
+* Zeitrahmen einhalten, Zielgruppe ansprechen, Kernaussagen visualisieren
+- Möglichst viel Text auf jede Folie schreiben
+- Den Text vom Blatt ablesen
+- Keine Blickkontakte
+! Die Folien unterstützen, der Vortragende erklärt.
+
+? Was bedeutet „aktives Zuhören“?
+* Zuhören mit Nachfragen, Paraphrasieren und Zusammenfassen
+- Schnell Lösungen vorschlagen
+- Den Kunden unterbrechen
+- Nur schriftlich kommunizieren
+! Es sichert Verständnis und zeigt Wertschätzung.
+
+? Welche Seite des Vier-Seiten-Modells beschreibt, was der Sender über sich preisgibt?
+* Selbstoffenbarung
+- Sachinhalt
+- Beziehung
+- Appell
+! Nach Schulz von Thun.

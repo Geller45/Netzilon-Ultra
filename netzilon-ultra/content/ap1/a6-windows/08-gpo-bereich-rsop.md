@@ -224,3 +224,24 @@ Animierter Bericht mit „Gewinnendes GPO“ pro Einstellung; Klick springt zum 
 - gpupdate /force
 - gpresult /r
 - dcdiag /html
+
+? Wofür steht LSDOU?
+* Lokal, Standort, Domäne, OU – Verarbeitungsreihenfolge der GPOs
+- Login, Sitzung, Datei, Objekt
+- LDAP, SMB, DNS, OU
+- Lesen, Schreiben, Darstellen, Übernehmen
+! Das zuletzt angewendete GPO gewinnt bei Konflikten.
+
+? Welche zwei Berechtigungen braucht eine Gruppe, damit ein GPO für sie gilt?
+* Lesen und Gruppenrichtlinie übernehmen
+- Schreiben und Ändern
+- Vollzugriff und Besitz
+- Ausführen und Auflisten
+! Standard: Authentifizierte Benutzer.
+
+? Womit lässt sich ein GPO nur auf Computer mit bestimmten Eigenschaften (z. B. Windows 11) anwenden?
+* WMI-Filter
+- Loopback-Verarbeitung
+- Vererbung deaktivieren
+- Verknüpfungsreihenfolge
+! WMI-Filter prüfen Bedingungen per WQL-Abfrage.

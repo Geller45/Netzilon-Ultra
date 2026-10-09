@@ -126,3 +126,24 @@ Haustür (Zutritt), Login-Bildschirm (Zugang), Aktenschrank mit Rechten (Zugriff
 - Werkvertrag
 - Garantie
 - Leasingvertrag
+
+? Was sind personenbezogene Daten nach DSGVO?
+* Alle Informationen, die sich auf eine identifizierte oder identifizierbare natürliche Person beziehen
+- Nur Name und Adresse
+- Nur Gesundheitsdaten
+- Daten von Unternehmen
+! Auch IP-Adressen können personenbezogen sein.
+
+? Ab wann muss ein Unternehmen einen Datenschutzbeauftragten benennen (BDSG)?
+* In der Regel, wenn mindestens 20 Personen ständig mit automatisierter Verarbeitung personenbezogener Daten beschäftigt sind
+- Ab 5 Mitarbeitern
+- Nur bei Behörden
+- Erst ab 500 Mitarbeitern
+! Unabhängig davon z. B. bei Kerntätigkeit mit umfangreicher Verarbeitung sensibler Daten.
+
+? Welches Betroffenenrecht erlaubt, die Löschung der eigenen Daten zu verlangen?
+* Recht auf Löschung („Recht auf Vergessenwerden“, Art. 17)
+- Recht auf Datenübertragbarkeit
+- Widerspruchsrecht gegen Werbung
+- Auskunftsrecht
+! Ausnahmen bestehen z. B. bei gesetzlichen Aufbewahrungsfristen.

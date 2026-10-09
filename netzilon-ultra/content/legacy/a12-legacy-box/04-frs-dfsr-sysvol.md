@@ -183,3 +183,17 @@ Eine Leiter 2003 → 2008 → 2008 R2 → 2012 R2 → 2016 → höher; jede Spro
 - Forest 2003
 - Domäne 2000
 - Forest 2016
+
+? Welches Werkzeug migriert SYSVOL von FRS zu DFSR?
+* dfsrmig.exe
+- robocopy
+- ntdsutil
+- repadmin
+! Zustände: Prepared, Redirected, Eliminated.
+
+? Welche Windows-Server-Versionen brachten keine eigene neue AD-Funktionsebene?
+* Windows Server 2019 und 2022
+- Windows Server 2016 und 2025
+- Windows Server 2008 und 2008 R2
+- Windows Server 2012 und 2012 R2
+! Höchste Ebene bis dahin war 2016; Server 2025 führt eine neue Funktionsebene ein.

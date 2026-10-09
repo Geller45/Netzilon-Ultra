@@ -203,3 +203,24 @@ Kalender springt um ein Jahr; alte Dateien rollen auf Förderband ins Archiv.
 - Hartes Kontingent
 - Passive Dateiprüfung
 - Access-Denied Assistance
+
+? Was unterscheidet ein hartes von einem weichen Kontingent?
+* Hart verhindert weiteres Speichern, weich warnt nur
+- Weich verhindert Speichern, hart warnt nur
+- Hart gilt nur für Administratoren
+- Es gibt keinen Unterschied
+! Weiche Kontingente eignen sich zur Überwachung.
+
+? Was ist eine Dateiprüfung (File Screen)?
+* Blockieren oder Überwachen bestimmter Dateitypen anhand von Dateigruppen
+- Prüfung auf Viren
+- Verschlüsselung von Dateien
+- Komprimierung alter Dateien
+! Aktive Prüfung blockiert, passive Prüfung protokolliert nur.
+
+? Welche FSRM-Funktion erzeugt Berichte über große oder doppelte Dateien?
+* Speicherberichteverwaltung
+- Kontingentverwaltung
+- Klassifizierungsverwaltung
+- Dateiprüfungsverwaltung
+! Berichte können geplant und per E-Mail versendet werden.

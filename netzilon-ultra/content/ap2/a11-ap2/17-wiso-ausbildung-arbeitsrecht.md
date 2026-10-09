@@ -147,3 +147,17 @@ Tempel mit Kranken, Pflege, Rente, Arbeitslosen, Unfall.
 - 2 Wochen
 - 4 Wochen
 - 3 Monate
+
+? Wie lange darf die Probezeit in der Berufsausbildung dauern?
+* Mindestens 1, höchstens 4 Monate
+- Genau 6 Monate
+- Bis zu 12 Monate
+- Es gibt keine Probezeit
+! § 20 BBiG.
+
+? Welche Zweige der Sozialversicherung finanzieren Arbeitgeber und Arbeitnehmer grundsätzlich je zur Hälfte?
+* Kranken-, Pflege-, Renten- und Arbeitslosenversicherung
+- Nur die Unfallversicherung
+- Nur die Rentenversicherung
+- Alle fünf Zweige je zur Hälfte
+! Die Unfallversicherung trägt der Arbeitgeber allein.

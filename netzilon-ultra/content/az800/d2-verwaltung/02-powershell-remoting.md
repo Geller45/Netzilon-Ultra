@@ -183,3 +183,24 @@ Client mit einer Gästeliste; Domänenserver kommen per Kerberos-Ausweis durch; 
 - Die Eigenschaften
 - Der Objekttyp
 - Die Werte
+
+? Welches Cmdlet startet eine interaktive Remotesitzung?
+* Enter-PSSession
+- Invoke-Command
+- New-PSDrive
+- Start-Process
+! Mit Exit-PSSession wird sie beendet.
+
+? Welcher Port wird für WinRM über HTTP standardmäßig genutzt?
+* 5985
+- 5986
+- 22
+- 3389
+! HTTPS nutzt 5986; der Datenstrom ist in der Domäne per Kerberos verschlüsselt.
+
+? Wie aktiviert man PowerShell Remoting auf einem Server?
+* Enable-PSRemoting
+- Set-ExecutionPolicy Unrestricted
+- Install-Module Remoting
+- netsh firewall set opmode disable
+! Auf Windows Server ist Remoting standardmäßig aktiviert.

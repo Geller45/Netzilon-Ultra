@@ -242,3 +242,24 @@ Zwei Walzen mit Verben (Get, Set, New, Remove, Start, Stop) und Substantiven (Se
 - Eine CSV-Datei
 - Eine Anzeige im GridView
 - Eine E-Mail
+
+? Nach welchem Schema sind PowerShell-Cmdlets benannt?
+* Verb-Nomen (z. B. Get-Service)
+- Nomen-Verb
+- Abkürzung mit Punkt
+- Nur Großbuchstaben
+! Mit Get-Verb lassen sich die zulässigen Verben anzeigen.
+
+? Welches Cmdlet liefert Hilfe zu einem Befehl?
+* Get-Help
+- Get-Command -Help
+- Show-Info
+- man.exe
+! Mit Update-Help werden Hilfedateien aktualisiert; man ist ein Alias für Get-Help.
+
+? Welcher Operator prüft in PowerShell auf „größer als“?
+* -gt
+- >
+- -ge
+- -lt
+! > ist in PowerShell eine Umleitung, -ge bedeutet „größer gleich“.

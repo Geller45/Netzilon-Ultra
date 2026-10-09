@@ -166,3 +166,17 @@ Zwei Firmengebäude, Tunnel unter der Stadt (Internet).
 - 256
 - 64
 - 16
+
+? Welches QoS-Merkmal wird zur Priorisierung im IP-Header genutzt?
+* DSCP
+- TTL
+- MAC
+- VLAN-ID
+! In 802.1Q-Frames gibt es zusätzlich die CoS-Priorität (PCP).
+
+? Was ist ein Vorteil eines Site-to-Site-VPN?
+* Verbindet ganze Standortnetze verschlüsselt über das Internet
+- Benötigt keine Router oder Firewalls
+- Ersetzt das WLAN
+- Ist nur für einzelne Laptops gedacht
+! Für einzelne Benutzer nutzt man Remote-Access-VPN.

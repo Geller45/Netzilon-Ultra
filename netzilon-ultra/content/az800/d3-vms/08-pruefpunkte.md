@@ -148,3 +148,24 @@ Eltern-VHDX unten, darauf gestapelte .avhdx-Scheiben; Prüfpunkt löschen → ob
 - New-VMSnapshot
 - Save-VM
 - Export-VM
+
+? Welche Dateierweiterung haben die Differenzdatenträger eines Prüfpunkts?
+* .avhdx
+- .vhdx
+- .vmcx
+- .iso
+! Beim Löschen eines Prüfpunkts werden sie mit der Eltern-VHDX zusammengeführt.
+
+? Warum sind Standardprüfpunkte für Domänencontroller und Datenbankserver problematisch?
+* Sie speichern den Arbeitsspeicherzustand ohne VSS im Gast – Anwendungen sind nicht konsistent gesichert.
+- Sie sind auf Domänencontrollern technisch nicht möglich.
+- Sie löschen die Datenbank.
+- Sie benötigen eine Internetverbindung.
+! Produktionsprüfpunkte nutzen VSS bzw. unter Linux das Dateisystem-Freeze.
+
+? Ersetzen Prüfpunkte eine Datensicherung?
+* Nein, sie liegen auf demselben Speicher und hängen von der Eltern-VHDX ab.
+- Ja, vollständig.
+- Ja, wenn sie täglich erstellt werden.
+- Nur bei Generation-2-VMs.
+! Lange Prüfpunktketten verringern zudem die Leistung.

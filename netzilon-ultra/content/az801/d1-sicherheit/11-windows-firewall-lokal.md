@@ -240,3 +240,17 @@ VM mit zwei Türen hintereinander: NSG (außen), Windows-Firewall (innen); Paket
 - Get-NetAdapter
 - Get-Service
 - Get-SmbShare
+
+? Welche drei Profile kennt die Windows Defender Firewall?
+* Domäne, Privat, Öffentlich
+- Intern, Extern, DMZ
+- Server, Client, Gast
+- LAN, WAN, VPN
+! Das Domänenprofil wird per Network Location Awareness erkannt.
+
+? Welches Cmdlet erstellt eine neue Firewallregel?
+* New-NetFirewallRule
+- Set-NetFirewallProfile
+- Add-FirewallRule
+- netsh firewall add
+! Beispiel: New-NetFirewallRule -DisplayName 'HTTPS' -Direction Inbound -Protocol TCP -LocalPort 443 -Action Allow.
