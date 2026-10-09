@@ -262,6 +262,86 @@ let fails = 0; const ok = (c, m) => { console.log((c ? 'OK     ' : 'FEHLER ') + 
     await go('lesen', 'server-hvsz-02'); ok(await page.locator('.leg-abschnitt').count() === 1 && await page.locator('.lab input[data-schritt]').count() > 3, 'Szenario 02: Legende + abhakbares Lab');
     await page.screenshot({ path: path.join(shots, 'p2-szenario.png') });
   }
+  // ---------- SQL-Labor (Paket 3) ----------
+  {
+    await page.setViewportSize({ width: 1300, height: 900 });
+    await page.evaluate(() => { const o = document.getElementById('ta-overlay'); if (o) o.remove(); SqlLabor._test.vergessen(); S.p.sql = { geloest: {}, db: null, verlauf: [], editor: '' }; });
+    const sqlBereit = () => page.waitForFunction(() => SqlLabor._test.bereit() && document.querySelector('#sql-wurzel[data-bereit="1"]'), null, { timeout: 30000 });
+    const ergTxt = () => page.locator('#sql-ergebnis-inhalt').innerText();
+    const sqlRun = async q => { await page.fill('#sql-editor', q); await page.focus('#sql-editor'); await page.keyboard.press('Control+Enter'); await page.waitForTimeout(250); return ergTxt(); };
+    await go('sql'); await sqlBereit();
+    ok(/SQL-Labor/.test(await txt()) && await page.locator('#sql-editor').count() === 1, 'SQL: Ansicht geöffnet, DB bereit (' + await page.evaluate(() => SqlKern.modus()) + ')');
+    await sqlRun('SELECT COUNT(*) FROM mitarbeiter;');
+    ok(await page.locator('#sql-ergebnis-inhalt td.sql-zahl').first().innerText() === '100' && /1 Zeile/.test(await ergTxt()) && /ms/.test(await ergTxt()), 'SQL: Strg+Enter → COUNT(*) = 100 (Zahl rechtsbündig, Zeilen/ms)');
+    let t = await sqlRun('SELECT foo FROM mitarbeiter;');
+    ok(/no such column/.test(t) && /Spalte foo gibt es nicht/.test(t) && /Tipp/.test(t), 'SQL: Fehler „no such column“ mit deutscher Erklärung + Tipp');
+    t = await sqlRun("INSERT INTO kunden (kunde_id, firma, stadt) VALUES (900, 'Testfirma Nord', 'Rostock');");
+    ok(/1 Zeile geändert/.test(t), 'SQL: INSERT → „1 Zeile geändert“');
+    t = await sqlRun("INSERT INTO kunden (kunde_id, firma) VALUES (900, 'Doppelt');");
+    ok(/Eindeutigkeit verletzt/.test(t), 'SQL: UNIQUE-Fehler übersetzt');
+    await page.waitForFunction(() => typeof S.p.sql.db === 'string' && S.p.sql.db.length > 1000, null, { timeout: 5000 });
+    await go('home');
+    ok(await page.evaluate(() => !SqlLabor._test.laeuft().beobachter && SqlLabor._test.laeuft().ui === 0), 'SQL: Timer/Beobachter nach Verlassen gestoppt');
+    await page.evaluate(() => SqlLabor._test.vergessen()); // Arbeits-DB aus dem Speicher werfen → muss aus S.p.sql.db (base64) kommen
+    await go('sql'); await sqlBereit();
+    t = await sqlRun("SELECT firma FROM kunden WHERE kunde_id = 900;");
+    ok(/Testfirma Nord/.test(t), 'SQL: Änderung übersteht gehe(home) + zurück (aus S.p.sql.db wiederhergestellt)');
+    ok(await page.evaluate(() => S.p.sql.verlauf.length >= 4 && /kunde_id = 900/.test(S.p.sql.verlauf[0]) && /kunde_id = 900/.test(S.p.sql.editor)), 'SQL: Verlauf + Editorinhalt gespeichert');
+    await page.click('#sql-wurzel [data-a="reset"]');
+    await page.waitForFunction(() => S.p.sql.db === null && SqlLabor._test.bereit() && /zurückgesetzt/.test(document.getElementById('sql-ergebnis-inhalt').innerText), null, { timeout: 15000 });
+    t = await sqlRun('SELECT COUNT(*) AS n FROM mitarbeiter; SELECT COUNT(*) AS k FROM kunden;');
+    ok(await page.locator('#sql-ergebnis-inhalt td.sql-zahl').allInnerTexts().then(x => x.join(',')) === '100,40', 'SQL: Zurücksetzen → wieder 100 Mitarbeiter / 40 Kunden');
+    // T-SQL-Erkennung
+    await page.fill('#sql-editor', 'SELECT TOP 5 * FROM mitarbeiter'); await page.waitForTimeout(600);
+    ok(/T-SQL/.test(await page.locator('#sql-tsql-live').innerText()) && /LIMIT/.test(await page.locator('#sql-tsql-live').innerText()), 'SQL: T-SQL „TOP“ erkannt → Hinweis auf LIMIT');
+    await page.focus('#sql-editor'); await page.keyboard.press('Control+Enter'); await page.waitForTimeout(250);
+    ok(/T-SQL erkannt/.test(await ergTxt()) && /Syntaxfehler/.test(await ergTxt()), 'SQL: Fehler bei TOP zeigt Syntax-Erklärung + T-SQL-Hinweis');
+    // Tab-Taste + Highlighting
+    await page.fill('#sql-editor', ''); await page.focus('#sql-editor'); await page.keyboard.press('Tab'); await page.keyboard.type('select 1');
+    ok(await page.inputValue('#sql-editor') === '  select 1' && await page.locator('#sql-hl .sql-hw').count() === 1, 'SQL: Tab = 2 Leerzeichen, Schlüsselwort hervorgehoben');
+    // ER-Diagramm
+    await page.evaluate(() => { document.getElementById('sql-er-box').open = true; });
+    ok(await page.locator('#sql-er-svg .sql-er-tab').count() === 10 && await page.locator('#sql-er-svg .sql-er-fk').count() >= 14, 'SQL: ER-Diagramm mit 10 Tabellen-Kästen und FK-Linien');
+    await page.click('#sql-er-svg .sql-er-tab[data-tab="projekte"]'); await page.waitForTimeout(400);
+    ok(/SELECT \* FROM projekte LIMIT 20/.test(await page.inputValue('#sql-editor')) && /15 Zeilen/.test(await ergTxt()), 'SQL: Klick auf Tabelle → SELECT * … LIMIT 20');
+    await sqlRun('CREATE VIEW v_test AS SELECT * FROM artikel; CREATE INDEX idx_test ON artikel(kategorie);');
+    ok(/v_test/.test(await page.locator('#sql-live').innerText()) && /idx_test/.test(await page.locator('#sql-live').innerText()), 'SQL: Live-Schema zeigt eigene View + Index');
+    await page.locator('#sql-er-box').screenshot({ path: path.join(shots, 'p3-sql-er.png') });
+    // Aufgaben
+    const aufg = await page.evaluate(() => (window.SQL_AUFGABEN || []).map(a => ({ id: a.id, art: a.art, loesung: a.loesung })));
+    ok(aufg.length >= 3, `SQL: Aufgaben vorhanden (${aufg.length})`);
+    const xpQ0 = await page.evaluate(() => S.p.xp.gesamt);
+    const loese = async (id, sql) => {
+      await page.evaluate(id => { const b = document.querySelector(`#sql-liste [data-aid="${id}"]`); b.closest('details').open = true; b.click(); }, id);
+      await page.fill('#sql-editor', sql); await page.click('#sql-pruefen');
+      await page.waitForFunction(() => /Richtig|Noch nicht|nicht möglich/.test(document.getElementById('sql-fb').innerText), null, { timeout: 15000 });
+      return page.evaluate(id => !!S.p.sql.geloest[id], id);
+    };
+    // Reset vor den Aufgaben (View/Index von oben stören Abfragen nicht, aber sauber starten)
+    const wahl = [aufg.find(a => a.art === 'abfrage'), aufg.filter(a => a.art === 'abfrage')[1], aufg.find(a => a.art === 'aenderung'), aufg.filter(a => a.art === 'abfrage')[5]].filter(Boolean);
+    let gel = 0;
+    for (const a of wahl) { const r = await loese(a.id, a.loesung); if (r) gel++; else console.log('nicht gelöst:', a.id, await page.locator('#sql-fb').innerText()); }
+    ok(gel === wahl.length && gel >= 3, `SQL: ${gel} Aufgaben mit Musterlösung gelöst (${wahl.map(a => a.id).join(', ')})`);
+    ok(await page.evaluate(x => S.p.xp.gesamt > x, xpQ0), 'SQL: XP gestiegen');
+    const falsch = aufg.filter(a => a.art === 'abfrage')[2];
+    ok(!(await loese(falsch.id, 'SELECT 1 AS x;')) && /Noch nicht richtig/.test(await page.locator('#sql-fb').innerText()) && /Zeilen: Soll/.test(await page.locator('#sql-fb').innerText()), 'SQL: falsche Lösung → nicht gelöst, Diff-Hilfe');
+    ok(/\d+\/\d+ gelöst/.test(await page.locator('#sql-liste').innerText()) && !(await page.evaluate(() => SqlLabor.alleGeloest())), 'SQL: Fortschritt x/y, alleGeloest() = false');
+    await page.evaluate(() => { document.getElementById('inhalt').scrollTop = 0; }); await page.waitForTimeout(200);
+    await page.screenshot({ path: path.join(shots, 'p3-sql.png') });
+    // kaputte gespeicherte DB
+    await go('home'); await page.evaluate(() => { SqlLabor._test.vergessen(); S.p.sql.db = 'kaputt!!keine-datenbank'; });
+    await go('sql'); await sqlBereit();
+    ok(/beschädigt/.test(await ergTxt()) && await page.evaluate(() => S.p.sql.db === null), 'SQL: kaputte gespeicherte DB → verworfen, frische DB, Hinweis');
+    // 390 px
+    await page.setViewportSize({ width: 390, height: 844 }); await go('sql'); await sqlBereit();
+    await page.evaluate(() => { document.getElementById('sql-er-box').open = true; document.getElementById('sql-tsql-panel').open = true; });
+    await sqlRun('SELECT * FROM mitarbeiter LIMIT 5;');
+    ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 2 && (() => { const i = document.getElementById('inhalt'); return i.scrollWidth <= i.clientWidth + 2; })()), 'SQL: 390 px ohne Seiten-Überlauf');
+    ok(await page.evaluate(() => { const w = document.getElementById('sql-er'); return w.scrollWidth > w.clientWidth; }), 'SQL: ER-Diagramm bei 390 px im eigenen Container scrollbar');
+    await page.screenshot({ path: path.join(shots, 'p3-sql-390.png') });
+    await page.setViewportSize({ width: 1300, height: 900 });
+    await go('home');
+  }
   ok(errs.length === 0, 'Keine Konsolenfehler ' + errs.slice(0, 3).join(' | '));
   await browser.close();
   console.log(fails ? `\n${fails} FEHLER` : '\nALLES OK'); process.exit(fails ? 1 : 0);
