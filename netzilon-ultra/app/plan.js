@@ -76,9 +76,14 @@ const Plan = (() => {
     [F.CB]: d => d.bereich === 'CCNA' || /(^|\/)ap1\/a4-netzwerk\//.test(d.order) || /(^|\/)netz\//.test(d.order), [F.CA]: d => d.bereich === 'CCNA',
     [F.PV1]: d => passtZuTag(d, 'AP1'), [F.AP1]: d => passtZuTag(d, 'AP1'), [F.PV2]: d => passtZuTag(d, 'AP2') || d.bereich === 'WiSo'
   };
+  // Zusätzlich (auch wenn die Datei schon ein anderes Fach hat): Aufbau-Themen gehören auch ins Folgefach
+  const AUCH = {
+    [F.CA]: d => d.bereich === 'CCNA' && /(^|\/)ccna\/([2-7]-|.*pruef)/.test(d.order),
+    [F.WSA]: d => /(^|\/)server\/(hyperv|speicher|s2-ad)/.test(d.order)
+  };
   function docsFuerFach(fach) {
-    const n = fnorm(fach), fb = FALLBACK[fach];
-    const exakt = S.docs.filter(d => d.fach.some(f => fnorm(f) === n));
+    const n = fnorm(fach), fb = FALLBACK[fach], auch = AUCH[fach];
+    const exakt = S.docs.filter(d => d.fach.some(f => fnorm(f) === n) || (auch && auch(d)));
     const weitere = fb ? S.docs.filter(d => !exakt.includes(d) && !d.fach.length && fb(d)) : [];
     return [...exakt, ...weitere];
   }
