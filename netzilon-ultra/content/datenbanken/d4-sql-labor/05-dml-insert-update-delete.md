@@ -34,7 +34,7 @@ VALUES ('USB-C-Dockingstation', 'Hardware', 95.00, 149.00, 20),
        ('Patchkabel Cat6 3 m',  'Zubehör',   1.20,   3.90, 400);
 ```
 
-**INSERT … SELECT** – Ergebnis einer Abfrage einfügen, z. B. alle aktiven Azubis in ein neues Projekt „Azubi-Lernlabor“ (projekt_id 3 als Beispiel):
+**INSERT … SELECT** – Ergebnis einer Abfrage einfügen, z. B. alle aktiven Azubis dem Projekt 3 („Firewall-Erneuerung“) zuordnen:
 ```sql
 INSERT INTO projekt_mitarbeiter (projekt_id, ma_id, rolle, stunden_geplant)
 SELECT 3, ma_id, 'Azubi', 40
@@ -273,7 +273,7 @@ IF @@ROWCOUNT > 20 ROLLBACK TRANSACTION; ELSE COMMIT TRANSACTION;
 ! Kind vor Eltern – sonst würden Positionen auf eine gelöschte Bestellung zeigen.
 
 ? Welche Anweisung fügt alle aktiven Azubis als Mitglieder in Projekt 3 ein?
-- `INSERT INTO projekt_mitarbeiter VALUES (SELECT * FROM mitarbeiter WHERE azubi = 1);`
+- `INSERT INTO projekt_mitarbeiter (projekt_id, ma_id, rolle) VALUES (3, (SELECT ma_id FROM mitarbeiter WHERE azubi = 1), 'Azubi');`
 - `UPDATE projekt_mitarbeiter SET projekt_id = 3 WHERE azubi = 1;`
 - `INSERT INTO projekt_mitarbeiter (3, ma_id) FROM mitarbeiter WHERE azubi = 1;`
 * `INSERT INTO projekt_mitarbeiter (projekt_id, ma_id, rolle) SELECT 3, ma_id, 'Azubi' FROM mitarbeiter WHERE azubi = 1 AND austritt IS NULL;`
@@ -349,7 +349,7 @@ IF @@ROWCOUNT > 20 ROLLBACK TRANSACTION; ELSE COMMIT TRANSACTION;
 
 ## Szenario
 ### Neue Auszubildende einstellen
-Die Personalabteilung der Netzilon GmbH möchte zum 1. August 2026 eine neue Auszubildende (Fachinformatikerin Systemintegration) in der Abteilung Ausbildung anlegen und sie dem Projekt „Azubi-Lernlabor“ zuordnen. Außerdem sollen alle Zeiterfassungen ausgetretener Mitarbeitender aus 2024 bereinigt werden.
+Die Personalabteilung der Netzilon GmbH möchte zum 1. August 2026 eine neue Auszubildende (Fachinformatikerin Systemintegration) in der Abteilung Ausbildung anlegen und sie dem bereits angelegten Lernprojekt „Azubi-Lernlabor“ zuordnen. Außerdem sollen alle Zeiterfassungen ausgetretener Mitarbeitender aus 2024 bereinigt werden.
 - F: Schreiben Sie das INSERT für die Auszubildende (Werte frei wählbar, abt_id 10). | A: `INSERT INTO mitarbeiter (personalnr, vorname, nachname, benutzername, email, eintritt, abt_id, position, gehalt, azubi) VALUES ('P0101', 'Ida', 'Beispiel', 'ida.beispiel', 'ida.beispiel@netzilon.example', '2026-08-01', 10, 'Auszubildende FiSi', 1100, 1);` | P: 3
 - F: Wie ordnen Sie sie dem Projekt zu, ohne ihre ma_id zu kennen? | A: `INSERT INTO projekt_mitarbeiter (projekt_id, ma_id, rolle) SELECT p.projekt_id, m.ma_id, 'Azubi' FROM projekte p, mitarbeiter m WHERE p.name = 'Azubi-Lernlabor' AND m.benutzername = 'ida.beispiel';` | P: 3
 - F: Formulieren Sie die Bereinigung der Zeiterfassung. | A: `DELETE FROM zeiterfassung WHERE datum < '2025-01-01' AND ma_id IN (SELECT ma_id FROM mitarbeiter WHERE austritt IS NOT NULL);` – vorher als SELECT testen. | P: 3

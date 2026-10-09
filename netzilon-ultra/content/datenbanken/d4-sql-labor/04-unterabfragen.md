@@ -287,7 +287,7 @@ OPTION (MAXRECURSION 20);
 * `SELECT nachname FROM mitarbeiter WHERE gehalt > (SELECT AVG(gehalt) FROM mitarbeiter);`
 - `SELECT nachname FROM mitarbeiter WHERE gehalt > AVG(gehalt);`
 - `SELECT nachname FROM mitarbeiter HAVING gehalt > AVG(gehalt);`
-- `SELECT nachname, AVG(gehalt) FROM mitarbeiter WHERE gehalt > 0;`
+- `SELECT nachname, AVG(gehalt) FROM mitarbeiter GROUP BY nachname HAVING gehalt > AVG(gehalt);`
 ! Aggregate sind in WHERE nicht erlaubt; der Durchschnitt muss per Unterabfrage berechnet werden.
 
 ? Die Unterabfrage `SELECT ma_id FROM bestellungen` enthält einen NULL-Wert. Was liefert `WHERE ma_id NOT IN (...)`?
@@ -308,14 +308,14 @@ OPTION (MAXRECURSION 20);
 - Sie steht immer in der FROM-Klausel
 - Sie liefert immer genau einen Wert
 * Sie verweist auf eine Spalte der äußeren Abfrage
-- Sie wird nur einmal ausgeführt
+- Sie wird unabhängig von der äußeren Abfrage nur einmal ausgeführt
 ! Sie wird logisch für jede äußere Zeile neu ausgewertet.
 
 ? Welche Zeile ist der Anker der rekursiven CTE für das Organigramm?
 * `SELECT ma_id, 0 FROM mitarbeiter WHERE vorgesetzter_id IS NULL`
 - `SELECT ma_id, 0 FROM mitarbeiter WHERE abt_id IS NULL`
 - `SELECT ma_id, ebene + 1 FROM org`
-- `SELECT ma_id FROM mitarbeiter ORDER BY vorgesetzter_id`
+- `SELECT ma_id, 0 FROM mitarbeiter ORDER BY vorgesetzter_id LIMIT 1`
 ! Die Spitze der Hierarchie hat keinen Vorgesetzten.
 
 ? Wie verbindet man Anker und rekursiven Teil einer CTE?
@@ -334,7 +334,7 @@ OPTION (MAXRECURSION 20);
 
 ? Welche Abfrage nutzt eine abgeleitete Tabelle korrekt?
 - `SELECT * FROM SELECT kunde_id FROM bestellungen;`
-- `SELECT * FROM (bestellungen) WHERE COUNT(*) > 1;`
+- `SELECT t.kunde_id FROM bestellungen WHERE (SELECT kunde_id, COUNT(*) AS n GROUP BY kunde_id) AS t > 5;`
 * `SELECT t.kunde_id FROM (SELECT kunde_id, COUNT(*) AS n FROM bestellungen GROUP BY kunde_id) AS t WHERE t.n > 5;`
 - `SELECT kunde_id FROM bestellungen AS (SELECT COUNT(*));`
 ! Unterabfrage in Klammern mit Alias; danach kann auf deren Spalten gefiltert werden.
@@ -350,7 +350,7 @@ OPTION (MAXRECURSION 20);
 * `WITH aktive AS (SELECT * FROM mitarbeiter WHERE austritt IS NULL) SELECT COUNT(*) FROM aktive;`
 - `CTE aktive = SELECT * FROM mitarbeiter; SELECT COUNT(*) FROM aktive;`
 - `SELECT COUNT(*) FROM aktive WITH (SELECT * FROM mitarbeiter);`
-- `WITH aktive (SELECT * FROM mitarbeiter) AS SELECT COUNT(*);`
+- `WITH aktive (SELECT * FROM mitarbeiter WHERE austritt IS NULL) AS SELECT COUNT(*) FROM aktive;`
 ! Aufbau: WITH name AS (Abfrage) Hauptabfrage.
 
 ? Wie oft wird eine nicht korrelierte skalare Unterabfrage logisch ausgewertet?
@@ -363,7 +363,7 @@ OPTION (MAXRECURSION 20);
 ? Welche Abfrage liefert Mitarbeitende, die in keinem Projekt eingeplant sind?
 - `SELECT nachname FROM mitarbeiter WHERE ma_id IN (SELECT ma_id FROM projekt_mitarbeiter);`
 - `SELECT nachname FROM mitarbeiter m JOIN projekt_mitarbeiter pm ON pm.ma_id = m.ma_id;`
-- `SELECT nachname FROM mitarbeiter WHERE EXISTS (SELECT 1 FROM projekt_mitarbeiter);`
+- `SELECT nachname FROM mitarbeiter m WHERE EXISTS (SELECT 1 FROM projekt_mitarbeiter pm WHERE pm.ma_id <> m.ma_id);`
 * `SELECT nachname FROM mitarbeiter m WHERE NOT EXISTS (SELECT 1 FROM projekt_mitarbeiter pm WHERE pm.ma_id = m.ma_id);`
 ! Hier wäre auch NOT IN sicher, weil ma_id in projekt_mitarbeiter Teil des Primärschlüssels ist – NOT EXISTS ist trotzdem die robustere Gewohnheit.
 

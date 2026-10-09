@@ -281,7 +281,7 @@ LEFT JOIN dbo.mitarbeiter AS v ON v.ma_id = m.vorgesetzter_id;
 ? Was ist das Ergebnis von `LEFT JOIN abteilungen a ON a.abt_id = m.abt_id WHERE a.name = 'Vertrieb'`?
 - Alle Mitarbeitenden, Vertrieb hervorgehoben
 * Nur Mitarbeitende des Vertriebs – wie bei einem INNER JOIN
-- Alle Mitarbeitenden außer Vertrieb
+- Alle Mitarbeitenden, wobei Nicht-Vertriebler NULL als Abteilung erhalten
 - Ein Syntaxfehler
 ! Der WHERE-Filter auf die rechte Tabelle entfernt die NULL-Zeilen.
 
@@ -303,7 +303,7 @@ LEFT JOIN dbo.mitarbeiter AS v ON v.ma_id = m.vorgesetzter_id;
 - Er wird nicht unterstützt, man muss LEFT JOIN verwenden
 * Er wird unterstützt, weil SQLite ihn seit Version 3.39 kennt
 - Er wird nur zusammen mit FULL JOIN unterstützt
-- Er wird stillschweigend als INNER JOIN ausgeführt
+- Er wird stillschweigend als INNER JOIN ausgeführt, die fehlenden Zeilen entfallen
 ! RIGHT und FULL OUTER JOIN kamen mit SQLite 3.39.0 (2022).
 
 ? Wie viele ON-Bedingungen braucht `mitarbeiter` → `abteilungen` → `standorte` mindestens?
@@ -335,7 +335,7 @@ LEFT JOIN dbo.mitarbeiter AS v ON v.ma_id = m.vorgesetzter_id;
 ! USING und NATURAL JOIN kennt SQL Server nicht; SQLite unterstützt beide.
 
 ? Was ist eine typische Folge eines Joins über eine 1:n-Beziehung vor einer Summe?
-- Die Summe wird automatisch korrigiert
+- Die Datenbank erkennt Duplikate und korrigiert die Summe automatisch
 - Es werden Zeilen ausgelassen
 * Werte der 1-Seite werden mehrfach summiert
 - Der Join liefert einen Fehler

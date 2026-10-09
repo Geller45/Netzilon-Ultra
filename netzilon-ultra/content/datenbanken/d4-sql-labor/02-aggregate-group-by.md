@@ -307,7 +307,7 @@ GROUP BY abt_id;
 ! NULL wird ignoriert: (3000 + 5000) / 2.
 
 ? Welche Abfrage liefert die Summe der gebuchten Stunden je Mitarbeiter und Projekt?
-- `SELECT ma_id, projekt_id, SUM(stunden) FROM zeiterfassung GROUP BY ma_id;`
+- `SELECT ma_id, projekt_id, SUM(stunden) FROM zeiterfassung GROUP BY ma_id ORDER BY projekt_id;`
 - `SELECT ma_id, SUM(stunden) FROM zeiterfassung GROUP BY projekt_id;`
 * `SELECT ma_id, projekt_id, SUM(stunden) FROM zeiterfassung GROUP BY ma_id, projekt_id;`
 - `SELECT SUM(stunden) FROM zeiterfassung GROUP BY stunden;`

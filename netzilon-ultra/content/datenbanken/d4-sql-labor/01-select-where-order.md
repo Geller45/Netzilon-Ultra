@@ -252,7 +252,7 @@ OFFSET 0 ROWS FETCH NEXT 10 ROWS ONLY;
 ! Fehlende Werte prüft man ausschließlich mit IS NULL; `= NULL` ergibt UNKNOWN und liefert nie eine Zeile.
 
 ? Was liefert `WHERE abt_id = 2 OR abt_id = 3 AND gehalt > 4000`?
-- Nur Mitarbeitende aus 2 oder 3 mit mehr als 4000 Euro
+- Nur Mitarbeitende aus Abteilung 2 oder 3, die jeweils mehr als 4000 Euro verdienen
 * Alle aus Abteilung 2 sowie die aus Abteilung 3 mit mehr als 4000 Euro
 - Nur Mitarbeitende aus Abteilung 3
 - Einen Syntaxfehler
@@ -260,7 +260,7 @@ OFFSET 0 ROWS FETCH NEXT 10 ROWS ONLY;
 
 ? Welche Bestellungen liefert `datum BETWEEN '2025-02-01' AND '2025-02-28'`?
 - Nur Bestellungen vom 2. bis 27. Februar
-- Bestellungen ab 1. Februar ohne den 28.
+- Alle Februar-Bestellungen ab dem 1., aber ohne die Bestellungen vom 28. Februar
 * Alle Februar-Bestellungen 2025 inklusive 1. und 28.
 - Alle Bestellungen außer Februar
 ! BETWEEN schließt beide Grenzen ein.
@@ -287,7 +287,7 @@ OFFSET 0 ROWS FETCH NEXT 10 ROWS ONLY;
 ! DISTINCT bezieht sich auf die gesamte Zeile der Spaltenliste.
 
 ? Wie lautet das T-SQL-Gegenstück zu `LIMIT 10 OFFSET 20`?
-- `TOP 10 SKIP 20`
+- `SELECT TOP 10 ... SKIP 20 ROWS ORDER BY spalte`
 - `LIMIT 20, 10`
 * `OFFSET 20 ROWS FETCH NEXT 10 ROWS ONLY`
 - `ROWNUM BETWEEN 20 AND 30`
@@ -304,7 +304,7 @@ OFFSET 0 ROWS FETCH NEXT 10 ROWS ONLY;
 * Einfache Anführungszeichen sind Text, doppelte kennzeichnen einen Bezeichner
 - Es gibt keinen Unterschied
 - Doppelte Anführungszeichen sind Text, einfache Bezeichner
-- Doppelte Anführungszeichen sind nur in T-SQL erlaubt
+- Doppelte Anführungszeichen sind nur in T-SQL erlaubt, in SQLite führen sie zu einem Syntaxfehler
 ! SQLite wertet unbekannte Bezeichner in "…" notfalls als Text aus – ein Kompatibilitätsrest, auf den man sich nicht verlassen sollte.
 
 ? Welche Abfrage zeigt Vor- und Nachname als eine Spalte „name“ in SQLite?
@@ -332,7 +332,7 @@ OFFSET 0 ROWS FETCH NEXT 10 ROWS ONLY;
 - Nur aktive und geplante Projekte
 * Abgeschlossene und gestoppte Projekte (Status nicht NULL)
 - Alle Projekte
-- Einen Fehler, weil NOT IN nicht existiert
+- Einen Syntaxfehler, weil NOT IN nur mit Zahlen und nicht mit Text funktioniert
 ! NOT IN kehrt die Liste um. Zeilen mit status NULL würden trotzdem nicht erscheinen.
 
 ## Lücken
