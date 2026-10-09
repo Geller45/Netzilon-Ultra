@@ -187,17 +187,17 @@ DC02 (Server 2025, VM) wurde auf einen sieben Tage alten Prüfpunkt zurückgeset
 ! 2095 steht für einen erkannten USN-Rollback.
 
 ? Was macht DC02 nach erkannter Generations-ID-Änderung NICHT?
-* Er überschreibt DC01 autoritativ mit seinem alten Stand
-- Er setzt die InvocationID zurück
-- Er verwirft den RID-Pool
-- Er synchronisiert SYSVOL nicht autoritativ
+* DC01 autoritativ mit seinem alten Stand überschreiben
+- Seine InvocationID für die Replikation zurücksetzen
+- Seinen aktuellen RID-Pool verwerfen und neu anfordern
+- SYSVOL nicht autoritativ von Partnern synchronisieren
 ! Der alte Stand wird gerade nicht autoritativ verteilt.
 
 ? Welche Daten können trotz Schutz verloren gehen?
-* Änderungen, die nur auf DC02 lagen und nicht repliziert waren
-- Alle Benutzer der Domäne
-- Nur Gruppenrichtlinien auf DC01
-- Keine, nie
+* Nur auf DC02 vorhandene, nicht replizierte Änderungen
+- Sämtliche Benutzerkonten der gesamten Domäne
+- Ausschließlich die Gruppenrichtlinien auf DC01
+- Keine – der Schutz verhindert jeden Datenverlust
 ! Was nicht repliziert war, existiert nur im verworfenen Zustand.
 
 ? Wie wird ein DC laut Microsoft wiederhergestellt?
@@ -215,10 +215,10 @@ DC02 (Server 2025, VM) wurde auf einen sieben Tage alten Prüfpunkt zurückgeset
 ! Microsoft unterstützt keine Reparatur eines Rollback-DCs.
 
 ? Warum sind DC-Prüfpunkte sicherheitskritisch?
-* Sie enthalten eine Kopie der Verzeichnisdatenbank mit Kennworthashes
-- Sie öffnen automatisch Port 389
-- Sie deaktivieren Kerberos
-- Sie löschen die Firewallregeln
+* Sie enthalten die AD-Datenbank mit Kennworthashes
+- Sie öffnen automatisch LDAP-Port 389 nach außen
+- Sie deaktivieren Kerberos auf dem Domänencontroller
+- Sie löschen beim Anwenden alle Firewallregeln
 ! Wer Zugriff auf die Dateien hat, kann Hashes auslesen.
 
 ? Welches Werkzeug zeigt eine Zusammenfassung der AD-Replikation?

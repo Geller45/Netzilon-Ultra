@@ -220,11 +220,11 @@ Frau Weber ist Prokuristin der Netzilon GmbH (Einzelprokura, im Handelsregister 
 
 ## Quiz
 ? Wer ist nach § 1 HGB Istkaufmann?
-* Wer ein Handelsgewerbe mit kaufmännisch eingerichtetem Geschäftsbetrieb betreibt
-- Wer sich freiwillig ins Handelsregister eintragen lässt
-- Jeder Freiberufler mit mehr als 50.000 € Umsatz
-- Jede Person, die einen Kaufvertrag abschließt
-! Die Eintragung wirkt beim Istkaufmann nur deklaratorisch.
+* Wer ein Handelsgewerbe mit kaufmännischer Einrichtung betreibt
+- Wer sich freiwillig ins Handelsregister eintragen lässt (§ 2 HGB)
+- Jeder Freiberufler mit mehr als 50.000 € Jahresumsatz
+- Jede Person, die privat einen Kaufvertrag abschließt
+! Die Eintragung wirkt beim Istkaufmann nur deklaratorisch; die freiwillige Eintragung (§ 2 HGB) macht zum Kannkaufmann.
 
 ? In welcher Abteilung des Handelsregisters wird eine GmbH eingetragen?
 * Abteilung B
@@ -294,9 +294,9 @@ Frau Weber ist Prokuristin der Netzilon GmbH (Einzelprokura, im Handelsregister 
 
 ? Was versteht man unter der „Firma“ im Sinne des HGB?
 * Den Namen, unter dem ein Kaufmann seine Geschäfte betreibt
-- Das Firmengebäude
-- Den Betrieb mit allen Mitarbeitern
-- Die Steuernummer des Unternehmens
+- Das Firmengebäude mit allen Betriebsstätten
+- Den Betrieb mit allen Mitarbeitern und Anlagen
+- Die Steuernummer bzw. Handelsregisternummer des Unternehmens
 ! § 17 Abs. 1 HGB.
 
 ? Was darf ein allgemeiner Handlungsbevollmächtigter ohne besondere Befugnis NICHT? (2 richtige)

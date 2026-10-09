@@ -183,11 +183,11 @@ HV01 soll ERP01 auf HV02 replizieren (gleiche Domäne). Beim Aktivieren erschein
 ! Zertifikatbasiert nutzt 443.
 
 ? Was ist auf dem Replikatserver nach der Aktivierung standardmäßig noch deaktiviert?
-* Die eingehende Firewallregel für den Replica-Listener
-- Der Hyper-V-Dienst
-- Die Domänenmitgliedschaft
-- Die Netzwerkkarte
-! Die Regel muss manuell aktiviert werden.
+* Die Firewallregel für den Replica-Listener
+- Der Dienst „Hyper-V-Verwaltung für virtuelle Computer“
+- Die Mitgliedschaft in der Active-Directory-Domäne
+- Die Netzwerkkarte für den Replikationsverkehr
+! Die eingehende Regel muss manuell aktiviert werden.
 
 ? Welche Replikationsfrequenz gibt es NICHT?
 * 1 Stunde
@@ -197,10 +197,10 @@ HV01 soll ERP01 auf HV02 replizieren (gleiche Domäne). Beim Aktivieren erschein
 ! Nur 30 s, 5 min und 15 min sind wählbar.
 
 ? Zwei Hosts in Arbeitsgruppen sollen replizieren. Welche Authentifizierung?
-* Zertifikatbasiert
-- Kerberos
-- Anonym
-- CredSSP
+* Zertifikatbasiert (HTTPS)
+- Kerberos (HTTP)
+- Anonym ohne Anmeldung
+- CredSSP-Delegierung
 ! Kerberos setzt Domänen voraus.
 
 ? Welches Cmdlet konfiguriert HV02 als Replikatserver?

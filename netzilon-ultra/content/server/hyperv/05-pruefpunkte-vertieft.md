@@ -196,24 +196,24 @@ Checkpoint-VM -Name HV-NESTED -SnapshotName "Lab-Basis"
 ! ProductionOnly verhindert den Rückfall auf Standardprüfpunkte.
 
 ? Was geschieht beim Löschen eines Prüfpunkts in der Mitte der Kette?
-* Die zugehörige AVHDX wird mit dem passenden Datenträger zusammengeführt, keine Daten gehen verloren
+* Die AVHDX wird zusammengeführt, es gehen keine Daten verloren
 - Alle Änderungen nach diesem Prüfpunkt werden verworfen
-- Die VM wird auf den Prüfpunkt zurückgesetzt
-- Die VHDX wird gelöscht
+- Die VM wird automatisch auf diesen Prüfpunkt zurückgesetzt
+- Die Eltern-VHDX wird gelöscht und durch die AVHDX ersetzt
 ! Nur der Rücksprungpunkt verschwindet; die Daten bleiben durch das Zusammenführen erhalten.
 
 ? Welcher Mechanismus erzeugt bei einem Linux-Gast einen Produktionsprüfpunkt?
-* Dateisystem-Freeze über den VSS-Daemon der Linux-Integrationsdienste
-- Windows-VSS-Writer im Linux-Kernel
-- Speichern des Arbeitsspeichers
-- Ein LVM-Snapshot durch Hyper-V
+* Dateisystem-Freeze über den VSS-Daemon der Integrationsdienste
+- Ein Windows-VSS-Writer, der im Linux-Kernel mitgeliefert wird
+- Das Speichern des kompletten Arbeitsspeichers in eine .vmrs-Datei
+- Ein LVM-Snapshot, den Hyper-V im Gast selbst anlegt
 ! Linux kennt kein VSS; die Integrationsdienste frieren das Dateisystem ein (fsfreeze).
 
 ? Nach dem Anwenden eines Produktionsprüfpunkts ist die VM ausgeschaltet. Wie ist das zu bewerten?
-* Normales Verhalten – es gibt keinen gespeicherten Arbeitsspeicher
-- Fehler in den Integrationsdiensten
-- Zeichen für eine defekte AVHDX
-- Nur bei Gen-1-VMs normal
+* Normal – es wurde kein Arbeitsspeicher gesichert
+- Fehler in den Integrationsdiensten des Gastes
+- Hinweis auf eine beschädigte AVHDX-Kette
+- Nur bei Gen-1-VMs normal, bei Gen 2 ein Fehler
 ! Produktionsprüfpunkte enthalten keinen RAM-Zustand, also startet die VM neu.
 
 ? Welche Funktion schützt einen virtualisierten DC ab Server 2012 beim Anwenden eines Prüfpunkts vor USN-Rollback?
@@ -225,9 +225,9 @@ Checkpoint-VM -Name HV-NESTED -SnapshotName "Lab-Basis"
 
 ? Was macht ein DC, der eine geänderte VM-GenerationID erkennt?
 * Er erzeugt eine neue InvocationID und verwirft seinen RID-Pool
-- Er löscht sich selbst aus der Domäne
-- Er wird zum autoritativen DC für alle Partitionen
-- Er deaktiviert die Replikation dauerhaft
+- Er entfernt sich selbst aus der Domäne und muss neu heraufgestuft werden
+- Er wird zum autoritativen DC für alle Verzeichnispartitionen
+- Er deaktiviert die eingehende Replikation dauerhaft
 ! So replizieren Partner seine nachfolgenden Änderungen korrekt und es entstehen keine doppelten SIDs.
 
 ? Wo sind automatische Prüfpunkte standardmäßig aktiviert?
@@ -238,31 +238,31 @@ Checkpoint-VM -Name HV-NESTED -SnapshotName "Lab-Basis"
 ! Auf Servern sind sie standardmäßig aus und sollten es bei vielen VMs auch bleiben.
 
 ? Ein Kollege hat eine AVHDX gelöscht, um Platz zu schaffen. Was ist die Folge?
-* Die Kette ist beschädigt; Daten seit dem Prüfpunkt können verloren sein und die VM startet ggf. nicht
-- Kein Problem – Hyper-V legt sie neu an
-- Der Prüfpunkt wird automatisch zusammengeführt
-- Nur die Prüfpunktansicht im Manager ist leer
-! AVHDX-Dateien enthalten die Änderungen seit dem Prüfpunkt; nur Hyper-V darf sie entfernen (zusammenführen).
+* Die Kette ist beschädigt; Daten seit dem Prüfpunkt können fehlen
+- Kein Problem – Hyper-V legt die Datei beim Start neu an
+- Der Prüfpunkt wird automatisch in die VHDX zusammengeführt
+- Nur die Prüfpunktansicht im Hyper-V-Manager ist danach leer
+! AVHDX-Dateien enthalten die Änderungen seit dem Prüfpunkt; ohne sie startet die VM ggf. nicht. Nur Hyper-V darf sie entfernen (zusammenführen).
 
 ? Welches Cmdlet löscht einen Prüfpunkt samt allen nachfolgenden Prüfpunkten?
 * Remove-VMSnapshot -IncludeAllChildSnapshots
-- Restore-VMSnapshot -All
-- Merge-VHD -All
-- Remove-VM -Snapshots
-! Entspricht im Manager „Prüfpunkt-Unterstruktur löschen“.
+- Restore-VMSnapshot -Name Basis -Confirm:$false
+- Merge-VHD -Path Basis.avhdx -DestinationPath Basis.vhdx
+- Remove-VMCheckpoint -VMName SRV01 -Name Basis
+! Entspricht im Manager „Prüfpunkt-Unterstruktur löschen“; ohne -IncludeAllChildSnapshots wird nur der einzelne Prüfpunkt entfernt.
 
 ? HV-NESTED (Hyper-V-Rolle aktiv, innere VMs laufen) soll vor einem Cluster-Umbau gesichert werden. Was ist am sichersten?
 * Innere VMs und HV-NESTED herunterfahren, dann Prüfpunkt erstellen
-- Standardprüfpunkt im laufenden Betrieb
-- VM speichern und VHDX kopieren
-- Automatische Prüfpunkte aktivieren
+- Einen Standardprüfpunkt im laufenden Betrieb erstellen
+- HV-NESTED mit Save-VM speichern und die VHDX kopieren
+- Automatische Prüfpunkte für HV-NESTED aktivieren
 ! Mit laufendem Gast-Hypervisor ist ein RAM-Zustand nicht zuverlässig sicherbar.
 
 ? Warum ist ein Prüfpunkt kein Backup?
 * Er liegt auf demselben Speicher und hängt von der Eltern-VHDX ab
-- Er kann nicht wiederhergestellt werden
-- Er enthält nie Daten
-- Er ist auf 24 Stunden begrenzt
+- Er lässt sich nach dem Erstellen nicht mehr wiederherstellen
+- Er enthält keine Daten, sondern nur die VM-Konfiguration
+- Er wird von Hyper-V nach 24 Stunden automatisch gelöscht
 ! Fällt das Volume aus oder wird die Kette beschädigt, sind VM und Prüfpunkte gemeinsam weg.
 
 ? Welche Datei enthält bei einem Standardprüfpunkt den Arbeitsspeicherzustand?
@@ -274,9 +274,9 @@ Checkpoint-VM -Name HV-NESTED -SnapshotName "Lab-Basis"
 
 ? Ein Produktionsprüfpunkt einer Windows-VM schlägt fehl, Typ ist „Production“. Was passiert?
 * Hyper-V erstellt stattdessen einen Standardprüfpunkt
-- Es wird kein Prüfpunkt erstellt
-- Die VM wird heruntergefahren und erneut versucht
-- Die VM wird angehalten
+- Es wird kein Prüfpunkt erstellt und ein Fehler protokolliert
+- Die VM wird heruntergefahren und der Vorgang wiederholt
+- Die VM wird angehalten, bis VSS wieder verfügbar ist
 ! Das ist die Standardeinstellung mit Rückfall; nur ProductionOnly verhindert ihn.
 
 ## Lücken

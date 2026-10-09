@@ -210,9 +210,9 @@ Get-Disk | Where-Object BusType -eq iSCSI
 
 ? Welcher IQN ist korrekt aufgebaut?
 * iqn.1991-05.com.microsoft:hv01.example.com
-- iqn.microsoft.com-1991-05:hv01
-- iqn:hv01.example.com.1991-05
-- iqn.05-1991.com.microsoft:hv01
+- iqn.microsoft.com-1991-05:hv01.example.com
+- iqn:hv01.example.com.1991-05.com.microsoft
+- iqn.05-1991.com.microsoft:hv01.example.com
 ! Format: iqn. + Jahr-Monat + umgekehrte Domain + Doppelpunkt + eindeutiger Teil.
 
 ? Welche Rolle übernimmt der Hyper-V-Host HV01, der eine LUN von FS01 einbindet?
@@ -245,9 +245,9 @@ Get-Disk | Where-Object BusType -eq iSCSI
 
 ? Was steuert beim Windows-iSCSI-Zielserver den Parameter InitiatorIds?
 * Welche Initiatoren das Target sehen und verbinden dürfen
-- Welche IP-Adresse das Portal hat
-- Wie groß die LUN ist
-- Welche MTU verwendet wird
+- Welche IP-Adresse und welchen Port das Zielportal verwendet
+- Wie groß die zugeordnete LUN (virtueller Datenträger) ist
+- Welche MTU für die iSCSI-Sitzungen verwendet wird
 ! InitiatorIds entsprechen dem LUN-Masking eines SAN-Arrays.
 
 ? Welches Cmdlet führt auf HV01 die Discovery am Zielportal aus?
@@ -258,10 +258,10 @@ Get-Disk | Where-Object BusType -eq iSCSI
 ! New-IscsiTargetPortal trägt das Portal ein und startet SendTargets-Discovery.
 
 ? Warum sollten Jumbo Frames Ende-zu-Ende gleich konfiguriert sein?
-* Sonst werden große Rahmen verworfen oder fragmentiert und Verbindungen brechen ab
-- Weil CHAP sonst nicht funktioniert
-- Weil iSCSI sonst Port 3205 verwendet
-- Weil die LUN sonst schreibgeschützt wird
+* Sonst werden große Rahmen verworfen und Verbindungen brechen ab
+- Weil die CHAP-Authentifizierung sonst fehlschlägt
+- Weil iSCSI sonst automatisch auf iSNS-Port 3205 wechselt
+- Weil die LUN bei abweichender MTU schreibgeschützt eingebunden wird
 ! Ein Switch mit MTU 1500 verwirft 9000-Byte-Rahmen – typische Ursache sporadischer Abbrüche.
 
 ? Welche Redundanzlösung empfiehlt Microsoft für iSCSI-Pfade?
@@ -280,16 +280,16 @@ Get-Disk | Where-Object BusType -eq iSCSI
 
 ? Wozu dient gegenseitiges CHAP?
 * Der Initiator prüft zusätzlich die Echtheit des Targets
-- Es verschlüsselt den Datenverkehr mit AES
-- Es erlaubt Verbindungen ohne Geheimnis
-- Es verteilt Last auf zwei Targets
-! Gegenseitiges (mutual) CHAP schützt auch vor gefälschten Targets.
+- Es verschlüsselt den gesamten iSCSI-Datenverkehr mit AES
+- Es erlaubt Verbindungen auch ohne gemeinsames Geheimnis
+- Es verteilt die Last gleichmäßig auf zwei Targets
+! Gegenseitiges (mutual) CHAP schützt auch vor gefälschten Targets; verschlüsselt wird nichts (dafür IPsec).
 
 ? Was ist iSNS?
 * Ein zentraler Namens- und Discovery-Dienst für iSCSI
-- Ein Verschlüsselungsverfahren für LUNs
-- Ein Dateisystem für Cluster
-- Eine MPIO-Richtlinie
+- Ein Verschlüsselungsverfahren für LUNs auf dem Target
+- Ein Cluster-Dateisystem für gemeinsam genutzte LUNs
+- Eine MPIO-Richtlinie zur Lastverteilung über Pfade
 ! iSNS (TCP 3205) funktioniert ähnlich wie DNS für iSCSI-Geräte.
 
 ## Lücken

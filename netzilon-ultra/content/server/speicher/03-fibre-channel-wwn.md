@@ -238,16 +238,16 @@ Add-VMFibreChannelHba -VMName SQL01 -SanName FabricA
 
 ? Warum braucht FCoE Data Center Bridging?
 * Weil Fibre Channel verlustfreien Transport erwartet
-- Weil FCoE sonst nicht routbar wäre
-- Weil DCB die WWPNs vergibt
-- Weil FCoE nur über WLAN läuft
+- Weil FCoE-Rahmen sonst nicht über Router weitergeleitet würden
+- Weil DCB die WWPNs an die Converged Network Adapter vergibt
+- Weil FCoE sonst auf 1-GbE-Kupferverbindungen begrenzt wäre
 ! PFC sorgt dafür, dass FCoE-Rahmen nicht verworfen werden.
 
 ? Welche Aussage zu FCoE ist richtig?
-* FCoE kapselt FC-Rahmen direkt in Ethernet und ist nicht routbar
-- FCoE verpackt SCSI in TCP-Pakete wie iSCSI
+* FCoE kapselt FC-Rahmen direkt in Ethernet, nicht routbar
+- FCoE verpackt SCSI-Befehle in TCP-Pakete, genau wie iSCSI
 - FCoE benötigt zwingend Kupferkabel mit 1 GbE
-- FCoE ersetzt das Zoning
+- FCoE ersetzt das Zoning durch VLANs auf dem Switch
 ! FCoE nutzt Ethertype 0x8906 ohne IP-Kopf; Zoning bleibt nötig.
 
 ? Wie wird ein FC-SAN üblicherweise redundant aufgebaut?
@@ -258,10 +258,10 @@ Add-VMFibreChannelHba -VMName SQL01 -SanName FabricA
 ! Zwei unabhängige Fabrics plus MPIO vermeiden jeden Single Point of Failure.
 
 ? Welche Aufgabe hat der Name Server in einer FC-Fabric?
-* Er führt ein Verzeichnis aller angemeldeten Ports und beantwortet Abfragen
-- Er löst DNS-Namen in IP-Adressen auf
-- Er verschlüsselt den FC-Verkehr
-- Er berechnet die RAID-Parität
+* Er verzeichnet alle angemeldeten Ports und beantwortet Abfragen
+- Er löst DNS-Namen der Hosts in IP-Adressen für das SAN auf
+- Er verschlüsselt den FC-Verkehr zwischen Initiator und Target
+- Er berechnet die RAID-Parität für die angeschlossenen Arrays
 ! Nach dem FLOGI fragen Initiatoren den Name Server, welche Targets sie (laut Zoning) sehen.
 
 ## Lücken

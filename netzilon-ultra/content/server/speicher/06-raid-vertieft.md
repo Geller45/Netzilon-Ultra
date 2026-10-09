@@ -233,10 +233,10 @@ $n = 6; $c = 4
 ! RAID 6 hat doppelte Parität und übersteht zwei beliebige Ausfälle.
 
 ? Welche Aussage zu RAID 10 mit 4 Platten ist richtig?
-* Es übersteht zwei Ausfälle nur, wenn sie in verschiedenen Spiegelpaaren liegen
-- Es übersteht immer zwei beliebige Ausfälle
-- Es hat keine Redundanz
-- Es braucht Paritätsberechnung
+* Zwei Ausfälle nur, wenn sie in verschiedenen Spiegelpaaren liegen
+- Es übersteht immer zwei beliebige Plattenausfälle gleichzeitig
+- Es hat keine Redundanz, da die Daten nur gestriped werden
+- Es braucht eine Paritätsberechnung wie RAID 5
 ! Fallen beide Platten desselben Spiegelpaares aus, sind die Daten verloren.
 
 ? Ein Server hat 7 Platten à 4 TB: RAID 5 aus 6 Platten plus 1 Hot Spare. Nutzkapazität?
@@ -247,18 +247,18 @@ $n = 6; $c = 4
 ! Die Hot Spare zählt nicht: (6 − 1) × 4 TB = 20 TB.
 
 ? Was beschreibt das Write Hole?
-* Daten und Parität passen nach einem Stromausfall beim Schreiben nicht mehr zusammen
-- Ein Loch im Plattenteller nach einem Headcrash
-- Eine fehlende Hot Spare
-- Ein Zoning-Fehler im SAN
+* Daten und Parität passen nach Stromausfall beim Schreiben nicht zusammen
+- Ein Loch in der Beschichtung des Plattentellers nach einem Headcrash
+- Eine fehlende Hot Spare, sodass kein automatischer Rebuild startet
+- Ein Zoning-Fehler, durch den Schreibzugriffe im SAN verloren gehen
 ! Gegenmittel: BBU/Flash-Cache, USV, Journaling.
 
 ? Warum wird bei großen Platten RAID 6 statt RAID 5 empfohlen?
-* Beim langen Rebuild steigt das Risiko eines URE oder zweiten Ausfalls, den RAID 5 nicht verkraftet
-- RAID 6 ist immer schneller beim Schreiben
-- RAID 5 unterstützt keine Platten über 2 TB
-- RAID 6 benötigt keine Parität
-! Während des RAID-5-Rebuilds ist das Array ungeschützt; RAID 6 hat noch eine Reserve.
+* Beim langen Rebuild droht ein URE oder zweiter Ausfall
+- RAID 6 ist beim Schreiben grundsätzlich schneller als RAID 5
+- RAID 5 kann keine Platten über 2 TB adressieren
+- RAID 6 benötigt keine Paritätsberechnung und spart CPU
+! Während des RAID-5-Rebuilds ist das Array ungeschützt; RAID 6 verkraftet noch einen weiteren Fehler.
 
 ? Welche Schreib-Penalty hat RAID 5?
 * 4
@@ -282,17 +282,17 @@ $n = 6; $c = 4
 ! 8 000 000 MB ÷ 200 MB/s = 40 000 s ≈ 11,1 Stunden.
 
 ? Was gilt für Hardware-RAID im Vergleich zu Software-RAID?
-* Eigener Controller mit Cache und BBU, aber Bindung an das Controller-Modell
-- Hardware-RAID benötigt keine Treiber und keine Firmware
-- Software-RAID ist grundsätzlich nicht redundant
+* Eigener Controller mit Cache und BBU, aber Herstellerbindung
+- Hardware-RAID benötigt weder Treiber noch Firmware-Updates
+- Software-RAID ist grundsätzlich nicht redundant, nur schneller
 - Hardware-RAID ist Voraussetzung für Storage Spaces Direct
-! S2D verlangt im Gegenteil einen HBA im Durchreichmodus, kein Hardware-RAID.
+! Das Array ist an das Controller-Modell gebunden. S2D verlangt im Gegenteil einen HBA im Durchreichmodus, kein Hardware-RAID.
 
 ? Wovor schützt RAID?
 * Vor dem Ausfall einzelner Festplatten
-- Vor versehentlichem Löschen
-- Vor Ransomware
-- Vor Brand im Serverraum
+- Vor versehentlichem Löschen von Dateien
+- Vor Verschlüsselung durch Ransomware
+- Vor Brand oder Wasser im Serverraum
 ! Alles andere erfordert Backup an einem getrennten Ort.
 
 ## Lücken

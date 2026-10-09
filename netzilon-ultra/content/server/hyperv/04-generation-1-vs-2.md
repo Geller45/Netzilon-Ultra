@@ -189,51 +189,51 @@ Get-VM | Select-Object Name, Generation, Version
 ## Quiz
 ? Eine Ubuntu-Installation in einer neuen Gen-2-VM bricht direkt nach dem Start mit einer Secure-Boot-Meldung ab. Was ist die beste Lösung?
 * Secure-Boot-Vorlage auf MicrosoftUEFICertificateAuthority stellen
-- Die VM in Generation 1 umwandeln
-- MAC-Spoofing aktivieren
-- Integrationsdienste deaktivieren
+- Die vorhandene VM per Set-VM in Generation 1 umwandeln
+- MAC-Spoofing an der Netzwerkkarte der VM aktivieren
+- Die Secure-Boot-Vorlage auf MicrosoftWindows zurücksetzen
 ! Linux-Bootloader (shim) sind über die Microsoft UEFI CA signiert; die Standardvorlage MicrosoftWindows lässt sie nicht zu.
 
 ? Welche Aussage über Generation-2-VMs ist richtig?
-* Sie booten per PXE über die synthetische Standard-Netzwerkkarte
-- Sie booten von einem IDE-Controller
-- Sie unterstützen VHD-Dateien als Startdatenträger
-- Sie unterstützen 32-Bit-Gastbetriebssysteme
+* Sie booten per PXE über die synthetische Standard-NIC
+- Sie booten von einem emulierten IDE-Controller
+- Sie unterstützen VHD-Dateien (nicht VHDX) als Startdatenträger
+- Sie unterstützen 32-Bit-Gastbetriebssysteme wie Windows 10 x86
 ! Gen 2 hat keine emulierten Altgeräte; PXE läuft über die normale synthetische NIC.
 
 ? Ein Admin möchte eine bestehende Gen-1-VM auf Gen 2 umstellen. Was ist richtig?
-* Es gibt keine Hyper-V-Funktion dafür; man legt eine neue Gen-2-VM an und übernimmt den auf GPT konvertierten Datenträger
-- Set-VM -Generation 2 bei ausgeschalteter VM
-- Update-VMVersion konvertiert automatisch
-- Im Hyper-V-Manager unter Firmware umschalten
-! Die Generation wird beim Erstellen festgelegt und kann nicht geändert werden.
+* Nicht möglich – neue Gen-2-VM anlegen, Datenträger vorher auf GPT konvertieren
+- Bei ausgeschalteter VM Set-VM -Generation 2 ausführen und neu starten
+- Update-VMVersion ausführen; die Generation wird automatisch mit angehoben
+- Im Hyper-V-Manager unter „Firmware“ von BIOS auf UEFI umschalten
+! Die Generation wird beim Erstellen festgelegt und kann nicht geändert werden; man übernimmt den konvertierten Datenträger in eine neue VM.
 
 ? Welche Voraussetzung muss vor Enable-VMTPM erfüllt sein?
 * Ein Schlüsselschutz (Key Protector) für die VM
-- Eine Gen-1-VM
-- Ein aktivierter Dynamic Memory
-- Ein externer vSwitch
+- Eine Gen-1-VM mit aktiviertem BIOS-Start
+- Aktivierter Dynamic Memory mit mindestens 4 GB
+- Ein externer vSwitch mit Verbindung zum HGS
 ! Ohne Key Protector kann der vTPM-Zustand nicht geschützt werden; im Einzelhost-Szenario genügt -NewLocalKeyProtector.
 
 ? Welcher Gast erfordert zwingend Generation 1?
 * Ein 32-Bit-Betriebssystem
-- Windows Server 2025
-- Windows 11
-- Ubuntu 24.04 LTS
+- Windows Server 2025 Datacenter
+- Windows 11 Pro mit TPM 2.0
+- Ubuntu 24.04 LTS (64 Bit)
 ! Gen 2 setzt 64-Bit-UEFI voraus.
 
 ? Wie startet eine Gen-1-VM über das Netzwerk (PXE)?
 * Mit einer Älteren Netzwerkkarte (Legacy Network Adapter)
-- Mit der synthetischen Netzwerkkarte
-- Nur über iSCSI-Boot
-- Gar nicht
+- Mit der synthetischen Netzwerkkarte (Standardadapter)
+- Ausschließlich über iSCSI-Boot vom SAN
+- Gar nicht, PXE gibt es nur bei Gen 2
 ! Das BIOS der Gen-1-VM kennt nur die emulierte Netzwerkkarte für PXE.
 
 ? Warum ist Windows 11 als Gast praktisch nur in einer Gen-2-VM sinnvoll installierbar?
-* Windows 11 verlangt TPM 2.0 und Secure Boot, die nur Gen 2 bereitstellt
-- Windows 11 kann nicht von IDE lesen
-- Gen 1 unterstützt keine Netzwerkkarten
-- Gen 1 hat maximal 1 GB RAM
+* Windows 11 verlangt TPM 2.0 und Secure Boot – nur in Gen 2
+- Windows 11 kann nicht von emulierten IDE-Controllern booten
+- Gen-1-VMs unterstützen grundsätzlich keine Netzwerkkarten
+- Gen-1-VMs sind auf maximal 1 GB Arbeitsspeicher begrenzt
 ! vTPM und Secure Boot gibt es nur bei Gen-2-VMs.
 
 ? Welches Cmdlet setzt bei einer Gen-2-VM das DVD-Laufwerk an die erste Stelle der Startreihenfolge?
@@ -245,9 +245,9 @@ Get-VM | Select-Object Name, Generation, Version
 
 ? Eine Gen-2-VM soll per WDS installiert werden, bekommt aber keine Bootdatei. Was ist wahrscheinlich?
 * Der WDS-Server bietet keine UEFI-Bootimages an
-- Die VM hat keine Ältere Netzwerkkarte
-- Secure Boot verhindert jedes PXE
-- Gen 2 unterstützt grundsätzlich kein PXE
+- Die VM hat keine Ältere Netzwerkkarte (Legacy)
+- Secure Boot verhindert grundsätzlich jeden PXE-Start
+- Gen 2 unterstützt grundsätzlich keinen PXE-Start
 ! Gen 2 bootet per UEFI-PXE; der Server muss x64-UEFI-Bootdateien liefern.
 
 ? Welche Secure-Boot-Vorlage ist der Standard für neue Gen-2-VMs?

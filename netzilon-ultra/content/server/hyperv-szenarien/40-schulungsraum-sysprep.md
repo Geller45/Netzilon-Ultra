@@ -158,9 +158,9 @@ Für 15 Schüler werden gleiche Server-VMs gebraucht, Platz auf HV01 ist knapp. 
 ## Quiz
 ? Welcher Befehl bereitet eine Vorlagen-VM korrekt vor?
 * sysprep /generalize /oobe /shutdown /mode:vm
-- sysprep /audit /reboot
-- sfc /scannow
-- dism /online /cleanup-image
+- sysprep /audit /reboot /unattend:vorlage.xml
+- sysprep /oobe /quit ohne /generalize (Identität bleibt)
+- dism /online /cleanup-image /restorehealth /shutdown
 ! /generalize entfernt die Identität, /oobe startet beim nächsten Mal die Ersteinrichtung.
 
 ? Was speichert eine differenzierende VHDX?
@@ -179,16 +179,16 @@ Für 15 Schüler werden gleiche Server-VMs gebraucht, Platz auf HV01 ist knapp. 
 
 ? Welcher Parameter erzeugt mit New-VHD eine Kind-Festplatte?
 * -Differencing
-- -Dynamic
-- -Fixed
-- -Shared
+- -Dynamic -Child
+- -Fixed -Clone
+- -SourceDisk
 ! Zusammen mit -ParentPath.
 
 ? Wann darf /mode:vm verwendet werden?
-* Wenn das Abbild auf derselben Hypervisor-Plattform genutzt wird
-- Für physische Rechner mit anderer Hardware
-- Nur bei Gen-1-VMs
-- Nur für Domänencontroller
+* Wenn das Abbild auf derselben Hypervisor-Plattform bleibt
+- Für physische Rechner mit abweichender Hardware und Treibern
+- Ausschließlich bei Gen-1-VMs mit emulierten Geräten
+- Nur für Domänencontroller, die geklont werden sollen
 ! Treiber werden dann nicht neu erkannt.
 
 ? Welches Problem entsteht beim Kopieren einer VM ohne Sysprep?
@@ -199,10 +199,10 @@ Für 15 Schüler werden gleiche Server-VMs gebraucht, Platz auf HV01 ist knapp. 
 ! Generalisieren verhindert das.
 
 ? Wie viel Platz brauchen 15 Kinder plus Eltern ungefähr im Vergleich zu 15 Vollkopien?
-* Deutlich weniger, da nur die Eltern voll gespeichert wird
-- Genau gleich viel
-- Doppelt so viel
-- Nur 1 MB insgesamt
+* Deutlich weniger, nur das Elternteil ist voll gespeichert
+- Genau gleich viel, da jedes Kind eine Vollkopie enthält
+- Doppelt so viel wegen der zusätzlichen Elterndatei
+- Nur etwa 1 MB insgesamt, unabhängig von Änderungen
 ! Kinder wachsen mit den Änderungen.
 
 ? Wie bekommen Schüler-VMs nach dem Kurs einen sauberen Stand?

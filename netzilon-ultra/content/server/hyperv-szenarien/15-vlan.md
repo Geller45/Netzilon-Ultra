@@ -179,23 +179,23 @@ PRINT01 soll in VLAN 20. Der Switchport zum Host ist ein Access-Port in VLAN 10,
 
 ? Wie wird der Host-Verwaltungsadapter getaggt?
 * Set-VMNetworkAdapterVlan -ManagementOS -VMNetworkAdapterName LAN -Access -VlanId 10
-- Set-VMHost -VlanId 10
-- Set-VMSwitch -ManagementVlan 10
-- Nur über die physische NIC im Treiber
+- Set-VMNetworkAdapterVlan -VMName LAN -Trunk -AllowedVlanIdList 10 -NativeVlanId 10
+- Set-VMSwitch -Name LAN -AllowManagementOS $true -DefaultFlowVlanId 10
+- Set-NetAdapter -Name NIC1 -VlanID 10 an der an den vSwitch gebundenen NIC
 ! -ManagementOS adressiert die Host-vNICs.
 
 ? Was sieht der Gast im Access-Modus?
 * Untagged Frames, der vSwitch taggt
-- Getaggte Frames mit ID 20
-- Gar keinen Verkehr
-- Nur Broadcasts
+- Getaggte Frames mit der VLAN-ID 20
+- Gar keinen Verkehr aus dem VLAN
+- Nur Broadcasts aller VLANs
 ! Der vSwitch entfernt bzw. setzt den Tag.
 
 ? Wann verwendet man -Trunk an der vNIC?
 * Wenn eine Router-VM mehrere VLANs selbst verarbeitet
-- Für jede normale Server-VM
-- Für Nested-Virtualisierung
-- Für Hyper-V-Replikat
+- Für jede normale Server-VM in einem einzelnen VLAN
+- Für die Weitergabe der Virtualisierungserweiterungen
+- Für die Replikationsverbindung von Hyper-V-Replikat
 ! Normale Server nutzen Access.
 
 ? Wie entfernt man die VLAN-Konfiguration?
@@ -206,10 +206,10 @@ PRINT01 soll in VLAN 20. Der Switchport zum Host ist ein Access-Port in VLAN 10,
 ! -Untagged setzt die vNIC zurück.
 
 ? Welche Gefahr besteht beim Umstellen des Host-Ports auf Trunk?
-* Der Host verliert ohne passendes Native VLAN die Verwaltung
-- Alle VMs werden gelöscht
-- Die VHDX wird beschädigt
-- Secure Boot wird deaktiviert
+* Ohne passendes Native VLAN verliert der Host die Verwaltung
+- Alle VMs des Hosts werden aus dem Manager entfernt
+- Die VHDX-Dateien der VMs werden beschädigt
+- Secure Boot wird an allen Gen-2-VMs deaktiviert
 ! Untagged Host-Verkehr landet im Native VLAN.
 
 ? Muss PRINT01 für die VLAN-Änderung ausgeschaltet sein?

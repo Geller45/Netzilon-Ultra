@@ -205,9 +205,9 @@ Start-VM -Name INNER01
 
 ? Welche CPU-Funktion ist bei Intel-Prozessoren neben VT-x zwingend erforderlich?
 * EPT (Extended Page Tables)
-- Hyper-Threading
-- AES-NI
-- Turbo Boost
+- HT (Hyper-Threading Technology)
+- AES-NI (Advanced Encryption Standard New Instructions)
+- TSX (Transactional Synchronization Extensions)
 ! EPT ist Intels Umsetzung von SLAT; ohne sie wäre die doppelte Adressübersetzung zu langsam und wird nicht unterstützt.
 
 ? Welche Mindest-Konfigurationsversion muss eine VM für Nested Virtualization (Intel) haben?
@@ -219,9 +219,9 @@ Start-VM -Name INNER01
 
 ? In der Ebenenbetrachtung ist „L1“…
 * die äußere VM, in der Hyper-V läuft
-- der physische Host
-- die innere VM
-- der virtuelle Switch
+- der physische Host mit dem eigentlichen Hypervisor
+- die innere VM, die im Gast-Hypervisor läuft
+- der virtuelle Switch zwischen L0 und L2
 ! L0 = physischer Host, L1 = Gast-Hypervisor (äußere VM), L2 = verschachtelte VM.
 
 ? Wo aktiviert man im Hyper-V-Manager die verschachtelte Virtualisierung?
@@ -233,9 +233,9 @@ Start-VM -Name INNER01
 
 ? Welches Szenario ist KEIN typischer Einsatzzweck verschachtelter Virtualisierung?
 * Maximale Leistung für eine produktive Datenbank mit hoher Last
-- Failover-Cluster-Übungslab auf einem einzelnen PC
-- Hyper-V-isolierte Container in einer VM
-- Credential Guard innerhalb einer VM
+- Failover-Cluster-Übungslab auf einem einzelnen PC oder Notebook
+- Hyper-V-isolierte Container innerhalb einer virtuellen Maschine
+- Credential Guard (VBS) innerhalb einer VM
 ! Jede Schachtelungsebene kostet Leistung; Hochlast-Produktion gehört nicht in mehrfach geschachtelte VMs.
 
 ? Welcher Befehl zeigt, ob die Erweiterungen für HV-NESTED weitergegeben werden?
@@ -253,17 +253,17 @@ Start-VM -Name INNER01
 ! Update-VMVersion hebt die Konfigurationsversion an; danach ist die VM nicht mehr auf älteren Hosts startbar.
 
 ? Warum benötigt Credential Guard innerhalb einer VM verschachtelte Virtualisierung?
-* Weil VBS selbst den Hypervisor und damit Virtualisierungserweiterungen benötigt
-- Weil Credential Guard nur auf Gen-1-VMs läuft
-- Weil Credential Guard MAC-Spoofing voraussetzt
-- Weil Credential Guard dynamischen Arbeitsspeicher braucht
+* Weil VBS selbst den Hypervisor und damit VT-x/AMD-V benötigt
+- Weil Credential Guard ausschließlich auf Gen-1-VMs mit BIOS läuft
+- Weil Credential Guard MAC-Spoofing an der vNIC voraussetzt
+- Weil Credential Guard zwingend dynamischen Arbeitsspeicher braucht
 ! Virtualisierungsbasierte Sicherheit nutzt den Hypervisor für isolierte Speicherbereiche – dafür muss die VM VT-x/AMD-V sehen.
 
 ? Was passiert, wenn man in einer VM ohne weitergegebene Erweiterungen die Hyper-V-Rolle installieren will?
-* Die Installation wird mit einem Hinweis auf fehlende Virtualisierungsfunktionen abgelehnt
-- Die Rolle installiert sich und emuliert die CPU in Software
-- Der Host stürzt ab
-- Die VM wird automatisch auf Gen 2 konvertiert
+* Die Installation bricht wegen fehlender Virtualisierungsfunktionen ab
+- Die Rolle installiert sich und emuliert die CPU-Erweiterungen in Software
+- Der physische Host stürzt mit einem Bluescreen ab
+- Die VM wird beim nächsten Start automatisch auf Gen 2 konvertiert
 ! Hyper-V hat keine reine Software-Emulation; ohne VT-x/AMD-V lässt sich die Rolle nicht aktivieren.
 
 ? Welches Werkzeug von Microsoft prüft Host und VM auf die Nested-Voraussetzungen?

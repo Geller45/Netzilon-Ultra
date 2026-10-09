@@ -150,9 +150,9 @@ In DEV01 (Windows 11, dynamischer RAM) startet die Windows-Sandbox nicht; auf CT
 ## Quiz
 ? Warum startet die Windows-Sandbox in einer normalen VM nicht?
 * Die VM sieht keine CPU-Virtualisierungserweiterungen
-- Windows 11 unterstützt keine Sandbox
-- Die VM hat keine Netzwerkkarte
-- Secure Boot ist aktiviert
+- Windows 11 unterstützt in VMs grundsätzlich keine Sandbox
+- Die VM hat keine Netzwerkkarte für die Sandbox
+- Secure Boot ist in der VM-Firmware aktiviert
 ! Sandbox = Mini-VM, braucht Hypervisor.
 
 ? Welche Container-Art läuft auch ohne Nested Virtualization in einer VM?
@@ -164,10 +164,10 @@ In DEV01 (Windows 11, dynamischer RAM) startet die Windows-Sandbox nicht; auf CT
 
 ? Welcher Befehl aktiviert Nested für DEV01?
 * Set-VMProcessor -VMName DEV01 -ExposeVirtualizationExtensions $true
-- Enable-VMIntegrationService -Name Nested
-- Set-VM -Nested On
-- Enable-WindowsOptionalFeature -FeatureName Nested
-! Am Host bei ausgeschalteter VM.
+- Enable-VMIntegrationService -VMName DEV01 -Name "Nested Virtualization"
+- Set-VM -Name DEV01 -NestedVirtualization On -ProcessorCount 4
+- Enable-WindowsOptionalFeature -Online -FeatureName Containers-DisposableClientVM
+! Am Host bei ausgeschalteter VM. Das optionale Feature installiert nur die Sandbox im Gast.
 
 ? Welche RAM-Einstellung ist für die äußere VM richtig?
 * Statischer Arbeitsspeicher

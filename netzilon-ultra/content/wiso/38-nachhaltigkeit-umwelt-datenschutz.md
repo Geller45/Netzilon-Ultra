@@ -324,24 +324,24 @@ Die Netzilon GmbH betreibt 12 physische Server mit durchschnittlich 10 % Auslast
 ! Zutritt = physischer Raum.
 
 ? Welche Maßnahme ist ein Beispiel für Zugriffskontrolle?
-* Ein Berechtigungskonzept, das Lesen und Schreiben auf Ordner nach Rollen regelt
-- Ein abgeschlossener Serverraum
-- Eine USV für den Server
-- Ein Besucherbuch am Empfang
-! Zugriffskontrolle betrifft die Rechte auf Daten innerhalb der Systeme.
+* Ein Berechtigungskonzept für Lese- und Schreibrechte nach Rollen
+- Ein abgeschlossener Serverraum mit Chipkartenleser an der Tür
+- Eine USV, die den Server bei Stromausfall weiter versorgt
+- Ein Besucherbuch mit Begleitpflicht am Empfang
+! Zugriffskontrolle betrifft die Rechte auf Daten innerhalb der Systeme; der abgeschlossene Raum ist Zutrittskontrolle.
 
 ? Ab wann muss ein Unternehmen nach BDSG in der Regel einen Datenschutzbeauftragten benennen?
-* Wenn mindestens 20 Personen ständig mit der automatisierten Verarbeitung personenbezogener Daten beschäftigt sind
-- Ab 10 Mitarbeitern insgesamt
-- Erst ab 250 Mitarbeitern
-- Nur bei börsennotierten Unternehmen
+* Ab 20 Personen, die ständig personenbezogene Daten automatisiert verarbeiten
+- Ab 10 Mitarbeitern insgesamt, unabhängig von ihrer Tätigkeit
+- Erst ab 250 Mitarbeitern, darunter gilt eine Ausnahme für KMU
+- Nur bei börsennotierten Unternehmen und Behörden
 ! § 38 Abs. 1 BDSG; unabhängig davon bei risikoreicher Kerntätigkeit (Art. 37 DSGVO).
 
 ? Wie hoch kann ein Bußgeld bei schweren DSGVO-Verstößen höchstens sein?
-* 20 Mio. € oder 4 % des weltweiten Jahresumsatzes, je nachdem, was höher ist
-- 50.000 €
-- 1 Mio. € oder 1 % des Umsatzes
-- 10 % des Gewinns
+* 20 Mio. € oder 4 % des weltweiten Jahresumsatzes (höherer Wert)
+- 50.000 € je Verstoß, unabhängig von der Unternehmensgröße
+- 1 Mio. € oder 1 % des Jahresumsatzes, je nachdem, was niedriger ist
+- 10 % des Jahresgewinns des Vorjahres
 ! Art. 83 Abs. 5 DSGVO.
 
 ? Auf welcher Rechtsgrundlage verarbeitet ein Arbeitgeber die Steuer-ID eines Mitarbeiters für die Lohnabrechnung?

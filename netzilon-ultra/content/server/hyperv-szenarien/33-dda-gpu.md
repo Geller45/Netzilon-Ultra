@@ -167,10 +167,10 @@ Die ungenutzte GPU in HV02 soll exklusiv an CAD01 (Gen 2) gehen. CAD01 soll spä
 ! Der PCIe-Pfad identifiziert das Gerät eindeutig.
 
 ? Was muss vor dem Zuweisen passieren?
-* Das Gerät mit Dismount-VMHostAssignableDevice vom Host trennen
-- Die VM live migrieren
-- Einen Prüfpunkt erstellen
-- Dynamischen RAM aktivieren
+* Gerät per Dismount-VMHostAssignableDevice vom Host trennen
+- Die Ziel-VM per Live-Migration auf den Host verschieben
+- Einen Produktionsprüfpunkt der Ziel-VM erstellen
+- Dynamischen Arbeitsspeicher an der Ziel-VM aktivieren
 ! Vorher zudem Disable-PnpDevice.
 
 ? Welche Einschränkung hat eine VM mit DDA-GPU?
@@ -196,9 +196,9 @@ Die ungenutzte GPU in HV02 soll exklusiv an CAD01 (Gen 2) gehen. CAD01 soll spä
 
 ? Welche Einstellung ist speziell für GPUs nötig?
 * MMIO-Bereiche (Low/HighMemoryMappedIoSpace)
-- MAC-Spoofing
-- NUMA-Spanning aus
-- Gastdienste aktivieren
+- MAC-Spoofing an der vNIC der VM
+- NUMA-Spanning auf dem Host abschalten
+- Integrationsdienst Gastdienste aktivieren
 ! GPUs brauchen zusätzlichen Adressraum in der VM.
 
 ? Was ist die richtige Reihenfolge zur Rückgabe an den Host?
@@ -210,7 +210,7 @@ Die ungenutzte GPU in HV02 soll exklusiv an CAD01 (Gen 2) gehen. CAD01 soll spä
 
 ? Welches Werkzeug stellt Microsoft für die Eignungsprüfung bereit?
 * Das Skript SurveyDDA.ps1
-- Disk2vhd
-- Sysprep
-- Compare-VM
+- Das Tool Disk2vhd.exe
+- Das Tool Sysprep.exe
+- Das Cmdlet Compare-VM
 ! Es prüft, welche Geräte für DDA in Frage kommen.

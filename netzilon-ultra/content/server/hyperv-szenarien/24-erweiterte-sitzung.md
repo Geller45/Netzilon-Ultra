@@ -192,35 +192,35 @@ Auf HV01 (Windows Server 2025) zeigt die VM-Verbindung zu CL01 nur die Basissitz
 
 ? Wo wird die Zwischenablage-Umleitung beim Verbinden gewählt?
 * Lokale Ressourcen im Dialog Anzeigekonfiguration
-- VM-Einstellungen → Firmware
-- Manager für virtuelle Switches
-- Hyper-V-Einstellungen → NUMA
+- VM-Einstellungen → Firmware → Startreihenfolge
+- Manager für virtuelle Switches → Erweiterungen
+- Hyper-V-Einstellungen → NUMA-Übergreifung
 ! Sie ist eine RDP-Umleitungsoption.
 
 ? Welcher Dienst muss im Gast laufen?
 * Remotedesktopdienste (TermService)
-- Hyper-V-Taktdienst allein
-- DHCP-Client
-- Windows Update
+- Hyper-V-Taktdienst (vmicheartbeat)
+- DHCP-Client (Dhcp)
+- Windows Update (wuauserv)
 ! Die erweiterte Sitzung ist eine RDP-Anmeldung.
 
 ? Wann ist nur die Basissitzung möglich?
 * Vor dem Booten bzw. während des Setups
-- Immer bei Gen-2-VMs
-- Nur bei Domänenmitgliedern
-- Bei aktivem Secure Boot
+- Immer bei Gen-2-VMs mit UEFI
+- Nur bei Domänenmitgliedern mit GPO
+- Sobald Secure Boot aktiviert ist
 ! Die erweiterte Sitzung braucht ein angemeldetes Gast-OS mit RDP.
 
 ? Auf welcher Plattform ist der Modus standardmäßig an?
 * Windows 11 mit Client-Hyper-V
-- Windows Server 2025
-- Windows Server 2022
-- Hyper-V Server 2019
+- Windows Server 2025 Datacenter
+- Windows Server 2022 Standard
+- Hyper-V Server 2019 (kostenlos)
 ! Auf Windows Server muss er zugelassen werden.
 
 ? Wie kopiert man ohne erweiterte Sitzung eine Datei vom Host in die VM?
 * Copy-VMFile mit Gastdienstschnittstelle
-- Set-VMHost -CopyFile
-- Move-VMStorage
-- Export-VM
+- Set-VMHost -VirtualMachinePath mit Freigabe
+- Move-VMStorage mit -DestinationStoragePath
+- Export-VM und anschließend Import-VM
 ! Copy-VMFile nutzt die Integrationsdienste.

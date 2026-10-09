@@ -159,16 +159,16 @@ Get-ComputerInfo -Property HyperVisorPresent
 
 ## Quiz
 ? Ein Admin will den Arbeitsspeicher der laufenden VM HV-NESTED (Hyper-V-Rolle aktiv, zwei innere VMs) von 8 auf 12 GB erhöhen. Was passiert?
-* Die Änderung schlägt fehl; die VM muss dafür ausgeschaltet werden
-- Die Änderung wirkt sofort
+* Es schlägt fehl; die VM muss dafür ausgeschaltet werden
+- Die Änderung wirkt sofort ohne Unterbrechung
 - Die Änderung wirkt erst nach Neustart der inneren VMs
 - Der Host erhöht den RAM automatisch über Smart Paging
 ! Mit aktivem Gast-Hypervisor ist keine Laufzeit-Größenänderung des Speichers möglich.
 
 ? Wie verhält sich Dynamic Memory an einer äußeren VM, in der Hyper-V läuft?
-* Es kann aktiviert sein, der Speicher bleibt aber praktisch auf dem Startwert
-- Es verdoppelt automatisch den Startwert
-- Es verteilt Speicher direkt an die inneren VMs
+* Es lässt sich aktivieren, der RAM bleibt aber auf dem Startwert
+- Es verdoppelt den Startwert automatisch, sobald Hyper-V startet
+- Es verteilt den Speicher direkt an die inneren VMs weiter
 - Es deaktiviert sich und meldet einen Fehler beim Start
 ! Microsoft dokumentiert: Der Speicher fluktuiert nicht, solange Hyper-V in der VM läuft.
 
@@ -201,31 +201,31 @@ Get-ComputerInfo -Property HyperVisorPresent
 ! VBS isoliert Geheimnisse in einer vom Hypervisor geschützten Umgebung (VTL 1) – dazu braucht der Gast VT-x/AMD-V.
 
 ? Welche Ursache erklärt den deutlichen I/O-Leistungsverlust einer L2-VM?
-* Jeder VM-Exit wird von L1 abgefangen und muss zusätzlich von L0 emuliert werden
-- L2-VMs laufen grundsätzlich ohne Integrationsdienste
-- L2-VMs dürfen nur eine vCPU haben
-- L2-VMs nutzen immer Gen 1
+* Jeder VM-Exit wird von L1 abgefangen und zusätzlich von L0 behandelt
+- L2-VMs laufen grundsätzlich ohne Integrationsdienste und synthetische Geräte
+- L2-VMs dürfen maximal eine vCPU und 1 GB RAM erhalten
+- L2-VMs werden immer als Gen 1 mit emulierter IDE angelegt
 ! Die Kaskade von Exits über zwei Hypervisor-Ebenen ist die Hauptquelle des Overheads.
 
 ? Welche Funktion steht inneren VMs (L2) NICHT zur Verfügung?
-* Discrete Device Assignment (DDA) einer physischen GPU
-- Prüfpunkte
-- Integrationsdienste
-- Virtuelle Switches
-! Physische Geräte können nicht durch zwei Hypervisor-Ebenen durchgereicht werden.
+* DDA einer physischen GPU
+- Prüfpunkte (Standard und Produktion)
+- Integrationsdienste wie Zeitsynchronisierung
+- Virtuelle Switches vom Typ privat
+! Discrete Device Assignment (DDA): Physische Geräte können nicht durch zwei Hypervisor-Ebenen durchgereicht werden.
 
 ? Ein Host läuft mit Windows Server 2016 und aktiviertem Device Guard/VBS. Was ist für Nested zu erwarten?
 * Die Virtualisierungserweiterungen können nicht weitergegeben werden
-- Nested funktioniert nur mit AMD
-- Nested funktioniert, aber nur für Linux-Gäste
-- Device Guard wird automatisch deaktiviert
+- Nested funktioniert dann nur noch auf Hosts mit AMD-Prozessoren
+- Nested funktioniert, allerdings nur für Linux-Gäste in L2
+- Device Guard wird beim Setzen von ExposeVirtualizationExtensions automatisch deaktiviert
 ! Diese Einschränkung bestand bei Server 2016/frühem Windows 10; neuere Versionen können VBS und Nested kombinieren.
 
 ? Welche Maßnahme verbessert die Leistung eines Nested-Labs am meisten?
-* VHDX-Dateien auf SSD/NVMe und ausreichend statischen RAM
-- Kompatibilitätsmodus für Prozessoren aktivieren
-- Dynamic Memory mit kleinem Minimum
-- Mehr Schachtelungsebenen
+* VHDX auf SSD/NVMe und ausreichend statischer RAM
+- Kompatibilitätsmodus für Prozessoren an allen VMs aktivieren
+- Dynamic Memory mit kleinem Minimum für die äußere VM
+- Weitere Schachtelungsebenen (L3) für die Lastverteilung
 ! Storage-Latenz und Speichermangel sind die häufigsten Bremsen im Lab.
 
 ? Move-VM für HV-NESTED (läuft, Hyper-V aktiv) zu HV02 schlägt fehl. Welche Alternative funktioniert?
@@ -236,17 +236,17 @@ Get-ComputerInfo -Property HyperVisorPresent
 ! Mit aktivem Gast-Hypervisor bleibt nur die Migration im ausgeschalteten Zustand.
 
 ? Was bewirkt der Prozessor-Kompatibilitätsmodus (CompatibilityForMigrationEnabled) im Nested-Kontext?
-* Er blendet CPU-Funktionen aus und ist für Nested nicht nötig, kann sogar stören
-- Er ist Voraussetzung für Nested
-- Er ermöglicht Live-Migration der äußeren VM
-- Er aktiviert EPT
+* Er blendet CPU-Funktionen aus; für Nested unnötig, eher störend
+- Er ist zwingende Voraussetzung für ExposeVirtualizationExtensions
+- Er ermöglicht die Live-Migration der äußeren VM mit laufendem Hyper-V
+- Er aktiviert EPT bzw. RVI für die inneren VMs
 ! Der Modus dient Migrationen zwischen unterschiedlichen CPU-Generationen und reduziert den sichtbaren Befehlssatz.
 
 ? Welche Planung ist für HV-NESTED mit drei inneren VMs zu je 2 GB sinnvoll?
 * Mindestens ca. 10 GB statischer RAM für L1
-- 4 GB dynamisch mit Minimum 512 MB
-- 2 GB statisch, Rest über Smart Paging
-- 6 GB dynamisch mit Puffer 200 %
+- 4 GB dynamisch mit Minimum 512 MB für L1
+- 2 GB statisch, den Rest über Smart Paging
+- 6 GB dynamisch mit einem Puffer von 200 %
 ! L1 braucht eigenen Speicher plus Summe der L2-VMs plus Overhead – und wachsen kann der RAM im Betrieb nicht.
 
 ## Lücken

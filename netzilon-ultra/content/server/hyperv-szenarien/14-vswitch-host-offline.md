@@ -197,14 +197,14 @@ Nach dem Anlegen eines externen vSwitch ohne Haken für das Verwaltungsbetriebss
 
 ? Was ist eine gute Vorbeugung?
 * Dedizierte Verwaltungs-NIC oder SET mit Verwaltungs-vNIC
-- MAC-Spoofing überall aktivieren
-- Dynamic Memory abschalten
-- Erweiterte Sitzung deaktivieren
+- MAC-Spoofing an allen vNICs und am Host-Adapter aktivieren
+- Dynamic Memory auf allen VMs des Hosts abschalten
+- Den erweiterten Sitzungsmodus auf dem Host deaktivieren
 ! So bleibt der Verwaltungszugang unabhängig.
 
 ? Was ist beim Anlegen eines externen Switches normal?
 * Eine kurze Netzwerkunterbrechung des Hosts
-- Ein Neustart des Hosts
-- Das Herunterfahren aller VMs
-- Der Verlust aller Prüfpunkte
+- Ein erzwungener Neustart des Hosts
+- Das Herunterfahren aller laufenden VMs
+- Der Verlust aller vorhandenen Prüfpunkte
 ! Die Bindung der NIC wird neu aufgebaut.

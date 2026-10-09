@@ -178,9 +178,9 @@ GFS1 und GFS2 sollen einen Gast-Cluster mit gemeinsamer Datenplatte bilden. Die 
 
 ? Welcher Parameter erlaubt mehreren VMs den Zugriff?
 * -SupportPersistentReservations
-- -Shared $true
-- -MultiAttach
-- -Differencing
+- -Shared $true -AllowMultiple
+- -MultiAttach -ControllerType SCSI
+- -Differencing -ParentPath
 ! Wird bei Add-VMHardDiskDrive gesetzt.
 
 ? Welches Cmdlet wandelt eine freigegebene VHDX in einen VHD-Satz?
@@ -192,9 +192,9 @@ GFS1 und GFS2 sollen einen Gast-Cluster mit gemeinsamer Datenplatte bilden. Die 
 
 ? Warum sollten GFS1 und GFS2 auf verschiedenen Hosts laufen?
 * Damit ein Hostausfall nicht beide Gastknoten trifft
-- Weil VHD-Sätze das verlangen
-- Damit Lizenzen gespart werden
-- Weil sonst kein DHCP funktioniert
+- Weil VHD-Sätze technisch zwei Hosts verlangen
+- Damit Windows-Server-Lizenzen gespart werden
+- Weil sonst kein DHCP im Gastcluster funktioniert
 ! Anti-Affinität erhöht die Verfügbarkeit.
 
 ? Ab welchem Gast-OS werden VHD-Sätze unterstützt?

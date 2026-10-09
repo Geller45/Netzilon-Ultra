@@ -146,10 +146,10 @@ SQL02 (24 vCPU, dynamischer RAM bis 48 GB) läuft auf HV02 mit 2 NUMA-Knoten à 
 
 ## Quiz
 ? Warum sieht SQL Server in einer VM mit dynamischem Arbeitsspeicher keine NUMA-Knoten?
-* Dynamischer Arbeitsspeicher und virtuelles NUMA schließen sich aus
-- SQL Server unterstützt kein NUMA
-- Gen-2-VMs haben kein NUMA
-- NUMA funktioniert nur mit AMD-CPUs
+* Dynamic Memory und vNUMA schließen sich aus
+- SQL Server unterstützt grundsätzlich kein NUMA
+- Gen-2-VMs stellen dem Gast kein NUMA bereit
+- NUMA funktioniert nur auf Hosts mit AMD-CPUs
 ! Für vNUMA muss der Arbeitsspeicher statisch sein.
 
 ? Wo wird NUMA-Spanning konfiguriert?
@@ -160,10 +160,10 @@ SQL02 (24 vCPU, dynamischer RAM bis 48 GB) läuft auf HV02 mit 2 NUMA-Knoten à 
 ! Es ist eine Host-weite Einstellung.
 
 ? Was ist die Folge von deaktiviertem NUMA-Spanning?
-* VMs, die nicht in einen freien Knoten passen, starten nicht
-- Alle VMs bekommen doppelt so viel RAM
-- Live-Migration wird deaktiviert
-- Der Host verliert einen Sockel
+* VMs, die in keinen freien Knoten passen, starten nicht
+- Alle VMs bekommen automatisch doppelt so viel RAM
+- Live-Migration wird auf dem Host vollständig deaktiviert
+- Der Host verliert einen Sockel und dessen Kerne
 ! Planbare Leistung gegen Startgarantie.
 
 ? Welche Aktion ist nach dem Ändern von NumaSpanningEnabled nötig?
@@ -175,16 +175,16 @@ SQL02 (24 vCPU, dynamischer RAM bis 48 GB) läuft auf HV02 mit 2 NUMA-Knoten à 
 
 ? Wie bekommt eine VM eine zur Hardware passende vNUMA-Topologie?
 * Prozessor → NUMA → „Hardwaretopologie verwenden“
-- Integrationsdienste → NUMA
-- Firmware → Startreihenfolge
-- Netzwerkkarte → Erweiterte Features
+- Integrationsdienste → Gastdienste → NUMA
+- Firmware → Startreihenfolge → NUMA-Knoten
+- Netzwerkkarte → Erweiterte Features → vRSS
 ! Die Schaltfläche übernimmt die Werte des aktuellen Hosts.
 
 ? Was zeigt der Indikator „Remote Physical Pages“?
-* Speicherseiten einer VM, die auf einem entfernten NUMA-Knoten liegen
-- Ausgelagerte Seiten im Gast
-- Anzahl der Prüfpunkte
-- Netzwerkpakete an Remote-Hosts
+* VM-Speicherseiten auf einem entfernten NUMA-Knoten
+- Im Gast in die Auslagerungsdatei ausgelagerte Seiten
+- Anzahl der Prüfpunkte, die auf Remote-Speicher liegen
+- Netzwerkpakete, die an entfernte Hosts gesendet werden
 ! Viele Remote-Seiten bedeuten langsamere Zugriffe.
 
 ? Ein Host hat 2 Knoten à 16 Kerne. Eine VM hat 24 vCPU. Was ist sinnvoll?

@@ -213,9 +213,9 @@ New-Volume -StoragePoolFriendlyName "S2D*" -FriendlyName CSV01 -FileSystem CSVFS
 
 ? Was ist bei Thin Provisioning zu beachten?
 * Der Pool kann überbucht werden und muss überwacht werden
-- Die Größe kann nie erweitert werden
-- Thin ist Voraussetzung für Tiering
-- Thin bietet automatisch eine Spiegelung
+- Die Größe des Datenträgers kann nie mehr erweitert werden
+- Thin Provisioning ist Voraussetzung für Speicherebenen (Tiering)
+- Thin bietet automatisch eine Spiegelung auf zwei Platten
 ! Läuft der Pool voll, fallen die virtuellen Datenträger aus.
 
 ? Welche Voraussetzung gilt für Speicherebenen (Tiering)?
@@ -226,11 +226,11 @@ New-Volume -StoragePoolFriendlyName "S2D*" -FriendlyName CSV01 -FileSystem CSVFS
 ! Tiering funktioniert nur mit Fixed und gemischten Medien (SSD/HDD).
 
 ? Warum erscheint eine Platte hinter einem RAID-Controller oft nicht als poolfähig?
-* Storage Spaces braucht direkten Zugriff auf die einzelnen Platten (HBA/Pass-Through)
-- Storage Spaces unterstützt keine SAS-Platten
-- RAID-Controller sind in Windows verboten
+* Storage Spaces braucht direkten Zugriff auf jede Platte (HBA)
+- Storage Spaces unterstützt grundsätzlich keine SAS-Platten
+- RAID-Controller werden von Windows Server nicht unterstützt
 - Die Platte muss zuerst mit NTFS formatiert werden
-! RAID-Controller verbergen die einzelnen Platten; nötig ist ein HBA im Durchreichmodus.
+! RAID-Controller verbergen die einzelnen Platten; nötig ist ein HBA im Durchreichmodus (Pass-Through).
 
 ? Wie viele Knoten darf ein S2D-Cluster höchstens haben?
 * 16
@@ -261,17 +261,17 @@ New-Volume -StoragePoolFriendlyName "S2D*" -FriendlyName CSV01 -FileSystem CSVFS
 ! Ohne Zeuge verliert der Cluster beim Ausfall eines Knotens das Quorum.
 
 ? Welche Reihenfolge ist beim Ersetzen einer defekten Platte richtig?
-* Retired setzen, neue Platte hinzufügen, Repair-VirtualDisk, alte Platte entfernen
-- Alte Platte entfernen, Pool löschen, neu anlegen
-- Format-Volume, dann Add-PhysicalDisk
-- Optimize-Volume, dann Remove-StoragePool
+* Retired setzen, neue Platte hinzufügen, Repair-VirtualDisk, alte entfernen
+- Alte Platte entfernen, Pool löschen, Pool und Datenträger neu anlegen
+- Format-Volume ausführen, dann Add-PhysicalDisk und Optimize-StoragePool
+- Optimize-Volume ausführen, dann Remove-StoragePool und neu erstellen
 ! So bleibt die Redundanz während des Tauschs erhalten.
 
 ? Was bewirkt Optimize-StoragePool nach dem Hinzufügen neuer Platten?
-* Es verteilt die vorhandenen Daten gleichmäßig auf alle Platten
-- Es löscht den Primordial Pool
-- Es wandelt Mirror in Parity um
-- Es aktiviert S2D
+* Es verteilt die Daten gleichmäßig auf alle Platten
+- Es löscht den Primordial Pool und legt ihn neu an
+- Es wandelt gespiegelte Datenträger in Parität um
+- Es aktiviert Storage Spaces Direct auf dem Server
 ! Ohne Neuverteilung würden neue Platten erst nach und nach genutzt.
 
 ## Lücken

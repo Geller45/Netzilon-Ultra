@@ -32,9 +32,9 @@ verweise: [server-hyperv-nested-grundlagen, server-hyperv-nested-netzwerk, serve
 
 ? Ein Unternehmen nutzt Hosts mit AMD EPYC und Windows Server 2019. Nested Virtualization funktioniert nicht. Was ist die Lösung?
 * Hosts auf Windows Server 2022 oder neuer aktualisieren
-- MAC-Spoofing aktivieren
-- Die VMs auf Generation 1 umstellen
-- Dynamic Memory deaktivieren
+- MAC-Spoofing an den vNICs der äußeren VMs aktivieren
+- Die äußeren VMs auf Generation 1 umstellen
+- Dynamic Memory an den äußeren VMs deaktivieren
 ! AMD wird erst ab Windows Server 2022 / Windows 11 für Nested unterstützt.
 @ Nested Virtualization
 
@@ -55,18 +55,18 @@ verweise: [server-hyperv-nested-grundlagen, server-hyperv-nested-netzwerk, serve
 @ Nested Virtualization
 
 ? Innere VMs in HV-NESTED (auf eigenem Hyper-V-Host) sollen Adressen vom Firmen-DHCP erhalten. Was konfigurieren Sie?
-* MAC-Spoofing an der vNIC von HV-NESTED auf dem Host und einen externen vSwitch in HV-NESTED
-- NAT mit New-NetNat in HV-NESTED
-- Einen privaten Switch auf dem Host
-- DHCP-Guard an der vNIC von HV-NESTED
-! Mit MAC-Spoofing hängen die inneren VMs im selben Layer-2-Netz wie das LAN.
+* MAC-Spoofing an der vNIC von HV-NESTED und externer vSwitch darin
+- NAT mit New-NetNat und internem vSwitch in HV-NESTED
+- Einen privaten Switch auf dem physischen Host für HV-NESTED
+- DHCP-Guard an der vNIC von HV-NESTED auf dem Host
+! Mit MAC-Spoofing auf dem Host und externem vSwitch in HV-NESTED hängen die inneren VMs im selben Layer-2-Netz wie das LAN.
 @ Nested Netzwerk
 
 ? Sie betreiben Hyper-V in einer Azure-VM. Wie erhalten die inneren VMs Internetzugang?
-* Interner vSwitch, IP auf vEthernet als Gateway und New-NetNat in der Azure-VM
-- MAC-Spoofing an der Azure-NIC
-- Externer vSwitch in der Azure-VM mit Azure-DHCP
-- Azure Bastion für jede innere VM
+* Interner vSwitch, vEthernet-IP als Gateway, New-NetNat
+- MAC-Spoofing an der Netzwerkkarte der Azure-VM aktivieren
+- Externer vSwitch in der Azure-VM mit Adressen vom Azure-DHCP
+- Azure Bastion für jede innere VM einzeln bereitstellen
 ! MAC-Spoofing ist in Azure nicht möglich; NAT ist der dokumentierte Weg.
 @ Nested Netzwerk
 
@@ -79,18 +79,18 @@ verweise: [server-hyperv-nested-grundlagen, server-hyperv-nested-netzwerk, serve
 @ Nested Netzwerk
 
 ? Was müssen Sie bei NAT für innere VMs bezüglich der IP-Vergabe beachten?
-* WinNAT vergibt keine Adressen – statische IPs oder ein eigener DHCP-Server sind nötig
-- WinNAT vergibt automatisch Adressen aus dem Präfix
-- Die inneren VMs erhalten Adressen vom Azure-DHCP
-- Die inneren VMs nutzen APIPA als Gateway
+* WinNAT vergibt keine Adressen – statische IPs oder eigener DHCP nötig
+- WinNAT vergibt automatisch Adressen aus dem angegebenen Präfix
+- Die inneren VMs erhalten ihre Adressen direkt vom Azure-DHCP
+- Die inneren VMs tragen eine APIPA-Adresse als Gateway ein
 ! New-NetNat übersetzt nur Adressen; DHCP muss separat bereitgestellt werden.
 @ Nested Netzwerk
 
 ? Sie wollen den Arbeitsspeicher von HV-NESTED (Hyper-V läuft darin) im Betrieb erhöhen. Was ist richtig?
-* Das ist nicht möglich; die VM muss heruntergefahren werden
-- Mit Set-VMMemory -StartupBytes sofort möglich
-- Nur wenn Dynamic Memory aktiv ist
-- Nur über Smart Paging
+* Nicht möglich; die VM muss heruntergefahren werden
+- Mit Set-VMMemory -StartupBytes sofort im Betrieb möglich
+- Nur wenn an HV-NESTED Dynamic Memory aktiviert ist
+- Nur über Smart Paging auf dem physischen Host
 ! Mit aktivem Gast-Hypervisor sind Laufzeit-Größenänderungen des Speichers nicht möglich.
 @ Nested Einschränkungen
 
@@ -111,10 +111,10 @@ verweise: [server-hyperv-nested-grundlagen, server-hyperv-nested-netzwerk, serve
 @ Nested Einschränkungen
 
 ? Warum muss für Credential Guard in einer VM Nested Virtualization aktiviert sein?
-* VBS benötigt selbst einen Hypervisor und damit VT-x/AMD-V im Gast
-- Credential Guard funktioniert nur auf Gen-1-VMs
-- Credential Guard benötigt MAC-Spoofing
-- Credential Guard ersetzt den Integrationsdienst Sicherung
+* VBS benötigt selbst einen Hypervisor und damit VT-x/AMD-V
+- Credential Guard funktioniert ausschließlich auf Gen-1-VMs
+- Credential Guard benötigt MAC-Spoofing an der vNIC der VM
+- Credential Guard ersetzt den Integrationsdienst „Sicherung“
 ! Virtualisierungsbasierte Sicherheit isoliert Geheimnisse mithilfe des Hypervisors.
 @ Nested Einschränkungen
 
@@ -128,10 +128,10 @@ verweise: [server-hyperv-nested-grundlagen, server-hyperv-nested-netzwerk, serve
 
 ? Eine CentOS-/RHEL-VM (Gen 2) bootet wegen Secure Boot nicht. Welche Einstellung behebt das, ohne Secure Boot abzuschalten?
 * Set-VMFirmware -SecureBootTemplate MicrosoftUEFICertificateAuthority
-- Set-VMFirmware -SecureBootTemplate MicrosoftWindows
-- Set-VMBios -EnableSecureBoot Off
-- Set-VM -Generation 1
-! Linux-Bootloader sind über die Microsoft UEFI CA signiert.
+- Set-VMFirmware -VMName RHEL01 -SecureBootTemplate MicrosoftWindows
+- Set-VMFirmware -VMName RHEL01 -EnableSecureBoot Off
+- Set-VMBios -VMName RHEL01 -StartupOrder @("IDE","CD")
+! Linux-Bootloader sind über die Microsoft UEFI CA signiert; Secure Boot abzuschalten wäre gerade nicht gefragt.
 @ Generationen
 
 ? Welche Funktion ist nur in Generation-2-VMs verfügbar?
@@ -144,34 +144,34 @@ verweise: [server-hyperv-nested-grundlagen, server-hyperv-nested-netzwerk, serve
 
 ? Eine Gen-1-VM soll per PXE installiert werden. Welche Hardware wird benötigt?
 * Ältere Netzwerkkarte (Legacy Network Adapter)
-- Synthetische Netzwerkkarte mit SR-IOV
+- Synthetische Netzwerkkarte mit aktiviertem SR-IOV
 - Ein virtueller Fibre-Channel-Adapter
-- Ein vTPM
+- Ein vTPM mit lokalem Schlüsselschutz
 ! Das BIOS der Gen-1-VM unterstützt PXE nur über die emulierte Karte.
 @ Generationen
 
 ? Wie wandeln Sie eine produktive Gen-1-VM in eine Gen-2-VM um?
-* Gar nicht direkt: Datenträger im Gast auf GPT konvertieren und an eine neu angelegte Gen-2-VM hängen
-- Set-VM -Generation 2
-- Update-VMVersion -Generation 2
-- Convert-VHD -VHDType Gen2
+* Nicht direkt: Datenträger auf GPT konvertieren, an neue Gen-2-VM hängen
+- Set-VM -Name SRV01 -Generation 2 bei ausgeschalteter VM
+- Update-VMVersion -Name SRV01 -Generation 2 -Force
+- Convert-VHD -Path SRV01.vhdx -VHDType Generation2
 ! Die Generation ist nach dem Erstellen unveränderlich.
 @ Generationen
 
 ? Welches Gastbetriebssystem erzwingt Generation 1?
 * Ein 32-Bit-Betriebssystem
-- Windows Server 2022
-- Windows 11
-- Ubuntu 24.04
+- Windows Server 2022 Standard
+- Windows 11 Enterprise
+- Ubuntu 24.04 LTS (64 Bit)
 ! Gen 2 setzt 64-Bit-UEFI-Unterstützung voraus.
 @ Generationen
 
 ? Welche Voraussetzung hat Enable-VMTPM?
-* Ein Schlüsselschutz, z. B. Set-VMKeyProtector -NewLocalKeyProtector
-- Eine Konfigurationsversion unter 8.0
-- Ein externer vSwitch
-- Deaktivierter Secure Boot
-! Der vTPM-Zustand wird durch den Key Protector geschützt.
+* Ein Schlüsselschutz, z. B. per -NewLocalKeyProtector
+- Eine Konfigurationsversion unter 8.0 (Server 2016)
+- Ein externer vSwitch mit Verbindung zum Internet
+- Deaktivierter Secure Boot in der VM-Firmware
+! Der vTPM-Zustand wird durch den Key Protector geschützt (Set-VMKeyProtector -NewLocalKeyProtector).
 @ Generationen
 
 ? Von welchem Controller startet eine Gen-2-VM?
@@ -183,34 +183,34 @@ verweise: [server-hyperv-nested-grundlagen, server-hyperv-nested-netzwerk, serve
 @ Generationen
 
 ? Was unterscheidet einen Produktionsprüfpunkt von einem Standardprüfpunkt?
-* Er nutzt VSS bzw. fsfreeze im Gast und speichert keinen Arbeitsspeicher
-- Er speichert zusätzlich den Arbeitsspeicher
-- Er ist nur für Linux-VMs verfügbar
+* Er nutzt VSS/fsfreeze im Gast und sichert keinen RAM
+- Er speichert zusätzlich den kompletten Arbeitsspeicher
+- Er ist ausschließlich für Linux-VMs verfügbar
 - Er ersetzt eine Sicherung auf einem anderen Speicher
 ! Produktionsprüfpunkte sind anwendungskonsistent; nach dem Anwenden startet die VM neu.
 @ Prüfpunkte
 
 ? Welche CheckpointType-Einstellung erstellt bei Fehlern des Produktionsprüfpunkts KEINEN Standardprüfpunkt?
-* ProductionOnly
-- Production
-- Standard
-- Disabled
+* Set-VM -CheckpointType ProductionOnly
+- Set-VM -CheckpointType Production
+- Set-VM -CheckpointType Standard
+- Set-VM -CheckpointType Disabled
 ! Production fällt auf Standard zurück, ProductionOnly bricht ab.
 @ Prüfpunkte
 
 ? Ein Admin löscht einen Prüfpunkt einer laufenden VM. Was passiert?
-* Die AVHDX wird zusammengeführt; die aktuellen Daten bleiben erhalten
-- Die VM wird auf den Prüfpunkt zurückgesetzt
+* Die AVHDX wird zusammengeführt, aktuelle Daten bleiben
+- Die VM wird auf den Stand des Prüfpunkts zurückgesetzt
 - Alle Änderungen seit dem Prüfpunkt gehen verloren
-- Die VM wird exportiert
+- Die VM wird angehalten und automatisch exportiert
 ! Löschen entfernt nur den Rücksprungpunkt.
 @ Prüfpunkte
 
 ? Wie schützt Windows Server einen virtualisierten DC beim Anwenden eines Prüfpunkts vor USN-Rollback?
-* Über die VM-GenerationID – der DC setzt eine neue InvocationID und verwirft den RID-Pool
-- Über automatische Prüfpunkte
-- Über DHCP-Guard
-- Über die Konfigurationsversion 8.0
+* VM-GenerationID: neue InvocationID, RID-Pool wird verworfen
+- Automatische Prüfpunkte vor jeder Replikation mit anderen DCs
+- DHCP-Guard an der vNIC des Domänencontrollers
+- Konfigurationsversion 8.0 mit aktiviertem vTPM
 ! Seit Server 2012 erkennt der DC über die geänderte GenerationID das Zurücksetzen.
 @ Prüfpunkte
 
@@ -231,26 +231,26 @@ verweise: [server-hyperv-nested-grundlagen, server-hyperv-nested-netzwerk, serve
 @ Prüfpunkte
 
 ? Was ist der sicherste Weg, eine äußere Nested-VM mit laufenden inneren VMs per Prüfpunkt zu sichern?
-* Innere VMs und die äußere VM herunterfahren, dann den Prüfpunkt erstellen
-- Standardprüfpunkt im laufenden Betrieb
-- Save-VM und VHDX kopieren
-- Automatische Prüfpunkte aktivieren
+* Innere und äußere VMs herunterfahren, dann Prüfpunkt erstellen
+- Standardprüfpunkt der äußeren VM im laufenden Betrieb
+- Save-VM für die äußere VM und anschließend VHDX kopieren
+- Automatische Prüfpunkte für die äußere VM aktivieren
 ! Speicherzustände mit laufendem Gast-Hypervisor sind nicht zuverlässig sicherbar.
 @ Prüfpunkte
 
 ? Was beschreibt der Arbeitsspeicherpuffer bei Dynamic Memory?
 * Prozentuale Reserve über dem aktuellen Bedarf (Standard 20 %)
-- Feste Menge RAM für das Host-Betriebssystem
-- Mindest-RAM beim Start
-- Größe der Smart-Paging-Datei
+- Feste Menge Arbeitsspeicher, die dem Host-Betriebssystem bleibt
+- Mindestmenge an RAM, die der VM beim Start zugewiesen wird
+- Größe der Smart-Paging-Datei auf dem Host-Volume
 ! Einstellbar von 5 bis 2000 %.
 @ Dynamic Memory
 
 ? In welcher Situation verwendet Hyper-V Smart Paging?
-* Beim Neustart einer VM mit Minimum < Start, wenn physischer RAM fehlt
-- Bei jeder Live-Migration
-- Wenn der Gast eine Auslagerungsdatei fehlt
-- Bei Speicherdruck im Normalbetrieb
+* Neustart mit Minimum < Start, wenn physischer RAM fehlt
+- Bei jeder Live-Migration einer VM mit Dynamic Memory
+- Wenn im Gastbetriebssystem die Auslagerungsdatei fehlt
+- Bei anhaltendem Speicherdruck im laufenden Normalbetrieb
 ! Smart Paging überbrückt nur den Neustart.
 @ Dynamic Memory
 
@@ -263,10 +263,10 @@ verweise: [server-hyperv-nested-grundlagen, server-hyperv-nested-netzwerk, serve
 @ Dynamic Memory
 
 ? Warum sollte eine große SQL-Server-VM mit NUMA-Optimierung keinen Dynamic Memory nutzen?
-* Mit Dynamic Memory wird kein virtuelles NUMA bereitgestellt
-- Dynamic Memory ist für SQL Server verboten
-- Dynamic Memory erfordert Gen 1
-- SQL Server kann keine Ballooning-Treiber laden
+* Mit Dynamic Memory gibt es kein virtuelles NUMA
+- Dynamic Memory ist für SQL Server lizenzrechtlich verboten
+- Dynamic Memory erfordert Generation-1-VMs mit BIOS
+- SQL Server kann keine Ballooning-Treiber im Gast laden
 ! Die VM sieht mit Dynamic Memory nur einen NUMA-Knoten.
 @ Dynamic Memory
 
@@ -311,42 +311,42 @@ verweise: [server-hyperv-nested-grundlagen, server-hyperv-nested-netzwerk, serve
 @ vSwitch
 
 ? Welche Aussage zu Switch Embedded Teaming ist richtig?
-* SET bündelt bis zu 8 identische NICs switch-unabhängig im vSwitch
-- SET benötigt LACP am physischen Switch
-- SET unterstützt Standby-Adapter
-- SET ist nur in Windows 11 verfügbar
-! Lastverteilung Hyper-V-Port oder Dynamisch, kompatibel mit RDMA.
+* SET bündelt bis zu 8 identische NICs switch-unabhängig
+- SET benötigt LACP bzw. statisches Teaming am physischen Switch
+- SET unterstützt Standby-Adapter für die Ausfallsicherheit
+- SET ist nur in Windows 11 Pro und Enterprise verfügbar
+! Lastverteilung Hyper-V-Port oder Dynamisch, kompatibel mit RDMA; der Team wird direkt im vSwitch gebildet.
 @ vSwitch
 
 ? Eine äußere Nested-VM soll innere VMs in VLAN 10 und 20 betreiben. Wie konfigurieren Sie ihre vNIC auf L0?
 * Trunk mit AllowedVlanIdList 10,20 und MAC-Spoofing
-- Access-VLAN 10 und Router-Guard
-- Privater Switch ohne VLAN
-- DHCP-Guard und Port-Mirroring
+- Access-VLAN 10 und zusätzlich Router-Guard
+- Privater Switch ohne VLAN-Konfiguration
+- DHCP-Guard und Port-Mirroring als Ziel
 ! Die inneren VMs taggen selbst; L0 muss Tags und fremde MACs durchlassen.
 @ vSwitch
 
 ? Im Nested-Cluster-Lab soll der iSCSI-Zielserver nur HVN1 und HVN2 bedienen. Wo konfigurieren Sie das?
 * In den InitiatorIds des iSCSI-Ziels (IQNs der Knoten)
-- In der Windows-Firewall von HV01
-- Im Datenträgerzeugen
-- Über MAC-Spoofing
+- In einer eingehenden Firewall-Regel für TCP 3260 auf HV01
+- In den Eigenschaften des Datenträgerzeugen im Cluster
+- Über MAC-Spoofing an den vNICs der beiden Knoten
 ! InitiatorIds entsprechen dem LUN-Masking beim iSCSI-Zielserver.
 @ Nested Lab
 
 ? Welcher Schritt muss im Nested-Cluster-Lab vor New-Cluster erfolgen?
 * Test-Cluster (Validierung) mit beiden Knoten
-- Add-ClusterSharedVolume
-- Set-ClusterQuorum
-- Add-ClusterVirtualMachineRole
+- Add-ClusterSharedVolume für die iSCSI-Datenträger
+- Set-ClusterQuorum mit dem Datenträgerzeugen
+- Add-ClusterVirtualMachineRole für INNER01
 ! CSV, Quorum und Rollen werden erst nach der Clustererstellung konfiguriert.
 @ Nested Lab
 
 ? Clusterte innere VMs im Nested-Lab haben kein Netzwerk. Was ist die wahrscheinlichste Ursache?
 * MAC-Spoofing an den vNICs der Nested-Knoten fehlt
-- Der Datenträgerzeuge fehlt
-- Das CSV ist mit ReFS formatiert
-- Die inneren VMs sind Gen 2
+- Der Datenträgerzeuge des Clusters ist nicht konfiguriert
+- Das freigegebene Clustervolume ist mit ReFS formatiert
+- Die inneren VMs wurden als Generation 2 angelegt
 ! Ohne MAC-Spoofing verwirft der vSwitch auf L0 Frames mit den MACs der inneren VMs.
 @ Nested Lab
 
@@ -360,17 +360,17 @@ verweise: [server-hyperv-nested-grundlagen, server-hyperv-nested-netzwerk, serve
 
 ? Welcher Befehl migriert die Clusterrolle INNER01 ohne Unterbrechung auf HVN2?
 * Move-ClusterVirtualMachineRole -Name INNER01 -Node HVN2 -MigrationType Live
-- Move-VM -Name INNER01 -DestinationHost HVN2 -Quick
-- Move-ClusterGroup -Name INNER01 -Node HVN2 -Offline
-- Export-VM -Name INNER01 -Path \\HVN2\VMs
-! Clusterrollen werden über die Cluster-Cmdlets verschoben.
+- Move-VM -Name INNER01 -DestinationHost HVN2 -IncludeStorage -Quick
+- Move-ClusterGroup -Name INNER01 -Node HVN2 -IgnoreLocked -Offline
+- Export-VM -Name INNER01 -Path \\HVN2\VMs anschließend Import-VM
+! Clusterrollen werden über die Cluster-Cmdlets verschoben; nur -MigrationType Live verschiebt ohne Unterbrechung.
 @ Nested Lab
 
 ? Ein Kollege möchte das Nested-Lab auf einem Notebook mit Windows 11 Home betreiben. Was ist das Problem?
 * Windows 11 Home enthält keine Hyper-V-Rolle
-- Windows 11 unterstützt keine Gen-2-VMs
-- Nested ist nur auf Windows Server möglich
-- Windows 11 unterstützt kein NAT
+- Windows 11 unterstützt keine Gen-2-VMs als Gast
+- Nested ist ausschließlich auf Windows Server möglich
+- Windows 11 unterstützt kein WinNAT mit New-NetNat
 ! Hyper-V gibt es in Windows 11 Pro, Enterprise und Education.
 @ Nested Virtualization
 
@@ -384,8 +384,8 @@ verweise: [server-hyperv-nested-grundlagen, server-hyperv-nested-netzwerk, serve
 
 ? Ein Admin prüft mit Get-VM die Spalte „Version“ einer VM und sieht 5.0. Welche Folge hat das für Nested?
 * Nested ist erst nach Update-VMVersion möglich
-- Nested funktioniert, aber nur mit AMD
-- Die VM muss neu installiert werden
-- Version 5.0 ist die Mindestversion
+- Nested funktioniert, aber nur auf AMD-Hosts
+- Die VM muss komplett neu installiert werden
+- Version 5.0 ist genau die Mindestversion für Nested
 ! Konfigurationsversion 5.0 stammt aus Server 2012 R2; mindestens 8.0 ist nötig.
 @ Nested Virtualization

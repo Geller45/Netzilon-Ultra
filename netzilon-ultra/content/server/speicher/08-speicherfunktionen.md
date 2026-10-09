@@ -211,17 +211,17 @@ $ist = 10; $rate = 0.20; $jahre = 3
 ! Ein Schreibvorgang gilt erst als fertig, wenn beide Seiten ihn bestätigt haben.
 
 ? Was ist ein Nachteil synchroner Replikation über große Entfernungen?
-* Jeder Schreibvorgang wartet auf die Bestätigung der Gegenseite und wird langsamer
-- Es entsteht ein hoher Datenverlust
-- Snapshots sind nicht mehr möglich
-- Es funktioniert nur mit HDDs
-! Darum ist synchrone Replikation auf kurze Distanzen mit geringer Latenz begrenzt.
+* Jeder Schreibvorgang wartet auf die Bestätigung der Gegenseite
+- Es entsteht bei jedem Ausfall ein hoher Datenverlust
+- Snapshots sind auf dem Quellsystem nicht mehr möglich
+- Sie funktioniert nur mit HDDs, nicht mit SSDs
+! Schreibvorgänge werden dadurch langsamer; darum ist synchrone Replikation auf kurze Distanzen mit geringer Latenz begrenzt.
 
 ? Warum ersetzt ein Snapshot kein Backup?
-* Er liegt auf demselben Speichersystem und geht bei dessen Verlust mit verloren
-- Er kann nicht wiederhergestellt werden
-- Er enthält nur Metadaten ohne Daten
-- Er ist immer verschlüsselt
+* Er liegt auf demselben System und geht mit ihm verloren
+- Er kann grundsätzlich nicht wiederhergestellt werden
+- Er enthält nur Metadaten, aber keine Nutzdaten
+- Er ist immer verschlüsselt und daher nicht lesbar
 ! Backups gehören auf ein getrenntes Medium, möglichst offline/offsite (3-2-1).
 
 ? Bei welchen Daten bringt Deduplizierung am wenigsten?
@@ -261,31 +261,31 @@ $ist = 10; $rate = 0.20; $jahre = 3
 
 ? Ein Bestand von 20 TB wächst jährlich um 10 %. Wie groß ist er nach zwei Jahren?
 * 24,2 TB
-- 22 TB
-- 24 TB
-- 40 TB
+- 22,0 TB
+- 24,0 TB
+- 40,0 TB
 ! 20 × 1,1² = 24,2 TB (Zinseszins-Effekt).
 
 ? Was beschreibt Copy-on-Write bei Snapshots?
-* Vor dem Überschreiben wird der alte Block in den Snapshot-Bereich kopiert
-- Neue Daten werden nie geschrieben
-- Der Snapshot wird sofort vollständig kopiert
-- Daten werden komprimiert und dedupliziert
+* Vor dem Überschreiben wird der alte Block in den Snapshot kopiert
+- Neue Daten werden nie geschrieben, nur im RAM gehalten
+- Der Snapshot wird sofort vollständig als Kopie angelegt
+- Die Daten werden beim Schreiben komprimiert und dedupliziert
 ! Das verursacht zusätzliche Schreiblast; Redirect-on-Write vermeidet die Kopie.
 
 ? Welcher Windows-Dienst erstellt anwendungskonsistente Snapshots?
 * VSS (Volume Shadow Copy Service)
-- MPIO
-- WinTarget
-- DFS-R
+- MPIO (Multipath I/O)
+- WinTarget (iSCSI-Zielserver)
+- DFS-R (DFS-Replikation)
 ! VSS koordiniert mit Writern (z. B. SQL, Hyper-V) einen konsistenten Zustand.
 
 ? Was unterscheidet Tiering von Caching?
-* Beim Tiering liegen Daten nur auf einer Ebene, beim Caching gibt es eine zusätzliche Kopie
-- Tiering funktioniert nur mit HDDs
+* Tiering verschiebt Daten, Caching legt eine zusätzliche Kopie an
+- Tiering funktioniert nur mit HDDs, Caching nur mit SSDs
 - Caching verschiebt Daten dauerhaft auf Band
-- Es gibt keinen Unterschied
-! Tiering verschiebt, Caching kopiert.
+- Es gibt keinen Unterschied, beide Begriffe sind gleich
+! Beim Tiering liegen Daten nur auf einer Ebene, beim Caching zusätzlich im schnellen Speicher.
 
 ## Lücken
 - Die Formel für den Durchsatz lautet Durchsatz = {IOPS} × {Blockgröße}.

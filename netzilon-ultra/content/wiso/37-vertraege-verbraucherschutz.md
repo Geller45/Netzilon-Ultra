@@ -263,17 +263,17 @@ Der 16-jährige Finn bestellt im Webshop der Netzilon GmbH eine Grafikkarte für
 
 ## Quiz
 ? Welche Aussage zum Vertragsschluss im Onlineshop ist richtig?
-* Die Bestellung des Kunden ist der Antrag, die Auftragsbestätigung des Händlers die Annahme.
-- Die Darstellung im Shop ist das Angebot, die Bestellung die Annahme.
-- Die automatische Eingangsbestätigung ist immer die Annahme.
-- Ein Vertrag entsteht erst mit der Zahlung.
+* Die Bestellung ist der Antrag, die Auftragsbestätigung die Annahme.
+- Die Darstellung im Shop ist das Angebot, die Bestellung des Kunden die Annahme.
+- Die automatische Eingangsbestätigung per E-Mail ist immer die Annahme.
+- Ein Vertrag entsteht erst mit der vollständigen Zahlung des Kaufpreises.
 ! Die Shopdarstellung ist eine invitatio ad offerendum.
 
 ? Ein 15-Jähriger kauft ohne Wissen der Eltern ein Smartphone für 600 € auf Raten. Wie ist der Vertrag zu beurteilen?
 * Schwebend unwirksam bis zur Genehmigung der Eltern
-- Nichtig von Anfang an
-- Voll wirksam
-- Wirksam nach dem Taschengeldparagrafen
+- Nichtig von Anfang an, auch eine Genehmigung hilft nicht
+- Voll wirksam, da der Käufer über 14 Jahre alt ist
+- Wirksam nach dem Taschengeldparagrafen (§ 110 BGB)
 ! §§ 106, 108 BGB; § 110 scheidet bei Ratenzahlung aus.
 
 ? Welche Rechtsgeschäfte sind nichtig? (2 richtige)
@@ -285,11 +285,11 @@ Der 16-jährige Finn bestellt im Webshop der Netzilon GmbH eine Grafikkarte für
 ! §§ 105, 125, 311b BGB; Irrtum und Täuschung führen nur zur Anfechtbarkeit.
 
 ? Ein Händler hat bei der Kalkulation eines Angebots falsch gerechnet und will deshalb anfechten. Was gilt?
-* Die Anfechtung ist nicht möglich, da ein unbeachtlicher Motiv-/Kalkulationsirrtum vorliegt.
-- Er kann wegen Inhaltsirrtums anfechten.
-- Er kann binnen eines Jahres wegen Täuschung anfechten.
-- Der Vertrag ist automatisch nichtig.
-! § 119 BGB erfasst den internen Kalkulationsirrtum nicht.
+* Nicht möglich – ein interner Kalkulationsirrtum ist unbeachtlich.
+- Er kann wegen Inhaltsirrtums nach § 119 Abs. 1 BGB unverzüglich anfechten.
+- Er kann binnen eines Jahres wegen arglistiger Täuschung anfechten.
+- Der Vertrag ist wegen des Rechenfehlers automatisch nichtig.
+! § 119 BGB erfasst den internen Kalkulationsirrtum (Motivirrtum) nicht.
 
 ? Innerhalb welcher Frist muss ein Vertrag wegen arglistiger Täuschung angefochten werden?
 * Innerhalb eines Jahres ab Entdeckung der Täuschung
@@ -313,10 +313,10 @@ Der 16-jährige Finn bestellt im Webshop der Netzilon GmbH eine Grafikkarte für
 ! § 439 Abs. 1 BGB; der Verkäufer kann nur unverhältnismäßige Kosten verweigern.
 
 ? Wann beginnt die Widerrufsfrist bei einem Fernabsatzkauf von Waren?
-* Mit Erhalt der Ware, nicht vor ordnungsgemäßer Widerrufsbelehrung
-- Mit Absenden der Bestellung
-- Mit Zahlung des Kaufpreises
-- Mit Ablauf der Gewährleistung
+* Mit Erhalt der Ware, nicht vor ordnungsgemäßer Belehrung
+- Mit dem Absenden der Bestellung durch den Kunden
+- Mit Zahlungseingang des Kaufpreises beim Händler
+- Mit Ablauf der zweijährigen Gewährleistungsfrist
 ! § 356 Abs. 2 und 3 BGB.
 
 ? In welchen Fällen besteht KEIN Widerrufsrecht? (2 richtige)
@@ -329,16 +329,16 @@ Der 16-jährige Finn bestellt im Webshop der Netzilon GmbH eine Grafikkarte für
 
 ? Welche Voraussetzung ist für den Lieferungsverzug in der Regel erforderlich, wenn kein fester Kalendertermin vereinbart wurde?
 * Eine Mahnung des Käufers nach Fälligkeit
-- Eine Rücktrittserklärung
-- Ein Gerichtsurteil
-- Eine Zahlung des Käufers
+- Eine schriftliche Rücktrittserklärung des Käufers
+- Ein rechtskräftiges Urteil des zuständigen Gerichts
+- Eine vollständige Vorauszahlung des Käufers
 ! § 286 Abs. 1 BGB; bei kalendermäßig bestimmtem Termin ist die Mahnung entbehrlich.
 
 ? Was ist die Rechtsfolge einer unwirksamen AGB-Klausel?
-* Der Vertrag bleibt im Übrigen wirksam, an die Stelle der Klausel tritt die gesetzliche Regelung.
-- Der gesamte Vertrag ist nichtig.
-- Die Klausel gilt in abgeschwächter Form weiter.
-- Der Kunde muss den Vertrag anfechten.
+* Der Vertrag bleibt wirksam; statt der Klausel gilt das Gesetz.
+- Der gesamte Vertrag ist nichtig und muss rückabgewickelt werden.
+- Die Klausel gilt in gerade noch zulässiger, abgeschwächter Form weiter.
+- Der Kunde muss den Vertrag binnen 14 Tagen anfechten.
 ! § 306 BGB – keine geltungserhaltende Reduktion.
 
 ? Welcher Vertrag liegt vor, wenn die Netzilon GmbH für einen Kunden eine individuelle Software mit Abnahme entwickelt?

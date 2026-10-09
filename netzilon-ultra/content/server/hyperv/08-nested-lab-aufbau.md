@@ -223,10 +223,10 @@ Get-ClusterGroup -Name INNER01 | Select-Object Name, OwnerNode, State
 
 ## Quiz
 ? Im Nested-Cluster-Lab lässt sich auf HVN1 die Hyper-V-Rolle nicht installieren. HVN2 funktioniert. Was ist die wahrscheinlichste Ursache?
-* Bei HVN1 wurde ExposeVirtualizationExtensions nicht (oder bei laufender VM) gesetzt
-- Der iSCSI-Initiator fehlt
-- Der Datenträgerzeuge ist offline
-- HVN1 hat keinen privaten Switch
+* ExposeVirtualizationExtensions fehlt bei HVN1 (oder wurde bei laufender VM gesetzt)
+- Auf HVN1 fehlt der iSCSI-Initiator bzw. der Dienst MSiSCSI läuft nicht
+- Der Datenträgerzeuge des Clusters ist offline und blockiert die Rolle
+- HVN1 hat keinen privaten Switch für den Cluster-Heartbeat erhalten
 ! Ohne weitergegebene Virtualisierungserweiterungen lässt sich die Rolle in L1 nicht installieren.
 
 ? Welche Reihenfolge ist für den Clusteraufbau korrekt?
@@ -238,16 +238,16 @@ Get-ClusterGroup -Name INNER01 | Select-Object Name, OwnerNode, State
 
 ? Wie stellt man auf ISCSI01 sicher, dass nur HVN1 und HVN2 die LUNs sehen?
 * Ihre IQNs als InitiatorIds im iSCSI-Ziel eintragen
-- Die Windows-Firewall auf ISCSI01 abschalten
-- MAC-Spoofing auf ISCSI01 aktivieren
-- Die LUNs als Datenträgerzeuge markieren
+- Die Windows-Firewall auf ISCSI01 für TCP 3260 abschalten
+- MAC-Spoofing an der vNIC von ISCSI01 aktivieren
+- Die LUNs im Cluster als Datenträgerzeugen markieren
 ! Die InitiatorIds wirken wie LUN-Masking.
 
 ? Nach einem Neustart von HVN2 fehlen die iSCSI-Datenträger. Was wurde vermutlich vergessen?
-* Persistente Verbindung (-IsPersistent $true) bzw. automatischer Start des Dienstes MSiSCSI
-- Test-Cluster erneut auszuführen
-- MAC-Spoofing für die iSCSI-vNIC
-- Die Konfigurationsversion anzuheben
+* Persistente Verbindung (-IsPersistent $true) bzw. Autostart von MSiSCSI
+- Test-Cluster nach dem Neustart erneut auszuführen und zu bestätigen
+- MAC-Spoofing an der iSCSI-vNIC von HVN2 auf dem Host zu aktivieren
+- Die Konfigurationsversion von HVN2 mit Update-VMVersion anzuheben
 ! Nicht-persistente Verbindungen werden beim Neustart nicht wiederhergestellt.
 
 ? Wozu dient der 1-GB-Datenträger „Witness“ im Lab?
@@ -266,23 +266,23 @@ Get-ClusterGroup -Name INNER01 | Select-Object Name, OwnerNode, State
 
 ? INNER01 läuft hochverfügbar im Cluster, hat aber kein Netzwerk. Der Cluster meldet keine Fehler. Was fehlt?
 * MAC-Spoofing an den vNICs von HVN1/HVN2 auf HV01
-- Ein zweiter Datenträgerzeuge
-- Der Dienst MSiSCSI in INNER01
-- Ein privater Switch in INNER01
+- Ein zweiter Datenträgerzeuge für das Clusterquorum
+- Der Dienst MSiSCSI innerhalb von INNER01
+- Ein privater Switch innerhalb von INNER01
 ! Innere VMs senden mit eigenen MACs über die vNIC des Nested-Knotens; der Switch auf HV01 verwirft sie ohne Spoofing.
 
 ? Welche Aussage zu Live-Migration im Lab ist richtig?
-* INNER01 kann zwischen HVN1 und HVN2 live migriert werden, HVN1 selbst nicht zwischen physischen Hosts
-- HVN1 kann zwischen physischen Hosts live migriert werden, INNER01 nicht
-- Weder INNER01 noch HVN1 können migriert werden
-- Live-Migration erfordert in Nested-Labs Gen-1-VMs
-! Die Einschränkung betrifft nur VMs mit aktivem Gast-Hypervisor.
+* INNER01 lässt sich zwischen HVN1/HVN2 migrieren, HVN1 selbst nicht
+- HVN1 lässt sich zwischen physischen Hosts migrieren, INNER01 dagegen nicht
+- Weder INNER01 noch HVN1 lassen sich im Lab live migrieren
+- Live-Migration funktioniert in Nested-Labs nur mit Gen-1-VMs
+! Die Einschränkung betrifft nur VMs mit aktivem Gast-Hypervisor: HVN1 kann nicht zwischen physischen Hosts migriert werden.
 
 ? Warum werden die iSCSI-Datenträger nur auf HVN1 initialisiert und formatiert?
-* Weil gleichzeitiger Schreibzugriff mehrerer Knoten vor der Clusterverwaltung das Dateisystem beschädigen kann
-- Weil HVN2 kein GPT kennt
-- Weil nur HVN1 Hyper-V hat
-- Weil HVN2 die LUNs nicht sehen darf
+* Paralleles Schreiben ohne Clusterkoordination beschädigt das Dateisystem
+- Weil HVN2 als Gen-1-VM keine GPT-Datenträger initialisieren kann
+- Weil die Hyper-V-Rolle bis dahin nur auf HVN1 installiert ist
+- Weil HVN2 die LUNs per Masking grundsätzlich nicht sehen darf
 ! Erst der Cluster koordiniert den gemeinsamen Zugriff (Besitz bzw. CSV).
 
 ? Welche Einstellung ist für die Nested-Knoten HVN1/HVN2 beim Arbeitsspeicher richtig?
@@ -294,9 +294,9 @@ Get-ClusterGroup -Name INNER01 | Select-Object Name, OwnerNode, State
 
 ? Wie macht man die neue VM INNER01 im Cluster hochverfügbar?
 * Add-ClusterVirtualMachineRole -VMName INNER01
-- Set-VM -Name INNER01 -HighlyAvailable $true
-- Enable-VMReplication -VMName INNER01
-- New-ClusterGroup -VM INNER01 -Local
+- Set-VM -Name INNER01 -HighlyAvailable $true -Cluster
+- Enable-VMReplication -VMName INNER01 -ReplicaServerName HVN2
+- New-ClusterGroup -Name INNER01 -GroupType VirtualMachine
 ! Voraussetzung: Die VM-Dateien liegen auf gemeinsamem Speicher (CSV).
 
 ? Welches Netz sollte im Lab für Clusterkommunikation gesperrt werden (Role = 0)?
@@ -308,9 +308,9 @@ Get-ClusterGroup -Name INNER01 | Select-Object Name, OwnerNode, State
 
 ? Welche Rolle erhält der Host HV01 für den Internetzugang des Labs?
 * NAT über internen Switch „Lab“ mit New-NetNat
-- DHCP-Server mit Option 003
-- iSCSI-Zielserver
-- Failover-Cluster-Knoten
+- DHCP-Server mit Option 003 (Router) für das Lab
+- iSCSI-Zielserver mit eigenem Gateway-Dienst
+- Failover-Cluster-Knoten mit Clusternetzwerk „Extern“
 ! Der interne Switch plus WinNAT gibt den Lab-VMs Internetzugang, ohne sie ins Heimnetz zu hängen.
 
 ## Lücken

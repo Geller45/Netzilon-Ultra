@@ -297,9 +297,9 @@ Azubi Sophie (19) der Netzilon GmbH erhält 1.100 € Ausbildungsvergütung. Sie
 
 ? Welches Prinzip beschreibt die Finanzierung der heutigen Renten durch die Beiträge der heute Beschäftigten?
 * Umlageverfahren (Generationenvertrag)
-- Kapitaldeckungsverfahren
-- Subsidiaritätsprinzip
-- Fürsorgeprinzip
+- Kapitaldeckungsverfahren (Ansparen)
+- Subsidiaritätsprinzip (Eigenhilfe vor Staatshilfe)
+- Fürsorgeprinzip (steuerfinanzierte Hilfe)
 ! Beim Kapitaldeckungsverfahren spart jeder für sich selbst an.
 
 ? Wie wirkt sich ein Arbeitgeberzuschuss zu vermögenswirksamen Leistungen auf die Abrechnung aus? (2 richtige)

@@ -173,16 +173,16 @@ Laufwerk E: in FILE01 (200-GB-VHDX am SCSI-Controller) ist voll und soll ohne Au
 
 ? Was ist nach Resize-VHD im Gast zu sehen?
 * Nicht zugeordneter Bereich hinter der Partition
-- Ein automatisch größeres Laufwerk E:
-- Ein neues Laufwerk F:
-- Nichts, Neustart nötig
+- Ein automatisch vergrößertes Laufwerk E:
+- Ein neues, bereits formatiertes Laufwerk F:
+- Nichts – erst nach Neustart des Gastes
 ! Die Partition muss manuell erweitert werden.
 
 ? Welcher Befehl erweitert E: im Gast auf das Maximum?
 * Resize-Partition -DriveLetter E -Size (Get-PartitionSupportedSize -DriveLetter E).SizeMax
-- Resize-VHD -DriveLetter E
-- Set-Volume -DriveLetter E -Size Max
-- diskpart convert gpt
+- Resize-VHD -Path E:\Daten.vhdx -SizeBytes (Get-VHD -Path E:\Daten.vhdx).Size
+- Set-Volume -DriveLetter E -Size (Get-Volume -DriveLetter E).SizeRemaining
+- Optimize-Volume -DriveLetter E -ReTrim -SlabConsolidate -Verbose
 ! Get-PartitionSupportedSize liefert die mögliche Höchstgröße.
 
 ? Warum schlägt Resize-VHD an einer Platte mit Prüfpunkten fehl?
@@ -201,9 +201,9 @@ Laufwerk E: in FILE01 (200-GB-VHDX am SCSI-Controller) ist voll und soll ohne Au
 
 ? Was ist bei dynamischen VHDX auf dem Host zu überwachen?
 * Freier Speicher, weil die Dateien wachsen
-- Nichts, sie sind immer klein
-- Die MAC-Adresse
-- Die Prüfpunktvorlage
+- Nichts, dynamische VHDX bleiben immer klein
+- Die MAC-Adresse der zugehörigen VM
+- Die Prüfpunktvorlage der zugehörigen VM
 ! Die Summe der Maximalgrößen kann den Host überbuchen.
 
 ? Ab welcher Version gibt es Online-Größenänderung von VHDX?

@@ -182,37 +182,37 @@ SRV05 (Server Core, Arbeitsgruppe) hat kein Netzwerk. PowerShell Direct scheiter
 ## Quiz
 ? Von wo aus funktioniert Enter-PSSession -VMName SRV05?
 * Lokal auf dem Hyper-V-Host, auf dem SRV05 läuft
-- Von jedem Domänenrechner
-- Nur vom Domänencontroller
-- Aus Azure Cloud Shell
+- Von jedem Domänenrechner mit aktiviertem WinRM
+- Nur vom Domänencontroller mit Schemaadmin-Rechten
+- Aus der Azure Cloud Shell über Azure Arc
 ! PowerShell Direct nutzt den VMBus des Hosts.
 
 ? Welche Anmeldeinformationen braucht man für eine Arbeitsgruppen-VM?
-* Ein lokales Konto des Gasts, z. B. SRV05\Administrator
-- Das Domänenkonto des Host-Admins
-- Das Computerkonto des Hosts
-- Keine
+* Ein lokales Gastkonto, z. B. SRV05\Administrator
+- Das Domänenkonto des Host-Administrators
+- Das Computerkonto des Hosts (HV01$)
+- Keine, der VMBus authentifiziert automatisch
 ! Das Konto muss im Gast gültig sein.
 
 ? Was braucht PowerShell Direct NICHT?
 * Netzwerkverbindung und Firewallregel im Gast
-- Gast-Anmeldeinformationen
-- Laufende VM
-- Windows Server 2016 oder neuer
+- Gültige Anmeldeinformationen für den Gast
+- Eine laufende VM auf dem lokalen Host
+- Windows 10 / Server 2016 oder neuer im Gast
 ! Die Verbindung läuft über den VMBus.
 
 ? Ab welcher Version wird PowerShell Direct unterstützt?
 * Windows 10 / Windows Server 2016
-- Windows Server 2008 R2
-- Windows Server 2012
-- Windows 7
+- Windows 7 / Windows Server 2008 R2
+- Windows 8 / Windows Server 2012
+- Windows 8.1 / Windows Server 2012 R2
 ! Host und Gast benötigen mindestens diese Version.
 
 ? Wie kopiert man eine Datei ohne Netzwerk in die VM?
-* Copy-Item -ToSession mit einer Sitzung aus New-PSSession -VMName
-- Copy-Item \\SRV05\C$
-- robocopy über SMB
-- Move-VMStorage
+* Copy-Item -ToSession mit Sitzung aus New-PSSession -VMName
+- Copy-Item \\SRV05\C$\Temp über die Administratorfreigabe
+- robocopy über SMB auf die Freigabe der VM
+- Move-VMStorage -VMName SRV05 mit Zielpfad
 ! Alternativ Copy-VMFile mit Gastdienstschnittstelle.
 
 ? Welcher Parameter ist bei gleichnamigen VMs eindeutig?

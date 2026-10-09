@@ -182,9 +182,9 @@ WEB01 nutzt Dynamic Memory mit Maximum 4 GB. Der Bedarf liegt bei 6 GB, der Host
 
 ? Wann wirkt die Speichergewichtung?
 * Bei Speicherknappheit des Hosts
-- Immer beim Start
-- Nur bei statischem RAM
-- Nur in Clustern
+- Immer beim Start jeder VM
+- Nur bei VMs mit statischem RAM
+- Nur in Failover-Clustern
 ! Bei genug freiem RAM bekommen alle VMs ihren Bedarf.
 
 ? Welcher Speicherstatus zeigt einen Engpass?

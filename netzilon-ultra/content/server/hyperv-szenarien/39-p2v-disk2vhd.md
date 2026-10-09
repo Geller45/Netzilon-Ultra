@@ -172,10 +172,10 @@ ALTSRV01 (Server 2016, BIOS-Modus Legacy, MBR) soll mit Disk2vhd nach HV01 über
 ! Sysinternals-Tool mit VSS-Unterstützung.
 
 ? Wo sollte das Ziel der VHDX liegen?
-* Auf einem anderen Datenträger bzw. einer Netzwerkfreigabe
-- Auf dem Quellvolume C:
-- Im Arbeitsspeicher
-- In der Auslagerungsdatei
+* Auf einem anderen Datenträger oder einer Freigabe
+- Direkt auf dem Quellvolume C: des Servers
+- In einer RAM-Disk im Arbeitsspeicher
+- Im Ordner der Auslagerungsdatei pagefile.sys
 ! Sonst wird die Datei mitgesichert oder der Platz reicht nicht.
 
 ? Woran erkennst du per bcdedit ein UEFI-System?
@@ -208,7 +208,7 @@ ALTSRV01 (Server 2016, BIOS-Modus Legacy, MBR) soll mit Disk2vhd nach HV01 über
 
 ? Warum nutzt Disk2vhd die Volumeschattenkopie?
 * Für ein konsistentes Abbild im laufenden Betrieb
-- Um die VHDX zu verschlüsseln
-- Um die VM automatisch zu starten
-- Um die Lizenz zu übertragen
+- Um die erzeugte VHDX automatisch zu verschlüsseln
+- Um die VM nach der Konvertierung automatisch zu starten
+- Um die Windows-Lizenz auf die VM zu übertragen
 ! VSS friert einen konsistenten Zeitpunkt ein.

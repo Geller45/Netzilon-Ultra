@@ -147,9 +147,9 @@ BACKUP01 belegt abends die 1-Gbit/s-Leitung des vSwitch „Extern“. FS01 und R
 
 ? Wann funktioniert -MinimumBandwidthWeight?
 * Wenn der vSwitch im Modus Weight erstellt wurde
-- Immer, unabhängig vom Switch
-- Nur bei internen Switches
-- Nur bei Gen-1-VMs
+- Immer, unabhängig vom Modus des vSwitches
+- Nur bei internen Switches ohne physische NIC
+- Nur bei Gen-1-VMs mit älterer Netzwerkkarte
 ! Der Modus wird bei New-VMSwitch festgelegt.
 
 ? Wie ändert man den Bandbreitenmodus eines vorhandenen vSwitch?
@@ -175,9 +175,9 @@ BACKUP01 belegt abends die 1-Gbit/s-Leitung des vSwitch „Extern“. FS01 und R
 
 ? Womit ermittelst du den Netzwerkverbrauch einer VM über die Zeit?
 * Enable-VMResourceMetering und Measure-VM
-- Get-VMSwitchTeam
-- Compare-VM
-- Test-NetConnection -Bandwidth
+- Get-VMSwitchTeam und Get-NetAdapterStatistics
+- Compare-VM mit dem Zielhost der Migration
+- Test-NetConnection -ComputerName WEB01 -TraceRoute
 ! Die Ressourcenmessung liefert Netzwerkverkehrsberichte.
 
 ? Welche Einheit nutzt der Hyper-V-Manager für die Bandbreitenverwaltung?
@@ -189,7 +189,7 @@ BACKUP01 belegt abends die 1-Gbit/s-Leitung des vSwitch „Extern“. FS01 und R
 
 ? Was ist eine sinnvolle Langfristlösung für Backup-Verkehr?
 * Eigenes Netz bzw. eigene Netzwerkkarte für Backups
-- Backup-VM in Gen 1 umwandeln
-- MAC-Spoofing aktivieren
-- DHCP-Wächter einschalten
+- Die Backup-VM als Gen-1-VM neu erstellen
+- MAC-Spoofing an der Backup-VM aktivieren
+- Den DHCP-Wächter an allen vNICs einschalten
 ! Trennung der Verkehrsarten verhindert Konkurrenz.

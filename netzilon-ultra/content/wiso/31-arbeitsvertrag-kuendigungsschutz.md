@@ -233,10 +233,10 @@ Azubi-Kollegin Sara beobachtet, wie ihr Kollege Tim (seit 4 Jahren im Betrieb) d
 ## Quiz
 ? Welche Grundkündigungsfrist gilt nach § 622 Abs. 1 BGB?
 * Vier Wochen zum 15. oder zum Ende eines Kalendermonats
-- Ein Monat zum Monatsende
-- Zwei Wochen zu jedem Tag
-- Sechs Wochen zum Quartalsende
-! Gilt für AG und AN, sofern nichts Abweichendes (z. B. Tarifvertrag) vereinbart ist.
+- Einen Monat zum Ende eines Kalendermonats für beide Seiten
+- Zwei Wochen zu jedem beliebigen Tag des Monats
+- Sechs Wochen zum Ende eines Kalendervierteljahres
+! Gilt für AG und AN, sofern nichts Abweichendes (z. B. Tarifvertrag) vereinbart ist. Zwei Wochen gelten nur in der Probezeit.
 
 ? Eine Mitarbeiterin ist seit 9 Jahren im Betrieb. Welche Frist muss der Arbeitgeber nach Gesetz einhalten?
 * Drei Monate zum Ende eines Kalendermonats
@@ -247,10 +247,10 @@ Azubi-Kollegin Sara beobachtet, wie ihr Kollege Tim (seit 4 Jahren im Betrieb) d
 
 ? Eine Mitarbeiterin mit 12 Jahren Betriebszugehörigkeit möchte selbst kündigen. Welche gesetzliche Frist gilt für sie?
 * Vier Wochen zum 15. oder zum Monatsende
-- Fünf Monate zum Monatsende
-- Drei Monate zum Monatsende
-- Sie kann fristlos kündigen
-! Die verlängerten Fristen gelten nur für Kündigungen durch den Arbeitgeber.
+- Fünf Monate zum Monatsende (§ 622 Abs. 2 BGB)
+- Drei Monate zum Ende eines Kalendermonats
+- Keine – sie kann jederzeit fristlos kündigen
+! Die verlängerten Fristen des § 622 Abs. 2 BGB gelten nur für Kündigungen durch den Arbeitgeber.
 
 ? In welcher Form muss eine Kündigung erfolgen?
 * Schriftlich mit eigenhändiger Unterschrift
@@ -299,17 +299,17 @@ Azubi-Kollegin Sara beobachtet, wie ihr Kollege Tim (seit 4 Jahren im Betrieb) d
 
 ? Bis wann kann eine außerordentliche Kündigung nach § 626 BGB ausgesprochen werden?
 * Innerhalb von zwei Wochen nach Kenntnis des wichtigen Grundes
-- Innerhalb von drei Wochen nach dem Vorfall
-- Innerhalb von vier Wochen nach Kenntnis
-- Unbefristet, solange der Grund besteht
+- Innerhalb von drei Wochen nach dem Vorfall selbst, unabhängig von der Kenntnis
+- Innerhalb von vier Wochen nach Kenntnis der maßgebenden Tatsachen
+- Unbefristet, solange der wichtige Grund fortbesteht
 ! § 626 Abs. 2 BGB – danach ist nur noch eine ordentliche Kündigung möglich.
 
 ? Wer muss einer Kündigung eines schwerbehinderten Mitarbeiters vorher zustimmen?
 * Das Integrationsamt (Inklusionsamt)
-- Die Agentur für Arbeit
-- Die Berufsgenossenschaft
-- Die Gewerkschaft
-! § 168 SGB IX.
+- Die örtliche Agentur für Arbeit
+- Die zuständige Berufsgenossenschaft
+- Die Schwerbehindertenvertretung allein
+! § 168 SGB IX. Die Schwerbehindertenvertretung ist zwar zu beteiligen, ihre Zustimmung ist aber nicht erforderlich.
 
 ? Ein Arbeitgeber befristet einen Arbeitsvertrag ohne Sachgrund. Welche Höchstdauer gilt grundsätzlich?
 * Zwei Jahre mit höchstens drei Verlängerungen

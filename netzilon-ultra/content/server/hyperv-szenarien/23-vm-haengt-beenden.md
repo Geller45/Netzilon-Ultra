@@ -201,9 +201,9 @@ APP03 hängt seit 40 Minuten im Status „Wird beendet“; Stop-VM -TurnOff -For
 
 ? Warum ist ein Host-Neustart keine gute Idee?
 * Alle anderen VMs wären ebenfalls betroffen
-- Er dauert zu kurz
-- Er löscht die Konfiguration
-- Er ändert die MAC-Adressen
+- Er dauert zu kurz, um APP03 zu beenden
+- Er löscht die Konfigurationsdateien von APP03
+- Er weist allen VMs neue MAC-Adressen zu
 ! Gezieltes Beenden betrifft nur APP03.
 
 ? Was passiert beim Neustart des VMMS-Dienstes mit laufenden VMs?
@@ -215,7 +215,7 @@ APP03 hängt seit 40 Minuten im Status „Wird beendet“; Stop-VM -TurnOff -For
 
 ? Welches Protokoll liefert Hinweise auf Probleme des Arbeitsprozesses?
 * Microsoft-Windows-Hyper-V-Worker-Admin
-- Security
-- DNS Server
-- Directory Service
-! Worker-Admin protokolliert Ereignisse der VM-Arbeitsprozesse.
+- Microsoft-Windows-Hyper-V-VmSwitch-Operational
+- Microsoft-Windows-Hyper-V-Hypervisor-Admin
+- Microsoft-Windows-Hyper-V-VMMS-Networking
+! Worker-Admin protokolliert Ereignisse der VM-Arbeitsprozesse (vmwp.exe).

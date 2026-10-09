@@ -175,9 +175,9 @@ Für SQL01 (Typ „Nur Produktionsprüfpunkte“) schlägt das Erstellen eines P
 
 ? Was macht der Typ „Production“, wenn VSS fehlschlägt?
 * Er erstellt stattdessen einen Standardprüfpunkt
-- Er bricht immer mit Fehler ab
-- Er startet die VM neu
-- Er erstellt ein Backup in Azure
+- Er bricht immer mit einer Fehlermeldung ab
+- Er startet die VM neu und versucht es erneut
+- Er legt ersatzweise ein Backup in Azure an
 ! Nur ProductionOnly bricht ab.
 
 ? Welcher Befehl setzt „Nur Produktionsprüfpunkte“?
@@ -203,16 +203,16 @@ Für SQL01 (Typ „Nur Produktionsprüfpunkte“) schlägt das Erstellen eines P
 
 ? Welcher Dienst im Windows-Gast nimmt die VSS-Anforderung des Hosts entgegen?
 * Hyper-V-Volumeschattenkopie-Anforderer
-- Hyper-V-Taktdienst
-- Remotedesktopdienste
-- Windows-Zeitgeber
+- Hyper-V-Taktdienst (Heartbeat)
+- Hyper-V-Datenaustauschdienst (KVP)
+- Hyper-V-Dienst für Zeitsynchronisierung
 ! Dienstname vmicvss.
 
 ? Welche Konsistenz bietet ein Standardprüfpunkt?
 * Zustand inklusive RAM, nicht anwendungskonsistent
-- Anwendungskonsistent per VSS
-- Nur Konfiguration
-- Gar keine Festplattendaten
+- Anwendungskonsistent per VSS im Gast
+- Nur die VM-Konfiguration, keine Datenträger
+- Absturzkonsistent ohne Arbeitsspeicher
 ! Standardprüfpunkte frieren alles inklusive laufender Programme ein.
 
 ? Kann man Integrationsdienste bei laufender VM aktivieren?

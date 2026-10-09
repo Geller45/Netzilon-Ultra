@@ -180,16 +180,16 @@ TEST01 und TEST02 hängen an einem privaten Switch, erreichen sich gegenseitig, 
 
 ? Was fehlt nach der Umstellung oft noch?
 * Eine IP-Adresse am vEthernet-Adapter
-- Eine VLAN-ID an jeder VM
-- MAC-Spoofing
-- Ein vTPM
+- Eine eigene VLAN-ID an jeder einzelnen VM
+- MAC-Spoofing an den vNICs der VMs
+- Ein vTPM mit lokalem Schlüsselschutz
 ! Im internen Netz gibt es kein automatisches DHCP.
 
 ? Warum wird der Freigabezugriff trotz internem Switch blockiert?
-* Das Netzwerk ist als öffentlich eingestuft und die Firewall blockiert SMB
-- Interne Switches unterstützen kein TCP
-- SMB geht nur über externe Switches
-- Die VMs brauchen Gen 1
+* Netzwerk als „Öffentlich“ eingestuft, Firewall blockiert SMB
+- Interne Switches unterstützen grundsätzlich kein TCP
+- SMB funktioniert nur über externe Switches
+- Die VMs müssen dafür als Gen 1 angelegt sein
 ! Eine gezielte Firewallregel löst das.
 
 ? Welche Switch-Art bindet eine physische Netzwerkkarte?
@@ -201,9 +201,9 @@ TEST01 und TEST02 hängen an einem privaten Switch, erreichen sich gegenseitig, 
 
 ? Wie erreichen VMs an einem internen Switch das Internet?
 * Über NAT oder Routing auf dem Host
-- Automatisch
-- Über MAC-Spoofing
-- Gar nicht möglich
+- Automatisch über die NIC des Hosts
+- Über MAC-Spoofing an jeder vNIC
+- Gar nicht, das ist nie möglich
 ! Ohne NAT/Routing bleibt das interne Netz isoliert.
 
 ? Was sollte am vEthernet-Adapter des Testnetzes NICHT gesetzt werden, um Routing zu vermeiden?

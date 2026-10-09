@@ -223,10 +223,10 @@ Azubi Noah (Netzilon GmbH) liest, dass die Inflationsrate im letzten Jahr bei 4 
 
 ## Quiz
 ? Was kennzeichnet die Soziale Marktwirtschaft?
-* Freie Preisbildung am Markt mit staatlichem Rahmen für Wettbewerb und sozialen Ausgleich
-- Zentrale Planung aller Preise durch den Staat
-- Völliger Verzicht auf staatliche Eingriffe
-- Staatliches Eigentum an allen Produktionsmitteln
+* Freie Preisbildung mit staatlichem Rahmen für Wettbewerb und sozialen Ausgleich
+- Zentrale Planung aller Preise und Produktionsmengen durch staatliche Behörden
+- Völliger Verzicht auf staatliche Eingriffe in Wirtschaft und Soziales
+- Staatliches Eigentum an allen Produktionsmitteln und Betrieben
 ! Grundlage u. a. Sozialstaatsprinzip (Art. 20 GG).
 
 ? Was geschieht in der Regel, wenn die Nachfrage nach einem Gut bei gleichem Angebot stark steigt?
@@ -273,17 +273,17 @@ Azubi Noah (Netzilon GmbH) liest, dass die Inflationsrate im letzten Jahr bei 4 
 ! Art. 127 AEUV; Inflationsziel 2 % mittelfristig.
 
 ? Welche Wirkung hat eine Erhöhung des Leitzinses durch die EZB in der Regel?
-* Kredite werden teurer, die Nachfrage sinkt und der Preisauftrieb wird gedämpft.
-- Kredite werden billiger und die Inflation steigt.
-- Die Löhne steigen automatisch.
-- Die Staatsverschuldung sinkt sofort.
+* Kredite werden teurer, die Nachfrage sinkt, der Preisauftrieb wird gedämpft.
+- Kredite werden billiger, die Nachfrage steigt und die Inflation nimmt zu.
+- Die Löhne steigen automatisch über die Tarifbindung an den Leitzins.
+- Die Staatsverschuldung sinkt sofort, weil Zinsausgaben entfallen.
 ! Restriktive Geldpolitik.
 
 ? Wie wird die Inflationsrate in Deutschland gemessen?
 * Mit dem Verbraucherpreisindex anhand eines Warenkorbs
-- Mit dem ifo-Geschäftsklimaindex
-- Mit dem DAX
-- Mit der Arbeitslosenquote
+- Mit dem ifo-Geschäftsklimaindex der Unternehmen
+- Mit dem Deutschen Aktienindex (DAX)
+- Mit der Arbeitslosenquote der Bundesagentur
 ! Statistisches Bundesamt; für den Euroraum der HVPI.
 
 ? Welche Ströme fließen im einfachen Wirtschaftskreislauf von den Unternehmen zu den Haushalten? (2 richtige)
@@ -295,10 +295,10 @@ Azubi Noah (Netzilon GmbH) liest, dass die Inflationsrate im letzten Jahr bei 4 
 ! Konsumausgaben und Arbeitsleistung fließen von den Haushalten zu den Unternehmen.
 
 ? Welche Beschreibung trifft auf ein Kartell zu?
-* Eine wettbewerbsbeschränkende Absprache rechtlich selbstständiger Unternehmen
-- Ein Zusammenschluss zu einem einzigen Unternehmen
-- Ein Konzern unter einheitlicher Leitung
-- Eine staatliche Preisaufsichtsbehörde
+* Eine wettbewerbsbeschränkende Absprache selbstständig bleibender Unternehmen
+- Ein Zusammenschluss mehrerer Unternehmen zu einem einzigen (Fusion)
+- Ein Konzern aus Unternehmen unter einheitlicher Leitung
+- Eine staatliche Preisaufsichtsbehörde für Märkte
 ! Grundsätzlich verboten nach § 1 GWB; Aufsicht: Bundeskartellamt.
 
 ? Was versteht man unter dem Minimalprinzip?

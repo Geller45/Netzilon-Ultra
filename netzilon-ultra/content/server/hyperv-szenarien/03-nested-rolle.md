@@ -192,9 +192,9 @@ Die Installation der Hyper-V-Rolle in der VM HV-NESTED scheitert mit dem Hinweis
 
 ? Ab welcher Version wird Nested auf AMD-Prozessoren unterstützt?
 * Windows Server 2022 / Windows 11
-- Windows Server 2012 R2
-- Windows Server 2016
-- Nur in Azure
+- Windows Server 2012 R2 / Windows 8.1
+- Windows Server 2016 / Windows 10 1607
+- Nur in Azure-VMs der Dv5-Serie
 ! Intel wird seit 2016 unterstützt, AMD seit Server 2022/Windows 11.
 
 ? Welche RAM-Konfiguration sollte HV-NESTED haben?
@@ -205,11 +205,11 @@ Die Installation der Hyper-V-Rolle in der VM HV-NESTED scheitert mit dem Hinweis
 ! Bei laufendem Hyper-V im Gast schwankt dynamischer RAM nicht; statischer RAM ist planbar.
 
 ? Welche Folge hat Update-VMVersion?
-* Die VM läuft danach nicht mehr auf Hosts, die die neue Version nicht unterstützen
-- Die VM wird in Generation 2 umgewandelt
-- Alle Prüfpunkte werden zusammengeführt
-- Die VM erhält eine neue MAC-Adresse
-! Die Versionsaktualisierung ist nicht umkehrbar.
+* Die VM läuft danach nicht mehr auf Hosts mit älterer Version
+- Die VM wird dabei automatisch in Generation 2 umgewandelt
+- Alle vorhandenen Prüfpunkte werden zusammengeführt
+- Die VM erhält aus dem MAC-Pool eine neue MAC-Adresse
+! Die Versionsaktualisierung ist nicht umkehrbar; Hosts, die die neue Version nicht kennen, starten die VM nicht mehr.
 
 ? Welche Funktion steht der äußeren Nested-VM NICHT zur Verfügung?
 * Live-Migration

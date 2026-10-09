@@ -227,23 +227,23 @@ Get-WinEvent -LogName System -MaxEvents 20 | Where-Object ProviderName -eq "mpio
 
 ? Was zeigt der Befehl mpclaim -s -d an?
 * Alle MPIO-Datenträger mit ihrer Lastverteilungsrichtlinie
-- Alle Netzwerkadapter
-- Die IQN des Initiators
-- Das aktive Zoneset
+- Alle Netzwerkadapter mit ihren iSCSI-Sitzungen
+- Die IQN des Initiators und die verbundenen Targets
+- Das aktive Zoneset der angeschlossenen Fabric
 ! Mit -s -d <Nummer> sieht man zusätzlich die einzelnen Pfade.
 
 ? Was ist der MSDSM?
-* Das Device Specific Module von Microsoft mit der Pfadlogik
-- Ein Speicherpool in Storage Spaces
-- Ein FC-Switch-Protokoll
-- Ein Dateisystem für Cluster
+* Microsofts Device Specific Module mit der Pfadlogik
+- Ein Speicherpool in Storage Spaces mit Spiegelung
+- Ein Protokoll zwischen FC-Switches in der Fabric
+- Ein Dateisystem für freigegebene Clustervolumes
 ! MSDSM funktioniert mit SPC-3-konformen Arrays; Hersteller können eigene DSMs liefern.
 
 ? Welche Richtlinie ist bei ALUA-Arrays unter MSDSM üblicherweise Standard?
 * Round Robin with Subset
-- Failover Only
-- Least Blocks
-- Weighted Paths
+- Failover Only (FOO)
+- Least Queue Depth (LQD)
+- Weighted Paths (WP)
 ! RRWS verteilt nur über die optimierten Pfade, die nicht optimierten bleiben Standby.
 
 ? Zwei iSCSI-Pfade von HV01 laufen über denselben Switch. Was ist das Problem?
@@ -255,16 +255,16 @@ Get-WinEvent -LogName System -MaxEvents 20 | Where-Object ProviderName -eq "mpio
 
 ? Was bedeutet der Parameter -IsMultipathEnabled $true bei Connect-IscsiTarget?
 * Die Sitzung darf als einer von mehreren Pfaden zu MPIO beitragen
-- Die Verbindung wird verschlüsselt
-- Die LUN wird doppelt so groß
-- Das Target wird auf zwei Servern repliziert
+- Die Verbindung wird zusätzlich mit IPsec verschlüsselt
+- Die LUN wird automatisch auf zwei Datenträger gespiegelt
+- Das Target wird auf einen zweiten Zielserver repliziert
 ! Ohne den Schalter kann zu einem Target nur eine Sitzung aufgebaut werden.
 
 ? Was legt die MPIO-Einstellung PDORemovePeriod fest?
-* Wie lange MPIO auf die Rückkehr eines Pfades wartet, bevor die Platte entfernt wird
-- Wie oft ein Snapshot erstellt wird
-- Die Größe eines iSCSI-Pakets
-- Wie viele LUNs ein Target haben darf
+* Wie lange MPIO auf einen Pfad wartet, bevor die Platte entfernt wird
+- In welchem Intervall ein Snapshot der LUN erstellt wird
+- Die maximale Größe eines iSCSI-Pakets in Byte
+- Wie viele LUNs ein einzelnes Target bereitstellen darf
 ! Ist kein Pfad mehr da, hält MPIO die Platte für diese Zeit vor (Get-MPIOSetting).
 
 ? Wie simuliert man auf HV01 einen iSCSI-Pfadausfall am einfachsten?

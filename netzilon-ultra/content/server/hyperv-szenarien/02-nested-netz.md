@@ -156,16 +156,16 @@ In einer Nested-Umgebung hat die äußere VM HV-NESTED Netzwerk, die inneren VMs
 ## Quiz
 ? Innere VMs in HV-NESTED erhalten nur 169.254-Adressen. Was fehlt?
 * MAC-Adress-Spoofing an der vNIC von HV-NESTED auf dem Host
-- ExposeVirtualizationExtensions an INNER01
-- Erweiterter Sitzungsmodus auf HV01
-- Ein zweiter DHCP-Bereich
+- ExposeVirtualizationExtensions an der inneren VM INNER01
+- Der erweiterte Sitzungsmodus auf dem Host HV01
+- Ein zweiter DHCP-Bereich für die inneren VMs im LAN
 ! Der vSwitch auf HV01 verwirft Frames mit MACs, die nicht zur vNIC gehören.
 
 ? Auf welcher Maschine wird MAC-Spoofing für das Nested-Lab aktiviert?
 * HV01 (physischer Host)
-- INNER01
-- DC01
-- Am physischen Switch
+- INNER01 (innere VM)
+- DC01 (Domänencontroller)
+- Am physischen Switch-Port
 ! Die Einstellung gehört zur vNIC der äußeren VM und wird auf dem Host gesetzt.
 
 ? Welcher Befehl aktiviert MAC-Spoofing?
@@ -191,9 +191,9 @@ In einer Nested-Umgebung hat die äußere VM HV-NESTED Netzwerk, die inneren VMs
 
 ? Warum ist MAC-Spoofing standardmäßig deaktiviert?
 * Damit VMs keine fremden MAC-Adressen vortäuschen können
-- Weil es die CPU-Leistung halbiert
-- Weil es nur mit IPv6 funktioniert
-- Weil es Prüfpunkte verhindert
+- Weil es die CPU-Leistung des Hosts spürbar halbiert
+- Weil es nur in reinen IPv6-Netzen zuverlässig funktioniert
+- Weil es Produktionsprüfpunkte der VM verhindert
 ! Es ist eine Sicherheitsfunktion des vSwitch.
 
 ? Welcher Switch-Typ in HV-NESTED verbindet innere VMs direkt mit dem LAN?

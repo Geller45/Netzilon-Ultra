@@ -176,9 +176,9 @@ Die VM WAWI01 steht auf „Angehalten – Kritisch“. Das Volume D: ist voll, i
 
 ? Was ist der erste sinnvolle Schritt bei vollem Volume?
 * Platz schaffen, ohne die Prüfpunktkette anzufassen
-- Die neueste .avhdx löschen
-- Die VM hart ausschalten
-- Den Host neu starten
+- Die neueste .avhdx-Datei löschen, um Platz zu gewinnen
+- Die VM sofort hart ausschalten (Stop-VM -TurnOff)
+- Den Host neu starten, damit Hyper-V aufräumt
 ! Danach kann die VM fortgesetzt und die Kette sauber zusammengeführt werden.
 
 ? Welches Cmdlet entfernt Prüfpunkte?
@@ -197,9 +197,9 @@ Die VM WAWI01 steht auf „Angehalten – Kritisch“. Das Volume D: ist voll, i
 
 ? Wofür ist Merge-VHD gedacht?
 * Verwaiste Differenzdateien manuell zusammenführen
-- Zwei VMs zu einer verbinden
-- VHD in VHDX konvertieren
-- Prüfpunkte erstellen
+- Zwei VMs zu einer gemeinsamen VM verbinden
+- Eine VHD-Datei in das VHDX-Format konvertieren
+- Neue Prüfpunkte einer laufenden VM erstellen
 ! Normalerweise erledigt Remove-VMCheckpoint das Zusammenführen.
 
 ? Welche Aussage über Prüfpunkte stimmt?

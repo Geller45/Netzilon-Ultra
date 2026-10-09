@@ -156,16 +156,16 @@ HV-NESTED hat Dynamic Memory (Start 6 GB, Maximum 32 GB). Darin startet nur eine
 ## Quiz
 ? HV-NESTED hat Dynamic Memory mit Maximum 32 GB. Wie viel RAM sieht der Gast bei aktivem Hyper-V?
 * Den Start-RAM, er schwankt nicht
-- Immer das Maximum
-- Immer das Minimum
-- Dynamisch bis 32 GB
+- Immer das konfigurierte Maximum
+- Immer das konfigurierte Minimum
+- Dynamisch je nach Bedarf bis 32 GB
 ! So beschreibt es die Microsoft-Doku zur Nested-Virtualisierung.
 
 ? Welche Lösung ist richtig?
-* HV-NESTED ausschalten und statischen RAM ausreichend groß setzen
-- Maximum auf 64 GB erhöhen
-- Speicherpuffer auf 50 % setzen
-- Gewichtung auf hoch setzen
+* HV-NESTED ausschalten, statischen RAM groß genug setzen
+- Das Dynamic-Memory-Maximum im Betrieb auf 64 GB erhöhen
+- Den Speicherpuffer von HV-NESTED auf 50 % setzen
+- Die Speichergewichtung von HV-NESTED auf „Hoch“ setzen
 ! Dynamische Einstellungen greifen bei Nested-Hosts nicht.
 
 ? Wann kann der RAM einer Nested-VM geändert werden?
@@ -177,23 +177,23 @@ HV-NESTED hat Dynamic Memory (Start 6 GB, Maximum 32 GB). Darin startet nur eine
 
 ? Für welche VM gilt die Einschränkung?
 * Für die äußere VM mit Hyper-V im Gast
-- Für alle inneren VMs
-- Für alle VMs auf HV01
-- Nur für Linux-VMs
+- Für alle inneren VMs in HV-NESTED
+- Für sämtliche VMs auf dem Host HV01
+- Nur für Linux-VMs mit Hyper-V-Treibern
 ! Innere VMs dürfen Dynamic Memory nutzen.
 
 ? Wie viel RAM ist für drei innere VMs à 4 GB plus Gast-OS sinnvoll?
 * Etwa 16 GB
-- 4 GB
-- 6 GB
-- 8 GB
-! 12 GB für die inneren VMs und Reserve für das Gast-OS.
+- Etwa 4 GB
+- Etwa 6 GB
+- Etwa 12 GB
+! 12 GB für die inneren VMs und Reserve für das Gast-OS – 12 GB allein reichen nicht.
 
 ? Welches Cmdlet setzt statischen RAM?
 * Set-VMMemory -DynamicMemoryEnabled $false -StartupBytes 16GB
-- Set-VMProcessor -StaticMemory 16GB
-- Set-VM -MemoryType Static
-- Set-VMHost -StaticRam $true
+- Set-VMProcessor -VMName HV-NESTED -StaticMemory 16GB
+- Set-VM -Name HV-NESTED -MemoryType Static -Size 16GB
+- Set-VMHost -NumaSpanningEnabled $false -StaticRam $true
 ! Speicher konfiguriert man mit Set-VMMemory.
 
 ? Was gilt für Laufzeit-Speicheränderung bei statischem RAM einer Nested-VM?

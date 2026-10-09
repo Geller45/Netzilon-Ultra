@@ -150,9 +150,9 @@ Clients erhalten Adressen aus 10.0.0.0/24. ipconfig /all zeigt DHCP-Server 10.0.
 
 ? Was blockiert der Router-Wächter?
 * Router-Advertisements und Redirects der VM
-- Alle Pakete an das Gateway
-- DNS-Anfragen der VM
-- DHCP-Anfragen von Clients
+- Alle Pakete der VM an das Standardgateway
+- DNS-Anfragen der VM an externe Server
+- DHCP-Anfragen von Clients im selben Netz
 ! Die VM kann sich nicht als Router ausgeben.
 
 ? Wo aktiviert man DHCP- und Router-Wächter im GUI?
@@ -171,9 +171,9 @@ Clients erhalten Adressen aus 10.0.0.0/24. ipconfig /all zeigt DHCP-Server 10.0.
 
 ? An welcher VM ist DHCP Guard falsch?
 * Am legitimen DHCP-Server DC01
-- An einer Test-VM
-- An einer Schulungs-VM
-- An einer Webserver-VM
+- An einer isolierten Test-VM
+- An einer Schulungs-VM im Lab
+- An einer Webserver-VM in der DMZ
 ! Dort würden keine Angebote mehr ankommen.
 
 ? Was müssen falsch konfigurierte Clients nach der Behebung tun?
@@ -184,11 +184,11 @@ Clients erhalten Adressen aus 10.0.0.0/24. ipconfig /all zeigt DHCP-Server 10.0.
 ! Sonst behalten sie die falsche Adresse bis zum Lease-Ablauf.
 
 ? Welche Maßnahme ist dauerhaft am sinnvollsten?
-* Testumgebungen an private/interne Switches und Wächter als Standard
-- DHCP im ganzen Netz abschalten
-- Alle Leases auf 1 Minute setzen
-- MAC-Spoofing für alle VMs aktivieren
-! Trennung plus Schutz an der vNIC.
+* Tests an private/interne Switches, Wächter als Standard
+- DHCP im gesamten Netz abschalten und statisch adressieren
+- Alle DHCP-Leases auf eine Minute Gültigkeit setzen
+- MAC-Spoofing für alle VMs des Hosts aktivieren
+! Trennung plus Schutz (DHCP-/Router-Wächter) an der vNIC.
 
 ? Welcher Parameter gehört zum DHCP-Wächter?
 * -DhcpGuard On

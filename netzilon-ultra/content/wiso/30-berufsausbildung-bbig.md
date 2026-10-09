@@ -233,11 +233,11 @@ Leon, Azubi im zweiten Jahr bei der Netzilon GmbH, muss seit drei Monaten jeden 
 ! § 12 Abs. 2 BBiG: Vertragsstrafen sind nichtig.
 
 ? Ein Azubi wird nach der Probezeit beim Diebstahl von Firmen-Hardware erwischt. Wie kann der Betrieb reagieren?
-* Fristlose Kündigung aus wichtigem Grund, schriftlich mit Angabe der Gründe binnen zwei Wochen
-- Ordentliche Kündigung mit vier Wochen Frist
-- Kündigung per E-Mail ohne Begründung
-- Gar nicht – Azubis sind unkündbar
-! § 22 Abs. 2 Nr. 1, Abs. 3 und 4 BBiG.
+* Fristlos aus wichtigem Grund, schriftlich mit Gründen, binnen zwei Wochen
+- Ordentlich mit vier Wochen Frist, eine fristlose Kündigung ist bei Azubis ausgeschlossen
+- Mündlich oder per E-Mail ohne Begründung, da die Probezeit maßgeblich ist
+- Gar nicht – nach der Probezeit sind Azubis unkündbar, nur eine Abmahnung ist möglich
+! § 22 Abs. 2 Nr. 1, Abs. 3 und 4 BBiG: Schriftform mit Angabe der Kündigungsgründe, Frist zwei Wochen ab Kenntnis.
 
 ? Welche Kündigung kann ein Auszubildender nach der Probezeit mit einer Frist von vier Wochen aussprechen?
 * Wenn er die Berufsausbildung aufgibt oder einen anderen Beruf erlernen will
@@ -248,9 +248,9 @@ Leon, Azubi im zweiten Jahr bei der Netzilon GmbH, muss seit drei Monaten jeden 
 
 ? Wann endet das Ausbildungsverhältnis, wenn der Azubi die Abschlussprüfung vor Ablauf der Ausbildungszeit besteht?
 * Mit Bekanntgabe des Ergebnisses durch den Prüfungsausschuss
-- Am vertraglich vereinbarten Enddatum
-- Mit Zugang des IHK-Zeugnisses per Post
-- Am Ende des Kalendermonats
+- Erst am vertraglich vereinbarten Enddatum der Ausbildung
+- Mit Zugang des IHK-Zeugnisses per Post beim Azubi
+- Am Ende des Kalendermonats, in dem die Prüfung stattfand
 ! § 21 Abs. 2 BBiG.
 
 ? Welche Angaben enthält ein qualifiziertes Ausbildungszeugnis zusätzlich zum einfachen Zeugnis?
@@ -293,14 +293,14 @@ Leon, Azubi im zweiten Jahr bei der Netzilon GmbH, muss seit drei Monaten jeden 
 
 ? Wie wird ein Berufsschultag mit mehr als fünf Unterrichtsstunden à 45 Minuten angerechnet?
 * Einmal pro Woche mit der durchschnittlichen täglichen Ausbildungszeit
-- Nur mit der tatsächlichen Unterrichtszeit
-- Gar nicht, der Azubi muss danach in den Betrieb
-- Jeder solche Tag zählt doppelt
+- Nur mit der tatsächlichen Unterrichtszeit einschließlich Pausen
+- Gar nicht, der Azubi muss danach noch in den Betrieb kommen
+- Jeder solche Tag zählt doppelt, unabhängig von der Anzahl pro Woche
 ! § 15 Abs. 2 Nr. 2 und Abs. 3 BBiG – gilt seit 2020 für alle Azubis, unabhängig vom Alter.
 
 ? Wer muss bei einem 16-jährigen Azubi den Ausbildungsvertrag mit unterschreiben bzw. zustimmen?
 * Die gesetzlichen Vertreter (in der Regel die Eltern)
-- Die Berufsschule
-- Der Betriebsrat
-- Die Agentur für Arbeit
+- Die zuständige Berufsschule als Lernortpartner
+- Der Betriebsrat bzw. die Jugend- und Auszubildendenvertretung
+- Die Agentur für Arbeit als Berufsberatung
 ! Der Minderjährige ist beschränkt geschäftsfähig (§ 106 BGB); § 11 Abs. 2 BBiG.

@@ -148,10 +148,10 @@ HV01 wurde auf Server 2025 aktualisiert, HV02 läuft noch mit Server 2019. SQL01
 ! Das Anheben ist ein bewusster Schritt mit Update-VMVersion.
 
 ? Welche Folge hat Update-VMVersion für eine VM in einer gemischten Hostumgebung?
-* Die VM läuft danach nicht mehr auf Hosts mit älterer Version
-- Die VM wird in Gen 2 umgewandelt
-- Die VM verliert ihre Prüfpunkte nie
-- Die VM kann auf jeden Host migriert werden
+* Sie läuft nicht mehr auf Hosts mit älterer Version
+- Die VM wird automatisch in Generation 2 umgewandelt
+- Die VM kann danach auf jeden Host migriert werden
+- Die VM wird auf allen Hosts auf Version 5.0 gesetzt
 ! Es gibt keinen Rückweg.
 
 ? Welche Standard-Konfigurationsversion verwendet Windows Server 2025?
@@ -176,10 +176,10 @@ HV01 wurde auf Server 2025 aktualisiert, HV02 läuft noch mit Server 2019. SQL01
 ! Konfigurationsänderung nur offline.
 
 ? Wann sollte man in einem Cluster die VM-Versionen anheben?
-* Nach dem Rolling Upgrade und Update-ClusterFunctionalLevel
-- Vor dem Upgrade des ersten Knotens
-- Während des gemischten Modus
-- Nie
+* Nach Rolling Upgrade und Update-ClusterFunctionalLevel
+- Vor dem Upgrade des ersten Clusterknotens
+- Während des gemischten Modus mit alten Knoten
+- Nie, die Version wird automatisch angehoben
 ! Sonst laufen VMs nicht mehr auf alten Knoten.
 
 ? Wie erzeugst du auf einem 2025-Host eine VM, die auch auf Server 2019 läuft?

@@ -144,9 +144,9 @@ WEB01 läuft auf HV01 (ältere Intel-CPU) und soll live auf HV02 (neuere Intel-C
 ## Quiz
 ? Welcher Parameter aktiviert die Prozessorkompatibilität?
 * Set-VMProcessor -CompatibilityForMigrationEnabled $true
-- Set-VM -ProcessorCompatibility On
-- Set-VMHost -CpuMigration $true
-- Enable-VMMigration -Cpu
+- Set-VMProcessor -ExposeVirtualizationExtensions $true
+- Set-VMHost -VirtualMachineMigrationEnabled $true
+- Set-VM -Name APP01 -ProcessorCompatibility On -Force
 ! Die Einstellung gehört zum virtuellen Prozessor der VM.
 
 ? Zwischen welchen Hosts hilft der Prozessorkompatibilitätsmodus NICHT?
@@ -171,24 +171,24 @@ WEB01 läuft auf HV01 (ältere Intel-CPU) und soll live auf HV02 (neuere Intel-C
 ! Compare-VM liefert einen Bericht mit Incompatibilities.
 
 ? Was bewirkt der Modus technisch?
-* Der Gast sieht nur CPU-Funktionen, die auf beiden Hosts vorhanden sind
-- Die VM wird auf eine vCPU begrenzt
-- Die CPU wird vollständig emuliert
-- Der Host taktet seine CPU herunter
-! Es werden erweiterte Befehlssätze ausgeblendet.
+* Der Gast sieht nur CPU-Funktionen beider Hosts
+- Die VM wird dauerhaft auf eine einzige vCPU begrenzt
+- Die CPU wird vollständig in Software emuliert
+- Der Host taktet seine physische CPU herunter
+! Es werden erweiterte Befehlssätze ausgeblendet, die nicht auf beiden Hosts vorhanden sind.
 
 ? Welche Neuerung bringt Windows Server 2025 dazu?
-* Dynamischer Kompatibilitätsmodus mit gemeinsamem Feature-Satz der Cluster-Knoten
-- Migration zwischen Intel und AMD
-- Kompatibilitätsmodus ohne Neustart der VM
-- Automatische Generationsumwandlung Gen 1 nach Gen 2
+* Dynamischer Modus mit gemeinsamem Feature-Satz der Cluster-Knoten
+- Live-Migration zwischen Intel- und AMD-Hosts im selben Cluster
+- Umschalten des Kompatibilitätsmodus ohne Neustart der VM
+- Automatische Umwandlung von Gen-1- in Gen-2-VMs bei Migration
 ! Parameter -CompatibilityForMigrationMode CommonClusterFeatureSet.
 
 ? Welcher Nebeneffekt ist möglich?
-* Geringere Leistung bei Software, die neue Befehlssätze nutzt
-- Verlust aller Prüfpunkte
-- Die VM verliert ihre IP-Adresse
-- Die VM-Konfigurationsversion wird herabgestuft
+* Weniger Leistung bei Software, die neue Befehlssätze nutzt
+- Verlust aller vorhandenen Prüfpunkte der VM
+- Die VM verliert bei jedem Start ihre IP-Adresse
+- Die Konfigurationsversion der VM wird herabgestuft
 ! Ausgeblendete Befehlssätze (z. B. neue Vektor-Erweiterungen) fehlen dem Gast.
 
 ? Wo stellt man den Modus im Hyper-V-Manager ein?

@@ -161,16 +161,16 @@ HV03 und ADMIN-W11 sind in einer Arbeitsgruppe, kein DNS. Der Hyper-V-Manager me
 ## Quiz
 ? Wo wird TrustedHosts für die Verwaltung von HV03 eingetragen?
 * Auf dem verwaltenden Client
-- Auf HV03
-- Auf einem DC
-- Im DNS
+- Auf dem verwalteten Host HV03
+- Auf einem Domänencontroller
+- Als Eintrag in der DNS-Zone
 ! Der Client entscheidet, wem er NTLM-Anmeldedaten sendet.
 
 ? Welche Richtlinie ist für CredSSP in der Arbeitsgruppe nötig?
-* Delegierung von neuen Anmeldeinformationen mit reiner NTLM-Serverauthentifizierung zulassen
-- Delegierung von Standardanmeldeinformationen zulassen
-- Remoteunterstützung anbieten
-- Kerberos-Armoring aktivieren
+* Delegierung neuer Anmeldeinformationen mit reiner NTLM-Serverauthentifizierung zulassen
+- Delegierung von Standardanmeldeinformationen zulassen (nur Kerberos-Server)
+- Delegierung gespeicherter Anmeldeinformationen verweigern
+- Kerberos-Armoring (FAST) für Clients aktivieren
 ! Eintrag wsman/HV03.
 
 ? Welche CredSSP-Rolle muss HV03 bekommen?
@@ -210,7 +210,7 @@ HV03 und ADMIN-W11 sind in einer Arbeitsgruppe, kein DNS. Der Hyper-V-Manager me
 
 ? Was ist eine sichere Alternative zur Konfiguration mit CredSSP?
 * Domänenmitgliedschaft bzw. Windows Admin Center als Gateway
-- TrustedHosts auf * setzen
-- Firewall auf beiden Systemen abschalten
-- Kennwortlose Anmeldung als Gast
+- TrustedHosts auf * setzen, damit jeder Host vertraut wird
+- Die Firewall auf beiden Systemen vollständig abschalten
+- Kennwortlose Anmeldung über das aktivierte Gastkonto
 ! TrustedHosts mit * ist ein Sicherheitsrisiko.

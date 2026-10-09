@@ -163,10 +163,10 @@ Die VM DC01 auf HV01 ist PDC-Emulator. `w32tm /query /source` auf DC01 zeigt „
 
 ## Quiz
 ? DC01 (PDC-Emulator) zeigt als Zeitquelle „VM IC Time Synchronization Provider“. Was ist die empfohlene Korrektur?
-* VMICTimeProvider im Gast deaktivieren und den PDC an eine externe NTP-Quelle hängen
-- Den Host HV01 an DC01 synchronisieren lassen
-- Die Kerberos-Toleranz auf 60 Minuten erhöhen
-- Den Integrationsdienst Takt (Heartbeat) deaktivieren
+* VMICTimeProvider im Gast deaktivieren, PDC an externe NTP-Quelle hängen
+- Den Host HV01 per NT5DS an DC01 synchronisieren lassen und neu starten
+- Die maximale Kerberos-Zeittoleranz per GPO auf 60 Minuten erhöhen
+- Den Integrationsdienst Takt (Heartbeat) an DC01 deaktivieren
 ! Die Domänenzeit muss aus der AD-Hierarchie kommen; oben steht der PDC-Emulator mit externer Quelle.
 
 ? Wie groß darf die Uhrzeitabweichung eines virtualisierten DCs zu den Clients für Kerberos standardmäßig höchstens sein?
@@ -184,10 +184,10 @@ Die VM DC01 auf HV01 ist PDC-Emulator. `w32tm /query /source` auf DC01 zeigt „
 ! /query /source zeigt die aktive Quelle, z. B. einen DC oder den VM IC Provider.
 
 ? Warum entsteht ein Zirkelbezug, wenn der Domänen-Host seine Zeit vom virtuellen DC holt?
-* Weil der DC per Integrationsdienst wiederum die Zeit vom Host übernimmt
-- Weil der Host keine BIOS-Uhr hat
-- Weil NT5DS nur in Arbeitsgruppen funktioniert
-- Weil die VM zu wenig Arbeitsspeicher hat
+* Der DC übernimmt per Integrationsdienst die Zeit vom Host
+- Der Host besitzt keine eigene BIOS-/UEFI-Echtzeituhr
+- NT5DS funktioniert nur in Arbeitsgruppen, nicht in Domänen
+- Die DC-VM hat zu wenig Arbeitsspeicher für den Zeitdienst
 ! Beide stimmen sich gegenseitig ab, keiner hat eine echte Referenz.
 
 ? Welcher DC sollte mit `/reliable:yes` und manueller Peerliste konfiguriert werden?
@@ -198,11 +198,11 @@ Die VM DC01 auf HV01 ist PDC-Emulator. `w32tm /query /source` auf DC01 zeigt „
 ! Er ist die Spitze der Domänenzeithierarchie.
 
 ? Was bleibt erhalten, wenn man nur den VMICTimeProvider deaktiviert, den Integrationsdienst aber anlässt?
-* Die Zeitkorrektur beim Start bzw. nach Wiederherstellen aus dem gespeicherten Zustand
-- Die laufende Synchronisation mit dem Host jede Minute
-- Die Kerberos-Toleranz von 10 Minuten
-- Der Heartbeat zum Cluster
-! Microsoft beschreibt diese Variante, damit die Uhr nach dem Wiederherstellen noch korrigiert wird.
+* Die Zeitkorrektur beim Start bzw. nach Wiederherstellen
+- Die laufende Synchronisation mit dem Host im Minutentakt
+- Die erhöhte Kerberos-Toleranz von 10 Minuten
+- Der Heartbeat des Gastes zum Failover-Cluster
+! Microsoft beschreibt diese Variante, damit die Uhr nach dem Wiederherstellen aus dem gespeicherten Zustand noch korrigiert wird.
 
 ? Wo deaktiviert man den Integrationsdienst Zeitsynchronisierung per GUI?
 * Hyper-V-Manager → VM-Einstellungen → Integrationsdienste

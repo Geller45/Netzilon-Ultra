@@ -191,10 +191,10 @@ Auf HV01 soll HV-NESTED (Server 2025) entstehen; darin INNER01/INNER02 im Netz 1
 
 ## Quiz
 ? Welche Fehlermeldung erscheint typischerweise, wenn Nested für HV-NESTED nicht aktiviert ist?
-* Hyper-V kann nicht installiert werden, da Virtualisierungsfunktionen fehlen
-- Die VHDX ist beschädigt
-- Die Lizenz ist abgelaufen
-- DNS-Name nicht gefunden
+* Hyper-V nicht installierbar: Virtualisierungsfunktionen fehlen
+- Die VHDX von HV-NESTED ist beschädigt und muss repariert werden
+- Die Lizenz für die Hyper-V-Rolle ist abgelaufen
+- Der DNS-Name des Hosts wurde nicht gefunden
 ! Der Gast sieht ohne ExposeVirtualizationExtensions kein VT-x/AMD-V.
 
 ? Wo wird New-NetNat für die inneren VMs ausgeführt?
@@ -220,9 +220,9 @@ Auf HV01 soll HV-NESTED (Server 2025) entstehen; darin INNER01/INNER02 im Netz 1
 
 ? Was ist die Alternative zu NAT für den Netzzugang innerer VMs?
 * MAC-Adress-Spoofing an der vNIC von HV-NESTED
-- DHCP-Wächter an HV-NESTED
-- Port-Spiegelung Destination
-- Router-Wächter an INNER01
+- DHCP-Wächter an der vNIC von HV-NESTED
+- Port-Spiegelung (Ziel) an der vNIC von HV-NESTED
+- Router-Wächter an der vNIC von INNER01
 ! Dann hängen die inneren VMs direkt im LAN.
 
 ? Welche Speichereinstellung ist für HV-NESTED richtig?
@@ -234,14 +234,14 @@ Auf HV01 soll HV-NESTED (Server 2025) entstehen; darin INNER01/INNER02 im Netz 1
 
 ? Wie setzt man INNER01 nach einer Übung zurück?
 * Restore-VMSnapshot -VMName INNER01 -Name "Grundzustand"
-- Remove-VMSnapshot -VMName INNER01
-- Optimize-VHD -Path INNER01.vhdx
-- Update-VMVersion -Name INNER01
-! Remove würde den Prüfpunkt löschen statt ihn anzuwenden.
+- Remove-VMSnapshot -VMName INNER01 -Name "Grundzustand"
+- Checkpoint-VM -Name INNER01 -SnapshotName "Grundzustand"
+- Update-VMVersion -Name INNER01 -Confirm:$false
+! Remove würde den Prüfpunkt löschen statt ihn anzuwenden, Checkpoint-VM legt einen neuen an.
 
 ? Warum wurde im Ausbildungslab NAT statt MAC-Spoofing gewählt?
-* Azubi-Netze bleiben vom Firmennetz getrennt, keine IP-Konflikte
-- NAT ist schneller als jede andere Lösung
-- MAC-Spoofing ist in Server 2025 entfernt
-- Nur NAT unterstützt Gen-2-VMs
+* Lab vom Firmennetz getrennt, keine IP-Konflikte
+- NAT ist schneller als jede andere Netzwerklösung
+- MAC-Spoofing wurde in Windows Server 2025 entfernt
+- Nur NAT unterstützt innere VMs der Generation 2
 ! Isolierte, gleichartige Lab-Umgebungen pro Azubi.

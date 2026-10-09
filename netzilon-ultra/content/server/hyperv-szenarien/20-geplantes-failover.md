@@ -191,9 +191,9 @@ ERP01 wird von HV01 nach HV02 repliziert und soll wegen Wartung ohne Datenverlus
 
 ? Warum scheitert die Umkehr der Replikation?
 * HV01 ist nicht als Replikatserver konfiguriert
-- HV02 hat zu wenig RAM
-- ERP01 ist Gen 2
-- Die Frequenz ist 5 Minuten
+- HV02 hat zu wenig freien Arbeitsspeicher für ERP01
+- ERP01 ist eine Gen-2-VM mit aktiviertem vTPM
+- Die Replikationsfrequenz steht auf 5 Minuten
 ! Die neue Zielseite muss Replikation annehmen.
 
 ? Welches Cmdlet läuft zuerst auf dem Primärserver?
@@ -204,10 +204,10 @@ ERP01 wird von HV01 nach HV02 repliziert und soll wegen Wartung ohne Datenverlus
 ! Danach folgt Start-VMFailover auf dem Replikatserver.
 
 ? Was macht ein Testfailover?
-* Erstellt eine Test-VM auf dem Replikatserver ohne die Produktion zu unterbrechen
-- Schaltet die Primär-VM aus
-- Kehrt die Replikation um
-- Löscht alle Wiederherstellungspunkte
+* Erstellt eine Test-VM auf dem Replikat, Produktion läuft weiter
+- Schaltet die Primär-VM aus und startet das Replikat produktiv
+- Kehrt die Replikationsrichtung dauerhaft zwischen beiden Hosts um
+- Löscht alle Wiederherstellungspunkte und startet die Erstreplikation neu
 ! Die Test-VM hängt typischerweise an einem isolierten Netz.
 
 ? Welches Cmdlet kehrt die Replikationsrichtung um?

@@ -163,9 +163,9 @@ Das Basis-Image der Schulungs-VMs wurde von D:\Vorlagen nach E:\Vorlagen verscho
 ## Quiz
 ? Was ist die Ursache, wenn nach dem Verschieben des Basis-Images keine VM startet?
 * Die Kind-VHDX enthält noch den alten Elternpfad
-- Die VMs haben keine MAC-Adresse
-- Die Integrationsdienste fehlen
-- Der vSwitch wurde gelöscht
+- Die VMs haben ihre statische MAC-Adresse verloren
+- Die Integrationsdienste fehlen im Basis-Image
+- Der virtuelle Switch der VMs wurde dabei gelöscht
 ! Der Elternpfad ist absolut im Kopf gespeichert.
 
 ? Welches Cmdlet setzt den neuen Elternpfad?
@@ -191,9 +191,9 @@ Das Basis-Image der Schulungs-VMs wurde von D:\Vorlagen nach E:\Vorlagen verscho
 
 ? Wann ist -IgnoreIdMismatch zulässig?
 * Nur bei garantiert identischem Elternteil
-- Immer als Standard
-- Bei jedem Start
-- Wenn Secure Boot aktiv ist
+- Immer, es ist ohnehin der Standardwert
+- Bei jedem Start einer differenzierenden VM
+- Wenn Secure Boot in der VM aktiv ist
 ! Sonst droht Datenbeschädigung.
 
 ? Wie prüft man, ob die Kette in Ordnung ist?

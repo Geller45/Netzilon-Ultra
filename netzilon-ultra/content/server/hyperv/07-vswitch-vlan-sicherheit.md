@@ -193,29 +193,29 @@ Set-VMSwitchTeam -Name "SETswitch" -LoadBalancingAlgorithm HyperVPort
 
 ? In einem Schulungsnetz verteilt eine Schüler-VM versehentlich IP-Adressen. Welche Funktion verhindert das?
 * DHCP-Guard an der vNIC der Schüler-VM
-- Router-Guard am DHCP-Server
-- MAC-Spoofing an der Schüler-VM
-- Port-Mirroring am DHCP-Server
+- Router-Guard an der vNIC des DHCP-Servers
+- MAC-Spoofing deaktivieren an der Schüler-VM
+- Port-Mirroring (Ziel) am DHCP-Server
 ! DHCP-Guard verwirft DHCP-Server-Nachrichten, die von der geschützten vNIC kommen.
 
 ? Wie wird eine Firewall-VM konfiguriert, die Verkehr aus den VLANs 10, 20 und 30 empfangen soll?
 * Set-VMNetworkAdapterVlan -VMName FW01 -Trunk -AllowedVlanIdList "10,20,30" -NativeVlanId 1
-- Set-VMNetworkAdapterVlan -VMName FW01 -Access -VlanId 10,20,30
-- In der GUI drei VLAN-IDs eintragen
-- Set-VMSwitch -VlanId 10,20,30
+- Set-VMNetworkAdapterVlan -VMName FW01 -Access -VlanId 10,20,30 -NativeVlanId 1
+- Set-VMNetworkAdapter -VMName FW01 -VlanId "10,20,30" -MacAddressSpoofing On
+- Set-VMSwitch -Name LAN -DefaultFlowVlanId 10,20,30 -AllowManagementOS $true
 ! Mehrere VLANs erfordern den Trunk-Modus; den gibt es nur per PowerShell.
 
 ? Was blockiert Router-Guard?
-* Router Advertisements und Redirect-Nachrichten von der vNIC
-- Jeden Datenverkehr in andere Subnetze
-- DHCP-Anfragen von Clients
-- ARP-Anfragen
+* Router Advertisements und Redirects der vNIC
+- Jeden Datenverkehr der VM in andere Subnetze
+- DHCP-Discover- und DHCP-Request-Pakete von Clients
+- ARP-Anfragen und Gratuitous ARP der VM
 ! Die VM kann weiterhin normal kommunizieren, darf sich aber nicht als Router ankündigen.
 
 ? Welche Voraussetzung gilt für Port-Mirroring in Hyper-V?
-* Quell- und Ziel-vNIC hängen am selben virtuellen Switch
-- Beide VMs müssen Gen 1 sein
-- Die Quell-VM braucht DHCP-Guard
+* Quell- und Ziel-vNIC hängen am selben vSwitch
+- Beide VMs müssen als Generation 1 angelegt sein
+- Die Quell-VM braucht aktivierten DHCP-Guard
 - Die Ziel-VM muss auf einem anderen Host laufen
 ! Hyper-V spiegelt Verkehr innerhalb eines vSwitches von Source an Destination.
 
@@ -235,9 +235,9 @@ Set-VMSwitchTeam -Name "SETswitch" -LoadBalancingAlgorithm HyperVPort
 
 ? Wann wird festgelegt, ob ein vSwitch Mindestbandbreite als Gewicht oder absolut verwaltet?
 * Beim Erstellen mit -MinimumBandwidthMode
-- Jederzeit per Set-VMSwitch
-- In jeder VM einzeln
-- Gar nicht, es gilt immer Gewicht
+- Jederzeit nachträglich per Set-VMSwitch
+- In jeder VM einzeln per Set-VMNetworkAdapter
+- Gar nicht, es gilt immer der Modus Gewicht
 ! Der Modus ist nach dem Erstellen nicht mehr änderbar.
 
 ? Welcher Befehl setzt den Host-Adapter am externen Switch „LAN“ in VLAN 10?
@@ -255,10 +255,10 @@ Set-VMSwitchTeam -Name "SETswitch" -LoadBalancingAlgorithm HyperVPort
 ! Die GUI zeigt Mbit/s, PowerShell erwartet Bit/s.
 
 ? Was müssen Sie am physischen Switch einstellen, damit VMs in VLAN 20 und 30 über die Hyper-V-NIC kommunizieren?
-* Den Port zur Hyper-V-NIC als Trunk mit VLAN 20 und 30 konfigurieren
-- Den Port als Access-Port in VLAN 1
-- Spanning Tree deaktivieren
-- Port-Security mit einer MAC-Adresse
+* Port zur Hyper-V-NIC als Trunk mit VLAN 20 und 30
+- Port als Access-Port im Default-VLAN 1
+- Spanning Tree am Port vollständig deaktivieren
+- Port-Security mit genau einer erlaubten MAC-Adresse
 ! Getaggte Frames mehrerer VLANs brauchen einen Trunk-Port.
 
 ? Eine äußere Nested-VM soll innere VMs in verschiedenen VLANs betreiben. Wie konfigurieren Sie ihre vNIC auf L0?

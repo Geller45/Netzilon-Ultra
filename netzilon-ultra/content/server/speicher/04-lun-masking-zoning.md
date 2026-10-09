@@ -179,11 +179,11 @@ Test-Cluster -Node HV01, HV02 -Include "Storage","Inventory"   # deutsches Syste
 ! Masking steuert am Array, welcher Host welche LUN sieht; Zoning passiert am Switch.
 
 ? Was regelt Zoning?
-* Welche Ports in der Fabric miteinander kommunizieren dürfen
-- Welche RAID-Stufe eine LUN nutzt
-- Wie groß eine LUN ist
-- Welche Dateien ein Benutzer öffnen darf
-! Zoning ist die Zugriffssteuerung auf Port-Ebene in der Fabric.
+* Welche Ports der Fabric miteinander kommunizieren dürfen
+- Welche RAID-Stufe eine LUN auf dem Array nutzt
+- Welche LUNs ein Host am Array sehen darf (Mapping)
+- Welche Dateien ein Benutzer auf dem Volume öffnen darf
+! Zoning ist die Zugriffssteuerung auf Port-Ebene in der Fabric; die LUN-Sicht regelt das LUN-Masking am Array.
 
 ? Ein Admin hat eine neue Zone angelegt, der Host sieht trotzdem nichts. Was wurde wahrscheinlich vergessen?
 * Das Zoneset zu aktivieren
@@ -207,10 +207,10 @@ Test-Cluster -Node HV01, HV02 -Include "Storage","Inventory"   # deutsches Syste
 ! Port-Zoning hängt am Switch-Port; ein neuer HBA hat neue WWPNs, die WWN-Zonen nicht kennen.
 
 ? Was kennzeichnet Hard-Zoning?
-* Der Switch prüft jeden Rahmen in Hardware und verwirft unerlaubte
-- Der Name Server blendet nur Einträge aus
-- Es wird nur auf dem Array konfiguriert
-- Es ist nur bei iSCSI möglich
+* Der Switch prüft jeden Rahmen in Hardware, verwirft unerlaubte
+- Der Name Server blendet lediglich unerlaubte Einträge aus
+- Es wird ausschließlich auf dem Array-Controller konfiguriert
+- Es ist nur in iSCSI-Netzen mit VLANs möglich
 ! Soft-Zoning filtert nur Name-Server-Antworten, Hard-Zoning erzwingt die Regeln pro Rahmen.
 
 ? Was ist Best Practice beim Zuschnitt von Zonen?
@@ -222,10 +222,10 @@ Test-Cluster -Node HV01, HV02 -Include "Storage","Inventory"   # deutsches Syste
 
 ? Ein Host sieht den Array-Port, aber keine LUN. Was ist die wahrscheinlichste Ursache?
 * Die LUN ist dem Host im LUN-Masking nicht zugeordnet
-- Das Zoning ist zu restriktiv
-- Der Host hat keine IP-Adresse
-- Das Kabel ist defekt
-! Wenn der Port sichtbar ist, funktioniert das Zoning; es fehlt das Mapping am Array.
+- Das Zoning auf dem FC-Switch ist zu restriktiv
+- Der Host-HBA hat keine IP-Adresse erhalten
+- Das Glasfaserkabel zum Switch ist defekt
+! Wenn der Port sichtbar ist, funktionieren Kabel und Zoning; es fehlt das Mapping am Array.
 
 ? Welche Kennung wird beim FC-Masking für einen Host eingetragen?
 * Die WWPNs seiner HBA-Ports
@@ -235,10 +235,10 @@ Test-Cluster -Node HV01, HV02 -Include "Storage","Inventory"   # deutsches Syste
 ! Host-Objekte im Array enthalten die WWPNs (bei iSCSI die IQN).
 
 ? Warum müssen gemeinsame LUNs in einem Cluster auf allen Knoten dieselbe LUN-ID haben?
-* Damit alle Knoten die LUN eindeutig gleich erkennen und Validierung sowie Failover funktionieren
-- Weil sonst das Zoneset nicht aktiviert werden kann
-- Weil Windows nur LUN 0 lesen kann
-- Weil die LUN sonst verschlüsselt wird
+* Damit alle Knoten die LUN gleich erkennen und Validierung/Failover klappen
+- Weil das Zoneset sonst nicht aktiviert werden kann
+- Weil Windows ausschließlich LUN 0 als Datenträger einbinden kann
+- Weil die LUN bei abweichender ID automatisch mit BitLocker verschlüsselt wird
 ! Unterschiedliche IDs führen zu Warnungen in der Cluster-Validierung und zu Problemen beim Failover.
 
 ? Wie wird bei einem Windows-iSCSI-Zielserver festgelegt, wer ein Target sieht?
@@ -256,10 +256,10 @@ Test-Cluster -Node HV01, HV02 -Include "Storage","Inventory"   # deutsches Syste
 ! Ohne Multipfad-E/A erscheint jede LUN pro Pfad als eigene Platte.
 
 ? Was ist ein RSCN?
-* Eine Meldung der Fabric über Zustandsänderungen an angemeldete Ports
-- Ein RAID-Level für SANs
-- Ein Befehl zum Formatieren von LUNs
-- Eine iSCSI-Authentifizierung
+* Eine Fabric-Meldung über Zustandsänderungen an angemeldete Ports
+- Ein spezieller RAID-Level für SAN-Arrays
+- Ein Befehl zum Formatieren von LUNs über die Fabric
+- Ein Authentifizierungsverfahren für iSCSI-Sitzungen
 ! Registered State Change Notification – Single-Initiator-Zoning begrenzt deren Auswirkungen.
 
 ## Lücken

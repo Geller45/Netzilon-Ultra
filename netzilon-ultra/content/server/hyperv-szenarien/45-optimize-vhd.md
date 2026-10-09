@@ -177,24 +177,24 @@ FS01-Daten.vhdx (dynamisch) ist 820 GB groß, im Gast sind nur 500 GB belegt. Es
 ! Quick gibt ungenutzte Blöcke frei, ohne Nullblöcke zu suchen.
 
 ? Was ist für den Modus Full nötig?
-* Die VHDX ist schreibgeschützt eingebunden
-- Die VM läuft
+* VHDX schreibgeschützt eingebunden
+- Die VM läuft und nutzt die VHDX
 - Die VHDX ist eine feste VHDX
-- Ein Prüfpunkt existiert
+- Ein aktueller Prüfpunkt existiert
 ! Mount-VHD -ReadOnly.
 
 ? Welcher Modus setzt KEIN schreibgeschütztes Einbinden der VHDX voraus?
-* Pretrimmed
-- Full
-- Quick
-- Retrim
+* Optimize-VHD -Mode Pretrimmed
+- Optimize-VHD -Mode Full
+- Optimize-VHD -Mode Quick
+- Optimize-VHD -Mode Retrim
 ! Ebenso Prezeroed – dafür weniger gründlich. Full, Quick und Retrim verlangen eine getrennte oder schreibgeschützt eingebundene VHDX.
 
 ? Warum vorher Prüfpunkte löschen?
-* Weil die VM sonst in die .avhdx schreibt und die Eltern-VHDX eingefroren ist
-- Weil Prüfpunkte die VM verschlüsseln
-- Weil Optimize-VHD Prüfpunkte erzeugt
-- Weil Prüfpunkte die VM-Version senken
+* Die VM schreibt in die .avhdx, die Eltern-VHDX ist eingefroren
+- Weil Prüfpunkte die VHDX mit BitLocker verschlüsseln
+- Weil Optimize-VHD automatisch neue Prüfpunkte erzeugt
+- Weil Prüfpunkte die Konfigurationsversion der VM senken
 ! Erst zusammenführen, dann komprimieren.
 
 ? Wie heißt die Funktion im Hyper-V-Manager?

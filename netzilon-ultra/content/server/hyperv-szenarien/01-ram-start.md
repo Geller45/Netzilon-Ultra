@@ -168,10 +168,10 @@ Ein Host mit 64 GB RAM betreibt vier laufende VMs mit zusammen 53 GB zugewiesene
 
 ## Quiz
 ? Eine VM mit 16 GB statischem RAM startet nicht, auf dem Host sind 10 GB frei. Was ist die Ursache?
-* Der Start-RAM muss beim Einschalten vollständig frei verfügbar sein
-- Die VM-Konfigurationsversion ist zu alt
-- Der virtuelle Switch ist nicht verbunden
-- Die Integrationsdienste sind deaktiviert
+* Der Start-RAM muss beim Einschalten vollständig frei sein
+- Die Konfigurationsversion der VM ist für den Host zu alt
+- Der virtuelle Switch der VM ist nicht mit einer NIC verbunden
+- Die Integrationsdienste im Gast sind deaktiviert und blockieren den Start
 ! Hyper-V reserviert den Start-RAM komplett im physischen Speicher; ist er nicht frei, scheitert der Start.
 
 ? Wann hilft Smart Paging?
@@ -183,9 +183,9 @@ Ein Host mit 64 GB RAM betreibt vier laufende VMs mit zusammen 53 GB zugewiesene
 
 ? Welches Cmdlet aktiviert Dynamic Memory mit 4 GB Start-RAM?
 * Set-VMMemory -VMName FIBU01 -DynamicMemoryEnabled $true -StartupBytes 4GB
-- Set-VM -Name FIBU01 -DynamicRAM 4GB
-- Enable-VMMemory -VMName FIBU01 -Size 4GB
-- Set-VMHost -DynamicMemory $true
+- Set-VM -Name FIBU01 -DynamicMemory -MemoryStartupBytes 4GB -Passthru
+- Set-VMProcessor -VMName FIBU01 -DynamicMemoryEnabled $true -Maximum 4GB
+- Set-VMHost -DynamicMemoryEnabled $true -MemoryStartupBytes 4GB
 ! Speicherwerte einer VM werden mit Set-VMMemory gesetzt.
 
 ? In welchem VM-Zustand lässt sich Dynamic Memory aktivieren?
@@ -204,9 +204,9 @@ Ein Host mit 64 GB RAM betreibt vier laufende VMs mit zusammen 53 GB zugewiesene
 
 ? Was verhindert dauerhaft, dass Test-VMs nach einem Host-Neustart Speicher blockieren?
 * Automatische Startaktion „Keine Aktion“
-- Speicherpuffer auf 0 % setzen
-- Smart-Paging-Pfad ändern
-- Konfigurationsversion aktualisieren
+- Speicherpuffer der Test-VMs auf 0 % setzen
+- Smart-Paging-Dateipfad auf ein anderes Volume legen
+- Konfigurationsversion der Test-VMs aktualisieren
 ! Mit Set-VM -AutomaticStartAction Nothing starten Test-VMs nicht automatisch.
 
 ? Welche Einstellung kann trotz genug Gesamt-RAM einen Start verhindern?
@@ -217,10 +217,10 @@ Ein Host mit 64 GB RAM betreibt vier laufende VMs mit zusammen 53 GB zugewiesene
 ! Ohne NUMA-Spanning muss der Speicher aus einem NUMA-Knoten kommen.
 
 ? Was zeigt die Spalte „Speicherbedarf“ (MemoryDemand)?
-* Wie viel RAM das Gastbetriebssystem aktuell tatsächlich benötigt
-- Den physischen RAM des Hosts
-- Die Größe der VHDX-Datei
-- Die maximale RAM-Grenze der VM
+* Den RAM, den der Gast aktuell tatsächlich benötigt
+- Den physisch installierten Arbeitsspeicher des Hosts
+- Die aktuelle Größe der VHDX-Datei auf dem Volume
+- Die konfigurierte maximale RAM-Grenze der VM
 ! MemoryDemand ist der aktuelle Bedarf; MemoryAssigned der zugewiesene Wert.
 
 ? Welche Maßnahme löst das Problem NICHT?

@@ -163,9 +163,9 @@ MAIL01 liegt auf dem degradierten RAID D: und soll im laufenden Betrieb auf E: u
 ## Quiz
 ? Welches Cmdlet verschiebt die Dateien einer laufenden VM auf ein anderes Volume desselben Hosts?
 * Move-VMStorage
-- Move-VM
-- Export-VM
-- Move-Item
+- Move-VM -Quick
+- Export-VM -Path
+- Move-Item -Force
 ! Move-VM wechselt den Host.
 
 ? Was passiert mit den Quelldateien nach erfolgreicher Speichermigration?
@@ -192,9 +192,9 @@ MAIL01 liegt auf dem degradierten RAID D: und soll im laufenden Betrieb auf E: u
 ? Welcher Parameter verschiebt alle VM-Dateien in einen Ordner?
 * -DestinationStoragePath
 - -IncludeStorage
-- -VHDs
-- -Path
-! -VHDs verschiebt gezielt einzelne Festplatten.
+- -VirtualMachinePath
+- -SnapshotFilePath
+! -VirtualMachinePath bzw. -SnapshotFilePath verschieben nur einzelne Dateiarten, -VHDs gezielt einzelne Festplatten.
 
 ? Braucht Speichermigration auf demselben Host einen Cluster?
 * Nein
@@ -211,8 +211,8 @@ MAIL01 liegt auf dem degradierten RAID D: und soll im laufenden Betrieb auf E: u
 ! So bleiben beide Kopien konsistent.
 
 ? Warum nicht einfach im Explorer verschieben?
-* Laufende VM-Dateien sind gesperrt und Hyper-V würde die Pfade nicht anpassen
-- Der Explorer ist zu schnell
-- Explorer kann keine VHDX kopieren
-- Es gäbe doppelte MAC-Adressen
-! Immer über Hyper-V verschieben.
+* Dateien sind gesperrt, Hyper-V passt die Pfade nicht an
+- Der Explorer kopiert zu schnell und überlastet den Host
+- Der Explorer kann grundsätzlich keine VHDX-Dateien kopieren
+- Es entstünden doppelte MAC-Adressen im Netzwerk
+! Laufende VM-Dateien sind gesperrt – immer über Hyper-V verschieben.

@@ -258,10 +258,10 @@ Die Netzilon GmbH wächst auf 60 Mitarbeitende. Bisher berichten alle Techniker 
 
 ## Quiz
 ? Was regelt die Aufbauorganisation eines Unternehmens?
-* Die Gliederung in Stellen und Abteilungen und die Weisungsbeziehungen
-- Die zeitliche Reihenfolge der Arbeitsschritte
-- Die Höhe der Gehälter
-- Die Preise der Produkte
+* Gliederung in Stellen und Abteilungen samt Weisungsbeziehungen
+- Die zeitliche und räumliche Reihenfolge der Arbeitsschritte
+- Die Höhe der Gehälter und die Eingruppierung der Beschäftigten
+- Die Preise der Produkte und die Kalkulationsschemata
 ! Die Abfolge der Arbeitsschritte regelt die Ablauforganisation.
 
 ? Welche Aussage zu einer Stabsstelle ist richtig?
@@ -288,10 +288,10 @@ Die Netzilon GmbH wächst auf 60 Mitarbeitende. Bisher berichten alle Techniker 
 
 ? Mit welchem Instrument wird die Ablauforganisation typischerweise dargestellt?
 * Ereignisgesteuerte Prozesskette (EPK)
-- Organigramm
-- Stellenbeschreibung
-- Bilanz
-! Weitere: Flussdiagramm, BPMN, Netzplan, Gantt-Diagramm.
+- Organigramm (Stellen- und Linienplan)
+- Stellenbeschreibung mit Kompetenzen
+- Bilanz und Gewinn-und-Verlust-Rechnung
+! Weitere: Flussdiagramm, BPMN, Netzplan, Gantt-Diagramm. Organigramm und Stellenbeschreibung gehören zur Aufbauorganisation.
 
 ? 6 Techniker richten in 240 Arbeitsstunden 360 Arbeitsplätze ein. Wie hoch ist die Arbeitsproduktivität?
 * 1,5 Arbeitsplätze je Stunde

@@ -168,23 +168,23 @@ Nach einem Host-Neustart von HV01 bleiben SQL01 und APP01 aus, DC01 läuft. Get-
 
 ? Welche Stoppaktion ist bei einer neuen VM voreingestellt?
 * Save (Status speichern)
-- ShutDown
-- TurnOff
-- Nothing
+- ShutDown (Gast herunterfahren)
+- TurnOff (ausschalten)
+- Nothing (keine Aktion)
 ! Standard ist das Speichern des Zustands.
 
 ? Warum staffelt man AutomaticStartDelay?
-* Damit abhängige Dienste in der richtigen Reihenfolge und ohne Lastspitze starten
-- Damit Lizenzen gespart werden
-- Weil Hyper-V nur eine VM gleichzeitig starten kann
-- Damit Prüfpunkte schneller erstellt werden
+* Abhängige Dienste starten in Reihenfolge, ohne Lastspitze
+- Damit beim Start weniger Windows-Lizenzen gleichzeitig benötigt werden
+- Weil Hyper-V technisch nur eine VM gleichzeitig starten kann
+- Damit die automatischen Prüfpunkte schneller erstellt werden
 ! DC und Datenbank sollen vor der Anwendung bereit sein.
 
 ? Die Stoppaktion ShutDown funktioniert nicht. Was prüfst du zuerst?
 * Den Integrationsdienst „Herunterfahren des Betriebssystems“
-- Die Startverzögerung
-- Den Integrationsdienst Gastdienste
-- Die NUMA-Einstellungen
+- Die konfigurierte Startverzögerung (AutomaticStartDelay)
+- Den Integrationsdienst „Gastdienstschnittstelle“
+- Die NUMA-Einstellungen des virtuellen Prozessors
 ! ShutDown nutzt den Integrationsdienst, um den Gast sauber herunterzufahren.
 
 ? Welche Einheit hat der Parameter -AutomaticStartDelay?
@@ -195,10 +195,10 @@ Nach einem Host-Neustart von HV01 bleiben SQL01 und APP01 aus, DC01 läuft. Get-
 ! Beispiel: 60 = eine Minute.
 
 ? Welche Folge hat die Stoppaktion Save für den Speicherplatz?
-* Es wird Platz in Größe des zugewiesenen RAMs für die Zustandsdatei benötigt
-- Die VHDX wird automatisch komprimiert
-- Es wird kein zusätzlicher Platz benötigt
-- Ein Prüfpunkt wird erstellt
+* Platz in Höhe des zugewiesenen RAMs für die Zustandsdatei
+- Die VHDX wird beim Speichern automatisch komprimiert
+- Es wird kein zusätzlicher Speicherplatz benötigt
+- Bei jedem Stopp wird zusätzlich ein Prüfpunkt erstellt
 ! Der Arbeitsspeicherinhalt muss auf den Datenträger geschrieben werden können.
 
 ? Wer übernimmt in einem Failover-Cluster das Starten der VMs?
@@ -210,7 +210,7 @@ Nach einem Host-Neustart von HV01 bleiben SQL01 und APP01 aus, DC01 läuft. Get-
 
 ? Welcher Befehl listet Start- und Stoppaktionen aller VMs?
 * Get-VM | Format-Table Name, AutomaticStartAction, AutomaticStartDelay, AutomaticStopAction
-- Get-VMHost | Select AutoStart
-- Get-VMIntegrationService -All
-- Measure-VM -Start
+- Get-VMHost | Format-Table Name, VirtualMachinePath, VirtualHardDiskPath, MacAddressMinimum
+- Get-VMIntegrationService -VMName * | Format-Table VMName, Name, Enabled, PrimaryStatusDescription
+- Measure-VM -VMName * | Format-Table VMName, AvgCPU, AvgRAM, TotalDisk
 ! Die Eigenschaften stehen direkt am VM-Objekt.

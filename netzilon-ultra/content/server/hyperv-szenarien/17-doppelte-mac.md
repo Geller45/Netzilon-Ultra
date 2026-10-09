@@ -169,9 +169,9 @@ APP01 (HV01) und APP02 (HV02) haben dieselbe MAC; HV02 wurde aus einem Image von
 ## Quiz
 ? Zwei VMs haben dieselbe MAC. Typisches Symptom?
 * Sporadische Verbindungsabbrüche durch MAC flapping
-- Die zweite VM startet nicht
-- Hyper-V löscht eine VM
-- Secure Boot schlägt fehl
+- Die zweite VM verweigert grundsätzlich den Start
+- Hyper-V löscht automatisch eine der beiden VMs
+- Secure Boot schlägt in beiden VMs fehl
 ! Hyper-V verhindert doppelte MACs zwischen Hosts nicht.
 
 ? Mit welchem Präfix beginnen Hyper-V-MACs?
@@ -183,9 +183,9 @@ APP01 (HV01) und APP02 (HV02) haben dieselbe MAC; HV02 wurde aus einem Image von
 
 ? Wie setzt man einen eigenen MAC-Pool auf HV02?
 * Set-VMHost -MacAddressMinimum 00155D0A1600 -MacAddressMaximum 00155D0A16FF
-- Set-VMSwitch -MacPool 00155D0A16
-- Set-VMNetworkAdapter -MacPool
-- New-VMMacPool
+- Set-VMSwitch -Name LAN -MacAddressMinimum 00155D0A1600 -MacAddressMaximum 00155D0A16FF
+- Set-VMNetworkAdapter -VMName * -StaticMacAddress 00155D0A1600
+- Set-NetAdapter -Name vEthernet* -MacAddress 00155D0A1600
 ! Der Pool ist eine Host-Einstellung.
 
 ? Was passiert mit vorhandenen VMs nach Änderung des Pools?
@@ -203,10 +203,10 @@ APP01 (HV01) und APP02 (HV02) haben dieselbe MAC; HV02 wurde aus einem Image von
 ! MAC-Einstellungen erfordern eine ausgeschaltete VM.
 
 ? Woraus entsteht ein identischer Pool auf zwei Hosts typischerweise?
-* Klonen eines Hosts mit installierter Hyper-V-Rolle oder gleiche IP bei der Installation
-- Unterschiedliche Zeitzonen
-- Gleiche Prozessoren
-- Gleicher Domänenname
+* Klonen eines Hosts mit Hyper-V-Rolle oder gleiche IP bei der Installation
+- Unterschiedliche Zeitzonen und Uhrzeiten der beiden Hosts
+- Baugleiche Prozessoren und Netzwerkkarten in beiden Hosts
+- Ein gleicher Domänenname bzw. dieselbe Organisationseinheit
 ! Der Pool wird bei der Rolleninstallation aus der IP abgeleitet.
 
 ? Wie findet man doppelte MACs per PowerShell?

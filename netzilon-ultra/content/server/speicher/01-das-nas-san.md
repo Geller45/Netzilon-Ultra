@@ -232,30 +232,30 @@ Get-PhysicalDisk | Format-Table FriendlyName, BusType, MediaType, CanPool
 
 ? Welche Aussage zu NFS ist richtig?
 * NFS ist ein Dateiprotokoll, verbreitet bei Unix/Linux und VMware
-- NFS ist ein Blockprotokoll auf Fibre Channel
-- NFS benötigt zwingend FCoE
-- NFS arbeitet nur ohne TCP/IP
+- NFS ist ein Blockprotokoll, das SCSI-Befehle über Fibre Channel transportiert
+- NFS benötigt zwingend FCoE und Data Center Bridging
+- NFS arbeitet direkt auf Ethernet ohne TCP/IP-Stack
 ! NFS (Network File System) stellt Dateien über TCP/IP bereit, typischer Port 2049.
 
 ? Was ist der wichtigste Vorteil von Blockspeicher gegenüber Dateispeicher?
-* Der Server kann ein eigenes Dateisystem wählen und erreicht geringe Latenz
-- Viele Clients können ohne Cluster gleichzeitig schreiben
-- Er benötigt keine Netzwerkkarte
-- Berechtigungen werden automatisch vom Speicher verwaltet
+* Der Server wählt sein Dateisystem selbst und erreicht geringe Latenz
+- Viele Clients können ohne Cluster gleichzeitig auf dasselbe Volume schreiben
+- Er benötigt weder Netzwerkkarte noch HBA im Server
+- Berechtigungen auf Dateien werden automatisch vom Speichersystem verwaltet
 ! Blockspeicher eignet sich für Datenbanken und VM-Festplatten, weil der Server direkt mit Blöcken arbeitet.
 
 ? Was bedeutet hyperkonvergente Infrastruktur?
-* Rechen- und Speicherressourcen liegen in denselben Knoten und werden per Software gebündelt
-- Jeder Server hat sein eigenes NAS
-- Speicher wird nur über Fibre Channel angebunden
-- Backup und Produktivdaten liegen im selben Ordner
+* Rechenleistung und Speicher in denselben Knoten, per Software gebündelt
+- Jeder Server erhält ein eigenes NAS, das nur er selbst nutzt
+- Speicher wird ausschließlich über Fibre Channel an die Hosts angebunden
+- Backup und Produktivdaten liegen im selben Ordner auf demselben Volume
 ! Beispiel: Storage Spaces Direct bündelt lokale Platten mehrerer Hyper-V-Hosts zu einem Pool.
 
 ? Welches Kriterium spricht am stärksten für ein SAN statt eines NAS?
 * Gemeinsamer Blockspeicher für einen Hyper-V-Failover-Cluster
-- Möglichst geringe Anschaffungskosten
-- Einfache Dateifreigabe für Mitarbeitende
-- Zugriff von Linux-Clients auf Textdateien
+- Möglichst geringe Anschaffungs- und Betriebskosten
+- Einfache SMB-Dateifreigaben für die Mitarbeitenden
+- Zugriff von Linux-Clients auf Textdateien per NFS
 ! Cluster brauchen gemeinsame Blockgeräte (CSV); Dateiablage löst ein NAS günstiger.
 
 ## Lücken

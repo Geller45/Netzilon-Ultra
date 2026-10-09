@@ -238,10 +238,10 @@ Die Auszubildende Lena (19) der Netzilon GmbH fährt nach Feierabend mit dem Fah
 
 ## Quiz
 ? Wie lange darf ein volljähriger Arbeitnehmer nach ArbZG werktäglich höchstens arbeiten?
-* 10 Stunden, wenn im Durchschnitt 8 Stunden nicht überschritten werden
-- 8 Stunden ohne Ausnahme
-- 12 Stunden bei Zustimmung des Arbeitnehmers
-- 9 Stunden plus Pausen
+* 10 Stunden, wenn im Schnitt 8 Stunden nicht überschritten werden
+- 8 Stunden ohne Ausnahme, Überstunden sind nicht zulässig
+- 12 Stunden, sofern der Arbeitnehmer schriftlich zustimmt
+- 9 Stunden zuzüglich der gesetzlichen Ruhepausen
 ! § 3 ArbZG – Ausgleichszeitraum 6 Kalendermonate oder 24 Wochen.
 
 ? Welche Pause steht einem 30-jährigen Mitarbeiter bei 9,5 Stunden Arbeitszeit mindestens zu?
@@ -282,9 +282,9 @@ Die Auszubildende Lena (19) der Netzilon GmbH fährt nach Feierabend mit dem Fah
 
 ? Bis zu welchem Alter des Kindes kann Elternzeit genommen werden?
 * Bis zur Vollendung des 8. Lebensjahres
-- Bis zum 3. Geburtstag
-- Bis zum 6. Geburtstag
-- Bis zur Einschulung
+- Bis zum 3. Geburtstag des Kindes
+- Bis zum 6. Geburtstag des Kindes
+- Bis zur Einschulung in die Grundschule
 ! § 15 Abs. 2 BEEG; bis zu 24 Monate dürfen zwischen dem 3. und 8. Geburtstag liegen.
 
 ? Wie viele Arbeitstage beträgt der gesetzliche Mindesturlaub bei einer 5-Tage-Woche?
@@ -296,9 +296,9 @@ Die Auszubildende Lena (19) der Netzilon GmbH fährt nach Feierabend mit dem Fah
 
 ? Wie lange erhält ein Arbeitnehmer bei Krankheit Entgeltfortzahlung vom Arbeitgeber?
 * Bis zu 6 Wochen je Krankheit
-- Bis zu 3 Wochen
-- Bis zu 78 Wochen
-- Unbegrenzt
+- Bis zu 3 Wochen je Kalenderjahr
+- Bis zu 78 Wochen innerhalb von 3 Jahren
+- Unbegrenzt bis zur Genesung
 ! § 3 EFZG; danach Krankengeld der Krankenkasse (bis 78 Wochen innerhalb von 3 Jahren).
 
 ? Wer finanziert die gesetzliche Unfallversicherung?
@@ -319,14 +319,14 @@ Die Auszubildende Lena (19) der Netzilon GmbH fährt nach Feierabend mit dem Fah
 
 ? Was bedeutet ein gelbes dreieckiges Sicherheitszeichen?
 * Warnung vor einer Gefahr
-- Gebot
-- Verbot
-- Rettungsweg
-! ASR A1.3 – z. B. Warnung vor elektrischer Spannung.
+- Gebot (z. B. Schutzbrille tragen)
+- Verbot (z. B. Rauchen verboten)
+- Rettungsweg bzw. Notausgang
+! ASR A1.3 – z. B. Warnung vor elektrischer Spannung. Gebote sind blau-rund, Verbote rot-rund, Rettungszeichen grün.
 
 ? Ab wann muss ein Arbeitnehmer bei Krankheit eine ärztliche Bescheinigung über die Arbeitsunfähigkeit vorlegen bzw. feststellen lassen?
-* Wenn die Arbeitsunfähigkeit länger als 3 Kalendertage dauert, spätestens am darauffolgenden Arbeitstag
-- Ab dem ersten Krankheitstag immer
-- Erst nach einer Woche
-- Nur bei Krankenhausaufenthalt
+* Bei mehr als 3 Kalendertagen, spätestens am folgenden Arbeitstag
+- Immer ab dem ersten Krankheitstag, ohne jede Ausnahme
+- Erst nach einer vollen Woche Arbeitsunfähigkeit
+- Nur bei einem stationären Krankenhausaufenthalt
 ! § 5 Abs. 1 EFZG – der AG darf die Bescheinigung früher verlangen.

@@ -22,9 +22,9 @@ verweise: [server-speicher-das-nas-san, server-speicher-iscsi, server-speicher-f
 
 ? Wo liegt beim SAN das Dateisystem einer LUN?
 * Im Server, der die LUN eingebunden hat
-- Im SAN-Switch
-- Im NAS-Kopf
-- Im Array-Controller als NTFS
+- Im FC-Switch der Fabric (Name Server)
+- Im NAS-Kopf vor dem Array
+- Im Array-Controller als NTFS-Volume
 ! Das Array liefert nur Blöcke; der Server formatiert die LUN selbst.
 
 ? Welche Kombination aus Protokoll und Port ist richtig?
@@ -78,9 +78,9 @@ verweise: [server-speicher-das-nas-san, server-speicher-iscsi, server-speicher-f
 
 ? Welche MTU testet man mit ping -f -l 8972?
 * 9000 Byte (Jumbo Frames)
-- 1500 Byte
-- 8972 Byte
-- 2148 Byte
+- 1500 Byte (Standard-Ethernet)
+- 8972 Byte (wie angegeben)
+- 2148 Byte (FC-Rahmen)
 ! 8972 + 20 Byte IP-Kopf + 8 Byte ICMP-Kopf = 9000.
 
 ? Welche FC-Schicht ist für Rahmenaufbau und Flusskontrolle zuständig?
@@ -92,9 +92,9 @@ verweise: [server-speicher-das-nas-san, server-speicher-iscsi, server-speicher-f
 
 ? Was ist ein WWPN?
 * Die 64-Bit-Kennung eines einzelnen FC-Ports
-- Die IP-Adresse eines FC-Switches
-- Die Kennung eines iSCSI-Targets
-- Die Seriennummer einer LUN
+- Die IP-Adresse eines FC-Switches in der Fabric
+- Die 64-Bit-Kennung des gesamten FC-Geräts (Knoten)
+- Die Seriennummer einer LUN auf dem Array
 ! Der WWNN benennt das ganze Gerät, der WWPN den einzelnen Port.
 
 ? Welche FC-Topologie teilt die Bandbreite unter bis zu 127 Ports?
@@ -120,9 +120,9 @@ verweise: [server-speicher-das-nas-san, server-speicher-iscsi, server-speicher-f
 
 ? Ein Host sieht den Array-Port, aber keine Platte. Was fehlt am wahrscheinlichsten?
 * LUN-Masking/Mapping auf dem Array
-- Zone auf dem Switch
-- Ein zweites Netzteil
-- Die DNS-Registrierung
+- Eine passende Zone auf dem FC-Switch
+- Ein zweites Netzteil im Array
+- Die DNS-Registrierung des Hosts
 ! Wäre das Zoning falsch, sähe der Host den Array-Port gar nicht.
 
 ? Welches Zoning bleibt beim Umstecken auf einen anderen Switch-Port gültig?
@@ -231,17 +231,17 @@ verweise: [server-speicher-das-nas-san, server-speicher-iscsi, server-speicher-f
 ! RAID 10 übersteht zwei Ausfälle nur, wenn sie in verschiedenen Spiegelpaaren liegen.
 
 ? Warum ist RAID 5 bei sehr großen Platten riskant?
-* Beim langen Rebuild kann ein URE auftreten, den RAID 5 nicht mehr ausgleichen kann
+* Ein URE beim langen Rebuild ist nicht mehr ausgleichbar
 - RAID 5 kann keine Platten über 4 TB adressieren
-- RAID 5 hat keine Parität
-- RAID 5 benötigt mindestens 8 Platten
+- RAID 5 hat keine Parität und damit keine Redundanz
+- RAID 5 benötigt bei großen Platten mindestens 8 Laufwerke
 ! Bei 1 URE pro 10^14 Bit sind schon nach etwa 12,5 TB gelesener Daten Fehler statistisch zu erwarten.
 
 ? Was verhindert das RAID-Write-Hole am wirksamsten?
-* Controller-Cache mit BBU bzw. Flash-Sicherung und Journaling
-- Eine größere Stripe-Größe
-- RAID 0 statt RAID 5
-- Defragmentierung
+* Controller-Cache mit BBU/Flash-Sicherung und Journaling
+- Eine größere Stripe-Größe auf allen Platten
+- RAID 0 statt RAID 5, da ohne Parität
+- Regelmäßige Defragmentierung der Volumes
 ! Das Write Hole entsteht durch Stromausfall zwischen Daten- und Paritätsschreibvorgang.
 
 ? Wie viele Platten braucht ein 2-Wege-Mirror in Storage Spaces mindestens?
@@ -273,10 +273,10 @@ verweise: [server-speicher-das-nas-san, server-speicher-iscsi, server-speicher-f
 ! Parity ist bei zufälligen Schreibzugriffen langsam; Simple hat keinen Schutz.
 
 ? Was ist das größte Risiko von Thin Provisioning?
-* Der Pool läuft unbemerkt voll und Datenträger fallen aus
-- Daten werden doppelt gespeichert
-- Snapshots sind unmöglich
-- Die Latenz verdoppelt sich immer
+* Der Pool läuft unbemerkt voll, Datenträger fallen aus
+- Daten werden grundsätzlich doppelt gespeichert
+- Snapshots sind auf Thin-Datenträgern unmöglich
+- Die Latenz verdoppelt sich bei jedem Zugriff
 ! Füllstand mit Schwellenwerten überwachen.
 
 ? Mit welchem Datenverlust (RPO) ist bei synchroner Replikation zu rechnen?
@@ -301,24 +301,24 @@ verweise: [server-speicher-das-nas-san, server-speicher-iscsi, server-speicher-f
 ! 1 500 + 1 500 × 6 = 10 500.
 
 ? Was ist der Hauptunterschied zwischen Snapshot und Backup?
-* Ein Backup liegt auf einem getrennten Medium, ein Snapshot auf demselben System
-- Ein Snapshot ist immer größer als ein Backup
-- Backups lassen sich nicht wiederherstellen
-- Snapshots funktionieren nur bei NAS
+* Backup auf getrenntem Medium, Snapshot auf demselben System
+- Ein Snapshot ist immer größer als ein Vollbackup
+- Backups lassen sich nur vollständig, nie einzeln wiederherstellen
+- Snapshots funktionieren nur bei NAS, nicht bei SAN
 ! Fällt das Array aus, sind die Snapshots mit verloren.
 
 ? Welche Daten lassen sich durch Deduplizierung am besten reduzieren?
 * Viele VDI-Festplatten mit demselben Betriebssystem
-- Verschlüsselte Datenbank-Backups
-- Bereits komprimierte Videos
-- Zufallsdaten
+- Verschlüsselte Datenbank-Backups mit Zufallsschlüssel
+- Bereits komprimierte Videos (H.264/H.265)
+- Zufallsdaten aus einem Rauschgenerator
 ! Identische Chunks werden nur einmal gespeichert – bei VDI sind Einsparungen bis 90 % möglich.
 
 ? Ein Datenbestand von 8 TB wächst jährlich um 25 %. Wie groß ist er nach 2 Jahren?
 * 12,5 TB
-- 12 TB
-- 10 TB
-- 16 TB
+- 12,0 TB
+- 10,0 TB
+- 16,0 TB
 ! 8 × 1,25² = 8 × 1,5625 = 12,5 TB.
 
 ? Welche Aussage zur Speicherredundanz ist richtig?

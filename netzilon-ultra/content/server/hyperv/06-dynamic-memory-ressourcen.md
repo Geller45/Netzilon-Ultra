@@ -199,10 +199,10 @@ Set-VMProcessor -VMName HV-NESTED -RelativeWeight 50
 ! Startwert für den Boot, Minimum für den Leerlauf, Maximum als Deckel.
 
 ? Wann nutzt Hyper-V Smart Paging?
-* Beim Neustart einer VM, deren Minimum unter dem Startwert liegt, wenn nicht genug physischer RAM frei ist
-- Immer wenn der Host weniger als 10 % freien RAM hat
-- Bei jeder Live-Migration
-- Wenn der Puffer überschritten wird
+* Beim VM-Neustart mit Minimum < Startwert, wenn physischer RAM fehlt
+- Immer wenn der Host weniger als 10 % freien Arbeitsspeicher hat
+- Bei jeder Live-Migration, um den Arbeitsspeicher zwischenzuspeichern
+- Sobald der Arbeitsspeicherpuffer einer laufenden VM überschritten wird
 ! Smart Paging ist eine reine Neustart-Überbrückung.
 
 ? Welche Änderung ist bei einer laufenden VM mit Dynamic Memory möglich?
@@ -213,25 +213,25 @@ Set-VMProcessor -VMName HV-NESTED -RelativeWeight 50
 ! Minimum senken und Maximum erhöhen funktionieren online; Start und Aktivierung nur offline.
 
 ? Was beschreibt der Arbeitsspeicherpuffer?
-* Zusätzlichen Speicher in Prozent über dem aktuellen Bedarf als Reserve
-- Den Speicher des Hosts für das Verwaltungsbetriebssystem
-- Die Größe der Auslagerungsdatei im Gast
-- Die Mindestmenge beim Start
-! Standard 20 %, einstellbar 5–2000 %.
+* Zusätzlicher Speicher in Prozent über dem aktuellen Bedarf
+- Den reservierten Speicher des Hosts für das Verwaltungsbetriebssystem
+- Die Größe der Auslagerungsdatei im Gastbetriebssystem
+- Die Mindestmenge an Arbeitsspeicher beim Start der VM
+! Er dient als Reserve; Standard 20 %, einstellbar 5–2000 %.
 
 ? Bei Speicherknappheit soll DB01 vor APP01 bedient werden. Welche Einstellung?
 * Höhere Arbeitsspeichergewichtung (-Priority) für DB01
-- Höherer Puffer für APP01
-- NUMA-Spanning deaktivieren
-- Smart-Paging-Pfad für DB01 ändern
+- Höherer Arbeitsspeicherpuffer (-Buffer) für APP01
+- NUMA-Spanning auf dem Host deaktivieren
+- Smart-Paging-Dateipfad für DB01 auf SSD legen
 ! Die Gewichtung entscheidet, welche VM bei Knappheit bevorzugt Speicher erhält.
 
 ? Was gilt für virtuelles NUMA und Dynamic Memory?
-* Sie schließen sich aus – mit Dynamic Memory sieht die VM nur einen NUMA-Knoten
-- Virtuelles NUMA erfordert Dynamic Memory
-- Beide sind nur auf Gen-1-VMs verfügbar
-- Dynamic Memory verdoppelt die NUMA-Knoten
-! Große NUMA-bewusste VMs (SQL) daher mit statischem RAM betreiben.
+* Sie schließen sich aus – die VM sieht nur einen NUMA-Knoten
+- Virtuelles NUMA setzt aktivierten Dynamic Memory voraus
+- Beide Funktionen sind nur für Gen-1-VMs verfügbar
+- Dynamic Memory verdoppelt die Zahl der virtuellen NUMA-Knoten
+! Mit Dynamic Memory wird kein virtuelles NUMA-Layout weitergegeben; große NUMA-bewusste VMs (SQL) daher mit statischem RAM betreiben.
 
 ? Welcher Parameter begrenzt die CPU-Nutzung einer VM auf höchstens 50 % ihrer vCPU-Kapazität?
 * Set-VMProcessor -Maximum 50
@@ -248,31 +248,31 @@ Set-VMProcessor -VMName HV-NESTED -RelativeWeight 50
 ! Bereich 1–10000; Standard 100. Beim RAM ist die Gewichtung 0–100 mit Standard 50.
 
 ? Eine VM startet nicht mehr, nachdem bei mehreren VMs CPU-Reserven gesetzt wurden. Warum?
-* Die Summe der Reserven übersteigt die verfügbare Host-Kapazität
-- Reserven aktivieren automatisch Nested Virtualization
-- Reserven sind nur für Gen-1-VMs erlaubt
-- Reserven deaktivieren den Hypervisor-Scheduler
+* Die Summe der Reserven übersteigt die Host-Kapazität
+- Reserven aktivieren automatisch verschachtelte Virtualisierung
+- Reserven sind nur für Gen-1-VMs mit einer vCPU erlaubt
+- Reserven deaktivieren den Scheduler des Hypervisors
 ! Hyper-V garantiert Reserven und verweigert den Start, wenn er die Garantie nicht einhalten kann.
 
 ? Was bewirkt Set-VMHost -NumaSpanningEnabled $false?
-* VMs erhalten Speicher nur aus einem NUMA-Knoten; Starts können scheitern, wenn ein Knoten nicht genug RAM hat
-- NUMA wird im Gast deaktiviert
-- Dynamic Memory wird für alle VMs abgeschaltet
-- Der Host nutzt nur noch einen CPU-Sockel
-! Die Änderung wird nach Neustart des Verwaltungsdienstes wirksam.
+* VMs erhalten RAM nur aus einem NUMA-Knoten; Starts können scheitern
+- NUMA wird in allen Gastbetriebssystemen vollständig deaktiviert
+- Dynamic Memory wird für alle VMs des Hosts abgeschaltet
+- Der Host nutzt nur noch einen CPU-Sockel und dessen Kerne
+! Reicht der RAM eines Knotens nicht, startet die VM nicht. Die Änderung wird nach Neustart des Verwaltungsdienstes wirksam.
 
 ? Warum sollte die äußere VM eines Nested-Labs statischen RAM haben?
-* Mit laufendem Gast-Hypervisor schwankt der Speicher nicht; Dynamic Memory bringt keinen Nutzen
-- Weil Nested nur mit Gen 1 funktioniert
-- Weil statischer RAM MAC-Spoofing aktiviert
-- Weil Dynamic Memory die Konfigurationsversion senkt
-! Planbar fester RAM verhindert, dass innere VMs mangels Speicher nicht starten.
+* Mit laufendem Gast-Hypervisor schwankt der RAM ohnehin nicht
+- Weil verschachtelte Virtualisierung nur mit Gen-1-VMs funktioniert
+- Weil statischer RAM automatisch MAC-Spoofing an der vNIC aktiviert
+- Weil Dynamic Memory die Konfigurationsversion der VM herabsetzt
+! Dynamic Memory bringt hier keinen Nutzen; planbar fester RAM verhindert, dass innere VMs mangels Speicher nicht starten.
 
 ? Welche Werte zeigt Get-VM zur Beurteilung von Dynamic Memory?
-* MemoryAssigned, MemoryDemand und MemoryStatus
-- CPUUsage, Uptime und Version
-- Generation, Path und Notes
-- NumaNodes, Buffer und Priority
+* MemoryAssigned, MemoryDemand, MemoryStatus
+- CPUUsage, Uptime, Version und State
+- Generation, Path, Notes und ConfigurationLocation
+- NumaNodes, MemoryBuffer und MemoryPriority
 ! Bedarf (Demand) vs. Zuweisung (Assigned) zeigt, ob eine VM unter Druck steht (Status z. B. „Warning“).
 
 ## Lücken

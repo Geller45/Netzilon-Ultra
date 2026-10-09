@@ -161,9 +161,9 @@ Eine neue Ubuntu-VM der Generation 2 bootet nicht vom ISO; Secure Boot ist mit d
 ## Quiz
 ? Eine Ubuntu-Gen-2-VM bootet wegen Secure Boot nicht. Beste Lösung?
 * Vorlage auf Microsoft UEFI Certificate Authority ändern
-- Secure Boot dauerhaft deaktivieren
-- VM als Generation 1 neu erstellen
-- Integrationsdienste deaktivieren
+- Secure Boot in der VM-Firmware dauerhaft deaktivieren
+- Die VM als Generation 1 mit BIOS neu erstellen
+- Vorlage auf „Microsoft Windows“ zurücksetzen
 ! So bleibt Secure Boot aktiv und der shim wird akzeptiert.
 
 ? Welche Vorlage ist bei neuen Gen-2-VMs voreingestellt?
@@ -209,8 +209,8 @@ Eine neue Ubuntu-VM der Generation 2 bootet nicht vom ISO; Secure Boot ist mit d
 ! Confirm-SecureBootUEFI ist das Windows-Gegenstück.
 
 ? Wann ist das Deaktivieren von Secure Boot vertretbar?
-* Wenn die Distribution keinen signierten Bootloader besitzt
-- Immer bei Linux
-- Bei jeder Gen-2-VM
-- Wenn dynamischer RAM aktiv ist
+* Wenn die Distribution keinen signierten Bootloader hat
+- Grundsätzlich bei jeder Linux-Distribution
+- Bei jeder Gen-2-VM, da UEFI ohnehin schützt
+- Wenn an der VM Dynamic Memory aktiviert ist
 ! Sonst entfällt unnötig der Schutz gegen manipulierte Bootloader.

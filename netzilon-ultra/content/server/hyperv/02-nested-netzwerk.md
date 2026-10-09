@@ -198,9 +198,9 @@ Set-DnsClientServerAddress -InterfaceAlias "Ethernet" -ServerAddresses 192.168.1
 ## Quiz
 ? INNER01 läuft in HV-NESTED und erhält keine Adresse vom LAN-DHCP. HV-NESTED selbst ist online. Was ist die wahrscheinlichste Lösung?
 * Auf dem physischen Host MAC-Spoofing für die vNIC von HV-NESTED aktivieren
-- In INNER01 MAC-Spoofing aktivieren
-- Den vSwitch des Hosts auf „privat“ umstellen
-- Die Konfigurationsversion von INNER01 anheben
+- In HV-NESTED MAC-Spoofing an der vNIC der inneren VM INNER01 aktivieren
+- Den externen vSwitch des physischen Hosts auf „privat“ umstellen
+- Die Konfigurationsversion von INNER01 mit Update-VMVersion anheben
 ! Der vSwitch auf L0 verwirft Frames mit der fremden MAC von INNER01, bis MAC-Spoofing an der vNIC der äußeren VM erlaubt ist.
 
 ? Eine Azure-VM soll innere Hyper-V-VMs mit Internetzugang betreiben. Welche Methode ist richtig?
@@ -226,58 +226,58 @@ Set-DnsClientServerAddress -InterfaceAlias "Ethernet" -ServerAddresses 192.168.1
 
 ? Welche Adresse tragen innere VMs bei der NAT-Variante als Standardgateway ein?
 * Die IP auf „vEthernet (NestedNAT)“ in der äußeren VM
-- Die IP des physischen Routers im LAN
-- Die IP des physischen Hosts HV01
-- 0.0.0.0
+- Die IP des physischen Routers im Firmen-LAN
+- Die IP des vEthernet-Adapters auf dem physischen Host HV01
+- Die APIPA-Adresse 169.254.0.1 der inneren VM
 ! Die äußere VM ist der Router; ihr interner vEthernet-Adapter ist das Gateway.
 
 ? Wo wird MAC-Adress-Spoofing für verschachtelte Virtualisierung eingeschaltet?
 * Auf L0 an der Netzwerkkarte der äußeren VM
-- In L1 an der physischen NIC
-- In L2 an der inneren VM
-- Im BIOS des Hosts
+- In L1 an der physischen Netzwerkkarte des Hosts
+- In L2 an der Netzwerkkarte der inneren VM
+- Im UEFI/BIOS des physischen Hosts
 ! Nur der vSwitch des physischen Hosts muss die fremden MACs akzeptieren.
 
 ? Was stimmt über WinNAT (New-NetNat)?
-* Es übersetzt Adressen, verteilt aber keine IP-Adressen per DHCP
-- Es enthält automatisch einen DHCP-Server
-- Es funktioniert nur mit externem vSwitch
-- Es erfordert MAC-Spoofing
+* Es übersetzt Adressen, vergibt aber keine IPs per DHCP
+- Es enthält automatisch einen DHCP-Server für das interne Präfix
+- Es funktioniert nur zusammen mit einem externen vSwitch
+- Es erfordert MAC-Spoofing an der vNIC der äußeren VM
 ! Für automatische Adressvergabe braucht man zusätzlich einen DHCP-Server oder vergibt statische IPs.
 
 ? Wie macht man RDP auf INNER02 (192.168.100.11) über die NAT-Adresse der äußeren VM erreichbar?
-* Add-NetNatStaticMapping mit externem Port und internem Ziel 192.168.100.11:3389
-- Set-VMNetworkAdapter -PortMirroring Source
-- New-NetFirewallRule auf dem physischen Host
-- Enable-PSRemoting in INNER02
+* Add-NetNatStaticMapping mit externem Port und Ziel 192.168.100.11:3389
+- Set-VMNetworkAdapter -PortMirroring Source an der vNIC von INNER02
+- New-NetFirewallRule -LocalPort 3389 auf dem physischen Host
+- Enable-PSRemoting -Force in INNER02 und WinRM-Port freigeben
 ! Statische NAT-Zuordnungen leiten einen externen Port an eine interne IP/Port weiter.
 
 ? Ein DHCP-Server läuft in der inneren VM DC-INNER; Clients im LAN bekommen aber keine Antworten. MAC-Spoofing ist aktiv. Was blockiert vermutlich?
 * DHCP-Guard an der vNIC der äußeren VM
-- Router-Guard an der vNIC des Clients
-- Die Windows-Firewall auf dem Host
-- Fehlende Integrationsdienste
+- Router-Guard an der vNIC des anfragenden Clients
+- Die Windows-Firewall auf dem physischen Host
+- Fehlende Integrationsdienste in DC-INNER
 ! DHCP-Guard verwirft DHCP-Server-Nachrichten, die von dieser vNIC kommen – also auch von inneren VMs.
 
 ? Welche Pipeline aktiviert MAC-Spoofing an ALLEN Netzwerkkarten der VM HV-NESTED?
 * Get-VMNetworkAdapter -VMName HV-NESTED | Set-VMNetworkAdapter -MacAddressSpoofing On
-- Set-VMSwitch -Name LAN -MacAddressSpoofing On
-- Set-VMHost -MacAddressSpoofing On
-- Get-NetAdapter | Set-NetAdapter -MacAddress Spoof
+- Get-VMSwitch -Name LAN | Set-VMSwitch -MacAddressSpoofing On -AllowManagementOS $true
+- Get-VM -Name HV-NESTED | Set-VMHost -MacAddressSpoofing On
+- Get-NetAdapter -Name * | Set-NetAdapter -MacAddress Spoof
 ! MAC-Spoofing ist eine Eigenschaft der VM-Netzwerkkarte, nicht des Switches oder Hosts.
 
 ? Was ist ein Nachteil der NAT-Variante gegenüber MAC-Spoofing?
 * Innere VMs sind im LAN nicht direkt erreichbar
-- Sie funktioniert nicht in Azure
-- Sie erfordert Gen-1-VMs
-- Sie benötigt einen Domänencontroller
+- Sie funktioniert nicht in Azure-VMs mit Nested
+- Sie erfordert, dass alle inneren VMs Gen 1 sind
+- Sie benötigt einen Domänencontroller im NAT-Netz
 ! Nach außen erscheint nur die äußere VM; Zugriffe von außen brauchen statische NAT-Zuordnungen.
 
 ? Welchen Typ muss der vSwitch in HV-NESTED bei der MAC-Spoofing-Variante haben, damit INNER01 ins LAN kommt?
-* Extern, gebunden an die Netzwerkkarte von HV-NESTED
-- Privat
-- Intern mit New-NetNat
-- Kein vSwitch nötig
+* Extern, gebunden an die vNIC von HV-NESTED
+- Privat, damit nur die inneren VMs ihn nutzen
+- Intern, zusätzlich mit New-NetNat
+- Keiner – INNER01 nutzt direkt den Host-Switch
 ! Der externe Switch in L1 verbindet die inneren VMs mit der vNIC der äußeren VM und damit mit dem LAN.
 
 ## Lücken

@@ -157,16 +157,16 @@ Auf HV01 sollen APP01 und FS01 nächtlich mit Bordmitteln gesichert und bei Beda
 ## Quiz
 ? Welches Bordmittel sichert einzelne Hyper-V-VMs auf Host-Ebene?
 * Windows Server-Sicherung (wbadmin)
-- Disk2vhd
-- Sysprep
-- Optimize-VHD
+- Disk2vhd von Sysinternals (P2V-Tool)
+- Sysprep /generalize /oobe /mode:vm
+- Optimize-VHD -Mode Full
 ! Elemente-Typ Hyper-V.
 
 ? Welcher Integrationsdienst ist für anwendungskonsistente Sicherungen nötig?
 * Sicherung (Volumeschattenkopie)
-- Takt
-- Gastdienste
-- Datenaustausch
+- Takt (Heartbeat-Überwachung)
+- Gastdienstschnittstelle (Dateikopie)
+- Datenaustausch (Key-Value-Pair)
 ! Er löst VSS im Gast aus.
 
 ? Welcher Befehl prüft den Zustand des Hyper-V-VSS-Writers?
@@ -198,10 +198,10 @@ Auf HV01 sollen APP01 und FS01 nächtlich mit Bordmitteln gesichert und bei Beda
 ! Lokale dedizierte Platten halten mehrere Versionen.
 
 ? Ist ein einmaliger VM-Export eine Sicherungsstrategie?
-* Nein, er hat weder Versionen noch Automatik
-- Ja, er ersetzt jede Sicherung
-- Ja, aber nur für Gen-1-VMs
-- Nur in Clustern
+* Nein – ohne Versionen und Automatik
+- Ja, er ersetzt jede regelmäßige Sicherung
+- Ja, aber nur für Gen-1-VMs ohne Prüfpunkte
+- Nur in Clustern mit freigegebenem Speicher
 ! Sicherung = regelmäßig, versioniert, getestet.
 
 ? Was ergänzt die Bordmittel-Sicherung sinnvoll im Sinne der 3-2-1-Regel?

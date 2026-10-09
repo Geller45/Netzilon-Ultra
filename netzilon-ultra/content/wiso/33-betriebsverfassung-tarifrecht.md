@@ -252,10 +252,10 @@ Azubi Kim (22) ist Vorsitzende der JAV der Netzilon GmbH. Ihre Ausbildung endet 
 ! §§ 60, 61 BetrVG.
 
 ? Für welche geplante Maßnahme braucht der Arbeitgeber die Zustimmung des Betriebsrats (echte Mitbestimmung)?
-* Einführung einer Software, die die Leistung der Mitarbeiter auswerten kann
-- Ordentliche Kündigung eines Mitarbeiters
-- Investition in neue Server
-- Festlegung des Verkaufspreises eines Produkts
+* Einführung einer Software, die die Leistung der Beschäftigten auswerten kann
+- Ordentliche Kündigung eines Mitarbeiters nach Ablauf der Probezeit
+- Investition in neue Server und Speichersysteme für das Rechenzentrum
+- Festlegung des Verkaufspreises eines neuen Produkts
 ! § 87 Abs. 1 Nr. 6 BetrVG; bei Kündigungen nur Anhörung (§ 102).
 
 ? Welches Organ entscheidet, wenn sich Arbeitgeber und Betriebsrat in einer Angelegenheit nach § 87 BetrVG nicht einigen?
@@ -303,9 +303,9 @@ Azubi Kim (22) ist Vorsitzende der JAV der Netzilon GmbH. Ihre Ausbildung endet 
 
 ? Wer erklärt einen Tarifvertrag nach § 5 TVG für allgemeinverbindlich?
 * Das Bundesministerium für Arbeit und Soziales
-- Der Deutsche Gewerkschaftsbund
-- Das Bundesarbeitsgericht
-- Die Industrie- und Handelskammer
+- Der Deutsche Gewerkschaftsbund als Dachverband
+- Das Bundesarbeitsgericht durch Grundsatzurteil
+- Die Industrie- und Handelskammer des Bezirks
 ! § 5 TVG – auf Antrag einer Tarifvertragspartei, im Einvernehmen mit dem Tarifausschuss.
 
 ? Welche Rangfolge der Rechtsquellen im Arbeitsrecht ist richtig (höchster Rang zuerst)?
@@ -316,8 +316,8 @@ Azubi Kim (22) ist Vorsitzende der JAV der Netzilon GmbH. Ihre Ausbildung endet 
 ! Rangprinzip, ergänzt durch das Günstigkeitsprinzip.
 
 ? Ein Azubi ist JAV-Mitglied. Bis wann muss er spätestens seine Weiterbeschäftigung schriftlich verlangen, um den Schutz des § 78a BetrVG zu erhalten?
-* Innerhalb der letzten drei Monate vor Beendigung der Ausbildung
-- Spätestens sechs Monate vor Ausbildungsende
-- Bis zu vier Wochen nach der Abschlussprüfung
-- Gar nicht – die Übernahme erfolgt automatisch
-! § 78a Abs. 2 BetrVG.
+* In den letzten drei Monaten vor Ausbildungsende
+- Spätestens sechs Monate vor dem Ende der Ausbildung
+- Bis zu vier Wochen nach bestandener Abschlussprüfung
+- Gar nicht – die Übernahme von JAV-Mitgliedern erfolgt automatisch
+! § 78a Abs. 2 BetrVG: innerhalb der letzten drei Monate vor Beendigung des Ausbildungsverhältnisses.

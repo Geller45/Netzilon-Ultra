@@ -156,10 +156,10 @@ W11-TEST wurde als Gen-1-VM mit 2 GB RAM angelegt, das Windows-11-Setup bricht a
 ! Gen 1 hat BIOS-Firmware ohne vTPM.
 
 ? Was muss vor Enable-VMTPM passieren?
-* Eine Schlüsselschutzvorrichtung setzen (Set-VMKeyProtector)
-- Die VM in den Cluster aufnehmen
-- Update-VMVersion auf 5.0
-- Dynamischen RAM aktivieren
+* Schlüsselschutz setzen (Set-VMKeyProtector)
+- Die VM in einen Failover-Cluster aufnehmen
+- Update-VMVersion auf Version 5.0 ausführen
+- Dynamischen Arbeitsspeicher für die VM aktivieren
 ! Ohne Key Protector kann das vTPM nicht aktiviert werden.
 
 ? Eine VM mit lokalem Key Protector startet nach dem Import auf HV02 nicht. Ursache?
@@ -198,8 +198,8 @@ W11-TEST wurde als Gen-1-VM mit 2 GB RAM angelegt, das Windows-11-Setup bricht a
 ! Get-VMSecurity läuft auf dem Host und zeigt nur den vTPM-Status.
 
 ? Wozu dient die Option „Statusdatei und Datenverkehr der VM-Migration verschlüsseln“?
-* Schutz von RAM-Inhalten in Zustandsdateien und bei der Live-Migration
-- Schnellere Live-Migration
-- Verschlüsselung der VHDX ohne BitLocker
-- Erzwingen von SMB 1.0
+* Schutz von RAM-Inhalten in Zustandsdateien und bei Migration
+- Beschleunigung der Live-Migration durch Komprimierung
+- Verschlüsselung der VHDX-Dateien ganz ohne BitLocker
+- Erzwingen von SMB 1.0 für die Migrationsverbindung
 ! RAM-Inhalte können Schlüssel enthalten.

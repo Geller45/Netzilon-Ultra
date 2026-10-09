@@ -177,17 +177,17 @@ Die Live-Migration von APP01 (HV01 → HV02, ohne Cluster) wird von ADMIN01 aus 
 
 ## Quiz
 ? Live-Migration mit CredSSP, remote von ADMIN01 gestartet, scheitert. Warum?
-* Double Hop – CredSSP verlangt eine Anmeldung direkt am Quellhost
-- Die VM hat dynamischen RAM
-- Kerberos ist im Netzwerk blockiert
-- Der Zielhost hat keinen DHCP-Server
+* Double Hop – CredSSP verlangt Anmeldung am Quellhost
+- Die VM nutzt dynamischen Arbeitsspeicher mit hohem Puffer
+- Kerberos ist im Netzwerk per Firewall auf Port 88 blockiert
+- Der Zielhost hat keine IP-Adresse vom DHCP-Server erhalten
 ! Der Quellhost kann die Anmeldeinformationen nicht weitergeben.
 
 ? Welche Dienste werden bei der eingeschränkten Delegierung eingetragen?
 * cifs und Microsoft Virtual System Migration Service
-- http und ldap
-- host und rpcss
-- dns und kerberos
+- http und ldap auf dem Domänencontroller beider Hosts
+- host und rpcss für die Remoteverwaltung des Zielhosts
+- dns und kerberos (krbtgt) für die Ticketweitergabe
 ! cifs für Dateizugriff, der Migrationsdienst für die Live-Migration.
 
 ? Wo wird die Delegierung für die Migration HV01 → HV02 eingetragen?
@@ -213,16 +213,16 @@ Die Live-Migration von APP01 (HV01 → HV02, ohne Cluster) wird von ADMIN01 aus 
 
 ? Welches Cmdlet startet eine Shared-Nothing-Live-Migration?
 * Move-VM -IncludeStorage
-- Move-VMStorage
-- Export-VM -Live
-- Start-VMFailover
+- Move-VMStorage -DestinationHost
+- Export-VM -Live -Path \\HV02
+- Start-VMFailover -Prepare
 ! Move-VMStorage verschiebt nur den Speicher auf demselben Host.
 
 ? Welche Einstellung erleichtert Migration zwischen unterschiedlichen Intel-Generationen?
 * Prozessorkompatibilität (CompatibilityForMigrationEnabled)
-- ExposeVirtualizationExtensions
-- NUMA-Spanning
-- MAC-Spoofing
+- Virtualisierungserweiterungen (ExposeVirtualizationExtensions)
+- NUMA-Spanning auf beiden Hosts (NumaSpanningEnabled)
+- MAC-Adress-Spoofing an der vNIC (MacAddressSpoofing)
 ! Funktioniert nicht zwischen Intel und AMD.
 
 ? Warum Delegierung in beide Richtungen?

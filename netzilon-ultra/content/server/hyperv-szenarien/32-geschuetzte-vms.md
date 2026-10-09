@@ -164,16 +164,16 @@ Ein Auditor bemängelt, dass Hyper-V-Admins die VHDX von HR01 kopieren und offli
 ## Quiz
 ? Was verhindert, dass eine kopierte VHDX offline gelesen werden kann?
 * BitLocker im Gast mit Schlüssel im vTPM
-- Dynamischer Arbeitsspeicher
-- Die Option Gastdienste
-- Eine differenzierende VHDX
+- Dynamischer Arbeitsspeicher mit kleinem Minimum
+- Die Integrationsdienst-Option „Gastdienste“
+- Eine differenzierende VHDX mit Elternteil
 ! Ohne das vTPM (und dessen Key Protector) bleibt das Volume gesperrt.
 
 ? Was ist eine VM mit lokalem Key Protector ohne HGS?
-* Eine VM mit vTPM, aber keine geschützte (Shielded) VM
-- Automatisch eine geschützte VM
-- Eine Gen-1-VM
-- Eine Cluster-VM
+* Eine VM mit vTPM, aber keine Shielded VM
+- Automatisch eine vollwertige geschützte VM
+- Eine Gen-1-VM mit emuliertem TPM-Chip
+- Eine hochverfügbare Cluster-VM mit HGS-Anbindung
 ! Shielded erfordert eine Guarded Fabric mit HGS.
 
 ? Welcher Dienst stellt in einer Guarded Fabric den Nachweis bereit?

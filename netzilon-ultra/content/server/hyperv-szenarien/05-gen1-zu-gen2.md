@@ -198,11 +198,11 @@ Die Gen-1-VM APP01 soll Secure Boot und ein virtuelles TPM erhalten. Der Datentr
 ! Gen 2 kennt kein IDE und kein VHD.
 
 ? Was ist vor Enable-VMTPM erforderlich?
-* Ein Key Protector, z. B. Set-VMKeyProtector -NewLocalKeyProtector
-- Eine Gen-1-VM
-- Ein deaktiviertes Secure Boot
-- Ein Hyper-V-Replikat
-! vTPM benötigt eine Schlüsselschutzvorrichtung.
+* Ein Key Protector, z. B. per -NewLocalKeyProtector
+- Eine Gen-1-VM mit aktiviertem BIOS-Startmodus
+- Ein deaktiviertes Secure Boot in der VM-Firmware
+- Ein eingerichtetes Hyper-V-Replikat der VM
+! vTPM benötigt eine Schlüsselschutzvorrichtung (Set-VMKeyProtector).
 
 ? Was muss vor MBR2GPT mit BitLocker geschehen?
 * BitLocker anhalten
@@ -220,7 +220,7 @@ Die Gen-1-VM APP01 soll Secure Boot und ein virtuelles TPM erhalten. Der Datentr
 
 ? Was passiert bei Remove-VM mit der VHDX?
 * Sie bleibt erhalten, nur die Konfiguration wird entfernt
-- Sie wird gelöscht
-- Sie wird zu AVHDX
-- Sie wird nach VHD konvertiert
+- Sie wird zusammen mit der Konfiguration endgültig gelöscht
+- Sie wird in eine AVHDX-Differenzdatei umgewandelt
+- Sie wird automatisch in das ältere VHD-Format konvertiert
 ! Remove-VM löscht keine virtuellen Festplatten.

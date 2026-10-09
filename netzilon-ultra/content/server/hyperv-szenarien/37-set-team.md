@@ -150,9 +150,9 @@ HV01 hat zwei identische 10-GbE-Karten. Bisher hing der vSwitch nur an NIC1; ein
 ## Quiz
 ? Welche Teaming-Lösung ist für Hyper-V-vSwitches in Server 2022/2025 vorgesehen?
 * Switch Embedded Teaming (SET)
-- LBFO-Team mit LACP
-- Windows-Bridge
-- NLB-Cluster
+- LBFO-Team mit LACP am Switch
+- Windows-Netzwerkbrücke (Bridge)
+- NLB-Cluster im Unicast-Modus
 ! LBFO als vSwitch-Uplink ist ab Server 2022 blockiert.
 
 ? Welcher Teaming-Modus wird von SET unterstützt?
@@ -164,9 +164,9 @@ HV01 hat zwei identische 10-GbE-Karten. Bisher hing der vSwitch nur an NIC1; ein
 
 ? Welcher Parameter aktiviert SET bei New-VMSwitch?
 * -EnableEmbeddedTeaming $true
-- -TeamingMode Lacp
-- -EnableIov $true
-- -SwitchType Team
+- -TeamingMode SwitchIndependent
+- -EnableIov $true -Team
+- -SwitchType External -Team
 ! Dazu mehrere Karten in -NetAdapterName.
 
 ? Wie viele physische Karten kann ein SET-Team maximal enthalten?
@@ -191,15 +191,15 @@ HV01 hat zwei identische 10-GbE-Karten. Bisher hing der vSwitch nur an NIC1; ein
 ! Der Hyper-V-Manager zeigt SET nur an.
 
 ? Welche Anforderung gilt für Teammitglieder?
-* Möglichst identische Karten (Modell, Firmware, Treiber, Geschwindigkeit)
-- Unterschiedliche Hersteller
+* Identische Karten (Modell, Firmware, Treiber, Tempo)
+- Karten unterschiedlicher Hersteller zur Risikostreuung
 - Jede Karte in einem anderen IP-Subnetz
-- Nur 1-Gbit/s-Karten
+- Ausschließlich 1-Gbit/s-Karten ohne RDMA
 ! Gemischte Karten sind nicht empfohlen.
 
 ? Wie testest du die Ausfallsicherheit?
 * Dauerping laufen lassen und ein Kabel ziehen
-- Den Host herunterfahren
-- Die VM in Gen 1 neu erstellen
-- Den DHCP-Server deaktivieren
+- Den Host herunterfahren und neu starten
+- Die VM als Gen-1-VM neu erstellen
+- Den DHCP-Server im Netz deaktivieren
 ! Der Ping darf höchstens kurz aussetzen.

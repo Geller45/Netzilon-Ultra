@@ -155,10 +155,10 @@ ERP01 wurde auf HV01 im Hyper-V-Manager angelegt und liegt auf D: von HV01. Bei 
 
 ## Quiz
 ? Warum wurde ERP01 beim Ausfall von HV01 nicht auf HV02 gestartet?
-* Sie war keine Clusterrolle und lag auf lokalem Speicher
-- Live-Migration war deaktiviert
-- HV02 hatte zu wenig CPU
-- Die Integrationsdienste fehlten
+* Keine Clusterrolle, und sie lag auf lokalem Speicher
+- Live-Migration war in den Hyper-V-Einstellungen deaktiviert
+- HV02 hatte zu wenige freie logische Prozessoren
+- Die Integrationsdienste in ERP01 waren veraltet
 ! Der Cluster kennt nur VMs, die als Rolle hinzugefügt wurden.
 
 ? Wo müssen die Dateien einer hochverfügbaren VM liegen?
@@ -197,15 +197,15 @@ ERP01 wurde auf HV01 im Hyper-V-Manager angelegt und liegt auf D: von HV01. Bei 
 ! Speichermigration läuft online.
 
 ? Was bewirkt die Priorität „Hoch“ einer Cluster-VM?
-* Sie wird nach Ausfällen vor niedriger priorisierten VMs gestartet
-- Sie bekommt mehr CPU-Zeit
-- Sie wird nie migriert
-- Sie bekommt dynamischen RAM
+* Sie startet nach Ausfällen vor niedriger priorisierten VMs
+- Sie bekommt dauerhaft mehr CPU-Zeit als andere VMs
+- Sie wird vom Cluster niemals auf einen anderen Knoten migriert
+- Sie erhält automatisch dynamischen RAM mit hohem Puffer
 ! Prioritäten steuern die Startreihenfolge im Cluster.
 
 ? Wie wartet man einen Knoten ohne VM-Ausfall?
-* Knoten anhalten mit Rollen ausgleichen (Drain) – VMs werden live migriert
-- Knoten einfach neu starten
-- Clusterdienst beenden
-- VMs auf dem Knoten pausieren
+* Anhalten mit Rollen ausgleichen (Drain) – VMs werden live migriert
+- Knoten einfach neu starten, der Cluster startet die VMs woanders
+- Den Clusterdienst beenden, damit die VMs automatisch umziehen
+- Alle VMs auf dem Knoten pausieren und nach der Wartung fortsetzen
 ! Drain verschiebt die Rollen vorher.

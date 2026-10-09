@@ -188,9 +188,9 @@ Auf LABHOST laufen DC01, ISCSI01, HVN1 und HVN2. HVN2 sieht die iSCSI-LUNs nicht
 
 ? HVN2 sieht keine LUN, HVN1 schon. Was fehlt am wahrscheinlichsten?
 * Die IQN von HVN2 als Initiator-ID am Ziel
-- Die Hyper-V-Rolle auf ISCSI01
-- Ein DHCP-Bereich
-- Die Clustervalidierung
+- Die Hyper-V-Rolle auf dem Zielserver ISCSI01
+- Ein DHCP-Bereich für das iSCSI-Netz
+- Eine erfolgreiche Clustervalidierung (Test-Cluster)
 ! Das Ziel gibt LUNs nur an eingetragene Initiatoren.
 
 ? Welcher Port wird für iSCSI genutzt?
@@ -208,10 +208,10 @@ Auf LABHOST laufen DC01, ISCSI01, HVN1 und HVN2. HVN2 sieht die iSCSI-LUNs nicht
 ! Ein validierter Cluster ist Voraussetzung für Support.
 
 ? Warum braucht HVN1 MAC-Spoofing?
-* Damit innere VMs mit eigenen MAC-Adressen ins Netz kommen
-- Damit iSCSI funktioniert
-- Damit der Cluster einen Namen bekommt
-- Damit die VM schneller startet
+* Damit innere VMs mit eigenen MACs ins Netz kommen
+- Damit der iSCSI-Initiator das Ziel überhaupt findet
+- Damit der Cluster einen Netzwerknamen registrieren kann
+- Damit die VM HVN1 schneller startet und weniger RAM braucht
 ! Alternativ wäre NAT in der äußeren VM möglich.
 
 ? Auf wie vielen Knoten initialisiert und formatiert man die neue LUN?
@@ -230,7 +230,7 @@ Auf LABHOST laufen DC01, ISCSI01, HVN1 und HVN2. HVN2 sieht die iSCSI-LUNs nicht
 
 ? Welches Quorum ergibt sich bei 2 Knoten mit Datenträgerzeuge?
 * Knoten- und Datenträgermehrheit
-- Nur Knotenmehrheit
-- Kein Quorum
-- Dateifreigabemehrheit
+- Nur Knotenmehrheit ohne Zeugen
+- Kein Quorum, Cluster bleibt offline
+- Knoten- und Dateifreigabemehrheit
 ! Der Zeuge bringt die dritte Stimme.

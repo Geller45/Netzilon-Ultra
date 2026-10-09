@@ -174,17 +174,17 @@ WIKI01 soll ohne Cluster von HV01 nach HV02 umziehen. Auf HV02 heißt der Switch
 ## Quiz
 ? Welcher Importtyp passt für einen Umzug mit anschließendem Löschen des Originals?
 * Wiederherstellen (vorhandene ID, Dateien kopieren)
-- Kopieren mit neuer ID
-- Direkt registrieren am Exportort
-- Gar kein Import, nur VHDX kopieren
+- Kopieren (neue eindeutige ID erstellen)
+- Direkt registrieren (Dateien am Exportort lassen)
+- Kein Import, nur die VHDX-Dateien kopieren
 ! Die ID bleibt, die Dateien landen im neuen Speicherort.
 
 ? Welcher Parameter erzeugt beim Import eine neue VM-ID?
 * -GenerateNewId
-- -NewSid
 - -Register
-- -Clone
-! In Kombination mit -Copy.
+- -VhdDestinationPath
+- -VirtualMachinePath
+! In Kombination mit -Copy. -Register lässt die Dateien am Ort, die Pfad-Parameter legen nur Speicherorte fest.
 
 ? Womit erkennt man einen fehlenden Switch vor dem Import?
 * Compare-VM
@@ -208,10 +208,10 @@ WIKI01 soll ohne Cluster von HV01 nach HV02 umziehen. Auf HV02 heißt der Switch
 ! Dafür braucht es Sysprep.
 
 ? Warum kann ein Import an der Version scheitern?
-* Der Ziel-Host unterstützt die Konfigurationsversion nicht
-- Die VM hat zu wenig RAM
-- Die VM hat eine statische IP
-- Die VM ist Gen 2
+* Der Ziel-Host kennt die Konfigurationsversion nicht
+- Die VM hat für den Ziel-Host zu wenig RAM
+- Die VM verwendet eine statische IP-Adresse
+- Die VM wurde als Generation 2 angelegt
 ! Neuere Versionen laufen nicht auf älteren Hosts.
 
 ? Welches Cmdlet zeigt unterstützte Versionen?

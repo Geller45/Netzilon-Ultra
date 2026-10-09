@@ -165,9 +165,9 @@ BUILD01 (16 vCPU) lastet HV01 jeden Nachmittag aus, ERP01 wird langsam. Beide st
 
 ? Wann wirkt die relative Gewichtung?
 * Wenn VMs gleichzeitig um CPU-Zeit konkurrieren
-- Nur beim Start der VM
-- Nur bei ausgeschalteter VM
-- Nur bei Live-Migration
+- Nur beim Start der VM und danach nicht mehr
+- Nur bei ausgeschalteter VM als Startvorgabe
+- Nur während einer laufenden Live-Migration
 ! Ohne Konkurrenz gibt es nichts zu verteilen.
 
 ? Womit erkennst du zuverlässig, welche VM die Host-CPU belastet?
@@ -185,10 +185,10 @@ BUILD01 (16 vCPU) lastet HV01 jeden Nachmittag aus, ERP01 wird langsam. Beide st
 ! Die CPU-Ressourcensteuerung gehört zum virtuellen Prozessor.
 
 ? Was liefert Measure-VM?
-* Verbrauchsdaten der Ressourcenmessung wie durchschnittliche CPU, RAM, Datenträger, Netz
-- Die Kompatibilität zum Zielhost
-- Die VM-Konfigurationsversion
-- Die NUMA-Topologie des Hosts
+* Verbrauchsdaten (CPU, RAM, Datenträger, Netz)
+- Die Kompatibilität der VM zum Zielhost einer Migration
+- Die Konfigurationsversion und Generation der VM
+- Die NUMA-Topologie und Sockelanzahl des Hosts
 ! Voraussetzung: Enable-VMResourceMetering.
 
 ? Welche Kombination passt für eine niedrig priorisierte Build-VM?

@@ -160,17 +160,17 @@ WEB02 startet nach einer Explorer-Kopie der VHDX nicht. Der Hyper-V-Manager zeig
 ! Der Worker-Prozess gehört zur jeweiligen VM.
 
 ? Was zeigt das VMMS-Protokoll?
-* Ereignisse des Verwaltungsdienstes wie Erstellen, Starten, Migration, Prüfpunkte
-- Nur Netzwerkpakete
-- Anmeldeversuche an Clients
-- Druckaufträge
-! VMMS = Virtual Machine Management Service.
+* Verwaltungsereignisse wie Erstellen, Starten, Migration
+- Mitschnitte einzelner Netzwerkpakete am vSwitch
+- Anmeldeversuche von Benutzern an den Clients
+- Druckaufträge und Spoolerfehler auf dem Host
+! VMMS = Virtual Machine Management Service; protokolliert z. B. auch Prüfpunkte.
 
 ? Warum startet eine VM nach einer Explorer-Kopie der VHDX oft nicht?
-* Der VM-Identität NT VIRTUAL MACHINE\<VM-ID> fehlen Rechte auf die Datei
-- Die VHDX wird beim Kopieren verschlüsselt
-- Explorer wandelt VHDX in VHD um
-- Die VM-ID ändert sich
+* Der VM-Identität (NT VIRTUAL MACHINE\<ID>) fehlen Rechte
+- Der Explorer verschlüsselt die VHDX beim Kopieren mit EFS
+- Der Explorer wandelt die VHDX beim Kopieren in VHD um
+- Die VM-ID ändert sich durch das Kopieren der Datei
 ! Hyper-V setzt die Rechte nur beim Anhängen über die Verwaltungswerkzeuge.
 
 ? Welches Cmdlet listet alle Hyper-V-Protokolle auf?
@@ -203,7 +203,7 @@ WEB02 startet nach einer Explorer-Kopie der VHDX nicht. Der Hyper-V-Manager zeig
 
 ? Was ist eine dauerhafte Hilfe für die Fehlersuche?
 * Benutzerdefinierte Ansicht über alle Hyper-V-Admin-Protokolle
-- Alle Protokolle löschen
-- Protokollgröße auf 64 KB setzen
-- Ereignisanzeige deinstallieren
+- Alle Protokolle regelmäßig löschen, damit sie übersichtlich bleiben
+- Die maximale Protokollgröße auf 64 KB begrenzen
+- Die Ereignisanzeige durch ein PowerShell-Skript ersetzen
 ! So sieht man alle Hyper-V-Fehler an einer Stelle.

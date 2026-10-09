@@ -170,23 +170,23 @@ ARCH01 braucht 2 TB vom SAN, tägliche Host-Sicherung, Prüfpunkte vor Updates u
 
 ? Welche Einschränkung haben Pass-through-Datenträger?
 * Keine Hyper-V-Prüfpunkte
-- Maximal 2 TB
-- Nur in Gen-1-VMs
-- Kein NTFS möglich
+- Maximal 2 TB Größe je Datenträger
+- Nur in Gen-1-VMs an IDE nutzbar
+- Kein NTFS, nur ReFS im Gast möglich
 ! Auch Host-Backups erfassen sie nicht.
 
 ? Wofür ist Gast-iSCSI typisch?
 * Für Gast-Cluster mit gemeinsamem SAN-Speicher
-- Für schnellere Prüfpunkte
-- Für Host-Backups
-- Für Secure Boot
+- Für schnellere Prüfpunkte der VM auf dem Host
+- Für Host-Backups mit Windows Server-Sicherung
+- Für Secure Boot mit Linux-Bootloadern
 ! Die VMs verbinden sich selbst mit dem SAN.
 
 ? Welcher Nachteil gilt für Gast-iSCSI?
 * Die VM braucht Zugang zum Speichernetz
-- Keine Live-Migration möglich
-- Nur 127 GB Größe
-- Die VM muss Gen 1 sein
+- Für die VM ist keine Live-Migration mehr möglich
+- Die LUN ist auf 127 GB Größe begrenzt
+- Die VM muss zwingend als Gen 1 angelegt sein
 ! Das erweitert die Angriffsfläche des Speichernetzes.
 
 ? An welchen Controller hängt man eine neue Datenplatte im laufenden Betrieb?

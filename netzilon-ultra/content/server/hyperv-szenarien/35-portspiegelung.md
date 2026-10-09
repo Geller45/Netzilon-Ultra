@@ -148,9 +148,9 @@ WEB01 auf HV01 verliert sporadisch Verbindungen. Auf WEB01 darf nichts installie
 
 ? Wo muss die Analyse-VM angeschlossen sein?
 * Am selben vSwitch auf demselben Host wie die Quelle
-- An einem beliebigen Host im Cluster
-- An einem internen Switch
-- Am physischen Switch-Port des Routers
+- An einem beliebigen Host im selben Failover-Cluster
+- An einem internen Switch ohne physische Netzwerkkarte
+- Am physischen Switch-Port des Routers (SPAN)
 ! Die Hyper-V-Spiegelung wirkt innerhalb eines vSwitch.
 
 ? Wo wird die Port-Spiegelung konfiguriert?
@@ -162,10 +162,10 @@ WEB01 auf HV01 verliert sporadisch Verbindungen. Auf WEB01 darf nichts installie
 
 ? Welcher Befehl beendet die Spiegelung?
 * Set-VMNetworkAdapter -VMName WEB01, ANALYSE01 -PortMirroring None
-- Stop-VMNetworkAdapter -Mirror
-- Remove-VMSwitch Extern
-- Disable-NetAdapter -Name Ethernet
-! None ist der Standardwert.
+- Set-VMNetworkAdapter -VMName WEB01, ANALYSE01 -PortMirroring Off
+- Set-VMSwitch -Name Extern -PortMirroring Disabled -Force
+- Disable-NetAdapter -Name "vEthernet (Extern)" -Confirm:$false
+! None ist der Standardwert; „Off“ gibt es als Wert nicht.
 
 ? Was ist ein Vorteil der Port-Spiegelung gegenüber Wireshark in WEB01?
 * Auf WEB01 muss nichts installiert werden

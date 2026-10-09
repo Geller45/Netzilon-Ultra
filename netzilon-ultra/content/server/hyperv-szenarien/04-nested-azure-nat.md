@@ -164,16 +164,16 @@ In der Azure-VM AZHV01 laufen innere Hyper-V-VMs. Ein externer Switch auf der Az
 ## Quiz
 ? Welcher Weg bringt innere VMs einer Nested-Azure-VM ins Internet?
 * Interner Switch plus NetNat in der Azure-VM
-- MAC-Spoofing in der Azure-NIC aktivieren
-- Externer Switch auf der Azure-NIC
-- Privater Switch
+- MAC-Spoofing an der Azure-NIC im Portal aktivieren
+- Externer Switch, gebunden an die Azure-NIC
+- Privater Switch mit eigener Standardroute
 ! In Azure ist NAT der vorgesehene Weg.
 
 ? Welches Gateway nutzen die inneren VMs?
 * Die IP des vEthernet-Adapters der äußeren VM
-- Die öffentliche IP der Azure-VM
-- 168.63.129.16
-- Die erste IP des Azure-Subnetzes
+- Die öffentliche IP-Adresse der Azure-VM
+- 168.63.129.16 (Azure-Plattform-IP)
+- Die erste nutzbare IP des Azure-Subnetzes
 ! Der vEthernet-Adapter des internen Switches ist das Gateway.
 
 ? Welches Cmdlet erstellt die Übersetzung?
@@ -192,16 +192,16 @@ In der Azure-VM AZHV01 laufen innere Hyper-V-VMs. Ein externer Switch auf der Az
 
 ? Was liefert NetNat NICHT?
 * DHCP-Adressen für die inneren VMs
-- Ausgehende Adressübersetzung
-- Portweiterleitungen
-- Sitzungsübersicht
+- Ausgehende Adressübersetzung (Source NAT)
+- Portweiterleitungen per statischer Zuordnung
+- Übersicht der Sitzungen (Get-NetNatSession)
 ! DHCP muss separat bereitgestellt oder statisch konfiguriert werden.
 
 ? Wie wird RDP auf INNER01 von außen erreichbar?
 * Add-NetNatStaticMapping mit externem Port auf 192.168.100.10:3389
-- Set-VMNetworkAdapter -MacAddressSpoofing On
-- Enable-PSRemoting in INNER01
-- New-NetFirewallRule auf INNER01 reicht allein
+- Set-VMNetworkAdapter -VMName INNER01 -MacAddressSpoofing On
+- Enable-PSRemoting -Force in INNER01 plus WinRM-Listener
+- New-NetFirewallRule -LocalPort 3389 auf INNER01 reicht allein
 ! Ohne statische Zuordnung lässt NAT keine eingehenden Verbindungen durch.
 
 ? Welcher Switch-Typ allein reicht NICHT, weil die äußere VM keinen eigenen Adapter daran hat?
@@ -213,7 +213,7 @@ In der Azure-VM AZHV01 laufen innere Hyper-V-VMs. Ein externer Switch auf der Az
 
 ? Was muss man vor der Bereitstellung der Azure-VM prüfen?
 * Ob die VM-Größe Nested Virtualization unterstützt
-- Ob die VM Generation 1 ist
-- Ob das VNet IPv6 nutzt
-- Ob die VM eine Datenplatte hat
+- Ob die Azure-VM als Generation 1 bereitgestellt wird
+- Ob das virtuelle Netzwerk (VNet) IPv6 nutzt
+- Ob die VM mindestens eine Premium-Datenplatte hat
 ! Nicht alle Größen unterstützen Nested.
