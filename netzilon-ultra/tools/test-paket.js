@@ -428,9 +428,9 @@ let fails = 0; const ok = (c, m) => { console.log((c ? 'OK     ' : 'FEHLER ') + 
     let r = await f('ip.addr==10.0.0.10');
     ok(r.ok && r.n > 5 && await page.evaluate(nr => nr.every(n => { const p = Wireshark._test.pakete()[n - 1]; return p.v['ip.src'] === '10.0.0.10' || p.v['ip.dst'] === '10.0.0.10'; }), r.nr), 'Wireshark: Filter ip.addr==');
     r = await f('tcp.port==445'); ok(r.ok && r.n >= 9, 'Wireshark: Filter tcp.port==445 (' + r.n + ')');
-    r = await f('dns'); ok(r.ok && r.n === 8, 'Wireshark: Filter dns (' + r.n + ')');
+    r = await f('dns'); ok(r.ok && r.n === 6, 'Wireshark: Filter dns (' + r.n + ')');
     const arpN = (await f('arp')).n; r = await f('!arp'); ok(r.ok && r.n === nAll - arpN && arpN === 8, 'Wireshark: Filter !arp');
-    r = await f('(tcp.flags.syn==1 and tcp.flags.ack==0) || udp.port==67'); ok(r.ok && r.n === 6, 'Wireshark: Klammern, and, or (' + r.n + ')');
+    r = await f('(tcp.flags.syn==1 and tcp.flags.ack==0) || udp.port==67'); ok(r.ok && r.n === 8, 'Wireshark: Klammern, and, or (' + r.n + ')');
     r = await f('ip.addr=10.0.0.10'); ok(!r.ok && /==/.test(r.err), 'Wireshark: ungültiger Filter erkannt');
     await page.fill('#ws-filter', 'tcp.port==abc'); await page.click('[data-a="filter"]');
     ok(await page.evaluate(() => document.getElementById('ws-filter').classList.contains('ws-f-bad')) && /Ungültiger Filter/.test(await page.locator('#ws-ferr').innerText()), 'Wireshark: ungültiger Filter → rotes Feld + Erklärung');
@@ -451,9 +451,9 @@ let fails = 0; const ok = (c, m) => { console.log((c ? 'OK     ' : 'FEHLER ') + 
     // Netsim
     await page.evaluate(() => { S.p.netsim.topo = null; });
     ok(await page.evaluate(() => !Wireshark._test.ausNetsim().ok), 'Wireshark: ohne Topologie Hinweis');
-    await page.evaluate(() => { S.p.netsim.topo = Netsim.AUFGABEN.find(a => a.id === 'gw-tipp') ? null : null; const t = Netsim.AUFGABEN[1].topo(); S.p.netsim.topo = t; });
+    await page.evaluate(() => { S.p.netsim.topo = Netsim.AUFGABEN.find(a => a.id === 'gw-tipp') ? null : null; const t = Netsim.AUFGABEN.find(a => a.id === 'gw-tipp').topo(); t.nodes.find(n => n.name === 'PC1').gw = '172.16.5.1'; S.p.netsim.topo = t; });
     const ns = await page.evaluate(() => { const r = Wireshark._test.ausNetsim(); return r.ok ? { msg: r.msg, arp: r.pakete.filter(p => p.protos.has('arp')).length, req: r.pakete.filter(p => p.v['icmp.type'] === 8).length, rep: r.pakete.filter(p => p.v['icmp.type'] === 0).length, gwmac: r.pakete.filter(p => p.v['icmp.type'] === 8).every(p => p.v['eth.dst'].startsWith('00:1b:54')) } : { msg: r.msg }; });
-    ok(ns.arp >= 1 && ns.req === 4, 'Wireshark: Netsim-Mitschnitt ARP + ICMP – ' + ns.msg);
+    ok(ns.arp === 2 && ns.req === 4 && ns.rep === 4 && ns.gwmac, 'Wireshark: Netsim-Mitschnitt über Router (ARP Gateway, ICMP an Gateway-MAC) – ' + ns.msg);
     await page.evaluate(() => { const s = Netsim.AUFGABEN[0].topo(); s.nodes[1].ip = '192.168.1.10'; s.nodes[1].maske = '/24'; s.nodes[2].ip = '192.168.1.20'; s.nodes[2].maske = '/24'; S.p.netsim.topo = s; });
     await page.click('[data-a="netsim"]'); await page.waitForTimeout(100); await page.click('[data-a="sofort"]');
     ok(await page.evaluate(() => Wireshark._test.pakete().filter(p => p.v['icmp.type'] === 0).length === 4 && !!S.p.wireshark.geloest.netsim), 'Wireshark: Netsim-Ping im selben Netz mit Echo Reply → Aufgabe gelöst');
@@ -471,7 +471,7 @@ let fails = 0; const ok = (c, m) => { console.log((c ? 'OK     ' : 'FEHLER ') + 
     ok(await page.evaluate(() => { Wireshark._test.laden('scan'); return Wireshark._test.pruefe('offen', '3389, 135,139 und 445').ok && Wireshark._test.pruefe('scanner', '10.0.0.66').ok; }), 'Wireshark: Port-Scan-Aufgaben lösbar');
     await page.screenshot({ path: path.join(shots, 'p5-wireshark.png') });
     // 390 px
-    await page.setViewportSize({ width: 390, height: 844 }); await go('wireshark'); await page.click('[data-a="sofort"]'); await page.click('#ws-tbody tr >> nth=0'); await page.click('[data-a="follow"]');
+    await page.setViewportSize({ width: 390, height: 844 }); await page.evaluate(() => { S.p.wireshark.filter = ''; S.p.wireshark.szenario = 'buero'; }); await go('wireshark'); await page.click('[data-a="sofort"]'); await page.click('#ws-tbody tr >> nth=0'); await page.click('[data-a="follow"]');
     ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 2 && (() => { const i = document.getElementById('inhalt'); return i.scrollWidth <= i.clientWidth + 2; })()), 'Wireshark: 390 px ohne Überlauf');
     await page.screenshot({ path: path.join(shots, 'p5-wireshark-390.png') });
     await page.setViewportSize({ width: 1300, height: 900 });

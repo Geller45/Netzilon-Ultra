@@ -348,6 +348,7 @@ const Wireshark = (() => {
       arp(0, a, b.ip); if (!r || r.ok) arp(0.0004, b, null, a); else { arp(1, a, b.ip); arp(1, a, b.ip); }
       if (!r || r.ok) for (let i = 1; i <= 4; i++) { icmp(i === 1 ? 0.001 : 1, a, b, 8, 0, 1, i); icmp(0.0006, b, a, 0, 0, 1, i, { ttl }); }
     } else {
+      if (!String(src.gw || '').trim()) return { ok: true, erfolg: false, pakete: [], msg: `${a.n} (${a.ip}) → ${b.n} (${b.ip}): Ziel liegt in einem anderen Netz, aber ${a.n} hat kein Standardgateway – es wird gar kein Paket gesendet (Mitschnitt leer). Gateway im Netzwerk-Simulator eintragen.`, src: a, dst: b };
       const g = { n: 'Gateway', ip: String(src.gw || '').trim() || '0.0.0.0', mac: '00:1b:54:' + macVon({ id: 'gw' + src.gw }).slice(9) };
       arp(0, a, g.ip); if (r && /Gateway/.test(r.msg) && !r.ok) { arp(1, a, g.ip); arp(1, a, g.ip); }
       else {
