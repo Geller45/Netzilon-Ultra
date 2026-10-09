@@ -46,3 +46,22 @@ Alle CSS-Klassen/IDs mit Präfix `sql-` (CSS per `<style id="sql-style">` injizi
 
 ## Inhalte `content/datenbanken/d4-sql-labor/` (Agent SQL-Inhalte)
 Themenseiten nach `/home/user/Netzilon-Ultra/status/P2-BRIEF.md` (inkl. Legende), Beispiele immer auf obiges Schema bezogen („Probier es im SQL-Labor aus“).
+
+## Aufgabenformat `app/sqlaufgaben.js` (Agent SQL-Aufgaben) – `window.SQL_AUFGABEN = [ … ]`
+```js
+{ id: 'sql-01',            // eindeutig, stabil (Fortschritt hängt daran)
+  stufe: 1,                // 1 leicht, 2 mittel, 3 schwer (Reihe steigt leicht→schwer)
+  thema: 'SELECT',         // SELECT|WHERE|ORDER|AGGREGAT|GROUP BY|JOIN|SUBQUERY|CTE|INSERT|UPDATE|DELETE|CREATE|VIEW|INDEX|TRANSAKTION|FENSTER
+  titel: 'Alle Azubis',
+  text: 'Liste Vorname, Nachname und Position aller Auszubildenden, alphabetisch nach Nachname.',  // Markdown-inline erlaubt
+  art: 'abfrage',          // 'abfrage' = Ergebnis der Lernenden-SELECT wird mit dem der Musterlösung verglichen
+                           // 'aenderung' = Lernende ändern die DB; danach wird `pruefSql` auf IHRER DB und auf einer Referenz-DB (frisch + loesung) ausgeführt und verglichen
+  loesung: 'SELECT vorname, nachname, position FROM mitarbeiter WHERE azubi = 1 ORDER BY nachname;',
+  pruefSql: null,          // bei 'aenderung' Pflicht, z. B. "SELECT * FROM mitarbeiter WHERE ma_id = 101"
+  reihenfolge: true,       // Reihenfolge der Zeilen relevant (nur wenn ORDER BY gefordert)
+  spaltenNamen: false,     // true = Spaltennamen/Aliase müssen passen
+  hinweise: ['Azubis erkennst du an der Spalte azubi.', 'ORDER BY nachname'],   // gestuft
+  tsql: 'In T-SQL identisch.' ,                                                  // T-SQL-Unterschied/Hinweis
+  erklaerung: 'Warum die Lösung so funktioniert (1–3 Sätze).' }
+```
+Prüfung durch die UI: Lernenden-SQL mit `SqlKern.ausfuehren` auf der Arbeits-DB, Vergleich mit `SqlKern.vergleiche`. Für 'abfrage' wird die Musterlösung auf einer frischen Referenz-DB (`neueDb()`) ausgeführt, damit Änderungen der Lernenden das Soll nicht verfälschen – DAHER müssen 'abfrage'-Aufgaben so formuliert sein, dass sie auf der Ursprungs-DB eindeutig sind; die UI weist darauf hin, die DB vorher zurückzusetzen, wenn das Ergebnis wegen eigener Änderungen abweicht.
