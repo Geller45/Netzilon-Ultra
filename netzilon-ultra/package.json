@@ -1,0 +1,33 @@
+{
+  "name": "netzilon-ultra",
+  "productName": "Netzilon Ultra",
+  "version": "2.1.0",
+  "description": "Netzilon Ultra – die FiSi-Lernapp: Prüfungstrainer, Nachschlagewerk, Lernplan, Simulatoren",
+  "author": "GPProductions",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder --win portable --x64",
+    "build:html": "node tools/build-html.js",
+    "build:html:split": "node tools/build-html.js --split",
+    "test:ui": "node tools/test-ui.js"
+  },
+  "dependencies": {
+    "@fontsource/kalam": "^5.0.0",
+    "@fontsource/atkinson-hyperlegible": "^5.0.0",
+    "@fontsource/jetbrains-mono": "^5.0.0"
+  },
+  "devDependencies": {
+    "electron": "^31.0.0",
+    "electron-builder": "^24.13.3"
+  },
+  "build": {
+    "appId": "de.gpproductions.netzilonultra",
+    "productName": "Netzilon Ultra",
+    "files": ["main.js", "preload.js", "app/**/*", "node_modules/@fontsource/**/*", "package.json"],
+    "extraResources": [{ "from": "content", "to": "content" }, { "from": "CHANGELOG.md", "to": "CHANGELOG.md" }],
+    "win": { "target": "portable", "signAndEditExecutable": false },
+    "portable": { "artifactName": "NetzilonUltra.exe" },
+    "directories": { "output": "dist" }
+  }
+}

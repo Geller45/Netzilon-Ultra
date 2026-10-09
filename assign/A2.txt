@@ -1,0 +1,52 @@
+0208e9e3-cisco_100-101.pdf
+172e37ab-DNS_Loesung_Uebung_Win2025_1.pdf
+2796c663-CCNA_200-301_Notes_-_Jeremys_IT_Lab.pdf
+3c35328a-ASCII-Code.pdf
+423786c6-200_301_CCNA_v1.0_2.pdf
+49410524-DNS_WindowsServer2025.pdf
+58e89b27-05-routing.pdf
+6163fec0-Unterschied_zwischen_IPv4_und_IPv6.pdf
+644d43b3-Netzwerkgrundlagen_Basic.pdf
+75f26487-05_Y_IPv4_2.pdf
+75f7bc7e-1-Folien-DNS-Einf_hrung.pdf
+76a48876-DNS_Uebung_Win2025_1.pdf
+825dbf07-Namensaufl_sung_WindowsServer2025.pdf
+86c33e55-mnd-obsidian-docs-main.zip::mnd-obsidian-docs-main/FI Ausbildung-Themen/Netzwerk/Cloud-Typen.md
+86c33e55-mnd-obsidian-docs-main.zip::mnd-obsidian-docs-main/FI Ausbildung-Themen/Netzwerk/DSL.md
+86c33e55-mnd-obsidian-docs-main.zip::mnd-obsidian-docs-main/FI Ausbildung-Themen/Netzwerk/Datenübertragung/Datenübertragungstechnik.md
+86c33e55-mnd-obsidian-docs-main.zip::mnd-obsidian-docs-main/FI Ausbildung-Themen/Netzwerk/Datenübertragung/Switching Types.md
+86c33e55-mnd-obsidian-docs-main.zip::mnd-obsidian-docs-main/FI Ausbildung-Themen/Netzwerk/Mobilfunknetz.md
+86c33e55-mnd-obsidian-docs-main.zip::mnd-obsidian-docs-main/FI Ausbildung-Themen/Netzwerk/Netzwerk Medien/Kupferkabel. Twisted Pair.md
+86c33e55-mnd-obsidian-docs-main.zip::mnd-obsidian-docs-main/FI Ausbildung-Themen/Netzwerk/Netzwerk Medien/Lichtwellenleiter.md
+86c33e55-mnd-obsidian-docs-main.zip::mnd-obsidian-docs-main/FI Ausbildung-Themen/Netzwerk/Netzwerk-Topologien/Netzwerk-Topologien.md
+86c33e55-mnd-obsidian-docs-main.zip::mnd-obsidian-docs-main/FI Ausbildung-Themen/Netzwerk/Netzwerke im Allgemeinen.md
+86c33e55-mnd-obsidian-docs-main.zip::mnd-obsidian-docs-main/FI Ausbildung-Themen/Netzwerk/OSI 1/Ethernet/Ethernet.md
+86c33e55-mnd-obsidian-docs-main.zip::mnd-obsidian-docs-main/FI Ausbildung-Themen/Netzwerk/OSI 1/OSI 1.md
+86c33e55-mnd-obsidian-docs-main.zip::mnd-obsidian-docs-main/FI Ausbildung-Themen/Netzwerk/OSI 1/WiFi/WiFi.md
+86c33e55-mnd-obsidian-docs-main.zip::mnd-obsidian-docs-main/FI Ausbildung-Themen/Netzwerk/OSI 2/CSMA-CD.md
+86c33e55-mnd-obsidian-docs-main.zip::mnd-obsidian-docs-main/FI Ausbildung-Themen/Netzwerk/OSI 2/Ethernet/Ethernet.md
+86c33e55-mnd-obsidian-docs-main.zip::mnd-obsidian-docs-main/FI Ausbildung-Themen/Netzwerk/OSI 2/Ethernet/Klassic Ethernet.md
+86c33e55-mnd-obsidian-docs-main.zip::mnd-obsidian-docs-main/FI Ausbildung-Themen/Netzwerk/OSI 2/Ethernet/Switchin-Internet.md
+86c33e55-mnd-obsidian-docs-main.zip::mnd-obsidian-docs-main/FI Ausbildung-Themen/Netzwerk/OSI 2/Frame-Types.md
+86c33e55-mnd-obsidian-docs-main.zip::mnd-obsidian-docs-main/FI Ausbildung-Themen/Netzwerk/OSI 2/MAC/MAC.md
+86c33e55-mnd-obsidian-docs-main.zip::mnd-obsidian-docs-main/FI Ausbildung-Themen/Netzwerk/OSI 2/OSI 2.md
+86c33e55-mnd-obsidian-docs-main.zip::mnd-obsidian-docs-main/FI Ausbildung-Themen/Netzwerk/OSI 2/STP.md
+86c33e55-mnd-obsidian-docs-main.zip::mnd-obsidian-docs-main/FI Ausbildung-Themen/Netzwerk/OSI 2/WiFi/WiFi.md
+86c33e55-mnd-obsidian-docs-main.zip::mnd-obsidian-docs-main/FI Ausbildung-Themen/Netzwerk/OSI. TCP-IP Modell/OSI - TCP-IP Model.md
+86c33e55-mnd-obsidian-docs-main.zip::mnd-obsidian-docs-main/FI Ausbildung-Themen/Netzwerk/Prüfungvorbereitung Fragen/Routig. Verschiedene Netzwerke..md
+86c33e55-mnd-obsidian-docs-main.zip::mnd-obsidian-docs-main/FI Ausbildung-Themen/Netzwerk/VLAN/VLAN.md
+86c33e55-mnd-obsidian-docs-main.zip::mnd-obsidian-docs-main/FI Ausbildung-Themen/Netzwerk/VPN/VPN.md
+86c33e55-mnd-obsidian-docs-main.zip::mnd-obsidian-docs-main/FI Ausbildung-Themen/Netzwerk/Well-known Ports.md
+acc311f9-XX_Strukturierte_Verkabelung.pdf
+ba562baa-OSI_Schichtenmodell.pdf
+bf0982e5-uebung-Physische-Netzwerkstruktur.pdf
+c4e669a5-DHCP_WindowsServer2025.pdf
+c610cbd6-05_Y_IPv4_4.pdf
+d165fc8e-01-Folien-physische-Netzwerktopologie.pdf
+d18096a8-05_Y_IPv4_5.pdf
+d997561d-DNS_Uebung_Win2025_2.pdf
+e1444d20-200-301.pdf
+e21fdbfe-1.19_Grundlagen_der_IT_-_Kodierung_und_Verschl_sselung.pdf
+eccb0e48-05_Y_IPv4_3.pdf
+f186919d-09-1-Uebung-einfaches_Netzwerk.pdf
+f30cd2cd-13_DHCP.pdf

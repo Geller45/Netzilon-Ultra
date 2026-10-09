@@ -1,0 +1,1 @@
+- Alle 12 Punkte geprüft/erledigt: Umbenennung 2.0.0, parser v2, Module eingebunden, check-content 0 Fehler, build-html -> dist/Netzilon-Ultra.html (2.48 MB), test-ui Desktop+Mobil alle OK, CHANGELOG 2.0.0, bauen.bat.

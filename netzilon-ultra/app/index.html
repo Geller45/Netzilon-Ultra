@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="de" data-theme="nacht" data-hell="0">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0a1222">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Netzilon Ultra">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: blob:; script-src 'self' 'unsafe-inline' blob:; worker-src blob:">
+<title>Netzilon Ultra</title>
+<!--FONTS-->
+<link rel="stylesheet" href="../node_modules/@fontsource/kalam/400.css">
+<link rel="stylesheet" href="../node_modules/@fontsource/kalam/700.css">
+<link rel="stylesheet" href="../node_modules/@fontsource/atkinson-hyperlegible/400.css">
+<link rel="stylesheet" href="../node_modules/@fontsource/atkinson-hyperlegible/700.css">
+<link rel="stylesheet" href="../node_modules/@fontsource/jetbrains-mono/400.css">
+<!--/FONTS-->
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="rahmen">
+  <header id="leiste">
+    <button class="logo" data-go="home" title="Startseite">Netzilon <span class="ultra">Ultra</span></button>
+    <nav id="brotkrumen"></nav>
+    <div class="leiste-rechts">
+      <button class="glas suchknopf" data-go="suche" title="Suche (Strg+K)">⌕ Suchen <kbd>Strg K</kbd></button>
+      <button class="glas icon" id="btn-fokus" title="Fokus-Modus (Strg+Umschalt+F)">◎</button>
+      <button class="glas icon" id="btn-hell" title="Hell/Dunkel">☀</button>
+      <button class="glas icon" id="btn-theme" title="Farbwelt wechseln: Nacht, Tafel, Weltall">◐</button>
+      <button class="glas icon" id="btn-ton" title="Ton an/aus">♪</button>
+      <button class="glas icon" id="btn-voll" title="Vollbild (F11)">⛶</button>
+      <button class="glas icon" data-go="einstellungen" title="Einstellungen">⚙</button>
+    </div>
+  </header>
+  <main id="inhalt" tabindex="-1"></main>
+  <nav id="tableiste" aria-label="Hauptnavigation">
+    <button data-go="home"><i>⌂</i><span>Start</span></button>
+    <button data-go="lernhub"><i>📚</i><span>Lernen</span></button>
+    <button data-go="quiz"><i>?</i><span>Quiz</span></button>
+    <button data-go="werkzeuge"><i>∑</i><span>Werkzeuge</span></button>
+    <button data-go="mehr"><i>☰</i><span>Mehr</span></button>
+  </nav>
+  <footer id="kreideablage"><span class="kreide k1"></span><span class="kreide k2"></span><span class="schwamm"></span><span id="status"></span></footer>
+</div>
+<div id="toast"></div>
+<script src="parser.js"></script>
+<script src="lernformen.js"></script>
+<script src="lernen.js"></script>
+<script src="werkzeuge.js"></script>
+<script src="spiele.js"></script>
+<script src="anim.js"></script>
+<script src="motivation.js"></script>
+<script src="plan.js"></script>
+<script src="analyse.js"></script>
+<script src="rechner.js"></script>
+<script src="netsim.js"></script>
+<script src="terminal.js"></script>
+<script src="extras.js"></script>
+<script src="weltall.js"></script>
+<script src="intro.js"></script>
+<script src="stickman.js"></script>
+<script src="ziele.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
