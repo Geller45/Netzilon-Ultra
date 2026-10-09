@@ -1,3 +1,10 @@
+# 2.3.0 – Paket 3 (SQL-Labor)
+- Neues Werkzeug „SQL-Labor“: echtes SQLite offline (sql.js 1.10.3, WebAssembly eingebettet, asm.js-Fallback) – in der .exe und in der Einzel-HTML
+- Firmen-Datenbank „Netzilon GmbH“: 100 Mitarbeiter, Abteilungen, Standorte, Gehälter, Projekte, Kunden, Bestellungen, Zeiterfassung – automatisch erzeugt, zurücksetzbar, Änderungen werden gespeichert
+- Editor (Strg+Enter, Verlauf, Beispiele), animierte Ergebnisse, deutsche Fehlererklärungen, ER-Diagramm + Live-Schema, SQLite↔T-SQL-Hinweise (erkennt TOP, GETDATE …)
+- 60 Aufgaben leicht → schwer mit automatischer Prüfung (SELECT bis Transaktion), Hinweise, Lösung, XP, Quest, Abzeichen (SELECT *, Query-Ninja, Datenbank-Admin)
+- 10 neue Themenseiten „SQL-Labor (Firmen-DB)“ mit 238 Aufgaben und T-SQL-Unterschieden
+
 # 2.2.0 – Paket 2 (Inhalte: WiSo, Hyper-V, SAN, Speicher-Labor)
 - WiSo-Prüfungstraining: 10 neue Themenseiten (BBiG, Kündigung, Schutzgesetze, Betriebsverfassung/Tarif, Sozialversicherung/Entgelt, Rechtsformen, Markt/Wirtschaftspolitik, Verträge/Verbraucherschutz, Nachhaltigkeit/DSGVO, Organisation/Kennzahlen) mit 277 Aufgaben aller Arten
 - Hyper-V vertieft: Schwerpunkt verschachtelte Virtualisierung (Nested Virtualization) – Voraussetzungen, MAC-Spoofing/NAT, Dynamic-Memory-Einschränkungen, Prüfpunkte, Gen 1/Gen 2, vSwitch/VLAN, Nested-Cluster-Lab; 212 Aufgaben
