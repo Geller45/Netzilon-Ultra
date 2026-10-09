@@ -116,8 +116,8 @@ Und wer darf unterschreiben? Der Chef natürlich – aber er kann nicht überall
 4. Gläubiger -> Kommanditist: nur bis zur Höhe der noch nicht geleisteten Einlage
 
 ## Lab
-### Handelsregister-Recherche
-Maschine: Büro-PC (Windows 11) mit Browser – nur öffentliche Registerdaten verwenden.
+### GUI
+Handelsregister-Recherche. Maschine: Büro-PC (Windows 11) mit Browser – nur öffentliche Registerdaten verwenden.
 1. Im Browser `https://www.handelsregister.de` öffnen und „Normale Suche“ wählen.
 2. Den Namen eines bekannten IT-Unternehmens eingeben und die Registerart (HRA oder HRB) notieren.
 3. Den „Aktuellen Abdruck“ (AD) öffnen und ablesen: Rechtsform, Sitz, Stamm- oder Grundkapital, Geschäftsführer/Vorstand, Prokuristen.

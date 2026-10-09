@@ -128,8 +128,8 @@ Ein Trick für Azubis: Wer **sehr wenig** verdient (bis 325 € im Monat), muss 
 4. Netto -> Auszahlung: minus VL-Sparrate und sonstige Abzüge
 
 ## Lab
-### Brutto-Netto in einer Tabellenkalkulation nachrechnen
-Maschine: Büro-PC (Windows 11) mit Excel oder LibreOffice Calc – keine Echtdaten verwenden.
+### GUI
+Brutto-Netto in einer Tabellenkalkulation nachrechnen. Maschine: Büro-PC (Windows 11) mit Excel oder LibreOffice Calc – keine Echtdaten verwenden.
 1. In A1:A8 die Bezeichnungen eintragen: Brutto, Lohnsteuer (vorgegeben), KiSt-Satz, SV-Satz AN (Beispielwert), KiSt, SV-AN, Netto, VL-Sparrate.
 2. In B1 `3000`, in B2 `330`, in B3 `9%`, in B4 `21%` eintragen.
 3. In B5 `=B2*B3` (Kirchensteuer von der Lohnsteuer!), in B6 `=B1*B4`.
