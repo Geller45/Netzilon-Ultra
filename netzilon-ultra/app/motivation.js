@@ -1,6 +1,6 @@
 // Netzilon Ultra – Motivation: XP, Level, Ränge, Streak, Tagesziel, 3 tägliche Mini-Quests, Abzeichen, Konfetti
 const Mot = (() => {
-  const XP = { start: 10, gelesen: 20, karte: 2, richtig: 5, falsch: 1, lab: 3, labKomplett: 25, kartenSitzung: 10, spiel: 10, terminal: 8, netsim: 15, ping: 1, rechner: 5, dojo: 5, freitext: 3, tagesaufgabe: 30, quest: 25, subnetz: 0, puzzle: 0, luecke: 0, pruefung: 50, speicher: 15, sql: 15, domaene: 15 };
+  const XP = { start: 10, gelesen: 20, karte: 2, richtig: 5, falsch: 1, lab: 3, labKomplett: 25, kartenSitzung: 10, spiel: 10, terminal: 8, netsim: 15, ping: 1, rechner: 5, dojo: 5, freitext: 3, tagesaufgabe: 30, quest: 25, subnetz: 0, puzzle: 0, luecke: 0, pruefung: 50, speicher: 15, sql: 15, domaene: 15, wireshark: 15 };
   const RAENGE = [[1, 'Azubi', '🎒'], [5, 'Junior-Admin', '🔧'], [10, 'Admin', '🖥'], [15, 'Senior-Admin', '🛡'], [20, 'Domain Admin', '👑'], [30, 'Enterprise Admin', '🌐'], [45, 'System-Architekt', '🏗'], [60, 'Cloud-Architekt', '☁'], [75, 'IT-Leiter', '🧭'], [90, 'Legende', '⭐'], [100, 'Netzilon-Meister (Durchgespielt)', '🏆']];
   const MAXLV = 100;
   // Kurve 2.1: Level 100 bei ca. 62.700 XP (erreichbar bis zum Ende der Ausbildung)
@@ -16,7 +16,8 @@ const Mot = (() => {
     { art: 'lab', ziel: 3, txt: '3 Lab-Schritte abhaken' }, { art: 'freitext', ziel: 1, txt: '1 Freitext- oder Szenario-Aufgabe bewerten' },
     { art: 'speicher', ziel: 1, txt: '1 Aufgabe im Speicher-Labor lösen' },
     { art: 'sql', ziel: 2, txt: '2 Aufgaben im SQL-Labor lösen' },
-    { art: 'domaene', ziel: 1, txt: '1 Aufgabe in „Meine Domäne“ lösen' }
+    { art: 'domaene', ziel: 1, txt: '1 Aufgabe in „Meine Domäne“ lösen' },
+    { art: 'wireshark', ziel: 1, txt: '1 Aufgabe im Wireshark-Simulator lösen' }
   ];
   const z = k => (S.p.zaehler || {})[k] || 0;
   const gelesenWo = re => Object.keys(S.p.gelesen).filter(id => re.test(id) || (S.byId[id] && re.test(S.byId[id].titel))).length;
@@ -70,6 +71,8 @@ const Mot = (() => {
     { id: 'sql25', name: 'Query-Ninja', txt: '25 Aufgaben im SQL-Labor gelöst', icon: '🥷', ok: () => z('sql') >= 25 },
     { id: 'dom1', name: 'Domänen-Admin in Ausbildung', txt: 'Erste Aufgabe in „Meine Domäne“ gelöst', icon: '🏢', ok: () => z('domaene') >= 1 },
     { id: 'domall', name: 'Herr(in) der Domäne', txt: 'Alle Aufgaben in „Meine Domäne“ gelöst', icon: '👑', ok: () => !!window.Domaene && Domaene.alleGeloest() },
+    { id: 'ws1', name: 'Paketschnüffler', txt: 'Erste Aufgabe im Wireshark-Simulator gelöst', icon: '🦈', ok: () => z('wireshark') >= 1 },
+    { id: 'wsall', name: 'Protokoll-Detektiv', txt: 'Alle Aufgaben im Wireshark-Simulator gelöst', icon: '🔎', ok: () => !!window.Wireshark && Wireshark.alleGeloest() },
     { id: 'sqlall', name: 'Datenbank-Admin', txt: 'Alle Aufgaben im SQL-Labor gelöst', icon: '🏛', ok: () => !!window.SqlLabor && SqlLabor.alleGeloest && SqlLabor.alleGeloest() },
     { id: 'zufall5', name: 'Zufalls-Prüfling', txt: '5 Zufallsprüfungen geschrieben', icon: '🎲', ok: () => ((S.p.zufall && S.p.zufall.n) || 0) >= 5 }
   ];

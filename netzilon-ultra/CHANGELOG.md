@@ -1,3 +1,10 @@
+# 2.5.0 – Paket 5 (Wireshark-Simulator)
+- Neues Werkzeug „Wireshark-Simulator“ (app/wireshark.js): deterministisch erzeugte Mitschnitte „Büro-Start“ (DHCP-DORA, ARP, DNS A/AAAA mit CNAME, ICMP-Ping, TCP-Handshake, HTTP GET, HTTPS mit TLS-Client-/Server-Hello inkl. SNI, Kerberos AS/TGS, LDAP bind/search, SMB2 Negotiate/Session Setup/Tree Connect, FIN/RST), „Port-Scan“ (SYN-Scan, SYN/ACK vs. RST) und „Fehlersuche“ (NXDOMAIN, ICMP Destination unreachable, TCP-Retransmissions)
+- Echte Bytes: Ethernet/IPv4/TCP/UDP/ICMP-Header korrekt aufgebaut inkl. Prüfsummen; Paketliste mit Wireshark-Farben und animierter Aufzeichnung, aufklappbare Schichten, Hex-/ASCII-Ansicht mit Feldmarkierung, Follow TCP Stream (HTTP lesbar, TLS verschlüsselt), Protokollhierarchie
+- Anzeigefilter-Parser (ip.addr/src/dst, tcp/udp.port, eth.addr, Protokolle, tcp.flags.*, dns.flags.rcode, frame.number, &&/and, ||/or, !/not, Klammern, contains) mit rotem Feld und deutscher Fehlererklärung
+- Mitschnitt aus dem Netzwerk-Simulator: Ping zwischen zwei Geräten der gespeicherten Topologie (ARP, ICMP Echo, über Router mit Gateway-MAC)
+- 13 Aufgaben mit Auswertung (Antwort, Auswahl, Paket anklicken, Filter finden), XP, Quest, 2 Abzeichen, Legende (Mitschnitt, Anzeige- vs. Mitschnittfilter, ARP, DORA, DNS, Handshake, TLS, Port-Scan, Port-Spiegelung)
+
 # 2.4.0 – Paket 4 (Domänen-Simulator „Meine Domäne“)
 - Neues Werkzeug „Meine Domäne“: simulierte AD-Umgebung netzilon.example (NETZILON) mit DC01 (Windows Server 2025, 10.0.0.10, DNS + DHCP), OUs je Standort/Abteilung und den 100 Mitarbeitern der Firmen-DB als AD-Benutzer (Abteilung, Titel, Manager, Ausgeschiedene deaktiviert)
 - GUI-Registerkarten: AD-Benutzer und -Computer (OU-Baum, Suche, Benutzer anlegen/ändern/verschieben/deaktivieren/löschen, Gruppen GG_/DL_ nach AGDLP), Gruppenrichtlinien (GPO anlegen, verknüpfen, Einstellungen, Richtlinienergebnis nach LSDOU), DNS (A/CNAME/PTR/SRV), DHCP (Bereich, DORA, Leases, Reservierungen), Freigaben/NTFS mit Rechner für effektive Rechte inkl. Erklärung, Vertrauensstellung zu partner.example
