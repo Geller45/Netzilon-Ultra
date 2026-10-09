@@ -484,6 +484,7 @@ let fails = 0; const ok = (c, m) => { console.log((c ? 'OK     ' : 'FEHLER ') + 
     ok(await page.evaluate(() => ['Speicher-Labor', 'SQL-Labor', 'Meine Domäne', 'Wireshark-Simulator'].every(x => document.getElementById('inhalt').innerText.includes(x))), 'Gesamt: Startseite zeigt alle neuen Werkzeuge');
   }
   { const n = await page.evaluate(() => { gehe('plan', 'fach:CCNA – Adv.'); return document.querySelectorAll('#inhalt .thema-kachel').length; }); ok(n >= 20, `Lernplan: Fach „CCNA – Adv.“ hat Inhalte (${n})`); }
+  { const fz = await page.evaluate(() => Object.values(Plan.F).map(f => [f, Plan.docsFuerFach(f).length])); console.log('Fächer', JSON.stringify(fz)); const leer = fz.filter(x => x[1] < 5); ok(!leer.length, 'Alle Lernplan-Fächer haben Inhalte ' + JSON.stringify(leer)); }
   ok(errs.length === 0, 'Keine Konsolenfehler ' + errs.slice(0, 3).join(' | '));
   await browser.close();
   console.log(fails ? `\n${fails} FEHLER` : '\nALLES OK'); process.exit(fails ? 1 : 0);
