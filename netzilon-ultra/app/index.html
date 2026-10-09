@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#0a1222">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Netzilon Ultra">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: blob:; script-src 'self' 'unsafe-inline' blob:; worker-src blob:">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: blob:; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' blob:; worker-src blob:">
 <title>Netzilon Ultra</title>
 <!--FONTS-->
 <link rel="stylesheet" href="../node_modules/@fontsource/kalam/400.css">
@@ -61,6 +61,11 @@
 <script src="stickman.js"></script>
 <script src="ziele.js"></script>
 <script src="speicher.js"></script>
+<script src="vendor/sql-wasm.js"></script>
+<script src="vendor/sql-wasm-bin.js"></script>
+<script src="vendor/sql-asm-gz.js"></script>
+<script src="sqldb.js"></script>
+<script src="sql.js"></script>
 <script src="app.js"></script>
 </body>
 </html>
