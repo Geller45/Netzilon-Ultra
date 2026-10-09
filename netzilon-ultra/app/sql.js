@@ -18,7 +18,7 @@ const SqlLabor = (() => {
   const datumHeute = () => (typeof heute === 'function' ? heute() : new Date().toISOString().slice(0, 10));
   const aktiv = () => !!(S.ansicht && S.ansicht.ansicht === 'sql' && document.getElementById('sql-wurzel'));
   const el = id => document.getElementById(id);
-  const inl = s => (window.Parser && Parser.inline ? Parser.inline(s) : E(s));
+  const inl = s => (typeof Parser !== 'undefined' && Parser.inline ? Parser.inline(s) : E(s));
 
   function P() {
     const p = S.p;
