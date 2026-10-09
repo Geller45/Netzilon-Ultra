@@ -215,7 +215,7 @@ Start-VM -Name INNER01
 - 5.0
 - 6.2
 - 12.0
-! Version 8.0 entspricht Windows Server 2016 / Windows 10 1709. Ältere VMs werden mit Update-VMVersion angehoben.
+! Version 8.0 entspricht Windows Server 2016 / Windows 10 1607 (bei AMD laut Doku 9.3 oder höher). Ältere VMs werden mit Update-VMVersion angehoben.
 
 ? In der Ebenenbetrachtung ist „L1“…
 * die äußere VM, in der Hyper-V läuft
@@ -275,7 +275,7 @@ Start-VM -Name INNER01
 
 ## Lücken
 - Verschachtelte Virtualisierung wird mit {Set-VMProcessor} und dem Parameter {-ExposeVirtualizationExtensions} aktiviert.
-- Die VM muss dabei {ausgeschaltet|aus} sein und mindestens Konfigurationsversion {8.0} haben.
+- Die VM muss dabei {ausgeschaltet|aus} sein und auf einem Intel-Host mindestens Konfigurationsversion {8.0} haben.
 - Bei Intel sind {VT-x} und {EPT} erforderlich, AMD wird ab Windows Server {2022} unterstützt.
 
 ## Zuordnen

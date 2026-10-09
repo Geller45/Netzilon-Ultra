@@ -116,7 +116,9 @@ Test-NetConnection HV02.example.com -Port 80
 # Auf HV02 – Replikatserver aktivieren
 Set-VMReplicationServer -ReplicationEnabled $true -AllowedAuthenticationType Kerberos -KerberosAuthenticationPort 80 -ReplicationAllowedFromAnyServer $false
 New-VMReplicationAuthorizationEntry -AllowedPrimaryServer HV01.example.com -ReplicaStorageLocation D:\Replica -TrustGroup ERP
-Enable-NetFirewallRule -Name VIRT-HVRHTTPL-In-TCP-NoScope      # "Hyper-V Replica HTTP Listener (TCP-In)"
+# Regelnamen sind sprachneutral; vorher anzeigen lassen, welche Replica-Regeln es gibt:
+Get-NetFirewallRule -Name "VIRT-HVR*" | Select-Object Name, DisplayName, Enabled
+Enable-NetFirewallRule -Name VIRT-HVRHTTPL-In-TCP-NoScope      # engl. DisplayName "Hyper-V Replica HTTP Listener (TCP-In)"
 # Für HTTPS: Enable-NetFirewallRule -Name VIRT-HVRHTTPSL-In-TCP-NoScope
 Get-VMReplicationServer
 

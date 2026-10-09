@@ -113,7 +113,8 @@ Nachstellen: Zuerst den Fehler bewusst erzeugen, dann beheben.
 # Auf HV01 – als Replikatserver vorbereiten
 Set-VMReplicationServer -ReplicationEnabled $true -AllowedAuthenticationType Kerberos -ReplicationAllowedFromAnyServer $false
 New-VMReplicationAuthorizationEntry -AllowedPrimaryServer HV02.example.com -ReplicaStorageLocation D:\Replica -TrustGroup ERP
-Enable-NetFirewallRule -Name VIRT-HVRHTTPL-In-TCP-NoScope
+Get-NetFirewallRule -Name "VIRT-HVR*" | Select-Object Name, DisplayName, Enabled   # Regelnamen prüfen
+Enable-NetFirewallRule -Name VIRT-HVRHTTPL-In-TCP-NoScope         # HTTP-Listener (Kerberos)
 
 # Auf HV01 – Primär-VM aus und Failover vorbereiten
 Stop-VM -Name ERP01

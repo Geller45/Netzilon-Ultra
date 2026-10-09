@@ -236,7 +236,7 @@ Azubi Kim (22) ist Vorsitzende der JAV der Netzilon GmbH. Ihre Ausbildung endet 
 - 3
 ! § 1 Abs. 1 BetrVG.
 
-? Ab welchem Alter dürfen Arbeitnehmer den Betriebsrat wählen?
+? Ab welchem Alter ist ein Arbeitnehmer bei der Betriebsratswahl wahlberechtigt (§ 7 BetrVG)?
 * 16 Jahre
 - 18 Jahre
 - 14 Jahre
@@ -251,7 +251,7 @@ Azubi Kim (22) ist Vorsitzende der JAV der Netzilon GmbH. Ihre Ausbildung endet 
 - Es gibt mindestens 5 Azubis über 25 Jahren.
 ! §§ 60, 61 BetrVG.
 
-? Bei welcher Maßnahme hat der Betriebsrat ein echtes Mitbestimmungsrecht?
+? Für welche geplante Maßnahme braucht der Arbeitgeber die Zustimmung des Betriebsrats (echte Mitbestimmung)?
 * Einführung einer Software, die die Leistung der Mitarbeiter auswerten kann
 - Ordentliche Kündigung eines Mitarbeiters
 - Investition in neue Server
@@ -301,7 +301,7 @@ Azubi Kim (22) ist Vorsitzende der JAV der Netzilon GmbH. Ihre Ausbildung endet 
 - Teilnahme an einem rechtmäßigen Streik ist ein Kündigungsgrund.
 ! Gewerkschaftsmitglieder erhalten Streikgeld; Friedenspflicht während der Laufzeit.
 
-? Wer kann einen Tarifvertrag für allgemeinverbindlich erklären?
+? Wer erklärt einen Tarifvertrag nach § 5 TVG für allgemeinverbindlich?
 * Das Bundesministerium für Arbeit und Soziales
 - Der Deutsche Gewerkschaftsbund
 - Das Bundesarbeitsgericht

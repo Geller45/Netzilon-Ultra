@@ -30,7 +30,7 @@ verweise: [az800-vhdx, az800-pruefpunkte, az800-datentraeger, server-hvsz-40]
   - **Quick** (Standard): gibt ungenutzte Blöcke frei, sucht keine Nullblöcke – VHDX muss **schreibgeschützt eingebunden** sein.
   - **Full**: sucht zusätzlich nach Nullblöcken – ebenfalls nur schreibgeschützt eingebunden.
   - **Retrim**: sendet nur erneut Trim-Befehle – schreibgeschützt eingebunden.
-  - **Pretrimmed** / **Prezeroed**: wie Quick, aber **ohne** schreibgeschütztes Einbinden; auch an einer **laufenden VM** möglich, weniger gründlich.
+  - **Pretrimmed** / **Prezeroed**: wie Quick, aber **ohne** schreibgeschütztes Einbinden, weniger gründlich. Ob das an einer **laufenden VM** klappt, hängt davon ab, ob Hyper-V die Datei sperrt – vorher an einer Test-VM ausprobieren; der sichere Weg bleibt das Wartungsfenster.
 - Voraussetzung ist zudem: **keine Prüfpunkte**, die auf der Datei aufbauen – bei vorhandenem Prüfpunkt schreibt die VM in eine **.avhdx**, und die Eltern-VHDX ist „eingefroren“. Erst Prüfpunkt löschen (zusammenführen).
 - Hinweis: Viele Gast-Dateisysteme melden freigegebene Blöcke per **TRIM/UNMAP** bereits an die VHDX; Hyper-V kann dadurch einen Teil des Platzes in der Datei freigeben. Ein manueller Lauf hilft, wenn das nicht ausgereicht hat.
 
@@ -40,7 +40,7 @@ verweise: [az800-vhdx, az800-pruefpunkte, az800-datentraeger, server-hvsz-40]
 3. **Wartungsfenster:** FS01 herunterfahren. *Begründung:* Für Quick/Full muss die VHDX schreibgeschützt eingebunden werden.
 4. VHDX auf dem Host **schreibgeschützt einbinden** (`Mount-VHD -ReadOnly`), **Optimize-VHD -Mode Full**, wieder trennen. *Begründung:* Gründlichster Modus.
 5. FS01 starten. *Begründung:* Dienst wieder bereitstellen.
-6. Alternative ohne Ausfall: `Optimize-VHD -Mode Pretrimmed` bei laufender VM. *Begründung:* Weniger Platzgewinn, aber kein Wartungsfenster.
+6. Mögliche Alternative ohne schreibgeschütztes Einbinden: `Optimize-VHD -Mode Pretrimmed`. *Begründung:* Weniger Platzgewinn; ob es ohne Wartungsfenster (laufende VM) funktioniert, vorher testen.
 
 ### Ergebnis prüfen
 - `Get-VHD D:\Hyper-V\FS01\FS01-Daten.vhdx | Select FileSize, Size, MinimumSize` → FileSize deutlich kleiner (nahe der belegten 500 GB).
@@ -68,7 +68,7 @@ Ein Ballon aus **festem Material** (feste VHDX) war schon von Anfang an voll gro
 ## Merksatz
 - Dynamisch **wächst**, **schrumpft nicht** von selbst.
 - **Quick/Full/Retrim** ⇒ VHDX **schreibgeschützt eingebunden**.
-- **Pretrimmed/Prezeroed** ⇒ auch bei **laufender** VM.
+- **Pretrimmed/Prezeroed** ⇒ **ohne** schreibgeschütztes Einbinden (weniger gründlich).
 - Erst **Prüfpunkte weg**, dann komprimieren.
 
 ## Prüfungsfalle
@@ -117,7 +117,7 @@ Optimize-VHD -Path "D:\Hyper-V\FS01\FS01-Daten.vhdx" -Mode Full
 Dismount-VHD -Path "D:\Hyper-V\FS01\FS01-Daten.vhdx"
 Start-VM -Name FS01
 
-# Auf HV01 – Alternative bei laufender VM
+# Auf HV01 – Alternative ohne schreibgeschütztes Einbinden (an laufender VM vorher testen)
 Optimize-VHD -Path "D:\Hyper-V\FS01\FS01-Daten.vhdx" -Mode Pretrimmed
 
 # Auf HV01 – Größe nachher
@@ -140,13 +140,13 @@ FS01-Daten.vhdx (dynamisch) ist 820 GB groß, im Gast sind nur 500 GB belegt. Es
 - F: Warum schrumpft die VHDX nicht von selbst? | A: Dynamische VHDX wachsen bei Bedarf, geben Platz aber nicht automatisch vollständig frei.
 - F: Was muss vor dem Komprimieren mit dem Prüfpunkt passieren? | A: Prüfpunkt löschen und die Zusammenführung abwarten.
 - F: Welche Modi verlangen eine schreibgeschützt eingebundene VHDX? | A: Quick (Standard), Full und Retrim.
-- F: Welcher Modus geht bei laufender VM? | A: Pretrimmed bzw. Prezeroed.
+- F: Welche Modi brauchen kein schreibgeschütztes Einbinden? | A: Pretrimmed bzw. Prezeroed.
 - F: Funktioniert Optimize-VHD bei festen VHDX? | A: Nein, nur bei dynamischen und differenzierenden.
 
 ## Legende
 ### Optimize-VHD
 - Was: Cmdlet zum Komprimieren dynamischer und differenzierender VHD/VHDX.
-- Wie: Mount-VHD -ReadOnly, Optimize-VHD -Mode Full/Quick, Dismount-VHD; alternativ Pretrimmed/Prezeroed im Betrieb.
+- Wie: Mount-VHD -ReadOnly, Optimize-VHD -Mode Full/Quick, Dismount-VHD; alternativ Pretrimmed/Prezeroed ohne schreibgeschütztes Einbinden.
 - Wann: Nach dem Löschen großer Datenmengen im Gast oder bei knappem Host-Speicher.
 - Wo: Auf dem Hyper-V-Host bzw. Hyper-V-Manager → Datenträger bearbeiten → Komprimieren.
 - Warum: Ungenutzte Blöcke belegen sonst weiter Platz auf dem Host.
@@ -156,7 +156,7 @@ FS01-Daten.vhdx (dynamisch) ist 820 GB groß, im Gast sind nur 500 GB belegt. Es
 - F: Welches Cmdlet komprimiert eine VHDX? | A: Optimize-VHD
 - F: Welcher Modus ist Standard bei Optimize-VHD? | A: Quick.
 - F: Was macht der Modus Full zusätzlich? | A: Er sucht nach Nullblöcken und gibt sie frei.
-- F: Welche Modi funktionieren bei laufender VM? | A: Pretrimmed und Prezeroed.
+- F: Welche Modi sind weniger gründlich, setzen aber kein schreibgeschütztes Einbinden voraus? | A: Pretrimmed und Prezeroed.
 - F: Wie bindet man eine VHDX schreibgeschützt ein? | A: Mount-VHD -Path Datei.vhdx -ReadOnly
 - F: Welche VHDX-Typen lassen sich komprimieren? | A: Dynamische und differenzierende.
 - F: Wie heißt die Funktion im Hyper-V-Manager? | A: Datenträger bearbeiten → Komprimieren.
@@ -183,12 +183,12 @@ FS01-Daten.vhdx (dynamisch) ist 820 GB groß, im Gast sind nur 500 GB belegt. Es
 - Ein Prüfpunkt existiert
 ! Mount-VHD -ReadOnly.
 
-? Welcher Modus kann bei laufender VM verwendet werden?
+? Welcher Modus setzt KEIN schreibgeschütztes Einbinden der VHDX voraus?
 * Pretrimmed
 - Full
 - Quick
 - Retrim
-! Ebenso Prezeroed – dafür weniger gründlich.
+! Ebenso Prezeroed – dafür weniger gründlich. Full, Quick und Retrim verlangen eine getrennte oder schreibgeschützt eingebundene VHDX.
 
 ? Warum vorher Prüfpunkte löschen?
 * Weil die VM sonst in die .avhdx schreibt und die Eltern-VHDX eingefroren ist

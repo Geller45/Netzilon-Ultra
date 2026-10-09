@@ -176,6 +176,70 @@ let fails = 0; const ok = (c, m) => { console.log((c ? 'OK     ' : 'FEHLER ') + 
     await page.screenshot({ path: path.join(shots, 'p2-speicher-390.png') });
     await page.setViewportSize({ width: 1300, height: 900 });
   }
+  // ---------- Anomalie P2: alte/kaputte Speicherstände, Legende, neue Themenseiten ----------
+  {
+    const KEY = 'netzilon-ultra-fortschritt-v2';
+    await page.waitForTimeout(500);
+    const basis = await page.evaluate(() => { const p = JSON.parse(JSON.stringify(S.p)); p.einstellungen.intro = false; return p; });
+    const neuLaden = async (p) => {
+      await page.evaluate(([k, v]) => localStorage.setItem(k, v), [KEY, JSON.stringify(p)]);
+      await page.reload(); await page.waitForFunction(() => window.__netzilonBereit && S.docs && S.docs.length, null, { timeout: 30000 });
+      await page.waitForTimeout(400); await page.evaluate(() => { const o = document.getElementById('ta-overlay'); if (o) o.remove(); });
+    };
+    const kaputt = {
+      'ohne speicher-Feld': p => { delete p.speicher; },
+      'speicher = String': p => { p.speicher = 'kaputt'; },
+      'speicher = Array, geloest = Array': p => { p.speicher = [1, 2]; },
+      'zustand = {foo:1}': p => { p.speicher = { geloest: [], zustand: { foo: 1 }, best: 'x' }; },
+      'zustand = null': p => { p.speicher = { geloest: {}, zustand: null }; },
+      'zustand = Array': p => { p.speicher = { geloest: {}, zustand: [1, 2, 3] }; },
+      'zustand = String': p => { p.speicher = { geloest: {}, zustand: 'abc' }; },
+      'zustand v1 mit Müll': p => { p.speicher = { geloest: { 'kap6': '2026-01-01' }, zustand: { v: 1, kid: 1, server: ['HV01', 'HV01', 'XYZ'], kabel: [{ id: 'k1', port: 'HV01.0', sw: 'FCA' }, { id: 'k1', port: 'HV01.1', sw: 'FCB' }, { id: 'k9', port: 'CTLA.0', sw: 'FCA' }], fab: { FCA: { zonen: 'x', aktiv: [{ n: 'a b', m: [] }] } }, rgs: [{ id: 'RG1', level: 5, n: 5, tb: 4, d: ['ok', 'warte', 'ok', 'ok', 'ok'], rb: null, spare: -4 }], luns: [{ n: 'VM-STORE', gb: 1e9, rg: 'RG9' }], aus: { 'x:y': 1 }, antw: { kap6: 'zwölf' } } }; }
+    };
+    for (const [name, f] of Object.entries(kaputt)) {
+      const p = JSON.parse(JSON.stringify(basis)); f(p); await neuLaden(p);
+      await go('speicher'); await page.waitForTimeout(250);
+      const r = await page.evaluate(() => ({ hoppla: /Hoppla/.test(document.getElementById('inhalt').innerText), wurzel: !!document.querySelector('#spm-wurzel .spm-karte'), geloest: !Array.isArray(S.p.speicher.geloest) && typeof S.p.speicher.geloest === 'object' }));
+      ok(!r.hoppla && r.wurzel && r.geloest, `Anomalie P2: Fortschritt ${name} → App startet, Speicher-Labor öffnet`);
+    }
+    // zuletzt „Müll“-Zustand: Kabel-IDs eindeutig, neue ID kollidiert nicht, wartende Platte wird aufgebaut
+    const zz = await page.evaluate(() => { const z = Speicher._test.z(); const ids = z.kabel.map(k => k.id); return { eindeutig: new Set(ids).size === ids.length, kid: z.kid, rb: !!z.rgs[0].rb, sp: z.rgs[0].spare }; });
+    ok(zz.eindeutig && zz.kid > 9 && zz.rb && zz.sp === 0, 'Anomalie P2: kaputter Zustand bereinigt (Kabel-IDs eindeutig, kid ' + zz.kid + ', Rebuild läuft weiter)');
+    await go('home'); await page.waitForTimeout(250);
+    ok(await page.evaluate(() => { const l = Speicher._test.laeuft(); return !l.raf && !l.timer; }), 'Anomalie P2: Rebuild-Timer stoppt nach Verlassen');
+    await neuLaden(basis);
+    // Legende + je eine Aufgabe jeder Art auf 10 neuen Themenseiten
+    const seiten = ['wiso-p2-bbig', 'wiso-p2-sozialversicherung-entgelt', 'wiso-p2-vertraege-verbraucherschutz', 'server-hyperv-nested-grundlagen', 'server-hyperv-nested-einschraenkungen', 'server-hvsz-05', 'server-hvsz-21', 'server-hvsz-45', 'server-speicher-iscsi', 'server-speicher-raid'];
+    for (const id of seiten) {
+      const e0 = errs.length;
+      await go('lesen', id);
+      const info = await page.evaluate(() => {
+        const i = document.getElementById('inhalt'); i.querySelectorAll('details').forEach(d => d.open = true);
+        return { hoppla: /Hoppla/.test(i.innerText), leg: i.querySelectorAll('.leg-abschnitt').length, dt: i.querySelectorAll('.leg-abschnitt .leg-karte dt').length, legSicht: (() => { const l = i.querySelector('.leg-abschnitt'); return !!l && l.offsetHeight > 0; })() };
+      });
+      const arten = await page.evaluate(() => {
+        const gemacht = {}; const i = document.getElementById('inhalt');
+        for (const box of i.querySelectorAll('.lesen-item')) {
+          const q = box.querySelector('.quizfrage'); if (!q) continue;
+          const art = box.querySelector('.antwort') ? 'mc' : box.querySelector('.luecke-in') ? 'luecke' : box.querySelector('.zo-raster') ? 'zuordnen' : box.querySelector('.rf-liste') ? 'reihenfolge' : q.classList.contains('freitext') ? 'freitext' : q.classList.contains('szenario') ? 'szenario' : '?';
+          if (gemacht[art]) continue; gemacht[art] = 1;
+          if (art === 'mc') { box.querySelector('.antwort').click(); const pb = box.querySelector('.mc-pruefen'); if (pb) pb.click(); }
+          if (art === 'luecke') { box.querySelectorAll('.luecke-in').forEach(x => { x.value = 'test'; x.dispatchEvent(new Event('input', { bubbles: true })); }); box.querySelector('.l-pruefen').click(); }
+          if (art === 'zuordnen') { const b = box.querySelector('.z-pruefen'); if (b) b.click(); }
+          if (art === 'reihenfolge') { const b = box.querySelector('.r-pruefen'); if (b) b.click(); }
+          if (art === 'freitext') { const t = box.querySelector('.ft-text'); t.value = 'Antwort'; t.dispatchEvent(new Event('input', { bubbles: true })); box.querySelector('.f-zeigen').click(); const sb = box.querySelector('.sb'); if (sb) sb.click(); }
+          if (art === 'szenario') { box.querySelector('.s-zeigen').click(); box.querySelectorAll('.sb[data-p="0"]').forEach(b => b.click()); }
+        }
+        return Object.keys(gemacht).sort().join(',');
+      });
+      await page.waitForTimeout(150);
+      ok(!info.hoppla && info.leg === 1 && info.dt >= 3 && info.legSicht && errs.length === e0 && arten.includes('mc'), `Anomalie P2: ${id} – Legende (${info.dt} Felder), Aufgaben ${arten}, keine Fehler`);
+    }
+    // Legende bei 390 px ohne Überlauf
+    await page.setViewportSize({ width: 390, height: 844 }); await go('lesen', 'server-hvsz-21'); await page.waitForTimeout(250);
+    ok(await page.evaluate(() => { const l = document.querySelector('.leg-abschnitt'); return !!l && l.scrollWidth <= l.clientWidth + 2 && document.documentElement.scrollWidth <= innerWidth + 2; }), 'Anomalie P2: Legende bei 390 px ohne Überlauf');
+    await page.setViewportSize({ width: 1300, height: 900 });
+  }
   ok(errs.length === 0, 'Keine Konsolenfehler ' + errs.slice(0, 3).join(' | '));
   await browser.close();
   console.log(fails ? `\n${fails} FEHLER` : '\nALLES OK'); process.exit(fails ? 1 : 0);

@@ -22,7 +22,7 @@ Das Protokoll, mit dem SCSI über FC läuft, heißt **FCP** (*Fibre Channel Prot
 | Schicht | Name | Aufgabe | Beispiel |
 |---|---|---|---|
 | **FC-0** | Physical | Medium, Stecker, Signale, Geschwindigkeit | Glasfaser OM4, LC-Stecker, SFP+-Module |
-| **FC-1** | Encode/Decode | Leitungscodierung, Fehlererkennung auf Bit-Ebene | 8b/10b (bis 8 GFC), 64b/66b bzw. 256b/257b (ab 16/32 GFC) |
+| **FC-1** | Encode/Decode | Leitungscodierung, Fehlererkennung auf Bit-Ebene | 8b/10b (bis 8 GFC), 64b/66b (16/32 GFC), 256b/257b (ab 64 GFC) |
 | **FC-2** | Framing & Flow Control | Rahmenaufbau, Sequenzen, Flusskontrolle, Dienstklassen | FC-Rahmen bis 2148 Byte, Buffer-to-Buffer-Credits |
 | **FC-3** | Common Services | gemeinsame Dienste mehrerer Ports | Striping, Hunt Groups, Multicast (kaum genutzt) |
 | **FC-4** | Protocol Mapping | Abbildung höherer Protokolle auf FC | **FCP (SCSI)**, FC-NVMe, früher IP over FC |

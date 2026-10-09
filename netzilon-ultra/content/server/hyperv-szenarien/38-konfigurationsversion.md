@@ -147,7 +147,7 @@ HV01 wurde auf Server 2025 aktualisiert, HV02 läuft noch mit Server 2019. SQL01
 - Sie werden gelöscht
 ! Das Anheben ist ein bewusster Schritt mit Update-VMVersion.
 
-? Welche Folge hat Update-VMVersion?
+? Welche Folge hat Update-VMVersion für eine VM in einer gemischten Hostumgebung?
 * Die VM läuft danach nicht mehr auf Hosts mit älterer Version
 - Die VM wird in Gen 2 umgewandelt
 - Die VM verliert ihre Prüfpunkte nie

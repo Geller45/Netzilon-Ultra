@@ -274,7 +274,7 @@ Azubi-Kollegin Sara beobachtet, wie ihr Kollege Tim (seit 4 Jahren im Betrieb) d
 - Unterhaltspflichten
 ! Die vier Kriterien sind Betriebszugehörigkeit, Lebensalter, Unterhaltspflichten und Schwerbehinderung.
 
-? Innerhalb welcher Frist muss eine Kündigungsschutzklage erhoben werden?
+? Bis wann muss ein gekündigter Arbeitnehmer spätestens Kündigungsschutzklage beim Arbeitsgericht erheben?
 * Drei Wochen nach Zugang der Kündigung
 - Zwei Wochen nach Zugang der Kündigung
 - Vier Wochen nach Ende des Arbeitsverhältnisses

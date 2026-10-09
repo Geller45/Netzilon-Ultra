@@ -188,7 +188,7 @@ Get-PhysicalDisk | Format-Table FriendlyName, BusType, MediaType, CanPool
 - Im RAID-Controller des Clients
 ! Das NAS verwaltet Dateisystem, Sperren und Berechtigungen selbst.
 
-? Welcher Port wird für iSCSI standardmäßig verwendet?
+? Über welchen Port erreicht ein Initiator standardmäßig das iSCSI-Portal eines SAN?
 * TCP 3260
 - TCP 445
 - TCP 2049

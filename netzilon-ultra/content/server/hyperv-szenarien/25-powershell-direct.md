@@ -126,7 +126,9 @@ Invoke-Command -VMName SRV05 -Credential $lokal -ScriptBlock {
   Remove-NetIPAddress -InterfaceIndex $nic.ifIndex -Confirm:$false
   New-NetIPAddress -InterfaceIndex $nic.ifIndex -IPAddress 192.168.10.55 -PrefixLength 24 -DefaultGateway 192.168.10.1
   Set-DnsClientServerAddress -InterfaceIndex $nic.ifIndex -ServerAddresses 192.168.10.10
-  Enable-NetFirewallRule -DisplayGroup "Windows-Remoteverwaltung"   # engl. "Windows Remote Management"
+  # Gruppenname ist sprachabhängig (dt. "Windows-Remoteverwaltung", engl. "Windows Remote Management");
+  # die Regelnamen WINRM-HTTP-In-TCP* sind sprachneutral:
+  Get-NetFirewallRule -Name "WINRM-HTTP-In-TCP*" | Enable-NetFirewallRule
   Get-NetIPConfiguration
 }
 

@@ -320,7 +320,7 @@ Der 16-jährige Finn bestellt im Webshop der Netzilon GmbH eine Grafikkarte für
 ! § 356 Abs. 2 und 3 BGB.
 
 ? In welchen Fällen besteht KEIN Widerrufsrecht? (2 richtige)
-* Entsiegelte Software auf einem versiegelten Datenträger
+* Software auf einem versiegelten Datenträger, dessen Versiegelung der Kunde nach der Lieferung entfernt hat
 * Kauf eines Notebooks im Ladengeschäft
 - Kauf eines Headsets im Onlineshop durch einen Verbraucher
 - Telefonische Bestellung eines Druckers durch einen Verbraucher

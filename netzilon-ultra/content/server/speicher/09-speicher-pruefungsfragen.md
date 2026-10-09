@@ -279,7 +279,7 @@ verweise: [server-speicher-das-nas-san, server-speicher-iscsi, server-speicher-f
 - Die Latenz verdoppelt sich immer
 ! Füllstand mit Schwellenwerten überwachen.
 
-? Welches RPO hat synchrone Replikation?
+? Mit welchem Datenverlust (RPO) ist bei synchroner Replikation zu rechnen?
 * 0
 - 5 Minuten
 - 1 Stunde

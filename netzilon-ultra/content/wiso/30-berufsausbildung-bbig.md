@@ -296,7 +296,7 @@ Leon, Azubi im zweiten Jahr bei der Netzilon GmbH, muss seit drei Monaten jeden 
 - Nur mit der tatsächlichen Unterrichtszeit
 - Gar nicht, der Azubi muss danach in den Betrieb
 - Jeder solche Tag zählt doppelt
-! § 15 Abs. 2 Nr. 1 BBiG – gilt seit 2020 für alle Azubis, unabhängig vom Alter.
+! § 15 Abs. 2 Nr. 2 und Abs. 3 BBiG – gilt seit 2020 für alle Azubis, unabhängig vom Alter.
 
 ? Wer muss bei einem 16-jährigen Azubi den Ausbildungsvertrag mit unterschreiben bzw. zustimmen?
 * Die gesetzlichen Vertreter (in der Regel die Eltern)

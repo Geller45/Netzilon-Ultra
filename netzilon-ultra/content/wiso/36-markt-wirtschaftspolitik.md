@@ -31,7 +31,7 @@ verweise: [wiso-verbrauchsgueterkauf-markt, wiso-marketing, ap2-wiso-unternehmen
 
 Die **Soziale Marktwirtschaft** (Alfred Müller-Armack, Ludwig Erhard) verbindet Marktfreiheit mit sozialem Ausgleich. Grundgesetzliche Basis: Berufsfreiheit, Vertragsfreiheit, Eigentum, Koalitionsfreiheit, **Sozialstaatsprinzip** (Art. 20 GG). Aufgaben des Staates:
 - **Wettbewerbspolitik**: Das **Bundeskartellamt** überwacht nach dem **GWB** Kartelle, Missbrauch marktbeherrschender Stellung und Fusionen.
-- **Sozialpolitik**: Sozialversicherung, Arbeitsschutz, Kündigungsschutz, Mindestlohn, Bürgergeld, Kindergeld.
+- **Sozialpolitik**: Sozialversicherung, Arbeitsschutz, Kündigungsschutz, Mindestlohn, Grundsicherung (Bürgergeld), Kindergeld.
 - **Konjunktur- und Strukturpolitik**, Umweltpolitik, Verbraucherschutz.
 
 ### Markt und Preisbildung
@@ -294,7 +294,7 @@ Azubi Noah (Netzilon GmbH) liest, dass die Inflationsrate im letzten Jahr bei 4 
 - Steuern
 ! Konsumausgaben und Arbeitsleistung fließen von den Haushalten zu den Unternehmen.
 
-? Was ist ein Kartell?
+? Welche Beschreibung trifft auf ein Kartell zu?
 * Eine wettbewerbsbeschränkende Absprache rechtlich selbstständiger Unternehmen
 - Ein Zusammenschluss zu einem einzigen Unternehmen
 - Ein Konzern unter einheitlicher Leitung

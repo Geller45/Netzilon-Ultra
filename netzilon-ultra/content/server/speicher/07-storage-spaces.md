@@ -29,7 +29,7 @@ verweise: [az800-storage-spaces, az801-s2d, az800-datentraeger, server-speicher-
 | **Parity (einfach)** | RAID 5 | 3 | 1 Platte | bis (n − 1)/n | Archiv, sequenzielles Schreiben |
 | **Parity (dual)** | RAID 6 | 7 | 2 Platten | bis (n − 2)/n | große Archive, Backups |
 
-Wichtig: Storage Spaces arbeitet nicht mit ganzen Platten wie klassisches RAID, sondern verteilt **Slabs** (Stücke von 256 MB) über die Platten. Die Spaltenanzahl (*columns*) bestimmt, über wie viele Platten parallel geschrieben wird. Parity ist beim zufälligen Schreiben **langsam** – für VMs Mirror verwenden.
+Wichtig: Storage Spaces arbeitet nicht mit ganzen Platten wie klassisches RAID, sondern verteilt **Slabs** (Stücke von 256 MB; bei S2D „Extents“ von 1 GB) über die Platten. Die Spaltenanzahl (*columns*) bestimmt, über wie viele Platten parallel geschrieben wird. Parity ist beim zufälligen Schreiben **langsam** – für VMs Mirror verwenden.
 
 ### Bereitstellung: Fixed oder Thin
 - **Fixed** (fest): Der gesamte Platz wird sofort im Pool reserviert. Vorhersehbar, Voraussetzung für **Tiering**.

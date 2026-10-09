@@ -40,9 +40,9 @@ Die gesetzliche Sozialversicherung ist im **Sozialgesetzbuch** geregelt; **SGB I
 |---|---|---|
 | **Solidaritätsprinzip** | Beitrag nach Leistungsfähigkeit (Einkommen), Leistung nach Bedarf | Familienversicherung in der KV, gleiche Behandlung unabhängig vom Beitrag |
 | **Versicherungsprinzip / Äquivalenz** | Leistung hängt von gezahlten Beiträgen ab | Rentenhöhe nach Entgeltpunkten, ALG I nach vorherigem Entgelt |
-| **Subsidiaritätsprinzip** | Erst Eigenverantwortung, dann Hilfe der Gemeinschaft | Bürgergeld erst, wenn eigenes Vermögen aufgebraucht |
+| **Subsidiaritätsprinzip** | Erst Eigenverantwortung, dann Hilfe der Gemeinschaft | Grundsicherung (Bürgergeld) erst, wenn eigenes Vermögen aufgebraucht |
 | **Umlageverfahren / Generationenvertrag** | Beiträge der Erwerbstätigen finanzieren die laufenden Renten | gesetzliche Rente |
-| **Fürsorgeprinzip** | steuerfinanzierte Hilfe ohne Vorleistung bei Bedürftigkeit | Sozialhilfe, Bürgergeld |
+| **Fürsorgeprinzip** | steuerfinanzierte Hilfe ohne Vorleistung bei Bedürftigkeit | Sozialhilfe, Grundsicherung (Bürgergeld) |
 | **Versorgungsprinzip** | steuerfinanzierte Leistung für besondere Opfer oder Dienste | Beamtenversorgung, Kriegsopferversorgung |
 | **Selbstverwaltung** | Versicherte und AG wählen die Organe (Sozialwahl) | Verwaltungsrat einer Krankenkasse |
 
@@ -109,7 +109,7 @@ Ein Trick für Azubis: Wer **sehr wenig** verdient (bis 325 € im Monat), muss 
 - **Lohnsteuer ist keine Sozialversicherung**.
 - Den **Kinderlosenzuschlag** zur Pflegeversicherung zahlt nur der AN.
 - **BBG ≠ Versicherungspflichtgrenze**.
-- **Arbeitslosengeld I** ist eine Versicherungsleistung (BA), **Bürgergeld** ist steuerfinanziert (Jobcenter).
+- **Arbeitslosengeld I** ist eine Versicherungsleistung (BA), **Grundsicherung (Bürgergeld)** ist steuerfinanziert (Jobcenter).
 - Beitragswerte und Grenzen ändern sich jährlich; in der Prüfung immer die **vorgegebenen** Werte verwenden.
 
 ## Grafik
@@ -185,7 +185,7 @@ Brutto-Netto in einer Tabellenkalkulation nachrechnen. Maschine: Büro-PC (Windo
 ### Prinzip und Beispiel
 - Solidaritätsprinzip => Familienversicherte Kinder ohne eigenen Beitrag in der KV
 - Versicherungsprinzip => Rentenhöhe hängt von den Entgeltpunkten ab
-- Subsidiaritätsprinzip => Bürgergeld erst nach Einsatz des eigenen Vermögens
+- Subsidiaritätsprinzip => Grundsicherung (Bürgergeld) erst nach Einsatz des eigenen Vermögens
 - Umlageverfahren => Beiträge der Beschäftigten zahlen die laufenden Renten
 - Versorgungsprinzip => Beamtenpension aus Steuermitteln
 
@@ -216,7 +216,7 @@ Brutto-Netto in einer Tabellenkalkulation nachrechnen. Maschine: Büro-PC (Windo
 ## Freitext
 - F: Berechnen Sie das Netto und den Auszahlungsbetrag: Brutto 3.000 €, Lohnsteuer laut Tabelle 330 €, Kirchensteuer 9 %, kein Solidaritätszuschlag, AN-Anteil SV insgesamt 21 % (Beispielwert), VL-Sparrate 40 €. | M: Kirchensteuer = 330 € × 9 % = 29,70 €. SV-AN = 3.000 € × 21 % = 630,00 €. Netto = 3.000 − 330 − 29,70 − 630 = 2.010,30 €. Auszahlung = 2.010,30 − 40 = 1.970,30 €. | P: 6
 - F: Ein Mitarbeiter verdient 7.000 € brutto. Die BBG der KV liegt bei 5.800 € (Beispielwert), der AN-Anteil zur KV beträgt 8,7 % (Beispielwert). Berechnen Sie den KV-Beitrag des AN und erläutern Sie das Prinzip. | M: Beiträge werden nur bis zur BBG berechnet: 5.800 € × 8,7 % = 504,60 €. Die 1.200 € über der BBG sind in der KV beitragsfrei. | P: 4
-- F: Erläutern Sie Solidaritäts- und Subsidiaritätsprinzip an je einem Beispiel. | M: Solidarität: Beitrag nach Einkommen, Leistung nach Bedarf – z. B. erhalten Geringverdiener und Gutverdiener in der KV dieselbe Behandlung, Kinder sind beitragsfrei familienversichert. Subsidiarität: Hilfe der Gemeinschaft erst, wenn Eigenhilfe nicht reicht – z. B. Bürgergeld erst nach Einsatz eigener Mittel. | P: 4
+- F: Erläutern Sie Solidaritäts- und Subsidiaritätsprinzip an je einem Beispiel. | M: Solidarität: Beitrag nach Einkommen, Leistung nach Bedarf – z. B. erhalten Geringverdiener und Gutverdiener in der KV dieselbe Behandlung, Kinder sind beitragsfrei familienversichert. Subsidiarität: Hilfe der Gemeinschaft erst, wenn Eigenhilfe nicht reicht – z. B. Grundsicherung (Bürgergeld) erst nach Einsatz eigener Mittel. | P: 4
 
 ## Szenario
 ### Erste Gehaltsabrechnung nach der Ausbildung
@@ -249,7 +249,7 @@ Azubi Sophie (19) der Netzilon GmbH erhält 1.100 € Ausbildungsvergütung. Sie
 - Das Jobcenter
 - Die Deutsche Rentenversicherung
 - Die Berufsgenossenschaft
-! SGB III; das Jobcenter ist für das steuerfinanzierte Bürgergeld zuständig.
+! SGB III; das Jobcenter ist für das steuerfinanzierte Grundsicherung (Bürgergeld) zuständig.
 
 ? Wer trägt die Beiträge zur gesetzlichen Unfallversicherung?
 * Ausschließlich der Arbeitgeber
@@ -265,7 +265,7 @@ Azubi Sophie (19) der Netzilon GmbH erhält 1.100 € Ausbildungsvergütung. Sie
 - An die Berufsgenossenschaft
 ! SGB IV § 28h – die Krankenkasse leitet die Anteile an RV und BA weiter.
 
-? Wovon wird die Kirchensteuer berechnet?
+? Welche Bemessungsgrundlage hat die Kirchensteuer in der Entgeltabrechnung?
 * Von der Lohnsteuer
 - Vom Bruttoentgelt
 - Vom Nettoentgelt
@@ -322,7 +322,7 @@ Azubi Sophie (19) der Netzilon GmbH erhält 1.100 € Ausbildungsvergütung. Sie
 - Solidaritätsprinzip
 - Äquivalenzprinzip
 - Versicherungsprinzip
-! Grundlage z. B. beim Bürgergeld und der Sozialhilfe.
+! Grundlage z. B. beim Grundsicherung (Bürgergeld) und der Sozialhilfe.
 
 ? Bruttoentgelt 2.800 €, Lohnsteuer 280 €, Kirchensteuer 9 %, AN-Anteil SV 20 % (Beispielwert). Wie hoch ist das Netto?
 * 1.934,80 €

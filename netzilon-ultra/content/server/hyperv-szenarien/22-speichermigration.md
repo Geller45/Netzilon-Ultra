@@ -34,7 +34,7 @@ verweise: [az800-vhdx, az800-storage-spaces, server-hvsz-13, server-hvsz-21]
 | Weitere Abhängigkeiten (ISO aus D: eingelegt) | `Get-VMDvdDrive -VMName MAIL01` |
 
 ### Lösungsweg
-1. **ISO-Medien auswerfen**, die auf D: liegen – Begründung: Hyper-V verschiebt eingebundene ISO-Dateien nicht mit; die VM würde weiter auf D: verweisen.
+1. **ISO-Medien auswerfen**, die auf D: liegen – Begründung: Die Speichermigration verschiebt virtuelle Festplatten, Konfiguration, Prüfpunkte und Smart-Paging-Datei – eingebundene ISO-Dateien gehören nicht dazu; die VM würde weiter auf D: verweisen.
 2. **Speicherplatz am Ziel prüfen** – Begründung: Während der Migration liegen die Daten kurzzeitig doppelt vor.
 3. **Speicher verschieben**: Hyper-V-Manager → *Verschieben* → *Speicher des virtuellen Computers verschieben* → *Alle Daten an einen einzigen Speicherort* `E:\VMs\MAIL01` bzw. `Move-VMStorage` – Begründung: alles an einen Ort, inkl. Prüfpunkt- und Smart-Paging-Dateien.
 4. **Fortschritt beobachten** (Statusspalte, `Get-VM`) – Begründung: 600 GB dauern je nach Durchsatz; die VM bleibt erreichbar.

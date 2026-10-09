@@ -53,7 +53,8 @@ function migrieren(d) {
   p.netsim = Object.assign({ geloest: {}, topo: null }, p.netsim || {});
   p.dojo = Object.assign({ r: 0, f: 0 }, p.dojo || {});
   p.speicher = Object.assign({ geloest: {}, zustand: null, best: {} }, (p.speicher && typeof p.speicher === 'object' && !Array.isArray(p.speicher)) ? p.speicher : {});
-  if (!p.speicher.geloest || typeof p.speicher.geloest !== 'object') p.speicher.geloest = {};
+  if (!p.speicher.geloest || typeof p.speicher.geloest !== 'object' || Array.isArray(p.speicher.geloest)) p.speicher.geloest = {};
+  if (!p.speicher.best || typeof p.speicher.best !== 'object' || Array.isArray(p.speicher.best)) p.speicher.best = {};
   p.kartenTag = Object.assign({ datum: '', neu: 0, wdh: 0 }, p.kartenTag || {});
   if (!THEMES[p.einstellungen.theme]) p.einstellungen.theme = p.einstellungen.theme === 'heft' ? 'weltall' : 'nacht';
   if (alt) {

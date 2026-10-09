@@ -198,7 +198,7 @@ verweise: [server-hyperv-nested-grundlagen, server-hyperv-nested-netzwerk, serve
 ! Production fällt auf Standard zurück, ProductionOnly bricht ab.
 @ Prüfpunkte
 
-? Was bewirkt das Löschen eines Prüfpunkts?
+? Ein Admin löscht einen Prüfpunkt einer laufenden VM. Was passiert?
 * Die AVHDX wird zusammengeführt; die aktuellen Daten bleiben erhalten
 - Die VM wird auf den Prüfpunkt zurückgesetzt
 - Alle Änderungen seit dem Prüfpunkt gehen verloren

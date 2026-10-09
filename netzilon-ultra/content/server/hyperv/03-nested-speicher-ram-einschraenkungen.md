@@ -32,7 +32,7 @@ Eine VM mit **aktivem Gast-Hypervisor** kann **nicht live migriert** werden (auc
 Hinweis: **Innerhalb** eines Nested-Labs (zwei verschachtelte Hyper-V-Knoten) kann man die **inneren** VMs sehr wohl zwischen den Nested-Knoten live migrieren – genau das übt man im Cluster-Lab.
 
 ### Virtualisierungsbasierte Sicherheit (VBS)
-- **Host-Seite**: Unter Windows Server 2016 bzw. frühen Windows-10-Versionen konnte ein Host mit aktivem **VBS/Device Guard** die Virtualisierungserweiterungen nicht weitergeben. Bei aktuellen Versionen (Server 2019+, Windows 10 ab 1803/Windows 11) ist das kombinierbar.
+- **Host-Seite**: In den ersten Versionen (Windows Server 2016 / frühe Windows-10-Builds) vertrug sich ein Host mit aktivem **VBS/Device Guard** nicht mit Nested Virtualization. Auf aktuellen Hosts (Windows Server 2022/2025, Windows 11) ist das kombinierbar; bei Problemen zuerst die Host-VBS-Konfiguration prüfen.
 - **Gast-Seite**: VBS, **Credential Guard** und **HVCI** (Speicherintegrität) im Gast benötigen selbst einen Hypervisor → dafür muss ExposeVirtualizationExtensions an der VM aktiv sein (Gen 2, Secure Boot, idealerweise vTPM).
 
 ### Leistungsoverhead

@@ -219,7 +219,7 @@ Set-VMSwitchTeam -Name "SETswitch" -LoadBalancingAlgorithm HyperVPort
 - Die Ziel-VM muss auf einem anderen Host laufen
 ! Hyper-V spiegelt Verkehr innerhalb eines vSwitches von Source an Destination.
 
-? Welche Aussage zu SET ist richtig?
+? Welche Aussage zu Switch Embedded Teaming (SET) am Hyper-V-vSwitch ist richtig?
 * SET unterstützt bis zu 8 identische NICs im switch-unabhängigen Modus
 - SET erfordert LACP am physischen Switch
 - SET erlaubt einen Standby-Adapter

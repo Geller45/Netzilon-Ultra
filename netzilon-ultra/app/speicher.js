@@ -53,9 +53,11 @@ const Speicher = (() => {
       const server = Array.isArray(z.server) ? [...new Set(z.server.filter(x => typeof x === 'string' && SRVIDX[x]))] : [];
       for (const b of SRV_BASIS) if (!server.includes(b)) server.unshift(b);
       s.server = server.slice(0, 5);
-      const belegt = new Set();
-      s.kabel = (Array.isArray(z.kabel) ? z.kabel : []).filter(k => istObj(k) && typeof k.id === 'string' && portOk(k.port, s.server) && SW.includes(k.sw) && !belegt.has(k.port) && belegt.add(k.port)).map(k => ({ id: k.id.slice(0, 12), port: k.port, sw: k.sw }));
-      s.kid = Number.isInteger(z.kid) && z.kid > 0 ? z.kid : 100;
+      const belegt = new Set(), ids = new Set();
+      s.kabel = (Array.isArray(z.kabel) ? z.kabel : []).filter(k => istObj(k) && typeof k.id === 'string' && /^[A-Za-z0-9_-]{1,12}$/.test(k.id) && !ids.has(k.id) && portOk(k.port, s.server) && SW.includes(k.sw) && !belegt.has(k.port) && belegt.add(k.port) && ids.add(k.id)).map(k => ({ id: k.id, port: k.port, sw: k.sw }));
+      // neue Kabel-IDs dürfen nicht mit vorhandenen kollidieren
+      const maxId = s.kabel.reduce((m, k) => { const n = /^k(\d+)$/.exec(k.id); return n ? Math.max(m, +n[1]) : m; }, 0);
+      s.kid = Math.max(Number.isInteger(z.kid) && z.kid > 0 && z.kid < 1e6 ? z.kid : 100, maxId + 1);
       const zonen = arr => (Array.isArray(arr) ? arr : []).filter(x => istObj(x) && zoneNameOk(x.n) && Array.isArray(x.m)).slice(0, 40).map(x => ({ n: x.n, m: [...new Set(x.m.filter(w => typeof w === 'string' && /^[0-9a-f:]{23}$/.test(w)))] }));
       if (istObj(z.fab)) for (const sw of SW) if (istObj(z.fab[sw])) s.fab[sw] = { zonen: zonen(z.fab[sw].zonen), aktiv: zonen(z.fab[sw].aktiv) };
       if (Array.isArray(z.rgs)) s.rgs = s.rgs.map(def => {
@@ -64,7 +66,10 @@ const Speicher = (() => {
         const d = Array.isArray(r.d) && r.d.length === n && r.d.every(x => PST.includes(x)) ? r.d.slice() : Array(n).fill('ok');
         let rb = istObj(r.rb) && Number.isInteger(r.rb.i) && r.rb.i >= 0 && r.rb.i < n && d[r.rb.i] === 'rebuild' && typeof r.rb.p === 'number' && r.rb.p >= 0 ? { i: r.rb.i, p: Math.min(r.rb.p, 0.999) } : null;
         d.forEach((x, i) => { if (x === 'rebuild' && (!rb || rb.i !== i)) d[i] = 'warte'; });
-        return { id: def.id, level, n, tb, d, spare: Number.isInteger(r.spare) ? Math.max(0, Math.min(3, r.spare)) : def.spare, rb, tot: r.tot === true };
+        const tot = r.tot === true;
+        if (tot) rb = null;
+        else if (!rb && d.includes('warte')) { const w = d.indexOf('warte'); d[w] = 'rebuild'; rb = { i: w, p: 0 }; } // wartende Platte nicht „hängen“ lassen
+        return { id: def.id, level, n, tb, d, spare: Number.isInteger(r.spare) ? Math.max(0, Math.min(3, r.spare)) : def.spare, rb, tot };
       });
       s.luns = (Array.isArray(z.luns) ? z.luns : []).filter(l => istObj(l) && lunNameOk(l.n) && Number.isFinite(l.gb) && l.gb >= 1 && l.gb <= 200000 && s.rgs.some(r => r.id === l.rg)).slice(0, 20).map(l => {
         const map = {}; if (istObj(l.map)) for (const [h, id] of Object.entries(l.map)) if (s.server.includes(h) && Number.isInteger(id) && id >= 0 && id <= 255) map[h] = id;

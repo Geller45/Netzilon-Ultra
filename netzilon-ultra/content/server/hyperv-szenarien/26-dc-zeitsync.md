@@ -169,7 +169,7 @@ Die VM DC01 auf HV01 ist PDC-Emulator. `w32tm /query /source` auf DC01 zeigt „
 - Den Integrationsdienst Takt (Heartbeat) deaktivieren
 ! Die Domänenzeit muss aus der AD-Hierarchie kommen; oben steht der PDC-Emulator mit externer Quelle.
 
-? Welche Zeitabweichung toleriert Kerberos standardmäßig?
+? Wie groß darf die Uhrzeitabweichung eines virtualisierten DCs zu den Clients für Kerberos standardmäßig höchstens sein?
 * 5 Minuten
 - 30 Sekunden
 - 15 Minuten

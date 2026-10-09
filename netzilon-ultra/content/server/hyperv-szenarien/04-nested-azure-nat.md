@@ -162,7 +162,7 @@ In der Azure-VM AZHV01 laufen innere Hyper-V-VMs. Ein externer Switch auf der Az
 - F: Woran erkennt man eine geeignete Azure-VM-Größe? | A: In der Größen-Dokumentation steht „Nested Virtualization: Supported“.
 
 ## Quiz
-? Wie bringt man innere VMs in einer Azure-VM ins Netz?
+? Welcher Weg bringt innere VMs einer Nested-Azure-VM ins Internet?
 * Interner Switch plus NetNat in der Azure-VM
 - MAC-Spoofing in der Azure-NIC aktivieren
 - Externer Switch auf der Azure-NIC
