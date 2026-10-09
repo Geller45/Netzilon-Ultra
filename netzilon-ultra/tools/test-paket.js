@@ -296,6 +296,10 @@ let fails = 0; const ok = (c, m) => { console.log((c ? 'OK     ' : 'FEHLER ') + 
     ok(/T-SQL/.test(await page.locator('#sql-tsql-live').innerText()) && /LIMIT/.test(await page.locator('#sql-tsql-live').innerText()), 'SQL: T-SQL „TOP“ erkannt → Hinweis auf LIMIT');
     await page.focus('#sql-editor'); await page.keyboard.press('Control+Enter'); await page.waitForTimeout(250);
     ok(/T-SQL erkannt/.test(await ergTxt()) && /Syntaxfehler/.test(await ergTxt()), 'SQL: Fehler bei TOP zeigt Syntax-Erklärung + T-SQL-Hinweis');
+    t = await sqlRun('WITH RECURSIVE z(n) AS (SELECT 1 UNION ALL SELECT n + 1 FROM z) SELECT COUNT(*) FROM z;');
+    ok(/WITH RECURSIVE ohne LIMIT/.test(t) && await page.locator('#sql-ergebnis-inhalt [data-a="trotzdem"]').count() === 1, 'SQL: Endlos-Rekursion → Warnung statt Hängen');
+    t = await sqlRun('WITH RECURSIVE z(n) AS (SELECT 1 UNION ALL SELECT n + 1 FROM z WHERE n < 10) SELECT SUM(n) FROM z;');
+    ok(/\b55\b/.test(t), 'SQL: Rekursion mit Abbruchbedingung läuft ohne Warnung');
     // Tab-Taste + Highlighting
     await page.fill('#sql-editor', ''); await page.focus('#sql-editor'); await page.keyboard.press('Tab'); await page.keyboard.type('select 1');
     ok(await page.inputValue('#sql-editor') === '  select 1' && await page.locator('#sql-hl .sql-hw').count() === 1, 'SQL: Tab = 2 Leerzeichen, Schlüsselwort hervorgehoben');

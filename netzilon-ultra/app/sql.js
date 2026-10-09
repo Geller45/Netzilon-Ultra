@@ -227,7 +227,20 @@ const SqlLabor = (() => {
     const s = bereinigt(sql);
     return TSQL.filter(([re]) => re.test(s)).map(([, name, txt]) => ({ name, txt }));
   }
-  function rekursivOhneLimit(sql) { const s = bereinigt(sql); return /\bWITH\s+RECURSIVE\b/i.test(s) && !/\bLIMIT\b/i.test(s); }
+  // Rekursive CTE ohne LIMIT und ohne Abbruchbedingung (WHERE/ON im rekursiven Teil) → Warnung vor Endlosschleife
+  function rekursivOhneLimit(sql) {
+    const s = bereinigt(sql);
+    if (!/\bWITH\s+RECURSIVE\b/i.test(s) || /\bLIMIT\b/i.test(s)) return false;
+    const re = /\bAS\s*\(/gi; let m;
+    while ((m = re.exec(s))) {
+      let tiefe = 1, i = re.lastIndex;
+      for (; i < s.length && tiefe; i++) { if (s[i] === '(') tiefe++; else if (s[i] === ')') tiefe--; }
+      const koerper = s.slice(re.lastIndex, i);
+      const teile = koerper.split(/\bUNION\b/i);
+      if (teile.length > 1 && !/\b(WHERE|ON)\b/i.test(teile.slice(1).join(' '))) return true;
+    }
+    return false;
+  }
 
   // ---------- Highlighting ----------
   const KW = new Set(('SELECT FROM WHERE AND OR NOT IN IS NULL LIKE GLOB BETWEEN EXISTS AS ON JOIN LEFT RIGHT FULL INNER OUTER CROSS NATURAL USING GROUP BY HAVING ORDER ASC DESC LIMIT OFFSET DISTINCT ALL UNION INTERSECT EXCEPT ' +
@@ -525,7 +538,7 @@ const SqlLabor = (() => {
   }
   const CMP = (za, zb) => za.length === zb.length && za.every((r, k) => r.length === zb[k].length && r.every((v, j) => gleicheZelle(v, zb[k][j])));
 
-  async function pruefen() {
+  async function pruefen(trotzdem) {
     const a = aufgabeVon(akt);
     if (!a) return;
     if (!bereit || !db) { toast('Die Datenbank lädt noch …'); return; }
@@ -536,7 +549,7 @@ const SqlLabor = (() => {
     let ist, sl, vorher = null;
     try {
       if (a.art === 'abfrage') {
-        if (rekursivOhneLimit(sql)) { ausfuehren(false); if (fb) fb.innerHTML = ''; return; }
+        if (!trotzdem && rekursivOhneLimit(sql)) { if (fb) fb.innerHTML = `<div class="sql-warnbox">⚠ <b>WITH RECURSIVE ohne LIMIT/Abbruchbedingung</b> – das könnte endlos laufen. <div class="sql-knoepfe"><button class="glas knopf klein" data-a="trotzdem-pruefen">Trotzdem prüfen</button></div></div>`; return; }
         ist = fuehreAus(db, sql, 100000);
         verlaufDazu(sql); nachAusfuehrung(ist);
         const z = el('sql-ergebnis-inhalt'); if (z) z.innerHTML = ergebnisHtml(ist, sql);
@@ -846,7 +859,8 @@ const SqlLabor = (() => {
       }
       case 'reset': return void zuruecksetzen();
       case 'neu-laden': return void starte();
-      case 'pruefen': return void pruefen();
+      case 'pruefen': return void pruefen(false);
+      case 'trotzdem-pruefen': return void pruefen(true);
       case 'hinweis': { const a = aufgabeVon(akt); if (!a) return; hStufe[a.id] = Math.min((hStufe[a.id] || 0) + 1, (a.hinweise || []).length); return aufgabeZeigen(); }
       case 'loesung': {
         const a = aufgabeVon(akt); const z = el('sql-loesung-box'); if (!a || !z) return;
