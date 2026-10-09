@@ -97,6 +97,85 @@ let fails = 0; const ok = (c, m) => { console.log((c ? 'OK     ' : 'FEHLER ') + 
   // Kachel / Bereich x/y
   await go('bereich', 'AP1'); ok(/✓ \d+\/\d+/.test(await txt()) || /Aufgaben erfolgreich/.test(await txt()), 'Bereich zeigt x/y');
   await go('erfolge'); ok(/Netzilon-Meister/.test(await txt()), 'Erfolge: neue Ränge');
+  // ---------- Speicher-Labor (Paket 2) ----------
+  {
+    page.on('dialog', d => d.accept());
+    await page.evaluate(() => { S.p.speicher.zustand = null; });
+    await go('speicher');
+    ok(await page.locator('#spm-svg').count() === 1 && /Speicher-Labor/.test(await txt()), 'Speicher: Ansicht mit SAN-Topologie');
+    const xpS0 = await page.evaluate(() => S.p.xp.gesamt), gel0 = await page.evaluate(() => Object.keys(S.p.speicher.geloest).length);
+    // LUN anlegen + mappen (Masking nur für SQL01)
+    await page.fill('#spm-lname', 'SQL-DATA'); await page.fill('#spm-lgb', '300'); await page.click('[data-a="lun-neu"]');
+    ok(await page.evaluate(() => !!Speicher._test.z().luns.find(l => l.n === 'SQL-DATA' && l.gb === 300)), 'Speicher: LUN SQL-DATA angelegt');
+    await page.click('[data-a="map"][data-lun="SQL-DATA"][data-host="SQL01"]');
+    ok(await page.evaluate(() => Speicher._test.z().luns.find(l => l.n === 'SQL-DATA').map.SQL01 === 0), 'Speicher: LUN für SQL01 gemappt (LUN-ID 0)');
+    // Verkabeln per Klick: Port antippen, dann Switch
+    await page.click('#spm-svg [data-port="SQL01.0"]'); await page.click('#spm-svg [data-sw="FCA"]');
+    await page.click('#spm-svg [data-port="SQL01.1"]'); await page.click('#spm-svg [data-sw="FCB"]');
+    ok(await page.evaluate(() => Speicher._test.z().kabel.filter(k => k.port.startsWith('SQL01.')).length === 2), 'Speicher: SQL01 per Klick an beide Fabrics verkabelt');
+    let s = await page.evaluate(() => Speicher._test.sicht('SQL01', 'SQL-DATA'));
+    ok(!s.ok && s.bed.some(b => !b.ok && /Zoning/.test(b.t)), 'Speicher: ohne Zone keine Sicht (Pfadprüfung ✗ Zoning)');
+    // Zoning (Single-Initiator) auf beiden Fabrics
+    const zone = async (fab, name, ports) => {
+      await page.click(`#spm-zone [data-fab="${fab}"]`);
+      for (const w of ports) await page.check(`#spm-zone .spm-zm[value="${w}"]`);
+      await page.fill('#spm-zname', name); await page.click('[data-a="zone-neu"]'); await page.click('[data-a="aktivieren"]');
+    };
+    await zone('FCA', 'z_SQL01_hba0', ['10:00:00:90:fa:33:03:00', '50:0a:09:81:00:a0:00:01', '50:0a:09:81:00:b0:00:01']);
+    await zone('FCB', 'z_SQL01_hba1', ['10:00:00:90:fa:33:03:01', '50:0a:09:82:00:a0:00:02', '50:0a:09:82:00:b0:00:02']);
+    s = await page.evaluate(() => Speicher._test.sicht('SQL01', 'SQL-DATA'));
+    ok(s.ok && s.aktiv === 4 && s.fabrics === 2 && s.bed.every(b => b.ok), `Speicher: Pfadprüfung ✓ (Pfade ${s.aktiv}, Fabrics ${s.fabrics})`);
+    await page.click('#spm-sicht [data-host="SQL01"]');
+    ok(await page.locator('#spm-sicht .spm-bed .spm-ok').count() >= 5 && /SQL-DATA/.test(await page.locator('#spm-sicht').innerText()), 'Speicher: „Was sieht SQL01?“ zeigt ✓ je Bedingung');
+    ok(await page.locator('#spm-io circle').count() > 0, 'Speicher: I/O-Animation läuft über die Pfade');
+    // Ausfall Switch A → weiter über Fabric B
+    await page.selectOption('#spm-aus-sel', 'sw:FCA'); await page.click('[data-a="aus-umschalten"]');
+    s = await page.evaluate(() => Speicher._test.sicht('SQL01', 'SQL-DATA'));
+    ok(s.ok && s.fabrics === 1 && s.aktiv === 2, 'Speicher: Switch A aus → SQL-DATA weiter über Fabric B erreichbar (MPIO)');
+    ok(/FC-Switch A \(Fabric A\) ausgefallen/.test(await page.locator('#spm-sicht').innerText()), 'Speicher: MPIO zeigt ausgefallene Pfade');
+    await page.click('[data-a="heil"]');
+    ok(await page.evaluate(() => Object.keys(Speicher._test.z().aus).length === 0), 'Speicher: Wiederherstellen');
+    // RAID-5-Rebuild (RG1, Hot Spare springt ein)
+    await page.click('#spm-raid [data-rg="RG1"]');
+    await page.click('#spm-raid [data-a="platte-aus"][data-v="1"]');
+    ok(await page.evaluate(() => { const r = Speicher._test.z().rgs[0]; return r.rb && r.rb.i === 1 && r.d[1] === 'rebuild'; }), 'Speicher: Plattenausfall → Hot Spare → Rebuild läuft');
+    await page.waitForTimeout(600);
+    ok(await page.locator('#spm-raid .spm-rbbalken').count() === 1 && /XOR/.test(await page.locator('#spm-raid').innerText()), 'Speicher: Rebuild-Balken + XOR-Erklärung');
+    await page.evaluate(() => Speicher._test.schnell(60));
+    await page.waitForFunction(() => !Speicher._test.z().rgs[0].rb, null, { timeout: 8000 });
+    ok(await page.evaluate(() => Speicher._test.z().rgs[0].d.every(x => x === 'ok') && Speicher._test.z().ev.rebuild5 === 1), 'Speicher: RAID-5-Rebuild fertig, Gruppe optimal');
+    await page.evaluate(() => Speicher._test.schnell(1));
+    // RAID 5: zweiter Ausfall während Rebuild = Datenverlust; RAID 6 nicht
+    const r5 = await page.evaluate(() => { const r = Speicher._test.z().rgs[0]; return [r.spare, r.tot]; });
+    await page.click('#spm-raid [data-a="platte-aus"][data-v="0"]'); await page.click('#spm-raid [data-a="platte-aus"][data-v="2"]');
+    ok(await page.evaluate(() => Speicher._test.z().rgs[0].tot === true) && !(await page.evaluate(() => Speicher._test.sicht('HV01', 'VM-STORE').ok)), 'Speicher: RAID 5 – zweiter Ausfall = Datenverlust, LUN weg');
+    await page.click('#spm-raid [data-a="backup"]');
+    await page.click('#spm-raid [data-rg="RG3"]');
+    await page.click('#spm-raid [data-a="platte-aus"][data-v="0"]'); await page.click('#spm-raid [data-a="platte-aus"][data-v="3"]');
+    ok(await page.evaluate(() => { const r = Speicher._test.z().rgs[2]; return !r.tot && Speicher._test.z().ev.raid6doppel === 1; }), 'Speicher: RAID 6 übersteht zwei Ausfälle');
+    ok(await page.evaluate(() => [Speicher.nutzTB(6, 8, 4), Speicher.nutzTB(5, 5, 4), Speicher.nutzTB(10, 6, 3), Speicher.nutzTB(1, 2, 8), Speicher.nutzTB(0, 4, 2)].join()) === '24,16,9,8,8', 'Speicher: Nutzkapazitäten korrekt');
+    // Rechenaufgabe per Eingabe
+    await page.fill('#spm-antw-kap6', '24'); await page.click('[data-a="antwort"][data-v="kap6"]');
+    const gel = await page.evaluate(() => S.p.speicher.geloest);
+    console.log('Speicher gelöst:', Object.keys(gel).join(', '), '| vorher', r5.join('/'));
+    ok(['kabel-sql', 'lun-sql', 'mask-sql', 'sql-mpio', 'rebuild5', 'raid6-doppel', 'kap6'].every(k => gel[k]) && Object.keys(gel).length - gel0 >= 2, 'Speicher: Aufgaben gelöst und in S.p.speicher.geloest');
+    ok(await page.evaluate(x => S.p.xp.gesamt > x, xpS0), 'Speicher: XP gestiegen');
+    ok(/\d+\/12 gelöst/.test(await page.locator('#spm-aufgaben').innerText()), 'Speicher: Fortschritt x/y');
+    await page.evaluate(() => { document.getElementById('inhalt').scrollTop = 0; }); await page.waitForTimeout(150);
+    await page.screenshot({ path: path.join(shots, 'p2-speicher.png'), fullPage: false });
+    await page.locator('#spm-raid').screenshot({ path: path.join(shots, 'p2-speicher-raid.png') });
+    // Zustand übersteht Ansichtswechsel, Timer/Animation stoppen
+    await go('home'); await page.waitForTimeout(250);
+    ok(await page.evaluate(() => { const l = Speicher._test.laeuft(); return !l.raf && !l.timer; }), 'Speicher: Animation/Timer gestoppt nach Verlassen');
+    await go('speicher');
+    ok(await page.evaluate(() => { const z = Speicher._test.z(); return !!z.luns.find(l => l.n === 'SQL-DATA') && z.fab.FCB.aktiv.length === 1 && !!S.p.speicher.zustand; }), 'Speicher: Zustand übersteht gehe(home) + zurück');
+    ok(await page.evaluate(() => { const t = Speicher._test; const a = t.normal({ v: 1, server: 'kaputt', kabel: [{ id: 1 }], rgs: [{ id: 'RG1', level: 7, d: 'x' }], luns: [{ n: '<script>', gb: -1 }] }); const b = t.normal(null), c = t.normal({ v: 99 }); return a.server.length === 3 && a.rgs[0].level === 5 && a.luns.length === 0 && b.rgs.length === 3 && c.kabel.length === 7; }), 'Speicher: kaputter/alter Zustand → Validierung/Startzustand');
+    // schmale Breite (iPhone, 390 px)
+    await page.setViewportSize({ width: 390, height: 844 }); await go('speicher'); await page.waitForTimeout(300);
+    ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 2 && (() => { const i = document.getElementById('inhalt'); return i.scrollWidth <= i.clientWidth + 2; })()), 'Speicher: 390 px ohne horizontalen Überlauf');
+    await page.screenshot({ path: path.join(shots, 'p2-speicher-390.png') });
+    await page.setViewportSize({ width: 1300, height: 900 });
+  }
   ok(errs.length === 0, 'Keine Konsolenfehler ' + errs.slice(0, 3).join(' | '));
   await browser.close();
   console.log(fails ? `\n${fails} FEHLER` : '\nALLES OK'); process.exit(fails ? 1 : 0);
